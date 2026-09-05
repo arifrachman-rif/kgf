@@ -69,6 +69,13 @@ class WindowsCapture:
         self.p = pyaudio.PyAudio()
         self.streams, self.wavs, self.parts = [], [], []
         self.devices = []
+        self.paused = False
+
+    def pause(self):
+        self.paused = True
+
+    def resume(self):
+        self.paused = False
 
     def _open_stream(self, dev, path, channels, rate):
         wf = wave.open(path, "wb")
@@ -77,7 +84,8 @@ class WindowsCapture:
         wf.setframerate(rate)
 
         def cb(in_data, frame_count, time_info, status):
-            wf.writeframes(in_data)
+            if not self.paused:
+                wf.writeframes(in_data)
             return (None, self.pyaudio.paContinue)
 
         st = self.p.open(format=self.pyaudio.paInt16, channels=channels,
@@ -119,14 +127,62 @@ def record_windows(base, title, start, mic_only, system_only):
     for d in cap.start():
         print(d)
     stop = threading.Event()
-    print("Recording... Ctrl-C to stop.")
+    print("Recording... Press [Space] or [P] to Pause/Resume. "
+          "Press [Q] or Ctrl-C to stop.")
     signal.signal(signal.SIGINT, lambda *a: stop.set())
+    
+    import msvcrt
+    paused = False
+    pause_time = None
+    accumulated_pause = datetime.timedelta(seconds=0)
+
+    # Third way to ask for a clean stop: a <base>.stop file appearing next to the marker.
+    #
+    # The keyboard checks below need a console, and SIGINT cannot reach a detached child on
+    # Windows, so a GUI that spawned this with pythonw has no way to ask it to stop. Killing
+    # the process instead skips the `finally` in main(), leaving the .recording marker behind
+    # -- and watcher.py ignores any recording whose marker still exists, so the audio sits on
+    # disk forever looking like it never happened. The sentinel gives every caller a clean stop.
+    stop_file = base + ".stop"
+
     try:
         while not stop.is_set():
-            stop.wait(1)
-            elapsed = (datetime.datetime.now(datetime.timezone.utc) - start).seconds
-            print(f"\r  {elapsed // 60:02d}:{elapsed % 60:02d}", end="", flush=True)
+            if os.path.exists(stop_file):
+                print("\n[STOPPING] Stop sentinel seen; finalising recording...")
+                stop.set()
+                break
+            if msvcrt.kbhit():
+                ch = msvcrt.getch()
+                # getch() swallows Ctrl-C and hands it back as \x03 instead of
+                # letting it raise SIGINT, so the handler above never fires
+                # while this loop is running. Treat it as a stop key here.
+                if ch in (b"\x03", b"q", b"Q"):
+                    print("\n[STOPPING] Finalising recording...")
+                    stop.set()
+                    break
+                if ch in (b' ', b'p', b'P'):
+                    paused = not paused
+                    if paused:
+                        cap.pause()
+                        pause_time = datetime.datetime.now(datetime.timezone.utc)
+                        print("\n[PAUSED] Recording suspended. Press [Space] or [P] to Resume.")
+                    else:
+                        cap.resume()
+                        if pause_time:
+                            paused_duration = datetime.datetime.now(datetime.timezone.utc) - pause_time
+                            accumulated_pause += paused_duration
+                        print("\n[RESUMED] Recording audio active...")
+            
+            stop.wait(0.2)
+            if not paused:
+                now_utc = datetime.datetime.now(datetime.timezone.utc)
+                elapsed = (now_utc - start - accumulated_pause).seconds
+                print(f"\r  {elapsed // 60:02d}:{elapsed % 60:02d}", end="", flush=True)
+            else:
+                print(f"\r  [PAUSED]   ", end="", flush=True)
     finally:
+        if os.path.exists(stop_file):
+            os.remove(stop_file)
         return cap.stop()
 
 # ---------- optional screen recording (video sidecar) ----------
@@ -263,6 +319,40 @@ def main():
     finally:
         if os.path.exists(marker):
             os.remove(marker)
+        try:
+            import subprocess
+            if plat == "windows":
+                # Create the transcribing.lock file
+                lock_file = os.path.join(rec_dir, "transcribing.lock")
+                try:
+                    open(lock_file, "w").close()
+                except Exception:
+                    pass
+
+                 # Show Windows system tray icon that monitors transcribing.lock.
+                # tray_watcher.py runs under Windows Python in the user's desktop
+                # session so the icon actually appears in the system tray.
+                script_dir = os.path.dirname(os.path.abspath(__file__))
+                watcher_script = os.path.join(script_dir, "tray_watcher.py")
+                win_python = sys.executable  # recorder.py is already Windows Python
+                subprocess.Popen(
+                    [win_python, watcher_script],
+                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                    creationflags=0x00000208)  # DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
+
+                cmd = ["wsl", "python3", "meeting-recorder/watcher.py", "--once"]
+                # 0x00000208 is DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
+                subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=0x00000208)
+            elif plat in ("macos", "linux"):
+                if plat == "macos":
+                    cmd_notify = 'display notification "Recording stopped. MOM is underway in the background..." with title "Meeting Recorder"'
+                    subprocess.Popen(["osascript", "-e", cmd_notify],
+                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                cmd = [sys.executable, "meeting-recorder/watcher.py", "--once"]
+                subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            print("\nTriggered automatic transcription and MOM generation in the background...")
+        except Exception as e:
+            print(f"\nWARNING: Could not trigger watcher: {e}")
 
 if __name__ == "__main__":
     main()
