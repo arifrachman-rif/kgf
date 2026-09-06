@@ -172,6 +172,42 @@
             .slide:not(:last-child) { page-break-after: always; }
             .bar-fill, .kpi, .highlight-box, th, .slide-num, .header-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
+
+        .sim-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.75rem 0; position: relative; z-index: 1; }
+        .sim-control label { display: block; font-weight: 700; color: var(--cocoa-900); margin-bottom: 0.6rem; font-size: 0.95rem; }
+        .sim-live { display: inline-block; margin-left: 0.5rem; padding: 0.15rem 0.65rem; border-radius: 999px; background: var(--cocoa-950); color: var(--gold-300); font-weight: 800; font-variant-numeric: tabular-nums; font-size: 0.85rem; }
+        .sim-control input[type="range"] {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 10px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--leaf-400), var(--gold-400));
+            outline: none;
+            cursor: pointer;
+        }
+        .sim-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--cocoa-950);
+            border: 3px solid var(--gold-300);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(42,24,16,0.4);
+        }
+        .sim-control input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--cocoa-950);
+            border: 3px solid var(--gold-300);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(42,24,16,0.4);
+        }
+        .sim-range-caption { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem; }
+        #simBars .bar-row { margin-bottom: 0.65rem; }
     </style>
 </head>
 <body>
@@ -210,7 +246,7 @@
 <div id="s2" class="slide">
     <div class="header">
         <div class="header-title">Ruang Lingkup Kerja Sama</div>
-        <div class="slide-num">02 / 10</div>
+        <div class="slide-num">02 / 11</div>
     </div>
     <h1>Mengakomodasi Seluruh Harapan Pemerintah Kabupaten</h1>
     <h2>Proyek ini dibangun berdasarkan empat komitmen utama</h2>
@@ -229,7 +265,7 @@
 <div id="s3" class="slide">
     <div class="header">
         <div class="header-title">Realita Hulu</div>
-        <div class="slide-num">03 / 10</div>
+        <div class="slide-num">03 / 11</div>
     </div>
     <h1>Tantangannya Bukan di Mesin, Tapi di Kebun</h1>
     <h2>Praktis belum ada biji fermentasi di Pesawaran saat ini</h2>
@@ -254,11 +290,61 @@
     </div>
 </div>
 
+<!-- SLIDE 3B — SIMULATOR INTERAKTIF -->
+<div id="s3b" class="slide">
+    <div class="header">
+        <div class="header-title">Simulasi Interaktif</div>
+        <div class="slide-num">04 / 11</div>
+    </div>
+    <h1>Berapa yang Diterima Petani?</h1>
+    <h2>Geser jumlah petani binaan dan jangka waktu simulasi</h2>
+
+    <p>Setiap petani binaan memproses rata-rata <b>0,5 ha kebun</b> dengan produktivitas <b>1.200 kg/ha/tahun</b> (setara 50 kg biji kering/bulan). Simulasi ini memakai harga biji fermentasi flat <b>Rp90.000/kg</b> di seluruh tahun proyeksi.</p>
+
+    <div class="sim-controls">
+        <div class="sim-control">
+            <label for="simPetani">Jumlah Petani Binaan <span class="sim-live" id="simPetaniVal">100</span></label>
+            <input type="range" id="simPetani" min="25" max="1250" step="25" value="100">
+            <div class="sim-range-caption"><span>25 (Th.1)</span><span>1.250 (Th.3, full klaster)</span></div>
+        </div>
+        <div class="sim-control">
+            <label for="simTahun">Jangka Simulasi (Tahun) <span class="sim-live" id="simTahunVal">3</span></label>
+            <input type="range" id="simTahun" min="1" max="5" step="1" value="3">
+            <div class="sim-range-caption"><span>1 tahun</span><span>5 tahun</span></div>
+        </div>
+    </div>
+
+    <div class="kpi-row">
+        <div class="kpi">
+            <div class="kpi-val" id="kpiPerPetani">Rp 54,0 jt</div>
+            <div class="kpi-lbl">Diterima per petani / tahun (biji fermentasi)</div>
+        </div>
+        <div class="kpi">
+            <div class="kpi-val" id="kpiTotalTahun">Rp 5,40 M</div>
+            <div class="kpi-lbl">Total dana ke petani / tahun</div>
+        </div>
+        <div class="kpi">
+            <div class="kpi-val" id="kpiKumulatif">Rp 16,20 M</div>
+            <div class="kpi-lbl">Kumulatif dana ke petani selama simulasi</div>
+        </div>
+    </div>
+
+    <div class="chart">
+        <h3 style="margin:0 0 1rem 0; font-size:1rem;">Dana ke Petani per Tahun (Kumulatif)</h3>
+        <div id="simBars"></div>
+    </div>
+
+    <div class="highlight-box">
+        <h4>Dibanding Jual Biji Asalan (Rp79.000/kg)</h4>
+        <p>Pada jumlah petani dan jangka waktu yang dipilih, program fermentasi menambah pendapatan petani sebesar <b id="simUplift">Rp 1,98 M</b> dibanding bila biji dijual asalan tanpa fermentasi — nilai tambah ini permanen melekat pada keterampilan petani.</p>
+    </div>
+</div>
+
 <!-- SLIDE 4 -->
 <div id="s4" class="slide">
     <div class="header">
         <div class="header-title">Strategi Operasional</div>
-        <div class="slide-num">04 / 10</div>
+        <div class="slide-num">05 / 11</div>
     </div>
     <h1>Masa Transisi Bahan Baku</h1>
     <h2>Tahun 1 adalah Masa Trial, R&amp;D &amp; Pembinaan Hulu</h2>
@@ -285,7 +371,7 @@
 <div id="s5" class="slide">
     <div class="header">
         <div class="header-title">Proyeksi Finansial</div>
-        <div class="slide-num">05 / 10</div>
+        <div class="slide-num">06 / 11</div>
     </div>
     <h1>Struktur Biaya &amp; Laba 5 Tahun</h1>
     <h2>Proyeksi dengan penyesuaian harga wajar (Rp90.000/kg)</h2>
@@ -344,7 +430,7 @@
 <div id="s6" class="slide">
     <div class="header">
         <div class="header-title">Aliran Laba &amp; Reinvestasi</div>
-        <div class="slide-num">06 / 10</div>
+        <div class="slide-num">07 / 11</div>
     </div>
     <h1>Laba Mengendap di Daerah</h1>
     <h2>Laba ditanam kembali untuk memperbesar serapan petani</h2>
@@ -375,7 +461,7 @@
 <div id="s7" class="slide">
     <div class="header">
         <div class="header-title">Roadmap Hulu-Hilir</div>
-        <div class="slide-num">07 / 10</div>
+        <div class="slide-num">08 / 11</div>
     </div>
     <h1>Ekspansi Pabrik Mengikuti Hulu</h1>
     <h2>Kapasitas mesin BMD saat ini terbatas untuk jangka panjang</h2>
@@ -402,7 +488,7 @@
 <div id="s8" class="slide">
     <div class="header">
         <div class="header-title">Dampak Sosial &amp; Ekonomi</div>
-        <div class="slide-num">08 / 10</div>
+        <div class="slide-num">09 / 11</div>
     </div>
     <h1>Total Manfaat Bagi Daerah</h1>
     <h2>Investasi SDM permanen melebihi sekadar setoran tunai PAD</h2>
@@ -426,7 +512,7 @@
 <div id="s9" class="slide">
     <div class="header">
         <div class="header-title">Mitigasi Risiko</div>
-        <div class="slide-num">09 / 10</div>
+        <div class="slide-num">10 / 11</div>
     </div>
     <h1>Risiko &amp; Mitigasi Kunci</h1>
 
@@ -454,7 +540,7 @@
 <div id="s10" class="slide">
     <div class="header">
         <div class="header-title">Kesimpulan</div>
-        <div class="slide-num">10 / 10</div>
+        <div class="slide-num">11 / 11</div>
     </div>
     <h1>Kesimpulan &amp; Tindak Lanjut</h1>
     <h2>Putusan: Proyek Layak Dijalankan</h2>
@@ -482,6 +568,76 @@
         </div>
     </div>
 </div>
+
+<script>
+(function () {
+    var KG_PER_HA = 1200;
+    var HA_PER_PETANI = 0.5;
+    var KG_PER_PETANI_TAHUN = KG_PER_HA * HA_PER_PETANI;
+    var HARGA_FERMENTASI = 90000;
+    var HARGA_ASALAN = 79000;
+
+    var petaniInput = document.getElementById('simPetani');
+    var tahunInput = document.getElementById('simTahun');
+    var petaniVal = document.getElementById('simPetaniVal');
+    var tahunVal = document.getElementById('simTahunVal');
+    var kpiPerPetani = document.getElementById('kpiPerPetani');
+    var kpiTotalTahun = document.getElementById('kpiTotalTahun');
+    var kpiKumulatif = document.getElementById('kpiKumulatif');
+    var simBars = document.getElementById('simBars');
+    var simUplift = document.getElementById('simUplift');
+
+    function fmtRp(n, unitJuta) {
+        if (unitJuta) {
+            var jt = n / 1e6;
+            return 'Rp ' + jt.toLocaleString('id-ID', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' jt';
+        }
+        var m = n / 1e9;
+        return 'Rp ' + m.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' M';
+    }
+
+    function fmtInt(n) {
+        return n.toLocaleString('id-ID');
+    }
+
+    function render() {
+        var petani = parseInt(petaniInput.value, 10);
+        var tahun = parseInt(tahunInput.value, 10);
+
+        petaniVal.textContent = fmtInt(petani);
+        tahunVal.textContent = tahun;
+
+        var perPetaniTahun = KG_PER_PETANI_TAHUN * HARGA_FERMENTASI;
+        var totalTahun = perPetaniTahun * petani;
+        var kumulatif = totalTahun * tahun;
+
+        var perPetaniTahunAsalan = KG_PER_PETANI_TAHUN * HARGA_ASALAN;
+        var upliftKumulatif = (perPetaniTahun - perPetaniTahunAsalan) * petani * tahun;
+
+        kpiPerPetani.textContent = fmtRp(perPetaniTahun, true);
+        kpiTotalTahun.textContent = fmtRp(totalTahun, false);
+        kpiKumulatif.textContent = fmtRp(kumulatif, false);
+        simUplift.textContent = fmtRp(upliftKumulatif, false);
+
+        var barsHtml = '';
+        var maxVal = totalTahun * tahun;
+        for (var y = 1; y <= tahun; y++) {
+            var cum = totalTahun * y;
+            var pct = Math.max(8, Math.round((cum / maxVal) * 100));
+            barsHtml += '' +
+                '<div class="bar-row">' +
+                    '<div class="bar-lbl">Tahun ' + y + '</div>' +
+                    '<div class="bar-track"><div class="bar-fill c1" style="width:' + pct + '%;">' + fmtRp(cum, false) + '</div></div>' +
+                '</div>';
+        }
+        simBars.innerHTML = barsHtml;
+    }
+
+    petaniInput.addEventListener('input', render);
+    tahunInput.addEventListener('input', render);
+    render();
+})();
+</script>
 
 </body>
 </html>
