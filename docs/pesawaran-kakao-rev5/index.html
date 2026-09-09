@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studi Kelayakan Kakao Pesawaran</title>
+    <!-- Tailwind CSS for fast styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+        .container-slide {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+            width: 100%;
+        }
+        .bg-pattern {
+            background-image: url('assets/cover_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            z-index: -1;
+        }
+        .logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+        .logo-row img {
+            height: 90px;
+            object-fit: contain;
+        }
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-slide" id="slider">
+
+    <!-- Slide 1: Cover -->
+    <section class="slide bg-white relative overflow-hidden">
+        <div class="bg-pattern"></div>
+        <div class="max-w-4xl mx-auto text-center reveal active">
+            <div class="logo-row mb-12">
+                <img src="assets/logo_pemkab.png" alt="Pemkab Pesawaran">
+                <img src="assets/logo_kgf_new.png" alt="Klumbayan Gold Farm">
+                <img src="assets/logo_mna.jpg" alt="MNA">
+            </div>
+            <h1 class="text-5xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
+                Kerja Sama Optimalisasi <br>
+                <span class="text-emerald-600">Industri Pengolahan Kakao</span>
+            </h1>
+            <h2 class="text-2xl text-slate-600 font-medium mb-8">Kabupaten Pesawaran</h2>
+            <div class="inline-flex items-center rounded-full bg-emerald-50 px-6 py-2 text-sm font-semibold text-emerald-600 ring-1 ring-inset ring-emerald-600/20">
+                Ringkasan Eksekutif — Rev. September 2026
+            </div>
+
+            <p class="mt-12 text-slate-400 text-sm animate-bounce">Scroll ke bawah &darr;</p>
+        </div>
+    </section>
+
+    <!-- Slide 2: Komitmen Pemkab -->
+    <section class="slide bg-emerald-900 text-white relative">
+        <div class="max-w-5xl mx-auto reveal">
+            <h2 class="text-4xl font-bold mb-12 text-emerald-100">Komitmen Kami: <br>Mengakomodasi Penuh Harapan Daerah</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-emerald-800/50 p-8 rounded-2xl border border-emerald-700/50 hover:bg-emerald-800 transition-colors">
+                    <div class="text-emerald-400 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Penyerapan Kakao Lokal</h3>
+                    <p class="text-emerald-100/80 leading-relaxed">Fokus utama menyerap 100% produksi biji kakao dari petani binaan di wilayah Kabupaten Pesawaran, menjamin kepastian pembeli.</p>
+                </div>
+                <div class="bg-emerald-800/50 p-8 rounded-2xl border border-emerald-700/50 hover:bg-emerald-800 transition-colors">
+                    <div class="text-emerald-400 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Pembinaan Berkelanjutan</h3>
+                    <p class="text-emerald-100/80 leading-relaxed">Edukasi intensif pasca-panen (fermentasi) untuk menaikkan kelas mutu kakao petani dari asalan menjadi <i>specialty</i> standar internasional.</p>
+                </div>
+                <div class="bg-emerald-800/50 p-8 rounded-2xl border border-emerald-700/50 hover:bg-emerald-800 transition-colors">
+                    <div class="text-emerald-400 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Mempertahankan Tenaga Kerja</h3>
+                    <p class="text-emerald-100/80 leading-relaxed">Pabrik akan terus mempekerjakan 3 (tiga) orang tenaga kerja lokal eksisting untuk operasional mesin harian.</p>
+                </div>
+                <div class="bg-emerald-800/50 p-8 rounded-2xl border border-emerald-700/50 hover:bg-emerald-800 transition-colors">
+                    <div class="text-emerald-400 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Co-Branding Daerah</h3>
+                    <p class="text-emerald-100/80 leading-relaxed">Pemasaran global akan menonjolkan produk akhir sebagai hasil bumi unggulan dan kebanggaan Kabupaten Pesawaran.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Dampak bagi Petani (Scale Up ke 1000 Petani) -->
+    <section class="slide bg-white relative">
+        <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 reveal">
+            <div class="w-full lg:w-1/2">
+                <img src="assets/ops_farmer_training.jpg" alt="Pelatihan Petani" class="rounded-2xl shadow-2xl object-cover w-full h-[450px]">
+                <p class="text-center text-sm text-slate-500 mt-3 font-medium">Pelatihan Petani</p>
+            </div>
+            <div class="w-full lg:w-1/2">
+                <h2 class="text-4xl font-bold mb-6 text-slate-900">Multiplier Effect & <br>Perputaran Dana Raksasa</h2>
+                <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                    Fermentasi dan akses <i>direct trade</i> meningkatkan harga beli di tingkat petani secara radikal. Skala pembinaan kami dirancang untuk menyentuh 1.000 keluarga petani.
+                </p>
+
+                <div class="space-y-6">
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
+                        <div class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">Peningkatan Nilai Jual Biji</div>
+                        <div class="flex items-end gap-3">
+                            <span class="text-3xl font-black text-slate-900">Rp 120.000<span class="text-lg font-medium text-slate-500">/kg</span></span>
+                            <span class="text-emerald-600 font-bold bg-emerald-100 px-2 py-1 rounded text-sm mb-1">+51,9% vs Biji Asalan</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
+                        <div class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">Target <i>Scale-Up</i> (Tahun Ke-2)</div>
+                        <div class="text-2xl font-bold text-slate-900">1.000 Petani Binaan</div>
+                        <p class="text-slate-600 mt-1">Estimasi panen gabungan mencapai 50.000 kg (50 Ton) per bulan dari seluruh Kabupaten Pesawaran.</p>
+                    </div>
+
+                    <div class="bg-amber-50 p-6 rounded-xl border border-amber-200 shadow-sm shadow-amber-100 transform scale-[1.02] transition-transform">
+                        <div class="text-sm font-semibold text-amber-700 uppercase tracking-wider mb-1">Total Dana Beredar di Petani Pesawaran</div>
+                        <div class="text-4xl font-black text-amber-600">Rp 72 Miliar<span class="text-xl font-bold"> / tahun</span></div>
+                        <p class="text-amber-800/80 mt-2 text-sm font-medium">Bahan baku yang tidak tertampung di mesin pabrik Pesawaran akan diserap sepenuhnya lewat jalur ekspor dan B2B KGF.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Timeline Kerja Sama (Peta Jalan) -->
+    <section class="slide bg-slate-50 relative">
+        <div class="max-w-6xl mx-auto reveal">
+            <h2 class="text-4xl font-bold mb-16 text-slate-900 text-center">Peta Jalan 5 Tahun Kerja Sama</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+                <!-- Tahun 1 (H1) -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow relative">
+                    <div class="absolute -top-4 left-8 bg-emerald-100 text-emerald-700 font-bold px-4 py-1 rounded-full text-sm">Bulan 1 - 6</div>
+                    <div class="text-slate-400 font-bold text-lg mb-1 mt-2">Tahun 1</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Fondasi & R&D</h3>
+                    <ul class="text-slate-600 text-sm leading-relaxed space-y-2">
+                        <li>• Perbaikan & sinkronisasi mesin</li>
+                        <li>• Pembuatan standar R&D (mutu ekspor)</li>
+                        <li>• Pembangunan fasilitas Fermentasi Center pertama</li>
+                        <li>• Persiapan tim tenaga penyuluh (pembinaan)</li>
+                    </ul>
+                </div>
+
+                <!-- Tahun 1 (H2) -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow relative">
+                    <div class="absolute -top-4 left-8 bg-emerald-100 text-emerald-700 font-bold px-4 py-1 rounded-full text-sm">Bulan 7 - 12</div>
+                    <div class="text-slate-400 font-bold text-lg mb-1 mt-2">Tahun 1</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Produksi Berjalan</h3>
+                    <ul class="text-slate-600 text-sm leading-relaxed space-y-2">
+                        <li>• Mesin mulai beroperasi (produksi liquor komersial)</li>
+                        <li>• Uji coba suplai ke pasar B2B premium</li>
+                        <li>• Evaluasi standar produksi pabrik</li>
+                    </ul>
+                </div>
+
+                <!-- Tahun 2 -->
+                <div class="bg-amber-50 p-8 rounded-2xl shadow-sm border border-amber-200 hover:shadow-md transition-shadow relative transform md:-translate-y-2">
+                    <div class="absolute -top-4 left-8 bg-amber-500 text-white font-bold px-4 py-1 rounded-full text-sm">Tahun 2</div>
+                    <div class="text-amber-600 font-bold text-lg mb-1 mt-2">Fase Ekspansi</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Scale-Up & PAD</h3>
+                    <ul class="text-slate-600 text-sm leading-relaxed space-y-2">
+                        <li>• Eskalasi pembinaan menuju target <b>1.000 petani</b></li>
+                        <li>• Pabrik menopang produksi secara optimal</li>
+                        <li>• Laba mulai terbentuk stabil</li>
+                        <li>• <b>Setoran Tetap (Sewa BMD) disalurkan</b> kepada Pemkab Pesawaran</li>
+                    </ul>
+                </div>
+
+                <!-- Tahun 3-5 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow relative">
+                    <div class="absolute -top-4 left-8 bg-emerald-500 text-white font-bold px-4 py-1 rounded-full text-sm">Tahun 3 - 5</div>
+                    <div class="text-slate-400 font-bold text-lg mb-1 mt-2">Fase Berkelanjutan</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Skala Global</h3>
+                    <ul class="text-slate-600 text-sm leading-relaxed space-y-2">
+                        <li>• Operasional ekspor stabil dan terukur</li>
+                        <li>• Pesawaran diakui sebagai penghasil kakao premium</li>
+                        <li>• Pemkab menerima kepastian setoran (PAD) rutin setiap tahun tanpa gejolak</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Investasi & Operasional KGF -->
+    <section class="slide bg-slate-900 text-white relative">
+        <div class="max-w-5xl mx-auto reveal">
+            <h2 class="text-4xl font-bold mb-4 text-white text-center">Investasi Sepenuhnya Ditanggung KGF</h2>
+            <p class="text-slate-400 text-center text-lg mb-12 max-w-3xl mx-auto">Kami tidak membebani APBD sedikit pun. Biaya operasional terbesar dalam program ini dialokasikan di luar pabrik (untuk pemasaran internasional dan pembinaan petani).</p>
+
+            <div class="bg-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-slate-700">
+                <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-700">
+
+                    <div class="p-8">
+                        <div class="text-slate-400 text-sm font-semibold uppercase tracking-wider mb-2">Total Opex Pabrik</div>
+                        <div class="text-3xl font-bold text-white mb-4">Rp 79,3 Juta <span class="text-lg text-slate-500 font-normal">/ bln</span></div>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            KGF menanggung 100% gaji tenaga kerja, listrik, kemasan, pemeliharaan mesin, serta utilitas.
+                        </p>
+                    </div>
+
+                    <div class="p-8 bg-emerald-900/20">
+                        <div class="text-emerald-400 text-sm font-semibold uppercase tracking-wider mb-2">Biaya Pembinaan</div>
+                        <div class="text-3xl font-bold text-emerald-100 mb-4">Rp 28 Juta <span class="text-lg text-slate-500 font-normal">/ bln</span></div>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Mencakup pelatihan lapangan berkala, tim tenaga penyuluh, dan investasi pembangunan sentra fermentasi komunal.
+                        </p>
+                    </div>
+
+                    <div class="p-8 bg-amber-900/20">
+                        <div class="text-amber-400 text-sm font-semibold uppercase tracking-wider mb-2">Pemasaran Internasional</div>
+                        <div class="text-3xl font-bold text-amber-100 mb-4">Rp 12 Juta <span class="text-lg text-slate-500 font-normal">/ bln</span></div>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Membuka akses pasar global, pengiriman sampel <i>(sample dispatch)</i>, sertifikasi, serta pameran dagang B2B.
+                        </p>
+                    </div>
+
+                </div>
+                <div class="bg-emerald-900/60 p-6 text-center border-t border-slate-700">
+                    <p class="text-emerald-100 font-medium tracking-wide">100% Risiko Pasar dan Kerusakan Mesin Ditanggung oleh KGF</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6: Skema PAD / Setoran Tetap -->
+    <section class="slide bg-white relative">
+        <div class="max-w-5xl mx-auto reveal text-center">
+            <h2 class="text-4xl font-bold mb-4 text-slate-900">Skema PAD yang Aman & Transparan</h2>
+            <p class="text-slate-600 text-lg mb-16 max-w-3xl mx-auto">Untuk mengakomodasi sisi birokrasi, kami mengusulkan skema <b>Sewa Barang Milik Daerah (BMD) / Setoran Tetap</b> yang melindungi daerah dari risiko bisnis.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left max-w-4xl mx-auto">
+                <div class="border-2 border-slate-100 rounded-2xl p-8 bg-slate-50 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-slate-200 text-slate-600 text-xs font-bold px-4 py-2 rounded-bl-xl">TAHUN 1</div>
+                    <h3 class="text-2xl font-bold mb-2">Fase Trial & R&D</h3>
+                    <div class="text-4xl font-black text-slate-400 mb-4">Rp 0</div>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <span class="text-slate-400 mt-1">✓</span> Masa pinjam pakai (persiapan dan perbaikan aset mesin).
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-slate-400 mt-1">✓</span> Pemkab belum mendapat setoran tunai, namun menerima hasil perbaikan teknis mesin secara gratis.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="border-2 border-emerald-500 rounded-2xl p-8 bg-white shadow-2xl shadow-emerald-900/10 relative overflow-hidden transform md:-translate-y-4">
+                    <div class="absolute top-0 right-0 bg-emerald-500 text-white text-xs font-bold px-4 py-2 rounded-bl-xl">TAHUN 2 - 5</div>
+                    <h3 class="text-2xl font-bold mb-2">Fase Operasional Stabil</h3>
+                    <div class="text-4xl font-black text-emerald-600 mb-1">Rp 20 - 30 Juta</div>
+                    <div class="text-slate-500 font-medium mb-6">Setoran Tetap per Tahun (Nilai Fix)</div>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-500 mt-1">✓</span> <b>Kepastian PAD</b> yang terjamin (tanpa menunggu audit).
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-500 mt-1">✓</span> Administrasi hukum sewa BMD yang sederhana dan rapi.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-500 mt-1">✓</span> Pemkab terbebas dari sengketa fluktuasi laba/rugi pabrik harian.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-20">
+                <div class="inline-flex items-center gap-8 opacity-75 hover:opacity-100 transition-opacity">
+                    <img src="assets/logo_pemkab.png" class="h-12" alt="Pemkab Pesawaran">
+                    <img src="assets/logo_kgf_new.png" class="h-12" alt="Klumbayan Gold Farm">
+                    <img src="assets/logo_mna.jpg" class="h-12" alt="MNA">
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    // Simple Intersection Observer to trigger reveal animations on scroll
+    document.addEventListener("DOMContentLoaded", () => {
+        const reveals = document.querySelectorAll(".reveal");
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                }
+            });
+        }, {
+            threshold: 0.15,
+            root: document.querySelector('.container-slide')
+        });
+
+        reveals.forEach(reveal => {
+            observer.observe(reveal);
+        });
+    });
+</script>
+
+</body>
+</html>
