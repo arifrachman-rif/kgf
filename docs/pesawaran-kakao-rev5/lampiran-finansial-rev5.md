@@ -76,7 +76,7 @@ Dengan menyertakan agregasi biji kakao dari kelompok tani, operasional pabrik da
 
 Mengingat fluktuasi panen dan harga kakao dunia, KGF mengusulkan Setoran Tetap yang mengamankan posisi Pemkab.
 
-- **Usulan Setoran PAD:** **Rp 30.000.000 / tahun** (Bersifat *Fixed Lease* / Sewa Barang Milik Daerah).
+- **Usulan Setoran PAD:** **Rp 20.000.000 / tahun** (Bersifat *Fixed Lease* / Sewa Barang Milik Daerah).
 - **Justifikasi Skema:**
   1. Pemkab Pesawaran mendapat kepastian nilai PAD yang disetor di muka atau pada akhir periode tanpa risiko penurunan.
   2. Administrasi hukum yang transparan (Sewa Aset), membebaskan Pemkab dari keharusan melakukan audit mendalam terhadap omzet penjualan KGF yang tersebar di pasar global.
