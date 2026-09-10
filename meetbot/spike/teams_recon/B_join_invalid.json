@@ -1,0 +1,1411 @@
+{
+  "url": "https://teams.microsoft.com/meet/1234567890123",
+  "name": "Meetbot Recorder",
+  "stages": [
+    {
+      "at": "settled",
+      "t": 15000,
+      "snap": {
+        "url": "https://teams.microsoft.com/light-meetings/launch?anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=e6bac56d-a5dc-4157-babb-223d57c6d41f&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9hbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD1lNmJhYzU2ZC1hNWRjLTQxNTctYmFiYi0yMjNkNTdjNmQ0MWYmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIn0%3D&deeplinkId=b8535a55-da89-4bbc-94d9-9c53d4a332c0",
+        "title": "Microsoft Teams meeting | Microsoft Teams",
+        "tids": [
+          "auth-sign-in-link",
+          "button-custom-video-backgrounds",
+          "calling-prejoin-render-content-container",
+          "calling-prejoin-screen",
+          "calling-prejoin-v2-computer-audio-renderer-test",
+          "calling-prejoin-v2-no-audio-renderer-test",
+          "calling-prejoin-v2-phone-audio-renderer-test",
+          "calling-right-side-panel",
+          "calling-slot-background",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-header-title",
+          "prejoin-audio-common-header-computer-audio",
+          "prejoin-audio-common-header-computer-no-audio",
+          "prejoin-audio-common-header-phone-audio",
+          "prejoin-cancel-button",
+          "prejoin-display-name-input",
+          "prejoin-header-content",
+          "prejoin-join-button",
+          "prejoin-meeting-details-content",
+          "prejoin-v2-video-actions",
+          "prejoin-v2-video-preview",
+          "prejoin-v2-video-preview-container",
+          "rail-header",
+          "rail-header-close-button",
+          "right-side-panel-header-title",
+          "selected-microphone-display",
+          "selected-speaker-display",
+          "speaker-toggle",
+          "toggle-mute",
+          "toggle-video",
+          "video-flyout-open-button"
+        ],
+        "visibleTids": [
+          "auth-sign-in-link",
+          "button-custom-video-backgrounds",
+          "calling-prejoin-render-content-container",
+          "calling-prejoin-screen",
+          "calling-prejoin-v2-computer-audio-renderer-test",
+          "calling-prejoin-v2-no-audio-renderer-test",
+          "calling-prejoin-v2-phone-audio-renderer-test",
+          "calling-slot-background",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-header-title",
+          "prejoin-audio-common-header-computer-audio",
+          "prejoin-audio-common-header-computer-no-audio",
+          "prejoin-audio-common-header-phone-audio",
+          "prejoin-cancel-button",
+          "prejoin-display-name-input",
+          "prejoin-header-content",
+          "prejoin-join-button",
+          "prejoin-meeting-details-content",
+          "prejoin-v2-video-actions",
+          "prejoin-v2-video-preview",
+          "prejoin-v2-video-preview-container",
+          "selected-microphone-display",
+          "selected-speaker-display",
+          "speaker-toggle",
+          "toggle-mute",
+          "toggle-video",
+          "video-flyout-open-button"
+        ],
+        "buttons": [
+          {
+            "tag": "button",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "video-flyout-open-button",
+            "role": "button",
+            "aria": "Open video options",
+            "ph": null,
+            "type": "button",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "button-custom-video-backgrounds",
+            "role": null,
+            "aria": "Background filters",
+            "ph": null,
+            "type": "button",
+            "text": "Background filters",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "selected-microphone-display",
+            "role": "button",
+            "aria": "Selected microphone: Fake Default Audio Input, open microphone options",
+            "ph": null,
+            "type": "button",
+            "text": "Fake Default Audio Input",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "speaker-toggle",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "selected-speaker-display",
+            "role": "button",
+            "aria": "Selected speaker: Fake Default Audio Output, open speaker options",
+            "ph": null,
+            "type": "button",
+            "text": "Fake Default Audio Output",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "prejoin-cancel-button",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Cancel",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "prejoin-join-button",
+            "role": null,
+            "aria": "Join now",
+            "ph": null,
+            "type": "button",
+            "text": "Join now",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "auth-sign-in-link",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Sign in",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "inputs": [
+          {
+            "tag": "input",
+            "tid": "prejoin-display-name-input",
+            "role": null,
+            "aria": null,
+            "ph": "Type your name",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": "toggle-video",
+            "role": "switch",
+            "aria": null,
+            "ph": null,
+            "type": "checkbox",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": null,
+            "role": null,
+            "aria": "Computer audio",
+            "ph": null,
+            "type": "radio",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": "toggle-mute",
+            "role": "switch",
+            "aria": null,
+            "ph": null,
+            "type": "checkbox",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": null,
+            "role": null,
+            "aria": "Phone audio",
+            "ph": null,
+            "type": "radio",
+            "text": null,
+            "disabled": true,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": null,
+            "role": null,
+            "aria": "Don't use audio",
+            "ph": null,
+            "type": "radio",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "alerts": [
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "headings": [
+          {
+            "tag": "h1",
+            "tid": null,
+            "role": null,
+            "aria": "Microsoft Teams meeting",
+            "ph": null,
+            "type": null,
+            "text": "Microsoft Teams meeting",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "media": {
+          "videos": 1,
+          "audios": 0,
+          "audioSrcs": []
+        },
+        "body": "Microsoft Teams meeting\nWith camera on and\nBackground filters\nComputer microphone and speaker controls\nComputer audio\nFake Default Audio Input\nMic on\nFake Default Audio Output\nPhone audio\nPhone audio\nNo audio\nDon't use audio\nCancel\nJoin now\nSign in\nNeed help?"
+      }
+    },
+    {
+      "at": "after-fill",
+      "snap": {
+        "url": "https://teams.microsoft.com/light-meetings/launch?anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=e6bac56d-a5dc-4157-babb-223d57c6d41f&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9hbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD1lNmJhYzU2ZC1hNWRjLTQxNTctYmFiYi0yMjNkNTdjNmQ0MWYmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIn0%3D&deeplinkId=b8535a55-da89-4bbc-94d9-9c53d4a332c0",
+        "title": "Microsoft Teams meeting | Microsoft Teams",
+        "tids": [
+          "auth-sign-in-link",
+          "button-custom-video-backgrounds",
+          "calling-prejoin-render-content-container",
+          "calling-prejoin-screen",
+          "calling-prejoin-v2-computer-audio-renderer-test",
+          "calling-prejoin-v2-no-audio-renderer-test",
+          "calling-prejoin-v2-phone-audio-renderer-test",
+          "calling-right-side-panel",
+          "calling-slot-background",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-header-title",
+          "prejoin-audio-common-header-computer-audio",
+          "prejoin-audio-common-header-computer-no-audio",
+          "prejoin-audio-common-header-phone-audio",
+          "prejoin-cancel-button",
+          "prejoin-display-name-input",
+          "prejoin-header-content",
+          "prejoin-join-button",
+          "prejoin-meeting-details-content",
+          "prejoin-v2-video-actions",
+          "prejoin-v2-video-preview",
+          "prejoin-v2-video-preview-container",
+          "rail-header",
+          "rail-header-close-button",
+          "right-side-panel-header-title",
+          "selected-microphone-display",
+          "selected-speaker-display",
+          "speaker-toggle",
+          "toggle-mute",
+          "toggle-video",
+          "video-flyout-open-button"
+        ],
+        "visibleTids": [
+          "auth-sign-in-link",
+          "button-custom-video-backgrounds",
+          "calling-prejoin-render-content-container",
+          "calling-prejoin-screen",
+          "calling-prejoin-v2-computer-audio-renderer-test",
+          "calling-prejoin-v2-no-audio-renderer-test",
+          "calling-prejoin-v2-phone-audio-renderer-test",
+          "calling-slot-background",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-header-title",
+          "prejoin-audio-common-header-computer-audio",
+          "prejoin-audio-common-header-computer-no-audio",
+          "prejoin-audio-common-header-phone-audio",
+          "prejoin-cancel-button",
+          "prejoin-display-name-input",
+          "prejoin-header-content",
+          "prejoin-join-button",
+          "prejoin-meeting-details-content",
+          "prejoin-v2-video-actions",
+          "prejoin-v2-video-preview",
+          "prejoin-v2-video-preview-container",
+          "selected-microphone-display",
+          "selected-speaker-display",
+          "speaker-toggle",
+          "toggle-mute",
+          "toggle-video",
+          "video-flyout-open-button"
+        ],
+        "buttons": [
+          {
+            "tag": "button",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "video-flyout-open-button",
+            "role": "button",
+            "aria": "Open video options",
+            "ph": null,
+            "type": "button",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "button-custom-video-backgrounds",
+            "role": null,
+            "aria": "Background filters",
+            "ph": null,
+            "type": "button",
+            "text": "Background filters",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "selected-microphone-display",
+            "role": "button",
+            "aria": "Selected microphone: Fake Default Audio Input, open microphone options",
+            "ph": null,
+            "type": "button",
+            "text": "Fake Default Audio Input",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "speaker-toggle",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "selected-speaker-display",
+            "role": "button",
+            "aria": "Selected speaker: Fake Default Audio Output, open speaker options",
+            "ph": null,
+            "type": "button",
+            "text": "Fake Default Audio Output",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "prejoin-cancel-button",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Cancel",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "prejoin-join-button",
+            "role": null,
+            "aria": "Join now",
+            "ph": null,
+            "type": "button",
+            "text": "Join now",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "auth-sign-in-link",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Sign in",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "inputs": [
+          {
+            "tag": "input",
+            "tid": "prejoin-display-name-input",
+            "role": null,
+            "aria": null,
+            "ph": "Type your name",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": "toggle-video",
+            "role": "switch",
+            "aria": null,
+            "ph": null,
+            "type": "checkbox",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": null,
+            "role": null,
+            "aria": "Computer audio",
+            "ph": null,
+            "type": "radio",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": "toggle-mute",
+            "role": "switch",
+            "aria": null,
+            "ph": null,
+            "type": "checkbox",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": null,
+            "role": null,
+            "aria": "Phone audio",
+            "ph": null,
+            "type": "radio",
+            "text": null,
+            "disabled": true,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": null,
+            "role": null,
+            "aria": "Don't use audio",
+            "ph": null,
+            "type": "radio",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "alerts": [
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "headings": [
+          {
+            "tag": "h1",
+            "tid": null,
+            "role": null,
+            "aria": "Microsoft Teams meeting",
+            "ph": null,
+            "type": null,
+            "text": "Microsoft Teams meeting",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "media": {
+          "videos": 1,
+          "audios": 0,
+          "audioSrcs": []
+        },
+        "body": "Microsoft Teams meeting\nWith camera on and\nBackground filters\nComputer microphone and speaker controls\nComputer audio\nFake Default Audio Input\nMic on\nFake Default Audio Output\nPhone audio\nPhone audio\nNo audio\nDon't use audio\nCancel\nJoin now\nSign in\nNeed help?"
+      }
+    },
+    {
+      "at": "post-join+5000ms",
+      "snap": {
+        "url": "https://teams.microsoft.com/light-meetings/launch?anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=e6bac56d-a5dc-4157-babb-223d57c6d41f&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9hbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD1lNmJhYzU2ZC1hNWRjLTQxNTctYmFiYi0yMjNkNTdjNmQ0MWYmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIn0%3D&deeplinkId=b8535a55-da89-4bbc-94d9-9c53d4a332c0",
+        "title": "Microsoft Teams meeting | Microsoft Teams",
+        "tids": [
+          "button-container",
+          "calling-retry-cancelbutton",
+          "calling-retry-rejoinbutton",
+          "calling-retry-screen",
+          "calling-retry-screen-alert-container",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-code-input",
+          "meeting-passcode-input"
+        ],
+        "visibleTids": [
+          "button-container",
+          "calling-retry-cancelbutton",
+          "calling-retry-rejoinbutton",
+          "calling-retry-screen",
+          "calling-retry-screen-alert-container",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-code-input",
+          "meeting-passcode-input"
+        ],
+        "buttons": [
+          {
+            "tag": "button",
+            "tid": "calling-retry-rejoinbutton",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Rejoin call",
+            "disabled": true,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "calling-retry-cancelbutton",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Dismiss",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "inputs": [
+          {
+            "tag": "input",
+            "tid": "meeting-code-input",
+            "role": null,
+            "aria": "Meeting ID",
+            "ph": "Type a meeting ID",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": "meeting-passcode-input",
+            "role": null,
+            "aria": "Meeting Passcode",
+            "ph": "Type a meeting passcode",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "alerts": [
+          {
+            "tag": "div",
+            "tid": "calling-retry-screen-alert-container",
+            "role": "alert",
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": "We couldn't find a meeting matching this ID and passcode.",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "headings": [
+          {
+            "tag": "h2",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": "We couldn't find a meeting matching this ID and passcode.",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "media": {
+          "videos": 0,
+          "audios": 0,
+          "audioSrcs": []
+        },
+        "body": "We couldn't find a meeting matching this ID and passcode.\nRejoin call\nDismiss"
+      }
+    },
+    {
+      "at": "post-join+10000ms",
+      "snap": {
+        "url": "https://teams.microsoft.com/light-meetings/launch?anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=e6bac56d-a5dc-4157-babb-223d57c6d41f&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9hbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD1lNmJhYzU2ZC1hNWRjLTQxNTctYmFiYi0yMjNkNTdjNmQ0MWYmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIn0%3D&deeplinkId=b8535a55-da89-4bbc-94d9-9c53d4a332c0",
+        "title": "Microsoft Teams meeting | Microsoft Teams",
+        "tids": [
+          "button-container",
+          "calling-retry-cancelbutton",
+          "calling-retry-rejoinbutton",
+          "calling-retry-screen",
+          "calling-retry-screen-alert-container",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-code-input",
+          "meeting-passcode-input"
+        ],
+        "visibleTids": [
+          "button-container",
+          "calling-retry-cancelbutton",
+          "calling-retry-rejoinbutton",
+          "calling-retry-screen",
+          "calling-retry-screen-alert-container",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-code-input",
+          "meeting-passcode-input"
+        ],
+        "buttons": [
+          {
+            "tag": "button",
+            "tid": "calling-retry-rejoinbutton",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Rejoin call",
+            "disabled": true,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "calling-retry-cancelbutton",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Dismiss",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "inputs": [
+          {
+            "tag": "input",
+            "tid": "meeting-code-input",
+            "role": null,
+            "aria": "Meeting ID",
+            "ph": "Type a meeting ID",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": "meeting-passcode-input",
+            "role": null,
+            "aria": "Meeting Passcode",
+            "ph": "Type a meeting passcode",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "alerts": [
+          {
+            "tag": "div",
+            "tid": "calling-retry-screen-alert-container",
+            "role": "alert",
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": "We couldn't find a meeting matching this ID and passcode.",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "headings": [
+          {
+            "tag": "h2",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": "We couldn't find a meeting matching this ID and passcode.",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "media": {
+          "videos": 0,
+          "audios": 0,
+          "audioSrcs": []
+        },
+        "body": "We couldn't find a meeting matching this ID and passcode.\nRejoin call\nDismiss"
+      }
+    },
+    {
+      "at": "post-join+15000ms",
+      "snap": {
+        "url": "https://teams.microsoft.com/light-meetings/launch?anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=e6bac56d-a5dc-4157-babb-223d57c6d41f&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9hbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD1lNmJhYzU2ZC1hNWRjLTQxNTctYmFiYi0yMjNkNTdjNmQ0MWYmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIn0%3D&deeplinkId=b8535a55-da89-4bbc-94d9-9c53d4a332c0",
+        "title": "Microsoft Teams meeting | Microsoft Teams",
+        "tids": [
+          "button-container",
+          "calling-retry-cancelbutton",
+          "calling-retry-rejoinbutton",
+          "calling-retry-screen",
+          "calling-retry-screen-alert-container",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-code-input",
+          "meeting-passcode-input"
+        ],
+        "visibleTids": [
+          "button-container",
+          "calling-retry-cancelbutton",
+          "calling-retry-rejoinbutton",
+          "calling-retry-screen",
+          "calling-retry-screen-alert-container",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-code-input",
+          "meeting-passcode-input"
+        ],
+        "buttons": [
+          {
+            "tag": "button",
+            "tid": "calling-retry-rejoinbutton",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Rejoin call",
+            "disabled": true,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "calling-retry-cancelbutton",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Dismiss",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "inputs": [
+          {
+            "tag": "input",
+            "tid": "meeting-code-input",
+            "role": null,
+            "aria": "Meeting ID",
+            "ph": "Type a meeting ID",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": "meeting-passcode-input",
+            "role": null,
+            "aria": "Meeting Passcode",
+            "ph": "Type a meeting passcode",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "alerts": [
+          {
+            "tag": "div",
+            "tid": "calling-retry-screen-alert-container",
+            "role": "alert",
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": "We couldn't find a meeting matching this ID and passcode.",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "headings": [
+          {
+            "tag": "h2",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": "We couldn't find a meeting matching this ID and passcode.",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "media": {
+          "videos": 0,
+          "audios": 0,
+          "audioSrcs": []
+        },
+        "body": "We couldn't find a meeting matching this ID and passcode.\nRejoin call\nDismiss"
+      }
+    },
+    {
+      "at": "post-join+20000ms",
+      "snap": {
+        "url": "https://teams.microsoft.com/light-meetings/launch?anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=e6bac56d-a5dc-4157-babb-223d57c6d41f&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9hbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD1lNmJhYzU2ZC1hNWRjLTQxNTctYmFiYi0yMjNkNTdjNmQ0MWYmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIn0%3D&deeplinkId=b8535a55-da89-4bbc-94d9-9c53d4a332c0",
+        "title": "Microsoft Teams meeting | Microsoft Teams",
+        "tids": [
+          "button-container",
+          "calling-retry-cancelbutton",
+          "calling-retry-rejoinbutton",
+          "calling-retry-screen",
+          "calling-retry-screen-alert-container",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-code-input",
+          "meeting-passcode-input"
+        ],
+        "visibleTids": [
+          "button-container",
+          "calling-retry-cancelbutton",
+          "calling-retry-rejoinbutton",
+          "calling-retry-screen",
+          "calling-retry-screen-alert-container",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-code-input",
+          "meeting-passcode-input"
+        ],
+        "buttons": [
+          {
+            "tag": "button",
+            "tid": "calling-retry-rejoinbutton",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Rejoin call",
+            "disabled": true,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "calling-retry-cancelbutton",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Dismiss",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "inputs": [
+          {
+            "tag": "input",
+            "tid": "meeting-code-input",
+            "role": null,
+            "aria": "Meeting ID",
+            "ph": "Type a meeting ID",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": "meeting-passcode-input",
+            "role": null,
+            "aria": "Meeting Passcode",
+            "ph": "Type a meeting passcode",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "alerts": [
+          {
+            "tag": "div",
+            "tid": "calling-retry-screen-alert-container",
+            "role": "alert",
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": "We couldn't find a meeting matching this ID and passcode.",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "headings": [
+          {
+            "tag": "h2",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": "We couldn't find a meeting matching this ID and passcode.",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "media": {
+          "videos": 0,
+          "audios": 0,
+          "audioSrcs": []
+        },
+        "body": "We couldn't find a meeting matching this ID and passcode.\nRejoin call\nDismiss"
+      }
+    },
+    {
+      "at": "post-join+25000ms",
+      "snap": {
+        "url": "https://teams.microsoft.com/light-meetings/launch?anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=e6bac56d-a5dc-4157-babb-223d57c6d41f&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9hbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD1lNmJhYzU2ZC1hNWRjLTQxNTctYmFiYi0yMjNkNTdjNmQ0MWYmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIn0%3D&deeplinkId=b8535a55-da89-4bbc-94d9-9c53d4a332c0",
+        "title": "Microsoft Teams meeting | Microsoft Teams",
+        "tids": [
+          "button-container",
+          "calling-retry-cancelbutton",
+          "calling-retry-rejoinbutton",
+          "calling-retry-screen",
+          "calling-retry-screen-alert-container",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-code-input",
+          "meeting-passcode-input"
+        ],
+        "visibleTids": [
+          "button-container",
+          "calling-retry-cancelbutton",
+          "calling-retry-rejoinbutton",
+          "calling-retry-screen",
+          "calling-retry-screen-alert-container",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-code-input",
+          "meeting-passcode-input"
+        ],
+        "buttons": [
+          {
+            "tag": "button",
+            "tid": "calling-retry-rejoinbutton",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Rejoin call",
+            "disabled": true,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "calling-retry-cancelbutton",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Dismiss",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "inputs": [
+          {
+            "tag": "input",
+            "tid": "meeting-code-input",
+            "role": null,
+            "aria": "Meeting ID",
+            "ph": "Type a meeting ID",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": "meeting-passcode-input",
+            "role": null,
+            "aria": "Meeting Passcode",
+            "ph": "Type a meeting passcode",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "alerts": [
+          {
+            "tag": "div",
+            "tid": "calling-retry-screen-alert-container",
+            "role": "alert",
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": "We couldn't find a meeting matching this ID and passcode.",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "headings": [
+          {
+            "tag": "h2",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": "We couldn't find a meeting matching this ID and passcode.",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "media": {
+          "videos": 0,
+          "audios": 0,
+          "audioSrcs": []
+        },
+        "body": "We couldn't find a meeting matching this ID and passcode.\nRejoin call\nDismiss"
+      }
+    },
+    {
+      "at": "post-join+30000ms",
+      "snap": {
+        "url": "https://teams.microsoft.com/light-meetings/launch?anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=e6bac56d-a5dc-4157-babb-223d57c6d41f&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9hbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD1lNmJhYzU2ZC1hNWRjLTQxNTctYmFiYi0yMjNkNTdjNmQ0MWYmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIn0%3D&deeplinkId=b8535a55-da89-4bbc-94d9-9c53d4a332c0",
+        "title": "Microsoft Teams meeting | Microsoft Teams",
+        "tids": [
+          "button-container",
+          "calling-retry-cancelbutton",
+          "calling-retry-rejoinbutton",
+          "calling-retry-screen",
+          "calling-retry-screen-alert-container",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-code-input",
+          "meeting-passcode-input"
+        ],
+        "visibleTids": [
+          "button-container",
+          "calling-retry-cancelbutton",
+          "calling-retry-rejoinbutton",
+          "calling-retry-screen",
+          "calling-retry-screen-alert-container",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-code-input",
+          "meeting-passcode-input"
+        ],
+        "buttons": [
+          {
+            "tag": "button",
+            "tid": "calling-retry-rejoinbutton",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Rejoin call",
+            "disabled": true,
+            "vis": true
+          },
+          {
+            "tag": "button",
+            "tid": "calling-retry-cancelbutton",
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": "button",
+            "text": "Dismiss",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "inputs": [
+          {
+            "tag": "input",
+            "tid": "meeting-code-input",
+            "role": null,
+            "aria": "Meeting ID",
+            "ph": "Type a meeting ID",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "input",
+            "tid": "meeting-passcode-input",
+            "role": null,
+            "aria": "Meeting Passcode",
+            "ph": "Type a meeting passcode",
+            "type": "text",
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "alerts": [
+          {
+            "tag": "div",
+            "tid": "calling-retry-screen-alert-container",
+            "role": "alert",
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": "We couldn't find a meeting matching this ID and passcode.",
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": null,
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "headings": [
+          {
+            "tag": "h2",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "type": null,
+            "text": "We couldn't find a meeting matching this ID and passcode.",
+            "disabled": null,
+            "vis": true
+          }
+        ],
+        "media": {
+          "videos": 0,
+          "audios": 0,
+          "audioSrcs": []
+        },
+        "body": "We couldn't find a meeting matching this ID and passcode.\nRejoin call\nDismiss"
+      }
+    }
+  ],
+  "fill": "filled -> Meetbot Recorder",
+  "click": "clicked join",
+  "navigations": [
+    "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fanon%3Dtrue&type=meet&deeplinkId=703b0a10-896c-44ba-b12a-9731350ac5f3&directDl=true&msLaunch=true&enableMobilePage=true",
+    "https://teams.microsoft.com/v2/?meetingjoin=true",
+    "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fanon%3Dtrue%26launchAgent%3Djoin_launcher_web%26lightExperience%3Dtrue%26correlationId%3De6bac56d-a5dc-4157-babb-223d57c6d41f%26anon%3Dtrue&type=meet&deeplinkId=b897f714-3473-4773-9512-33ee300317a0&directDl=true&msLaunch=true&enableMobilePage=true",
+    "https://teams.microsoft.com/light-meetings/launch?anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=e6bac56d-a5dc-4157-babb-223d57c6d41f&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9hbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD1lNmJhYzU2ZC1hNWRjLTQxNTctYmFiYi0yMjNkNTdjNmQ0MWYmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIn0%3D&deeplinkId=b8535a55-da89-4bbc-94d9-9c53d4a332c0"
+  ],
+  "console": [
+    "[ExpLoader] Getting things ready...",
+    "[ExpLoader] ExperienceLoader: OCDI redirect: Not redirecting - not enabled",
+    "[Auth]: auth_cache initialized",
+    "[Auth]: authTelemetryProvider initialized",
+    "[Auth]: [Telemetry][e46b6344-7484-48ec-a05d-7c20edaa0485][auth_web_initialization] [start] - telemetry provider created for createAuthenticationServiceInstance, source: core-auth-tasks::init with shouldCreateScenario: [true]",
+    "Unhandled error/rejection {\"isTrusted\":true}",
+    "[Auth]: auth_cache initialized",
+    "[Auth]: authTelemetryProvider initialized",
+    "CallingBotService: waitForCallRegion failed with error: Call disconnected",
+    "CallingBotService: waitForCallRegion failed with error: Call disconnected",
+    "ObservableCallService: Failed to get observable call. error=Conversation cannot be created due to invalid meeting data., error.message=terminatedReason: 5, ccCode: 400, ccSubCode: 5751, resultCategory: UnexpectedClientError,InvalidMeetingIdentifier",
+    "ObservableCallService: max num of failures exceeded",
+    "callingAgents: wasmvqe API: Error loading VQE worklet (AbortError: Unable to load a worklet's module.).",
+    "callingAgents: calling-stack [JS.TsCalling.MediaAgent] ffffffff: MA/DeviceManager/EffectsManager/AudioEffectManager Audio effect error: WasmVqeProcessorError, message: AbortError: Unable to load a worklet's module.",
+    "callingAgents: calling-stack [JS.TsCalling.MediaAgent] ffffffff: MA/webrtc2-1/SSM/Sender_\"Video\":1/Sender Not setting up audio mixer for non-audio stream",
+    "i18n: The namespace \"meetingRoomConsole\" has not been loaded. The only loaded namespaces: \"calling, peoplePicker, auth, channels, recurrence, breakoutRooms, extensibility, messaging\"",
+    "[LIME] LightLoggingService: calling_call_disconnected(callId=43cdff2e-71cb-4bc2-9ee9-d526104c185e, sessionId=8295dd3a-9eb3-4299-8ece-57b5c356498a): Scenario stopped with incomplete, callEndActionReason: NotConnected",
+    "CallingBotService: waitForCallRegion failed with error: Call disconnected",
+    "CallingBotService: waitForCallRegion failed with error: Call disconnected",
+    "callingService: Prepare call failed with: 5"
+  ]
+}

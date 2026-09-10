@@ -112,3 +112,29 @@ python3 .agent/skills/whatsapp-connector/wa_manager.py send \
 - Deteksi dokumen tidak boleh hanya mengandalkan ekstensi berkas. WhatsApp
   kadang menampilkan nama tanpa ekstensi (mis. `DOC-20260225-WA0016.`), jadi
   baris metadata ("40 pages - PDF - 2 MB") dan ikon dokumen ikut diperiksa.
+
+---
+
+## Upstream Alternative: macOS Go Bridge (`whatsapp-mcp`)
+
+*(Catatan: Bagian di bawah ini adalah konfigurasi upstream untuk macOS launchd Go bridge. Untuk lingkungan Windows/WSL, gunakan metode browser-service CDP di atas).*
+
+This is personal infrastructure, not Work client work. It runs outside this repo's client connectors and outside the ASB app.
+
+## How it's wired on this machine
+
+- **Bridge**: a local Go process, `com.owner.wa-bridge`, managed by launchd,
+  serving REST on `localhost:8080`.
+- **MCP server**: `~/wa-bridge/whatsapp-mcp-server`, run via `uv`, talking
+  to the bridge over stdio.
+- **Credentials**: the WhatsApp account session lives under `~/wa-bridge/store/`
+  and never leaves this machine.
+
+## Send mode
+
+`WA_SEND_MODE` gates every send tool. Default on this machine is
+**disabled** (read-only): send tools refuse outright. In **approval** mode,
+a send tool does not deliver anything. It appends the draft to
+`~/.local/share/whatsapp-mcp/outbox.jsonl` and returns "staged", and the owner
+approves it out-of-band with `approve.py`, separate from this chat.
+

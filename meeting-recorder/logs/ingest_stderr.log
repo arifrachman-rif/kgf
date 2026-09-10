@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\rifra\.gemini\antigravity-ide\scratch\ai-second-brain\meeting-recorder\ingest_server.py", line 48, in <module>
+    from common import REPO_ROOT, load_config, slugify
+  File "C:\Users\rifra\.gemini\antigravity-ide\scratch\ai-second-brain\meeting-recorder\common.py", line 78
+    <<<<<<< HEAD
+    ^^
+SyntaxError: invalid syntax

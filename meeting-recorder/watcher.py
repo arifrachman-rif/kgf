@@ -21,8 +21,10 @@ import argparse
 import datetime
 import json
 import os
+import platform
 import subprocess
 import sys
+import threading
 import time
 
 from common import REPO_ROOT, load_config, parse_json_tail, slugify
@@ -38,6 +40,10 @@ AGY_BRIDGE = os.path.join(REPO_ROOT, ".agent", "skills", "agy-bridge", "run.py")
 HEARTBEAT = os.path.join(REPO_ROOT, ".agent", "scripts", "heartbeat.py")
 ACTIVITY_LOG = os.path.join(REPO_ROOT, ".agent", "scripts", "activity_log.py")
 GCAL = os.path.join(REPO_ROOT, ".agent", "skills", "google-calendar-connector", "gcal_manager.py")
+
+# Historical state entries hold absolute WSL paths from the automation host.
+# See _rebase below.
+LEGACY_PREFIX = "./"
 
 AUDIO_EXTS = (".wav", ".m4a", ".mp3", ".ogg", ".flac")
 WIB = datetime.timezone(datetime.timedelta(hours=7))
@@ -333,10 +339,18 @@ def link_related(rec_id, related):
         json.dump(registry, f, indent=2, ensure_ascii=False)
     os.replace(tmp, REGISTRY_PATH)
 
+def _rebase(p):
+    """Legacy state entries hold absolute WSL paths. Rebase onto this
+    checkout when the original does not exist, so historical lookups keep
+    working on macOS. No-op on the WSL host, where the path resolves."""
+    if p and p.startswith(LEGACY_PREFIX) and not os.path.exists(p):
+        return os.path.join(REPO_ROOT, p[len(LEGACY_PREFIX):])
+    return p
+
 def existing_mom(related):
     """Path of an already-drafted MOM among related recordings, if any."""
     for rid, e in related:
-        p = e.get("mom_path")
+        p = _rebase(e.get("mom_path"))
         if p and os.path.exists(os.path.join(REPO_ROOT, p)):
             return rid, p
     return None, None
@@ -441,8 +455,35 @@ def _strip_narration(text):
         idx = idx + 1 if idx != -1 else -1
     return text[idx:].strip() if idx > 0 else text
 
-def draft_mom(transcript_md, title, start_wib, matched, scratch, cfg=None):
+def resolve_speakers(transcript_md, attendees):
+    """Put names on the "Speaker N" labels, using the confidence ladder in
+    speaker_map.py. Returns (resolved {label: name}, still_open [label]).
+
+    Never fatal: a resolver failure must not cost the MOM, so the transcript is
+    left exactly as the ASR produced it and every label reports as open."""
+    try:
+        sys.path.insert(0, MODULE_DIR)
+        import speaker_map
+        result = speaker_map.resolve(transcript_md, attendees or [])
+        if not result["labels"]:
+            return {}, []
+        speaker_map.merge_into_store(transcript_md, result)
+        resolved = speaker_map.trusted_map(transcript_md)
+        if resolved:
+            speaker_map.cmd_apply(
+                argparse.Namespace(transcript=transcript_md, dry_run=False))
+        entry = speaker_map.load_store()["maps"][speaker_map.store_key(transcript_md)]
+        still_open = speaker_map.unresolved(entry)
+        print(f"[watcher] speakers: {len(resolved)} named, {len(still_open)} still open")
+        return resolved, still_open
+    except Exception as e:                                   # noqa: BLE001
+        print(f"[watcher] speaker resolution skipped: {e}", file=sys.stderr)
+        return {}, []
+
+def draft_mom(transcript_md, title, start_wib, matched, scratch, cfg=None,
+              attendees=None, unresolved_speakers=None):
     cfg = cfg or {}
+    roster = ", ".join(attendees) if attendees else ""
     with open(transcript_md, encoding="utf-8") as f:
         transcript = f.read()
     with open(MOM_TEMPLATE, encoding="utf-8") as f:
@@ -454,7 +495,17 @@ def draft_mom(transcript_md, title, start_wib, matched, scratch, cfg=None):
                 "context), topics discussed with key points, decisions made with "
                 "rationale, action items with owner and deadline if stated, notable "
                 "quotes. Do NOT synthesize or prioritize; facts only. Keep the "
-                "original language of quotes.\n\n=== TRANSCRIPT ===\n" + transcript,
+                "original language of quotes.\n"
+                + (f"Known attendees, in no particular order: {roster}. Map the "
+                   "speaker labels onto these names ONLY where the transcript "
+                   "makes the mapping unambiguous; otherwise keep the raw label.\n"
+                   if roster else "")
+                + (f"These labels are still unidentified and were checked already: "
+                   f"{', '.join(unresolved_speakers)}. Keep them as labels. Do NOT "
+                   "assign them a name, and do NOT drop the action items they "
+                   "speak: attribute those to the raw label.\n"
+                   if unresolved_speakers else "")
+                + "\n=== TRANSCRIPT ===\n" + transcript,
                 scratch)
     if facts is None:
         return None
@@ -465,7 +516,9 @@ def draft_mom(transcript_md, title, start_wib, matched, scratch, cfg=None):
               "template structure (replace placeholders, keep the section order and "
               "table formats). No em-dashes anywhere. Meeting: "
               f"{meeting_line}. Date: {start_wib.strftime('%Y-%m-%d')}, start "
-              f"{start_wib.strftime('%H:%M')} WIB.\n\n=== TEMPLATE ===\n{template}\n\n"
+              f"{start_wib.strftime('%H:%M')} WIB."
+              + (f" Attendees: {roster}." if roster else "")
+              + f"\n\n=== TEMPLATE ===\n{template}\n\n"
               "=== EXTRACTED FACTS ===\n" + facts,
               scratch,
               model=cfg.get("draft_model"), backend=cfg.get("draft_backend"))
@@ -502,6 +555,8 @@ def process(audio_path, cfg, state):
     meta = read_sidecar(base)
     title = meta.get("title") or os.path.splitext(name)[0]
     print(f"[watcher] processing: {name} ({title})")
+    # Named in the heartbeat so a reader can tell "working on this one" from "queue not moving".
+    set_busy(title)
 
     os.makedirs(TRANSCRIPTS_DIR, exist_ok=True)
     slug = slugify(title)
@@ -510,9 +565,23 @@ def process(audio_path, cfg, state):
 
     duration = meta.get("duration_sec", 0)
     rec_id, start_wib = register_recording(audio_path, meta, None, duration)
-    matched = calendar_match(start_wib, cfg)
-    if matched:
-        update_registry_entry(rec_id, matched_meeting=matched, confidence="high")
+    ad_hoc = bool(meta.get("ad_hoc"))
+    attendees = meta.get("attendees") or []
+    if ad_hoc:
+        # the owner created this meeting himself; the typed title is authoritative.
+        # Matching it to an overlapping calendar event would rename the MOM,
+        # brief the wrong room, and dedupe it against an unrelated recording.
+        matched = None
+        update_registry_entry(rec_id, matched_meeting=title, confidence="high",
+                              match_source="local-recorder-adhoc",
+                              participants=attendees)
+        print(f"[watcher] ad-hoc meeting, calendar match skipped: {title}")
+    else:
+        matched = calendar_match(start_wib, cfg)
+        if matched:
+            update_registry_entry(rec_id, matched_meeting=matched, confidence="high")
+        if attendees:
+            update_registry_entry(rec_id, participants=attendees)
     video = base + ".mp4"
     if os.path.exists(video):
         update_registry_entry(rec_id, video_path=video)
@@ -528,10 +597,16 @@ def process(audio_path, cfg, state):
         status = f"transcribed (duplicate of {dup_rid}, MOM draft skipped)"
         print(f"[watcher] {status} -> {dup_mom}")
     elif cfg.get("auto_draft", True):
+        # Name the "Speaker N" labels BEFORE the MOM is drafted, so an action
+        # item spoken by a resolved voice carries its owner instead of being
+        # dropped. Only tiers that cannot be wrong are written back; everything
+        # else stays a proposal in `speaker_map.py pending`.
+        resolved, still_open = resolve_speakers(transcript_md, attendees)
         scratch = os.path.join(MODULE_DIR, "scratch")
         os.makedirs(scratch, exist_ok=True)
         try:
-            mom = draft_mom(transcript_md, title, start_wib, matched, scratch, cfg)
+            mom = draft_mom(transcript_md, title, start_wib, matched, scratch, cfg,
+                            attendees=attendees, unresolved_speakers=still_open)
         except RuntimeError as e:
             print(f"[watcher] draft failed: {e}", file=sys.stderr)
             mom = None
@@ -612,7 +687,7 @@ def scan_once(cfg, state):
         for path in candidates:
             try:
                 process(path, cfg, state)
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001 -- one bad file must not end the watch
                 prev = state["processed"].get(path)
                 attempts = (prev.get("attempts", 0) if isinstance(prev, dict) else 0) + 1
                 quarantined = attempts >= MAX_ATTEMPTS
@@ -634,12 +709,76 @@ def scan_once(cfg, state):
                     heartbeat("fail", f"{name}: QUARANTINED after {attempts} attempts, "
                                       f"no further retries -- recover with "
                                       f"'watcher.py --file <path>'. Last error: {e}")
+            finally:
+                set_busy(None)
     finally:
         if lock_file and os.path.exists(lock_file):
             try:
                 os.remove(lock_file)
             except Exception:
                 pass
+
+# ---------- liveness ----------
+#
+# The ASB app's corner feed used to label every un-transcribed recording "transcription
+# running", because the only fact it had was "audio on disk, not yet in state.json". That is
+# true whether this watcher is working through the file or has not been started at all, and on
+# 24 Aug 2026 four meetings sat there for ten hours reading as work in progress while nothing
+# was running. A count of hours is not a symptom anyone can act on; "the transcriber is not
+# running" is.
+#
+# So the watcher says it is alive, every poll, in one small file. Absent or stale means not
+# running, and the app says exactly that instead of guessing.
+
+HEARTBEAT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                              "watcher_heartbeat.json")
+
+# The beat runs on its own thread, NOT on the poll loop. `scan_once` transcribes synchronously and
+# one meeting can hold it for an hour, so a beat written by the loop would go stale during exactly
+# the work it is meant to prove -- and the app would report "the transcriber is not running" about
+# a machine that was busy transcribing.
+HEARTBEAT_TICK_S = 10
+
+# What the beat says it is working on, set by `process` and read by the beat thread.
+_busy = None
+_busy_lock = threading.Lock()
+
+def set_busy(name):
+    global _busy
+    with _busy_lock:
+        _busy = name
+
+def write_heartbeat(cfg, interval):
+    """One line of proof that this process is alive. Atomic: the reader polls it every few
+    seconds and a half-written file would read as a dead watcher."""
+    with _busy_lock:
+        busy = _busy
+    row = {
+        "pid": os.getpid(),
+        "at": round(time.time(), 3),
+        "interval_s": interval,
+        "tick_s": HEARTBEAT_TICK_S,
+        "device": cfg.get("machine", {}).get("name") or platform.node(),
+        "recordings_dir": cfg.get("machine", {}).get("recordings_dir"),
+        "busy": busy,
+    }
+    tmp = HEARTBEAT_PATH + ".tmp"
+    try:
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(row, f, indent=1)
+        os.replace(tmp, HEARTBEAT_PATH)
+    except OSError:
+        pass            # a missed beat is a stale reading, never a reason to stop working
+
+def start_heartbeat(cfg, interval):
+    """Beats until the process exits. Daemon, so Ctrl-C still ends the watcher at once."""
+    def beat():
+        while True:
+            write_heartbeat(cfg, interval)
+            time.sleep(HEARTBEAT_TICK_S)
+
+    write_heartbeat(cfg, interval)
+    threading.Thread(target=beat, daemon=True, name="watcher-heartbeat").start()
 
 def report_status(state):
     now = time.time()
@@ -680,14 +819,14 @@ def main():
         if args.file:
             path = os.path.abspath(args.file)
             state["processed"].pop(path, None)
-            
+
             # Create lock file to show tray icon
             if lock_file:
                 try:
                     open(lock_file, "w").close()
                 except Exception:
                     pass
-                    
+
             try:
                 process(path, cfg, state)
             except Exception as e:
@@ -706,6 +845,7 @@ def main():
             return
         print(f"[watcher] polling {cfg['machine'].get('recordings_dir')} "
               f"every {args.interval}s (Ctrl-C to stop)")
+        start_heartbeat(cfg, args.interval)
         while True:
             scan_once(cfg, state)
             time.sleep(args.interval)

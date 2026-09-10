@@ -86,7 +86,7 @@ class App:
             "recordings_dir", r"F:\Meeting Recordings Automation")
 
         root.title("Meeting Recorder")
-        root.geometry("360x255")
+        root.geometry("360x330")
         root.attributes("-topmost", True)
         root.resizable(False, False)
 
@@ -101,6 +101,21 @@ class App:
                                      command=self.refresh_calendar)
         self.refresh_btn.pack(side="left", padx=(6, 0))
         self.entry.focus()
+
+        # Ad-hoc: a meeting the owner creates himself (Slack huddle, phone call).
+        # Auto-ticks as soon as the typed title stops matching a calendar entry,
+        # so the common case needs no thought; the tick can still be forced.
+        self.adhoc_var = tk.BooleanVar(value=False)
+        tk.Checkbutton(root, text="Ad-hoc meeting (not on calendar)",
+                       variable=self.adhoc_var).pack(anchor="w", padx=12, pady=(4, 0))
+        self.title_var.trace_add("write", self._on_title_typed)
+
+        tk.Label(root, text="Attendees (optional, comma separated):").pack(
+            anchor="w", padx=12, pady=(6, 0))
+        self.attendees_var = tk.StringVar(value="")
+        self.attendees = ttk.Entry(root, textvariable=self.attendees_var,
+                                   font=("Segoe UI", 10))
+        self.attendees.pack(fill="x", padx=12)
 
         self.btn_frame = tk.Frame(root)
         self.btn_frame.pack(fill="x", padx=12, pady=10)
@@ -131,6 +146,16 @@ class App:
         self.refresh_calendar()
         self.tick()
 
+    def _on_title_typed(self, *_):
+        """Title no longer matches a calendar candidate -> it is an ad-hoc
+        meeting. Never un-ticks a box the owner ticked on purpose."""
+        if self.cap is not None or self.adhoc_var.get():
+            return
+        current = self.title_var.get().strip()
+        candidates = list(self.entry["values"])
+        if current and candidates and current not in candidates:
+            self.adhoc_var.set(True)
+
     def refresh_calendar(self):
         """Fetch calendar candidates in the background; safe to hit anytime."""
         self.refresh_btn.config(state="disabled")
@@ -147,13 +172,19 @@ class App:
                 return  # recording; don't touch the title or status
             if not candidates:
                 self.status.config(text="No calendar match, type a name", fg="#555")
+                self.adhoc_var.set(True)
                 return
             self.entry["values"] = candidates
-            # prefill unless the owner typed something custom
+            # prefill unless the owner typed something custom or ticked ad-hoc:
+            # an ad-hoc title must never be overwritten by a calendar refresh
             current = self.title_var.get().strip()
-            if current in ("", "Meeting") or current in list(self.entry["values"]):
+            if not self.adhoc_var.get() and (
+                    current in ("", "Meeting") or current in candidates):
                 self.title_var.set(candidates[0])
-            self.status.config(text=f"Calendar: {len(candidates)} match", fg="#555")
+            self._on_title_typed()
+            self.status.config(
+                text=("Ad-hoc, calendar ignored" if self.adhoc_var.get()
+                      else f"Calendar: {len(candidates)} match"), fg="#555")
 
         self.root.after(0, apply)
         # idle auto-refresh every 5 minutes so a left-open window stays current
@@ -199,6 +230,7 @@ class App:
 
         self.status.config(text="\n".join(devices), fg="#1a7f37")
         self.entry.config(state="disabled")
+        self.attendees.config(state="disabled")
 
     def stop(self):
         title = self.title_var.get().strip() or "meeting"
@@ -209,7 +241,9 @@ class App:
             self.screen = None
             if video:
                 parts = list(parts) + [video]
-        write_sidecar(self.base, title, self.start_time, parts, "windows")
+        write_sidecar(self.base, title, self.start_time, parts, "windows",
+                      ad_hoc=self.adhoc_var.get(),
+                      attendees=self.attendees_var.get().split(","))
         marker = self.base + ".recording"
         if os.path.exists(marker):
             os.remove(marker)
@@ -222,6 +256,7 @@ class App:
         self.is_paused = False
 
         self.entry.config(state="normal")
+        self.attendees.config(state="normal")
         msg = f"Saved: {os.path.basename(self.base)}"
         if self.auto_var.get():
             try:

@@ -104,20 +104,50 @@ def get_sheets_service():
     creds = authenticate()
     return build('sheets', 'v4', http=google_auth_httplib2.AuthorizedHttp(creds, http=httplib2.Http(timeout=60)))
 
-def _find_component(rows, component, match_col, l0_col):
+def _norm_cell(v):
+    return str(v).strip()
+
+def _norm_row(row):
+    """Canonical form of a row for equality checks: strings, stripped, no trailing blanks.
+
+    The Sheets API trims trailing empty cells off existing rows, so a freshly built
+    8-column row must be trimmed the same way or it can never compare equal.
+    """
+    cells = [_norm_cell(c) for c in row]
+    while cells and not cells[-1]:
+        cells.pop()
+    return tuple(cells)
+
+def _find_component(grid, component, match_col, l0_col):
     """Return (found, l0) by matching the component name in that tab's component column."""
     target = component.lower().replace(' ', '').replace('-', '')
-    for r in rows:
-        vals = r.get('values', [])
+    for vals in grid:
         if len(vals) <= match_col:
             continue
-        val = vals[match_col].get('effectiveValue', {}).get('stringValue', '') or ''
+        val = _norm_cell(vals[match_col])
         if target and target in val.lower().replace(' ', '').replace('-', ''):
             l0 = ''
             if l0_col is not None and len(vals) > l0_col:
-                l0 = vals[l0_col].get('effectiveValue', {}).get('stringValue', '') or ''
+                l0 = _norm_cell(vals[l0_col])
             return True, l0
     return False, ''
+
+# Two sentinels that are never real detail text.
+_ITEM_PROBE_A = '\x00__L3_PROBE_A__'
+_ITEM_PROBE_B = '\x00__L3_PROBE_B__'
+
+def _row_consumes_item(build_row, ctx):
+    """True if this tab's row schema actually places the L3 detail item in the row.
+
+    Splitting --details on ';' is only correct for tabs whose rows differ per item.
+    For a schema that drops the item, one row per item is N IDENTICAL rows, which is
+    how duplicate blocks get into the sheet. Rather than hardcoding a tab name, probe
+    the schema: build the row twice with different sentinels and see if it changes.
+    """
+    try:
+        return build_row(ctx, _ITEM_PROBE_A) != build_row(ctx, _ITEM_PROBE_B)
+    except Exception:
+        return True
 
 def _update_sheet_tab(service, tab_name, component, feature, details, phase,
                       prd_status, build_status, prd_url, prd_title, dry_run=False):
@@ -127,14 +157,16 @@ def _update_sheet_tab(service, tab_name, component, feature, details, phase,
         print(f"Error: no schema defined for tab '{tab_name}'. Refusing to write.")
         return False
 
-    metadata = service.spreadsheets().get(
+    # FORMULA render so existing hyperlink cells come back as '=HYPERLINK(...)', the
+    # same shape build_row emits. Under the default render they come back as display
+    # text and no already-written row would ever match, defeating the dedupe below.
+    grid = service.spreadsheets().values().get(
         spreadsheetId=SHEET_ID,
-        ranges=[f"'{tab_name}'!A1:H400"],
-        fields="sheets(data(rowData(values(effectiveValue))))",
-    ).execute()
-    rows = metadata['sheets'][0]['data'][0].get('rowData', [])
+        range=f"'{tab_name}'!A1:H2000",
+        valueRenderOption='FORMULA',
+    ).execute().get('values', [])
 
-    found, l0 = _find_component(rows, component, schema["match_col"], schema["l0_col"])
+    found, l0 = _find_component(grid, component, schema["match_col"], schema["l0_col"])
     if not found:
         print(f"Error: component '{component}' not found in tab '{tab_name}' "
               f"(matched against column {chr(65 + schema['match_col'])}). Nothing written.")
@@ -150,14 +182,44 @@ def _update_sheet_tab(service, tab_name, component, feature, details, phase,
         "link": f'=HYPERLINK("{prd_url}", "{prd_title}")',
     }
 
-    # One row per detail item, matching how every existing block in both tabs is laid out.
     items = [d.strip() for d in details.split(';') if d.strip()] or [details.strip()]
-    new_rows = [schema["build_row"](ctx, item) for item in items]
+
+    if _row_consumes_item(schema["build_row"], ctx):
+        # One row per detail item, matching how every existing block in this tab is laid out.
+        new_rows = [schema["build_row"](ctx, item) for item in items]
+    else:
+        # This tab's row schema drops the detail item, so one row per item would be N
+        # byte-identical rows. Emit exactly one, carrying the full detail text.
+        new_rows = [schema["build_row"](ctx, "; ".join(items))]
+        if len(items) > 1:
+            print(f"  Note: '{tab_name}' rows do not carry the L3 detail item; "
+                  f"collapsed {len(items)} detail items into 1 row.")
+
+    # Idempotency: re-running the same registration must not append the same rows again.
+    # Skip anything already present verbatim, and de-dup within this batch too.
+    seen = {_norm_row(r) for r in grid}
+    to_append, skipped = [], []
+    for r in new_rows:
+        key = _norm_row(r)
+        if key in seen:
+            skipped.append(r)
+        else:
+            seen.add(key)
+            to_append.append(r)
+
+    for r in skipped:
+        print(f"  SKIP (already present in '{tab_name}'): "
+              + " | ".join(str(x)[:30] for x in r))
 
     if dry_run:
-        print(f"  DRY RUN, would append {len(new_rows)} row(s) to '{tab_name}':")
-        for r in new_rows:
+        print(f"  DRY RUN, would append {len(to_append)} row(s) to '{tab_name}' "
+              f"({len(skipped)} skipped as duplicates):")
+        for r in to_append:
             print("   ", " | ".join(str(x)[:30] for x in r))
+        return True
+
+    if not to_append:
+        print(f"Sheet tab '{tab_name}' already up to date; nothing appended.")
         return True
 
     # Google Sheets "Table" objects reject insertRange ("cannot insert cells over part
@@ -167,9 +229,10 @@ def _update_sheet_tab(service, tab_name, component, feature, details, phase,
         range=f"'{tab_name}'!A1",
         valueInputOption='USER_ENTERED',
         insertDataOption='INSERT_ROWS',
-        body={'values': new_rows},
+        body={'values': to_append},
     ).execute()
-    print(f"Sheet tab '{tab_name}' updated successfully (appended {len(new_rows)} row(s)).")
+    print(f"Sheet tab '{tab_name}' updated successfully (appended {len(to_append)} row(s), "
+          f"skipped {len(skipped)} duplicate(s)).")
     return True
 
 def main():

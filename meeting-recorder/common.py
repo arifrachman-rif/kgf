@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Shared helpers for the local meeting note-taker (recorder / transcribe / watcher).
+"""Shared helpers for the local meeting recorder (recorder / transcribe / watcher).
 
 Platform detection is delegated to .agent/scripts/harness_config.py, which caches
 the output of detect_platform.sh. This file used to keep its own Python copy of
@@ -114,26 +114,67 @@ def parse_json_tail(text):
             return json.loads(text[i:])
     raise ValueError("no JSON found in output")
 
-def load_gemini_key():
-    """Reuse the Gemini API key from the environment, root .env, or gemini-image skill."""
-    key = os.environ.get("GEMINI_API_KEY")
-    if key:
-        return key
-    # Check root .env file
-    root_env = os.path.join(REPO_ROOT, ".env")
-    if os.path.exists(root_env):
-        for line in open(root_env, encoding="utf-8", errors="replace"):
+# Credential lookup: the environment first, then meeting-recorder/.env (next to
+# the thing being configured), then .env / secrets.env in the workspace root,
+# then the gemini-image skill's token.env -- the owner's original borrow point,
+# kept last as a legacy fallback rather than the primary source.
+_RECORDER_ENV = os.path.join(MODULE_DIR, ".env")
+_LEGACY_GEMINI_ENV = os.path.join(REPO_ROOT, ".agent", "skills", "gemini-image", "token.env")
+
+def _secret_files():
+    return [
+        _RECORDER_ENV,
+        os.path.join(REPO_ROOT, ".env"),
+        os.path.join(REPO_ROOT, "secrets.env"),
+        _LEGACY_GEMINI_ENV,
+    ]
+
+def _read_env_file(path, name):
+    if not os.path.exists(path):
+        return None
+    try:
+        for line in open(path, encoding="utf-8", errors="replace"):
             line = line.strip()
-            if line.startswith("GEMINI_API_KEY="):
-                val = line.split("=", 1)[1].strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, val = line.partition("=")
+            if key.strip() == name:
+                val = val.strip().strip('"').strip("'")
                 if val:
                     return val
-    # Fallback to gemini-image skill
-    env_path = os.path.join(REPO_ROOT, ".agent", "skills", "gemini-image", "token.env")
-    if os.path.exists(env_path):
-        for line in open(env_path, encoding="utf-8"):
-            line = line.strip()
-            if line.startswith("GEMINI_API_KEY="):
-                return line.split("=", 1)[1].strip()
-    sys.exit("ERROR: no GEMINI_API_KEY (env, root .env, or .agent/skills/gemini-image/token.env)")
+    except OSError:
+        pass
+    return None
 
+def secret_search_path():
+    """Human-readable list of the places load_secret looks, for error messages
+    and for --doctor. A user who is told 'no key found' must also be told where
+    to put one."""
+    return _secret_files()
+
+def load_secret(name, default=None):
+    """Find a credential by env-var name, or return `default`.
+
+    Returns rather than exits: a missing key means "this provider is
+    unavailable, try the next one", not "kill the run". (The older
+    load_gemini_key below calls sys.exit(), which is why a machine with no
+    Gemini key could take down a whole watcher pass instead of quietly
+    falling through to another provider.)
+    """
+    val = os.environ.get(name)
+    if val:
+        return val
+    for path in _secret_files():
+        val = _read_env_file(path, name)
+        if val:
+            return val
+    return default
+
+def load_gemini_key():
+    """Back-compat wrapper for callers that want a hard failure rather than a
+    fallback to the next engine. Prefer load_secret('GEMINI_API_KEY')."""
+    key = load_secret("GEMINI_API_KEY")
+    if key:
+        return key
+    sys.exit("ERROR: no GEMINI_API_KEY (env, meeting-recorder/.env, root .env/secrets.env, "
+              "or .agent/skills/gemini-image/token.env)")

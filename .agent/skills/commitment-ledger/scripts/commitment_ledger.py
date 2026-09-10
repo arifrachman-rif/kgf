@@ -50,6 +50,12 @@ AGY_BRIDGE = os.path.join(BASE_DIR, '.agent', 'skills', 'agy-bridge', 'run.py')
 FATHOM_CLIENT = os.path.join(BASE_DIR, '.agent', 'skills', 'fathom-connector', 'scripts', 'fathom_client.py')
 FATHOM_REGISTRY = os.path.join(BASE_DIR, 'journal', 'fathom_registry.json')
 HEARTBEAT = os.path.join(BASE_DIR, '.agent', 'scripts', 'heartbeat.py')
+
+# Every record carries a work-tree node (CLAUDE.md, "Every Ticket Belongs To A
+# Work-Tree Node"). resolve_or_die refuses an unknown id and prints the closest
+# matches, so a typo can never quietly file a record under nothing.
+sys.path.insert(0, os.path.join(BASE_DIR, '.agent', 'scripts'))
+from work_tree import UNFILED, UnknownNode, resolve_or_die  # noqa: E402
 PEOPLE_PATH = os.path.join(BASE_DIR, 'journal', 'state', 'people.json')
 
 # Local meeting artifacts (verified against meeting-recorder/watcher.py constants
@@ -114,6 +120,73 @@ CUE_RE = re.compile(
 HEADING_RE = re.compile(r'^(#{1,6})\s+(.*)$')
 ACTION_ITEMS_TEXT_RE = re.compile(r'^[\d.\s]*[^\w]*action\s+items?\b', re.IGNORECASE)
 BRIAN_OWNER_RE = re.compile(r'\bBrian\b', re.IGNORECASE)
+# "the owner's prioritisation" names the owner as context, not as owner. A line whose ONLY
+# mention of the owner is possessive must never become the owner's commitment.
+BRIAN_POSSESSIVE_RE = re.compile(r"\bBrian(?:\s+\w+)?['’]s\b", re.IGNORECASE)
+# Cells that are structurally never an owner: sequence numbers, dates, priorities,
+# and the dependency phrasing MOM templates put in the Due column.
+_NON_OWNER_CELL_RE = re.compile(
+    r'^(?:\d+|high|medium|low|tbd|n/?a|-+|eod|done|pending.*|with item.*|feeds item.*|'
+    r'before .*|after .*|\d{4}-\d{2}-\d{2}.*|.*\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\b.*)$',
+    re.IGNORECASE)
+# You personal-brand work. Work's ledger must never carry it, and the reverse
+# separation is enforced in the You repo. Added 28 Jul 2026 after the Dibimbing
+# PLN training MOM produced three Work commitments for a You teaching job.
+# Deliberately excludes "you": that is the owner's own Slack display name ("the owner
+# (You)") and fires on any Work MOM that merely mentions him. Same reason
+# "linkedin", "podcast" and "second brain" are out. Only unambiguous project names
+# belong here.
+YOU_RE = re.compile(
+    r'\b(?:goakal|bukal\s*nikah|taaruf|lalu\s*nikah|TLN|suami\s*qawwam|AI\s*Circle|'
+    r'dibimbing|repliz|hyperframe)\b',
+    re.IGNORECASE)
+
+def _cell_names_brian(cell):
+    c = (cell or '').strip().lower()
+    return any(tok in c for tok in BRIAN_NAME_TOKENS) or c in ('owner', 'owner arfi you')
+
+def mom_owner_cells(raw_line):
+    """Split a MOM action-item row into its fields and return the cells that could
+    plausibly be an owner. MOM templates emit `N | task | Owner | Due | Priority`
+    (pipes) or the same shape flattened with ' - ' separators. Returns [] when the
+    line has no field structure, in which case the caller falls back to a scan."""
+    if '|' in raw_line:
+        cells = raw_line.strip().strip('|').split('|')
+    else:
+        cells = re.split(r'\s+-\s+', raw_line.strip())
+    cells = [re.sub(r'\*\*|\[[ xX]\]', '', c).strip(' -\t') for c in cells]
+    out = []
+    for c in cells:
+        if not c or len(c.split()) > 5:
+            continue                      # long cell is the task text, not an owner
+        if _NON_OWNER_CELL_RE.match(c):
+            continue
+        if not re.search(r'[A-Za-z]', c):
+            continue
+        out.append(c)
+    return out
+
+def line_owner_is_brian(raw_line):
+    """True when the MOM row actually assigns the work to the owner.
+
+    The old test was `\\bBrian\\b` anywhere on the line, which captured other
+    people's action items whenever the task text happened to mention the owner. On
+    28 Jul that put Teammate Sanka's Buy Box scoping task ('sequenced against
+    the owner's prioritisation - Teammate Sanka') into the owner's outbound ledger."""
+    cells = mom_owner_cells(raw_line)
+    if cells:
+        brian_cells = [c for c in cells if _cell_names_brian(c)]
+        if brian_cells:
+            return True
+        # A structured row with a named owner who is not the owner is not the owner's,
+        # even if the task text mentions him.
+        named = [c for c in cells if resolve_person_slug(c) in _load_person_lookup().values()]
+        if named:
+            return False
+    if BRIAN_POSSESSIVE_RE.search(raw_line) and not re.search(
+            r'\bBrian\b(?!(?:\s+\w+)?[\'’]s)', raw_line, re.IGNORECASE):
+        return False
+    return bool(BRIAN_OWNER_RE.search(raw_line))
 
 # --------------------------------------------------------- content dedupe --
 #
@@ -137,7 +210,13 @@ BRIAN_OWNER_RE = re.compile(r'\bBrian\b', re.IGNORECASE)
 # and anything arguable is escalated rather than guessed.
 
 DUP_AUTO = 0.86     # >= this: same commitment, merge without asking
-DUP_BAND = 0.55     # [DUP_BAND, DUP_AUTO): uncertain, send to GLM to adjudicate
+# Lowered 0.55 -> 0.45 on 28 Jul 2026. Every one of the four real cross-source
+# duplicates found by hand that day scored 0.27 to 0.53, so they were never even
+# offered to the adjudicator and `dedupe` reported "no duplicates found" against a
+# ledger that had six. Only the explicit `dedupe` command uses this band (ingest
+# still gates on DUP_AUTO), so the cost is one larger adjudication call, and the
+# model still has to agree before anything merges.
+DUP_BAND = 0.45     # [DUP_BAND, DUP_AUTO): uncertain, send to GLM to adjudicate
 
 _DUP_STOP = {
     'the', 'a', 'an', 'to', 'for', 'of', 'in', 'on', 'at', 'by', 'with', 'and',
@@ -170,11 +249,44 @@ _LEAKED_OWNER_SUFFIX_RE = re.compile(
 def _strip_leaked_suffix(text):
     return _LEAKED_OWNER_SUFFIX_RE.sub('', text or '').strip()
 
+# The same commitment arrives from Fathom in telegraphic shorthand ("Draft BRD w/
+# 4-phase MVP") and from a MOM row in full prose ("Update the BRD with the four-phase
+# MVP breakdown"). Token overlap alone scored those at 0.275 and the pair was never
+# even offered to the adjudicator. Normalize the two dialects onto one before scoring.
+_DUP_NUMWORDS = {
+    'one': '1', 'two': '2', 'three': '3', 'four': '4', 'five': '5', 'six': '6',
+    'seven': '7', 'eight': '8', 'nine': '9', 'ten': '10', 'twelve': '12',
+}
+_DUP_ABBREV = {
+    'w': 'with', 'ops': 'operations', 'op': 'operations', 'mkt': 'marketing',
+    'req': 'requirement', 'reqs': 'requirement', 'doc': 'document',
+    'docs': 'document', 'est': 'estimate', 'ests': 'estimate', 'mtg': 'meeting',
+    'acct': 'account', 'acc': 'account', 'info': 'information', 'poc': 'poc',
+    'api': 'api', 'apis': 'api', 'ticket': 'ticket', 'tickets': 'ticket',
+    'supplier': 'supplier', 'suppliers': 'supplier', 'merchant': 'supplier',
+    'merchants': 'supplier', 'partnership': 'partnership', 'partnerships':
+    'partnership', 'deliverable': 'deliverable', 'deliverables': 'deliverable',
+}
+# MOM rows carry scaffolding that is pure noise for similarity: a leading sequence
+# number and a trailing "- Owner - Due - Priority" tail.
+_MOM_LEAD_RE = re.compile(r'^\s*\d+\s*-\s*')
+_MOM_TAIL_RE = re.compile(
+    r'\s*-\s*(?:[A-Z][\w.]*(?:\s+[A-Z][\w.]*){0,3})\s*-\s*.{0,40}?$')
+
+def _normalize_for_dup(text):
+    s = _strip_leaked_suffix(text or '')
+    s = _MOM_LEAD_RE.sub('', s)
+    s = _MOM_TAIL_RE.sub('', s)
+    s = s.replace('&', ' and ').replace('/', ' ').replace('+', ' and ')
+    return s
+
 def _dup_tokens(text):
     """Normalized content-word set used for duplicate scoring."""
-    words = re.findall(r"[a-z0-9]+", _strip_leaked_suffix(text).lower())
+    words = re.findall(r"[a-z0-9]+", _normalize_for_dup(text).lower())
     out = set()
     for w in words:
+        w = _DUP_NUMWORDS.get(w, w)
+        w = _DUP_ABBREV.get(w, w)
         w = _VERB_CANON.get(w, w)
         if w in _DUP_STOP or len(w) < 2:
             continue
@@ -278,8 +390,15 @@ def merge_items(primary, secondary):
     secondary.setdefault('notes', []).append(f"duplicate of {primary['id']}")
     return primary
 
+ADJUDICATE_BATCH = 40   # one 162-pair call came back unparseable on 28 Jul 2026
+
 def _glm_adjudicate(pairs):
-    """Ask GLM which borderline pairs are the same commitment. ONE batched call.
+    """Ask the bridge model which borderline pairs are the same commitment.
+
+    Batched: a single call carrying every pair returns prose or a truncated array
+    once the list gets long, and the parse failure is indistinguishable from a
+    clean "no duplicates", which is exactly how a ledger with six duplicates
+    reported none. Each batch failing is independently survivable.
 
     Returns a set of pair indices judged duplicate. Honors the agy-bridge
     fallback sentinel (exit 3): on fallback or ANY failure we return an empty
@@ -288,13 +407,28 @@ def _glm_adjudicate(pairs):
     """
     if not pairs:
         return set()
+    if len(pairs) > ADJUDICATE_BATCH:
+        confirmed = set()
+        for start in range(0, len(pairs), ADJUDICATE_BATCH):
+            chunk = pairs[start:start + ADJUDICATE_BATCH]
+            print('    batch {}-{} of {} ...'.format(
+                start, start + len(chunk) - 1, len(pairs)))
+            for idx in _glm_adjudicate(chunk):
+                confirmed.add(start + idx)
+        return confirmed
     lines = []
     for i, (a, b) in enumerate(pairs):
+        def _prov(x):
+            src = (x.get('source') or {}).get('type') or '-'
+            ref = ((x.get('source') or {}).get('ref') or '')[-60:]
+            seen = x.get('first_seen') or 0
+            day = time.strftime('%Y-%m-%d', time.localtime(seen)) if seen else '-'
+            return f"source={src} captured={day} ref={ref}"
         lines.append(
             f"[{i}]\nA ({a['id']}): {a.get('text')}\n"
-            f"    to={a.get('to') or '-'} project={a.get('project') or '-'}\n"
+            f"    to={a.get('to') or '-'} project={a.get('project') or '-'} {_prov(a)}\n"
             f"B ({b['id']}): {b.get('text')}\n"
-            f"    to={b.get('to') or '-'} project={b.get('project') or '-'}")
+            f"    to={b.get('to') or '-'} project={b.get('project') or '-'} {_prov(b)}")
     prompt = (
         "You are deduplicating a product manager's commitment ledger. Each pair "
         "below was captured from different sources and MAY describe the same "
@@ -303,6 +437,17 @@ def _glm_adjudicate(pairs):
         "Answer DUPLICATE only if a person doing one has necessarily done the "
         "other. Two different PRDs, two different tickets, or the same artifact "
         "at different stages (draft vs review vs send) are DISTINCT.\n\n"
+        "IMPORTANT, the most common real duplicate looks like this: the SAME "
+        "meeting is captured twice, once as a terse Fathom line and once as a "
+        "verbose MOM table row. Use the source and captured date shown on each "
+        "record. When two records come from different source types but the same "
+        "meeting or the same day, and they name the same deliverable, that is a "
+        "DUPLICATE even though the wording shares few words. Telegraphic style "
+        "('Draft BRD w/ 4-phase MVP + POC; send to Teammate') and full prose "
+        "('Update the BRD with the four-phase MVP breakdown and per-phase "
+        "deliverables') are the same commitment, not two.\n\n"
+        "Do not treat a difference in verb alone (draft vs update vs produce) as "
+        "evidence of two commitments when the artifact and the meeting match.\n\n"
         "When uncertain, answer DISTINCT. A wrong merge deletes real work.\n\n"
         + "\n\n".join(lines) +
         "\n\nReturn ONLY a JSON array of the indices that are DUPLICATE, "
@@ -483,7 +628,7 @@ def resolve_names(state, user_ids, token):
 def create_item(state, text, to='', channel=None, channel_name=None, thread_ts=None,
                  permalink='', due=None, project=None, source_type='manual',
                  source_ref='', confidence='medium', priority=None, notes=None,
-                 dedupe=True):
+                 dedupe=True, node=None, node_why=None):
     """Create a commitment, or fold it into the existing one it duplicates.
 
     Every ingestion path (fathom / slack / local MOM / manual / extract) funnels
@@ -508,6 +653,11 @@ def create_item(state, text, to='', channel=None, channel_name=None, thread_ts=N
             if _richness(incoming) > _richness(existing):
                 existing['text'] = (text or '')[:600]
             merge_items(existing, incoming)
+            # A real node always beats 'unfiled': a manual add naming its node
+            # should file the record the sweep ingested blind.
+            if node and existing.get('node', UNFILED) == UNFILED:
+                existing['node'] = node
+                existing['node_why'] = node_why
             return existing
 
     iid = next_id(state)
@@ -519,6 +669,10 @@ def create_item(state, text, to='', channel=None, channel_name=None, thread_ts=N
         'channel': channel, 'channel_name': channel_name,
         'thread_ts': thread_ts, 'permalink': permalink or '',
         'due': due, 'project': project,
+        # Work-tree node. Unattended ingestion paths file as 'unfiled' with the
+        # reason recorded, and surface in the morning update until triaged.
+        'node': node or UNFILED,
+        'node_why': node_why or (None if node else f'auto-ingest:{source_type}'),
         'source': {'type': source_type, 'ref': source_ref or ''},
         'status': 'open', 'confidence': confidence,
         'first_seen': time.time(), 'closed_at': None, 'closed_by': None,
@@ -697,7 +851,7 @@ def extract_mom_action_lines(text):
                     break
                 j += 1
             for line in lines[i + 1:j]:
-                if BRIAN_OWNER_RE.search(line):
+                if line_owner_is_brian(line):
                     out.append(line)
             i = j
         else:
@@ -758,6 +912,16 @@ def sweep_local(state):
             if len(cleaned.split()) < MIN_CAPTURE_WORDS:
                 continue
             candidates.append((raw_line, cleaned[:300]))
+
+        # You work never enters the Work ledger. Judge the whole file, not the
+        # single line: a Dibimbing or AI Circle MOM produces action items whose own
+        # wording ("submit presentation slides") looks perfectly like Work work.
+        if YOU_RE.search(text[:4000]) or YOU_RE.search(relpath):
+            print('  skip (You work, belongs in the You repo): {}'.format(relpath))
+            for raw_line, _ in candidates:
+                line_hash = hashlib.sha1(raw_line.encode('utf-8', 'replace')).hexdigest()[:12]
+                state['processed_sources'][f'local:{relpath}:{line_hash}'] = True
+            continue
 
         for raw_line, captured in candidates:
             line_hash = hashlib.sha1(raw_line.encode('utf-8', 'replace')).hexdigest()[:12]
@@ -936,14 +1100,37 @@ def cmd_extract(args):
 # ---------------------------------------------------------------------- CLI --
 
 def cmd_add(args):
+    try:
+        node = resolve_or_die(args.node, allow_unfiled=bool(args.node_why))
+    except UnknownNode as e:
+        print(str(e), file=sys.stderr)
+        sys.exit(2)
     state = load_state()
     it = create_item(
         state, text=args.text, to=args.to or '', due=args.due, project=args.project,
         source_type='manual', source_ref=args.source or '', confidence='high',
-        priority=args.priority,
+        priority=args.priority, node=node, node_why=args.node_why,
     )
     save_state(state)
-    print(f"added: {it['id']}")
+    print(f"added: {it['id']}  node={it.get('node')}")
+
+def cmd_refile(args):
+    """Move a record to another node. The triage pass runs on this."""
+    try:
+        node = resolve_or_die(args.node, allow_unfiled=bool(args.node_why))
+    except UnknownNode as e:
+        print(str(e), file=sys.stderr)
+        sys.exit(2)
+    state = load_state()
+    it = state['items'].get(args.item_id)
+    if not it:
+        print(f"no such commitment: {args.item_id}", file=sys.stderr)
+        sys.exit(1)
+    was = it.get('node', UNFILED)
+    it['node'] = node
+    it['node_why'] = args.node_why
+    save_state(state)
+    print(f"{args.item_id}: {was} -> {node}")
 
 def cmd_dedupe(args):
     """Collapse duplicate OPEN commitments that predate the ingest-time guard.
@@ -1161,6 +1348,15 @@ def main():
     ap.add_argument('--project', default=None)
     ap.add_argument('--source', default=None)
     ap.add_argument('--priority', action='store_true', default=None)
+    ap.add_argument('--node', required=True,
+                    help='work-tree node id; find one with work_tree.py find <text>')
+    ap.add_argument('--node-why', default=None,
+                    help='only with --node unfiled, and only for unattended runs')
+
+    rf = sub.add_parser('refile', help='move a record to a different work-tree node')
+    rf.add_argument('item_id')
+    rf.add_argument('--node', required=True)
+    rf.add_argument('--node-why', default=None)
 
     cp = sub.add_parser('close')
     cp.add_argument('item_id')
@@ -1194,8 +1390,26 @@ def main():
     {'sweep': cmd_sweep, 'extract': cmd_extract, 'add': cmd_add,
      'close': cmd_close, 'drop': cmd_drop, 'reopen': cmd_reopen,
      'report': cmd_report, 'link': cmd_link, 'unlink': cmd_unlink,
-     'dedupe': cmd_dedupe,
+     'dedupe': cmd_dedupe, 'refile': cmd_refile,
      }.get(args.cmd or 'sweep', cmd_sweep)(args)
 
+READONLY_CMDS = {'report'}
+
 if __name__ == '__main__':
-    main()
+    # Serialise mutating runs. load_state/save_state is a read-modify-write
+    # cycle and os.replace only makes the write atomic, not the cycle. Two
+    # overlapping runs otherwise silently drop whichever record was written
+    # first. See .agent/scripts/ledger_lock.py for the incident this comes from.
+    _cmd = next((a for a in sys.argv[1:] if not a.startswith('-')), None)
+    if _cmd in READONLY_CMDS:
+        main()
+    else:
+        sys.path.insert(0, os.path.join(BASE_DIR, '.agent', 'scripts'))
+        from ledger_lock import hold_ledger_lock
+        hold_ledger_lock('commitments')
+        # Propagate on the way out: re-render the indexes and the follow-up
+        # tracker, then commit + push, so the next session to read this repo
+        # sees the change now rather than after the next daily run.
+        # See .agent/scripts/ledger_sync.py.
+        from ledger_sync import run_and_sync
+        run_and_sync('commitments', main)

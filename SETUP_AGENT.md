@@ -123,18 +123,34 @@ Lock down the guardrails:
 Now wire up the access you need to actually *do* the work. Follow `docs/SETUP.md` rather than
 duplicating its steps.
 
-1. Ask which they use: Google Workspace (Drive, Docs, Calendar, Gmail), Slack, a meeting recorder,
-   Figma, analytics (Mixpanel or Metabase), a tracker (Jira or ClickUp), WhatsApp. Use the "Which
-   skills do you actually need?" decision tree in `docs/SETUP.md`; most people need only Google plus
-   Slack plus a recorder to get 80% of the value.
-2. For each chosen tool, in order (Google first, it's the foundation):
+1. Ask which they use: Google Workspace (Drive, Docs, Calendar, Gmail), Slack, Figma, analytics
+   (Mixpanel or Metabase), a tracker (Jira or ClickUp), WhatsApp. Use the "Which skills do you
+   actually need?" decision tree in `docs/SETUP.md`; most people need only Google plus Slack plus
+   the meeting recorder to get 80% of the value.
+2. **Set up the local meeting recorder by default.** Do not ask whether they want a meeting tool
+   and do not lead with Fathom. Meeting notes are one of the highest-value things this harness
+   does, the recorder needs no account or API key, and the audio stays on their machine, so treat
+   it as part of the standard setup and walk them through it:
+   - Confirm `ffmpeg` is installed (`ffmpeg -version`), and install it if not.
+   - `cp meeting-recorder/config.example.json meeting-recorder/config.json`, then fill in the
+     section for their platform (`macos` / `windows` / `wsl`).
+   - Run `python3 meeting-recorder/recorder.py --list-devices` with them and help pick the
+     loopback or monitor device. This is the step people get stuck on, so do not just hand them
+     the command.
+   - Record a short test, process it with `python3 meeting-recorder/watcher.py --once`, and
+     confirm a transcript plus a `MOM_*.md` draft actually appeared. If nothing appeared, treat
+     that as a failed setup and troubleshoot from `docs/MEETING_RECORDER.md`.
+   - Full reference for engines, daily use, and the Vexa auto-join bot: `docs/MEETING_RECORDER.md`.
+   - Only after this works, ask whether they *also* use a cloud recorder (Fathom). If yes, wire
+     `fathom-connector` as an addition. If no, say plainly that they are already covered.
+3. For each chosen tool, in order (Google first, it's the foundation):
    - Point them to the exact `docs/SETUP.md` section for getting the credential.
    - Do the mechanical parts yourself: `cp .env.example .env`, create the connector folder and a
      placeholder `token.env`, place `credentials.json` once they've downloaded it.
    - Run the first-auth and verify command from `docs/SETUP.md` and confirm it returns real data.
      If it fails, troubleshoot and fix it.
    - Ground rule 4: the secret goes into the file or the browser, never into this chat.
-3. If they want to skip a tool, mark it TODO and move on; they can wire it later by asking you.
+4. If they want to skip a tool, mark it TODO and move on; they can wire it later by asking you.
 
 ## Phase 7 — Assemble & write CLAUDE.md, then AGENTS.md
 

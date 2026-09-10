@@ -18,7 +18,8 @@ PROBE_PROMPT = "Reply with exactly one word: PONG"
 # One cheap, representative model per backend.
 PROBE_TARGETS = [
     ("agy", "Gemini 3.5 Flash (Low)"),
-    ("zai", "glm-5.2"),
+    # ("zai", "glm-5.2"),  # retired 2026-07-27: subscription ended, every probe
+    # would log a guaranteed error row and poison --analyze's error-rate stats.
 ]
 
 def main():

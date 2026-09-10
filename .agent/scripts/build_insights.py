@@ -70,8 +70,10 @@ def main():
     )
     pf = os.path.join("/tmp", "insights_prompt.txt")
     open(pf, "w", encoding="utf-8").write(prompt)
-    p = subprocess.run([sys.executable, BRIDGE, "--task", "draft", "--backend", "zai",
-                        "--model", "glm-5.2", "--prompt-file", pf],
+    # z.ai/GLM retired 2026-07-27 (subscription no longer active). Let agy-bridge
+    # walk its own chain, which now heads with Gemini via the agy CLI.
+    p = subprocess.run([sys.executable, BRIDGE, "--task", "draft",
+                        "--prompt-file", pf],
                        cwd=REPO, capture_output=True, text=True, timeout=180)
     out = p.stdout.strip()
     # GLM may wrap in fences; extract the JSON object
@@ -90,7 +92,7 @@ def main():
                          "action_items": g.get("action_items", [])})
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump({"meetings": insights}, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    print(f"wrote {OUT}: {len(insights)} meetings ({sum(1 for i in insights if i['takeaways'])} with GLM takeaways)")
+    print(f"wrote {OUT}: {len(insights)} meetings ({sum(1 for i in insights if i['takeaways'])} with model takeaways)")
 
 if __name__ == "__main__":
     main()

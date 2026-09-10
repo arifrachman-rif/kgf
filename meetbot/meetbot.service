@@ -1,0 +1,31 @@
+[Unit]
+Description=meetbot — Google Meet recording bot API (drop-in for vexa-lite)
+Documentation=file://<meetbot>/README.md
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=<meetbot>
+ExecStart=<meetbot>/target/release/meetbot serve \
+  --config <meetbot>/config.toml
+
+# meetbot finalizes in-flight sessions on SIGTERM: it drains the audio channel,
+# flushes the segmenter, awaits every in-flight whisper call, inserts the
+# segments and only THEN writes the terminal status (SPEC.md §2, ordering rule).
+# SHUTDOWN_GRACE in src/main.rs is 90 s, so TimeoutStopSec MUST stay above it.
+# If systemd SIGKILLs first, the drop guard still writes `failed`, but a partial
+# transcript is lost.
+KillSignal=SIGTERM
+TimeoutStopSec=120
+
+Restart=always
+RestartSec=5
+
+# A crash mid-call leaves rows non-terminal; the unconditional startup sweep
+# fails them so vexa_bots.py stops polling (SPEC.md §2). Nothing to do here.
+StandardOutput=journal
+StandardError=journal
+Environment=RUST_LOG=meetbot=info
+
+[Install]
+WantedBy=default.target

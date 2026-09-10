@@ -6,6 +6,296 @@ Entries are written in the private working repo and carried to the public templa
 (`ai-second-brain`) by the sync pipeline, which strips credentials, tokens, real client
 names, and personal data. This file is copied verbatim, so it reads the same in both.
 
+Dated headings below are the history. From v0.1.0 on, releases also carry a
+version, and the rule is in [`docs/VERSIONING.md`](docs/VERSIONING.md).
+
+## Unreleased
+
+### Seven new commands, six retired, and the list says what each group is for
+
+The command set had grown to 32 with flat descriptions, which reads as one long
+alphabetical list. Every description now leads with a group, so the picker reads
+in blocks: Daily, Weekly, Product, Artifact, Comms, Notes, Tracking, Thinking,
+Setup, Harness.
+
+Seven commands are new, wrapping skills that already shipped with nothing in
+front of them. `/user-story` turns a feature into stories and holds the line that
+every `Then` has to be objectively measurable, because "the user sees a friendly
+message" cannot be tested and will be argued about. `/ticket` drafts a tracker
+issue, resolves its work-tree node first, and waits for explicit approval before
+filing. `/rca` runs the incident protocol under one rule: no root cause, no
+"resolved". On the artifact side, `/artifact` builds a self-contained HTML
+explainer or report, `/mockup` a clickable prototype with presenter keys, `/deck`
+a keyboard-driven slide deck, and `/diagram` a Mermaid diagram validated by an
+actual render before anyone sees it. The three HTML commands end with the same
+self-containment grep, because a page that pulls in a font or an image stops
+working the moment it is sent to someone.
+
+Six commands were retired, and none of their procedures were deleted. Each moved
+to a permanent home first and every reference was repointed: the Slack send
+playbook to `.agent/protocols/slack_send.md`, the offload-mode toggle to
+`.agent/skills/agy-bridge/OFFLOAD_MODE.md`, and the morning and evening updates
+into a now self-contained `/daily-update`, which takes `morning` or `evening` to
+force a mode. `/sync-fathom` and `/no-ai-slop` were pure wrappers over SOPs that
+already lived in `.agent/`.
+
+Two wirings would have broken silently and were repointed in the same pass:
+`journal/state/routines.json` scheduled `/morning-update` and `/evening-update`
+as daily routines, and the SessionStart hook printed `/glm on` as the way to
+toggle offload mode.
+
+### Fixed
+
+- **A public sync could delete the public template's own onboarding.**
+  `sync.py` copies `.claude/commands/` with an `rmtree` first, so a command
+  retired from the private repo vanishes from the public one on the next run.
+  That is right for a real restructuring and wrong for the generic starter
+  commands, which the private repo drops because it has richer replacements
+  while a fresh fork has nothing. `/setup` and `/update-harness` would both have
+  gone, and `README.md` names `/update-harness` in its own text.
+  `PRESERVE_PUBLIC_COMMANDS` now restores those ten from the public repo's git
+  HEAD after the tree copy.
+
+- **A synced command could point at a skill that deliberately does not ship.**
+  Scrubbing renames client strings; it cannot remove a whole section, so the
+  public `/artifact` would have told a reader to publish through `artifact-host`,
+  which is excluded. `PUBLIC_OVERRIDES` copies a public-specific version from
+  `.agent/skills/sync-public/public_overrides/` after the tree copy. Two related
+  gaps closed the same way round: `reply-router` and `linear-connector` now ship,
+  because `/autodraft` and `/ticket` named them and they were absent, with
+  `linear-connector/teams.json` held back for its real workspace and team ids.
+
+- **The leak audit caught a home path with the real username in it, on a file
+  type nothing blocked.** `meeting-recorder/logs/watcher.err` synced because
+  `*.log` was a blocked pattern and `*.err` was not. The audit refused the push,
+  which is the guard working, but the file had already been written into the
+  public tree. Log directories are now blocked by directory name as well as by
+  suffix, so the next runtime file does not have to be discovered by the audit
+  first.
+
+### Fixed
+
+- **The Hours tab froze for three weeks and said nothing.** Four defects, one
+  shape: every failure was silent and no watch existed on the file.
+  `dashboard/server.py` spawned the background sweep behind `flock`, a
+  Linux-only binary, and the `except Exception: pass` around it turned the
+  resulting `FileNotFoundError` on macOS into a no-op, so the tab served a
+  frozen `work_hours.json` and rendered it in the same muted grey as fresh
+  data. The same `flock` prefix broke the dashboard's manual run-job buttons on
+  macOS. `work_hours.py` counted every `sdk-cli` session as cron automation,
+  which drops every session run through the desktop app or the SDK (0 sessions,
+  leverage 1.0x); an app session is now recognised by the chat UI's own line
+  types plus more than one human-typed minute. And `gcal_manager.py list` never
+  followed `nextPageToken`, so a window wider than 250 events came back
+  truncated at the old end and the sweep cached the recent days as "no
+  meetings". Data from 10 Aug to 3 Sep 2026 was rebuilt by backfill.
+- **Guards, so the next variant of this is loud.** A calendar fetch that
+  returns nothing for a day that had events keeps the cached events and warns
+  instead of blanking them. A sweep that finds session transcripts but counts
+  none of them as interactive writes `sessions_warning` into the state and
+  warns on stderr. `work_hours.json` joined the `harness_health` staleness
+  table at 6 hours, next to the four ledgers. The refresh spawn logs both its
+  attempts and its failures, and the failure reaches the Hours tab, which now
+  turns the "updated Xh ago" label into a warning past 6 hours.
+
+## v0.1.0 - 2026-08-23
+
+First tagged release of the public template. It has been usable for months; what
+changed is that it is now legally usable, and that a machine checks it before it
+ships.
+
+### Added
+- **Apache-2.0.** The repository was public with no LICENSE, which under
+  copyright means all rights reserved. Nobody could legally fork it. The name
+  and the artwork stay out of the grant, so a fork picks its own name.
+- `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, and issue and pull
+  request templates.
+- `tools/repo_check.py`: one gate for personal data, script syntax, and skill
+  frontmatter, with a self-test for its own rules. Findings that already exist
+  are recorded in a baseline, so CI fails on new leaks only and the baseline can
+  only shrink.
+- CI that runs the gate and proves `install.sh` still produces a working
+  workspace on Linux and macOS.
+
+### Fixed
+- The export scrub let a colleague's surname through inside an email local part,
+  a client's product names, and six real Jira project keys. All three are now
+  scrubbed at the source, in `.agent/skills/sync-public/sync.py`.
+- `docs/UPDATING.md` and `/update-harness` both said `CLAUDE.md`, `journal/` and
+  `Dashboard.md` were gitignored and could never conflict. None of them was.
+  `CLAUDE.md` is now ignored, and the four tracked seed files are documented
+  with the resolution to use. A fork used to hit a conflict on its first update
+  while being told that was impossible.
+- `/update-harness` finished conflict resolution with `git add -A`, which sweeps
+  up whatever untracked personal files happen to be in the tree. It now stages
+  only the files it resolved.
+
+## 2026-08-14
+
+### Breaking
+- **Every ledger record must now name a work-tree node.** `--node <id>` is
+  required on `add` in all four ledger CLIs (commitments, decisions,
+  waiting-on, chase queue), and an id that does not exist in the work tree is
+  rejected rather than stored, with the closest matching nodes printed. Any
+  script, cron job, or habit that calls `add` without a node will fail until
+  it passes one. Unattended callers that genuinely cannot know the node pass
+  `--node unfiled --node-why "<reason>"`, which files the record into a triage
+  queue instead of silently inventing a home for it. A live session may not
+  use `unfiled`: when the right node is not obvious it asks the human, once,
+  with candidates, at the end of the turn.
+
+  The reason for the hard failure is that the alternative is worse. Before
+  this, linkage lived on the tree as a hand-curated list of references, so a
+  record could be created with no home and nothing noticed: of 729 records,
+  61 were reachable from the tree. The other 668 were only findable by reading
+  them one at a time.
+
+### Added
+- **The work tree became a schema instead of a report.** It began as a
+  per-window reporting artifact, hand-maintained for the dashboard, which was
+  safe while nothing pointed at it. Once every record names a node, those ids
+  are permanent identifiers, and a node renamed during a weekly refresh would
+  orphan everything under it. A new `.agent/scripts/work_tree.py` owns the
+  invariants that make the ids safe to depend on: ids unique across the whole
+  tree, retirement by an `archived` status rather than deletion or rename,
+  writes taken under the same lock as the ledgers, and `find` / `show` /
+  `add-node` / `alias` / `validate` / `coverage` commands. Ledger CLIs import
+  its resolver directly, so the rule is enforced in one place.
+- **A backfill for records that predate the rule.** `work_tree_backfill.py`
+  maps existing records using four signals in order of strength: an id already
+  referenced by a node, a ticket key that sits under exactly one node, a
+  curated phrase table for the words people actually write, and the source
+  document a record came from. That last one carries most of the weight, since
+  the largest group of unmapped records were action items extracted from
+  meeting minutes ("send the invitation for the UAT"), where the topic lives
+  in the document rather than the line, and their confidently-filed siblings
+  from the same document supply the missing context.
+
+  Where two candidate nodes tie, it files the record under their nearest
+  common ancestor rather than picking one, because a coarse node that is true
+  beats a precise one that is wrong. Where there is no common ancestor, the
+  record goes to a triage file with its candidates instead of a guess. A
+  record filed under the wrong node reports as tracked and never surfaces
+  again, which is the exact failure the rule exists to prevent.
+- **A second id space is bridged rather than retired.** The portfolio view
+  keeps its own initiative ids and its own tab; `work_tree_alias.json` maps
+  those ids to nodes, alongside the phrase table. Two id spaces drift by
+  default, so both halves are checked by `work_tree.py validate`.
+- **Records show their home.** The deep-linked card for any tracker id now
+  carries a "Work tree" line with the node's full path. `unfiled` prints as a
+  real state rather than an empty field, because it means the record is
+  waiting on a human to say where it belongs. The morning briefing surfaces
+  the count of open unfiled records until they are filed.
+
+## 2026-08-08
+
+### Breaking
+- **Drive writes no longer publish documents to anyone-with-link.** Every
+  writer used to attach a public link-sharing permission unconditionally,
+  regardless of the `--share` flag, so a limited-circulation document was
+  public from the moment it was created. Writers now call a shared
+  `apply_visibility()` in `.agent/scripts/file_utils.py`, which defaults to
+  the account's own domain for work accounts and to private for personal
+  ones, and which **revokes** any pre-existing anyone-with-link permission on
+  every write rather than merely declining to add one. A document made public
+  by an earlier upload therefore becomes private again on its next update.
+  Pass `--visibility public` (or `--share`) to publish on purpose. Any script
+  or habit that relied on a fresh document being world-readable by default
+  needs that flag added.
+
+### Added
+- **Concurrency locking for the JSON state ledgers.** The commitment,
+  decision, waiting-on, and chase-queue ledgers are written by several cron
+  jobs plus live sessions. Atomic replacement prevented corrupt files but not
+  lost updates: two overlapping read-modify-write cycles silently dropped
+  whichever record landed first, which is how a handful of records
+  disappeared without any error being raised. A new
+  `.agent/scripts/ledger_lock.py` gives every writer an exclusive lock held
+  for the whole read-modify-write cycle; read-only commands skip it so long
+  reports cannot block writers. A reproduction test ships alongside it:
+  without the lock 3 of 3 concurrent records are dropped, with it 3 of 3
+  survive.
+- **A publishing target for HTML deliverables.** Interactive artifacts now
+  deploy to Cloudflare Pages, which serves the exact bytes and preserves CSS
+  custom properties inside inline SVG. The previous Apps Script host rewrote
+  and branded every page, which broke variable resolution in diagrams and
+  made them unreadable in the dark palette. Republishing under the same
+  artifact name replaces the content and keeps the URL, so a link already
+  sent to someone keeps working.
+- **Background CPU throttling for the cron fleet.** Cron jobs clustered on
+  round minutes, each spawning its own interpreter, could saturate every core
+  and leave the editor and interactive sessions with no scheduler time. Two
+  reversible levers ship: a throttle that reschedules `*/N` jobs across
+  deterministic offsets and drops the cron shell to low CPU and IO priority,
+  and an optional systemd slice that hard-caps background CPU so interactive
+  work always wins.
+- **An idle-session reaper.** Long-lived editor AI sessions accumulate and
+  hold hundreds of megabytes each. The reaper measures CPU time across
+  several samples so it never kills a session mid-turn, and it defaults to a
+  dry run; killed sessions are restorable in full from their transcript.
+- **A repair command for lost executable bits.** Editing a shell script over
+  a network mount from another OS drops its `+x` bit, which surfaces much
+  later as an opaque permission error from cron. The repair script diffs the
+  filesystem against the git index and restores the difference. The
+  session-start check now also pins the file-mode setting per machine, so a
+  checkout shared between two operating systems stops inventing permission
+  changes for every tracked executable.
+
+### Fixed
+- **A truncated Slack API response no longer discards an entire harvest.**
+  The user-name lookup is cosmetic, but an incomplete read from it raised
+  past the error handling and killed the whole channel listing, throwing away
+  hundreds of conversations that had already been fetched successfully. Three
+  layers now hold: transient transport errors retry with backoff and report
+  failure rather than exiting, the name map seeds from its cache and only
+  rewrites that cache on success, and the call site tolerates a failed
+  lookup. The Slack sender also warns when a draft contains text a shell
+  would mangle, after a dollar figure was silently rewritten in a message.
+- **The share gate now reads the published document, not the local source.**
+  It was scanning the local markdown for unresolved image placeholders, but
+  that file legitimately keeps its placeholder tokens as an image manifest,
+  so the gate reported blocked forever once the images had actually been
+  inserted into the published document. It now checks the document itself.
+- **Local meeting capture no longer depends on the browser.** Audio is
+  recorded from the system audio server outside the browser, into a
+  dedicated null sink created before the browser launches. Recording the
+  bridge sink instead could wedge the whole audio server and fail every later
+  session. A stalled reader is now reported as a failed call rather than
+  passing silently, a synthetic test tone is refused instead of being
+  transcribed as if it were the meeting, and speaker names are read from a
+  DOM label that still exists after the meeting UI dropped its participant
+  attributes, which had been attributing every line to an unknown speaker.
+
+### Removed
+- **The knowledge-graph retrieval layer.** Four rounds of A/B testing against
+  plain search never cleared the cost bar that was agreed before the
+  experiment started. Recall trended in its favour but not consistently
+  enough to justify a second index maintained on top of the existing ledgers
+  and dashboard.
+
+## 2026-08-04
+
+### Added
+- **`mom_reconcile.py` now cross-checks against Google Calendar and scans MOM
+  content, not just size.** Coverage used to be enumerated from meeting
+  recordings alone, so a meeting nobody hit record on produced zero rows and
+  was indistinguishable from no meeting having happened. A second enumeration
+  pass now runs against the calendar connector; any substantial calendar
+  event matching no recording lands in a new `uncounted` bucket that trips
+  the same non-zero exit as a missing or bad MOM (calendar-fetch failures are
+  logged and swallowed rather than blocking the primary check). Separately,
+  a minutes file used to count as covered purely by clearing a byte-size
+  threshold, which let a hollow draft with zero decisions pass. `inspect_mom`
+  now also scans content for decisions (a heading, or a ticket-style
+  reference) and action items (a checkbox, or a bulleted section), and
+  downgrades to suspect when both are absent, independent of size.
+- **`docs/okf_adaptation.md`**: notes on adopting Google Cloud's Open
+  Knowledge Format (v0.2). The harness's memory system already conforms to
+  its one required field; the doc covers the optional `generated`/`verified`
+  provenance fields worth layering on top, and states the principle behind
+  the `mom_reconcile.py` fix above: a guard that cannot verify something must
+  report "unverified," never "pass."
+
 ## 2026-07-18
 
 ### Breaking

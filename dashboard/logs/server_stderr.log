@@ -1,9 +1,9 @@
 Traceback (most recent call last):
-  File "C:\Users\rifra\.gemini\antigravity-ide\scratch\ai-second-brain\dashboard\server.py", line 3994, in <module>
+  File "C:\Users\rifra\.gemini\antigravity-ide\scratch\ai-second-brain\dashboard\server.py", line 4549, in <module>
     main()
-  File "C:\Users\rifra\.gemini\antigravity-ide\scratch\ai-second-brain\dashboard\server.py", line 3982, in main
-    print(f"\n  \U0001f680 Dashboard running at http://localhost:{PORT}\n")
+  File "C:\Users\rifra\.gemini\antigravity-ide\scratch\ai-second-brain\dashboard\server.py", line 4539, in main
+    print(f"  Calendar:     {'\u2705 token found' if TOKEN_FILE.exists() else '\u274c no token'}")
   File "C:\Users\rifra\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1252.py", line 19, in encode
     return codecs.charmap_encode(input,self.errors,encoding_table)[0]
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f680' in position 4: character maps to <undefined>
+UnicodeEncodeError: 'charmap' codec can't encode character '\u274c' in position 16: character maps to <undefined>

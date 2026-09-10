@@ -27,6 +27,7 @@ import signal
 import subprocess
 import sys
 import threading
+import time
 import wave
 
 from common import detect_platform, load_config, slugify
@@ -36,7 +37,11 @@ CHUNK = 1024
 def now_stamp():
     return datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
 
-def write_sidecar(base, title, start, parts, plat):
+def write_sidecar(base, title, start, parts, plat, ad_hoc=False, attendees=None):
+    """ad_hoc=True marks a meeting you started yourself (a huddle, a phone call,
+    anything not on the calendar). The watcher then skips the calendar match
+    entirely, so the recording cannot inherit the title, attendees, or dedupe
+    key of whatever calendar event happened to overlap it."""
     end = datetime.datetime.now(datetime.timezone.utc)
     meta = {
         "title": title,
@@ -44,6 +49,8 @@ def write_sidecar(base, title, start, parts, plat):
         "end_utc": end.isoformat(timespec="seconds"),
         "duration_sec": int((end - start).total_seconds()),
         "platform": plat,
+        "ad_hoc": bool(ad_hoc),
+        "attendees": [a.strip() for a in (attendees or []) if a.strip()],
         "parts": [os.path.basename(p) for p in parts],
     }
     with open(base + ".json", "w", encoding="utf-8") as f:
@@ -130,7 +137,6 @@ def record_windows(base, title, start, mic_only, system_only):
     print("Recording... Press [Space] or [P] to Pause/Resume. "
           "Press [Q] or Ctrl-C to stop.")
     signal.signal(signal.SIGINT, lambda *a: stop.set())
-    
     import msvcrt
     paused = False
     pause_time = None
@@ -172,7 +178,7 @@ def record_windows(base, title, start, mic_only, system_only):
                             paused_duration = datetime.datetime.now(datetime.timezone.utc) - pause_time
                             accumulated_pause += paused_duration
                         print("\n[RESUMED] Recording audio active...")
-            
+
             stop.wait(0.2)
             if not paused:
                 now_utc = datetime.datetime.now(datetime.timezone.utc)
@@ -244,11 +250,23 @@ def record_ffmpeg(base, plat, machine, mic_only, system_only):
 
     print("Recording... Ctrl-C or 'q' to stop.")
     proc = subprocess.Popen(cmd)
+    # Same two stop paths as the Windows capture: Ctrl-C, or a <base>.stop sentinel appearing.
+    # Poll rather than plain wait() so a GUI caller that cannot deliver SIGINT still gets ffmpeg
+    # shut down through its own SIGINT, which is what makes it flush a playable file.
+    stop_file = base + ".stop"
     try:
+        while proc.poll() is None:
+            if os.path.exists(stop_file):
+                proc.send_signal(signal.SIGINT)
+                break
+            time.sleep(1)
         proc.wait()
     except KeyboardInterrupt:
         proc.send_signal(signal.SIGINT)
         proc.wait()
+    finally:
+        if os.path.exists(stop_file):
+            os.remove(stop_file)
     if not os.path.exists(out):
         sys.exit("ERROR: ffmpeg produced no output")
     return [out]
@@ -276,6 +294,13 @@ def main():
     ap.add_argument("--system-only", action="store_true")
     ap.add_argument("--video", action="store_true",
                     help="also screen-record to <base>.mp4 (Windows, needs ffmpeg)")
+    ap.add_argument("--ad-hoc", action="store_true",
+                    help="meeting not on the calendar (Slack huddle, phone call). "
+                         "Skips calendar matching so the title you type is the title "
+                         "that sticks")
+    ap.add_argument("--attendees", default="",
+                    help="comma-separated names, used to resolve Speaker 1/2 labels "
+                         "in the MOM draft")
     args = ap.parse_args()
 
     cfg = load_config()
@@ -315,7 +340,9 @@ def main():
             video = screen.stop()
             if video:
                 parts = list(parts) + [video]
-        write_sidecar(base, args.title, start, parts, plat)
+        write_sidecar(base, args.title, start, parts, plat,
+                      ad_hoc=args.ad_hoc,
+                      attendees=args.attendees.split(","))
     finally:
         if os.path.exists(marker):
             os.remove(marker)

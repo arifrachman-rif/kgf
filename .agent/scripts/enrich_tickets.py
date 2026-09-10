@@ -33,14 +33,16 @@ def main():
     )
     pf = "/tmp/enrich_prompt.txt"
     open(pf, "w", encoding="utf-8").write(prompt)
-    p = subprocess.run([sys.executable, BRIDGE, "--task", "draft", "--backend", "zai", "--model", "glm-5.2",
+    # z.ai/GLM retired 2026-07-27 (subscription no longer active). Let agy-bridge
+    # walk its own chain, which now heads with Gemini via the agy CLI.
+    p = subprocess.run([sys.executable, BRIDGE, "--task", "draft",
                         "--prompt-file", pf], cwd=REPO, capture_output=True, text=True, timeout=180)
     out = p.stdout.strip()
     s, e = out.find("{"), out.rfind("}")
     try:
         glm = json.loads(out[s:e + 1])
     except Exception as ex:
-        print("GLM parse failed:", ex)
+        print("model JSON parse failed:", ex)
         print(out[:300])
         return
     changed = 0

@@ -23,6 +23,10 @@ credentials.json
 .linkedin_cookie
 *.token
 
+# Your own brain. install.sh copies CLAUDE.md.template here and it becomes
+# personal from the first edit. The template itself stays tracked.
+CLAUDE.md
+
 # Generated outputs (personal data)
 _temp/
 _output/
@@ -54,3 +58,15 @@ whatsapp_*.png
 whatsapp_*.html
 temp_img_*.jpg
 *.bak_*
+
+# Atomic-write scratch files. Every writer under journal/state/ writes `x.tmp`
+# then os.replace()s it into place, so a .tmp file exists for microseconds and is
+# never content anyone wants committed. Un-ignored, a sync that ran while one of
+# them was in flight died with "git add failed: unable to stat ... .tmp" and left
+# the whole turn's ledger change uncommitted.
+*.tmp
+
+# Runtime lock files. Process-local, meaningless in another checkout, and a
+# committed one makes flock behave unpredictably for whoever clones it.
+journal/state/.locks/
+

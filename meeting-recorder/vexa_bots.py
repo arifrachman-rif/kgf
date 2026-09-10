@@ -25,6 +25,7 @@ import re
 import subprocess
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -41,6 +42,32 @@ MEET_RE = re.compile(r"meet\.google\.com/([a-z]{3}-[a-z]{4}-[a-z]{3})")
 WIB = datetime.timezone(datetime.timedelta(hours=7))
 BOT_NAME = "Your Name"
 WHISPER_PORT = 8083
+MEETBOT_PORT = 8060  # the Rust replacement; vexa-lite is 8056
+
+def meetbot_mode():
+    """True when this client is pointed at the Rust `meetbot` server instead of
+    the vexa-lite container.
+
+    Two container-maintenance behaviours below are vexa-only and actively wrong
+    against meetbot: rewriting TRANSCRIPTION_SERVICE_URL in ~/tools/vexa/.env
+    (meetbot resolves the WSL gateway IP itself, per call, via Config::gateway_ip)
+    and `docker restart vexa-lite` (meetbot is not that container, and vexa must
+    stay untouched because it is the rollback path). Both are gated on this.
+
+    Detection is explicit only -- never guessed:
+      * MEETBOT=1/0 in the environment wins outright, and
+      * otherwise VEXA_API_BASE naming meetbot's port.
+    With MEETBOT unset and VEXA_API_BASE unset or on :8056, this is False and
+    every legacy code path runs exactly as it did before."""
+    flag = os.environ.get("MEETBOT", "").strip().lower()
+    if flag in ("1", "true", "yes", "on"):
+        return True
+    if flag in ("0", "false", "no", "off"):
+        return False
+    try:
+        return urllib.parse.urlsplit(API_BASE).port == MEETBOT_PORT
+    except ValueError:  # malformed port in the URL -> assume legacy vexa
+        return False
 
 def gateway_ip():
     """WSL gateway IP = the Windows host running whisper-server.exe.
@@ -70,7 +97,13 @@ def heartbeat(status, summary):
 def ensure_env_url():
     """Keep TRANSCRIPTION_SERVICE_URL in ~/tools/vexa/.env pointed at the live
     gateway IP; on drift, patch the .env and restart the container (else bots
-    silently produce empty transcripts)."""
+    silently produce empty transcripts).
+
+    No-op under meetbot: it reads the gateway IP itself on every whisper call,
+    so there is nothing to patch, and the restart would bounce the one container
+    that has to stay untouched as the rollback path."""
+    if meetbot_mode():
+        return
     want = f"http://{gateway_ip()}:{WHISPER_PORT}/v1/audio/transcriptions"
     try:
         lines = open(ENV_PATH, encoding="utf-8").read().splitlines()
@@ -92,7 +125,7 @@ def ensure_env_url():
                    capture_output=True, timeout=180)
 
 def ensure_vexa_api():
-    """Vexa Lite container reachable? Try one docker start if not."""
+    """API reachable? Under vexa, try one docker start if not."""
     def ok():
         try:
             urllib.request.urlopen(API_BASE + "/", timeout=5)
@@ -103,6 +136,15 @@ def ensure_vexa_api():
             return False
     if ok():
         return True
+    if meetbot_mode():
+        # meetbot is a systemd user unit, not a container. Never `docker start`
+        # here: it would resurrect vexa-lite behind meetbot's back, and vexa is
+        # the rollback path -- it must only ever move on a deliberate operator
+        # action. Report down and let the caller heartbeat + exit.
+        print(f"[meetbot] API down at {API_BASE}; not a container, no auto-start. "
+              "Recover with: systemctl --user restart meetbot.service "
+              "(or roll back: unset VEXA_API_BASE MEETBOT)", file=sys.stderr)
+        return False
     print("[vexa] API down; attempting docker start...", file=sys.stderr)
     subprocess.run(["sg", "docker", "-c", "docker start vexa-postgres vexa-lite"],
                    capture_output=True, timeout=120)
@@ -227,7 +269,7 @@ def parse_meet(s):
 def cmd_setup(_):
     tok = admin_token()
     user = req("POST", "/admin/users",
-               {"email": "owner.local@yourcompany.com", "name": "the owner (local)"},
+               {"email": "teammate@yourcompany.com", "name": "the owner (local)"},
                {"X-Admin-API-Key": tok})
     uid = user.get("id", 1)
     t = req("POST", f"/admin/users/{uid}/tokens?scopes=bot,tx,browser", {},
@@ -314,17 +356,57 @@ def cmd_pull(a):
     if n_segs == 0:
         # never write an empty transcript file or mark the meeting done
         if final:
-            # Empty at finish is almost always operational (bot not admitted from
-            # the waiting room / nobody spoke) -- a real whisper/API outage is
-            # already caught by the pre-join checks in cmd_auto. Classify as a
-            # skip, not a fail, so harness-health alerts stay meaningful.
+            # Check STATUS BEFORE segment count. This ordering is load-bearing:
+            # it used to be the other way round, so ANY zero-segment terminal row
+            # was laundered into an operational skip with an "ok" heartbeat --
+            # including a genuine mid-call recorder failure. A meeting lost to a
+            # dead transcription backend disappeared behind a green light, which
+            # is the exact failure mode the ledgers exist to prevent.
+            if data.get("status") in ("failed", "stopped"):
+                st["meetings"][kid] = {**meta, "title": title,
+                                       "status": "failed_empty"}
+                save_state(st)
+                heartbeat("fail", f"vexa {mid} ({title}): bot ended '{data.get('status')}' "
+                                  "with NO transcript -- recorder failure, not a skip. "
+                                  "Meeting is unrecorded; check whisper + bot logs")
+                print(f"FAILED: {kid} ended {data.get('status')} with an empty "
+                      f"transcript -- treat as unrecorded, NOT as not-admitted",
+                      file=sys.stderr)
+                return
+            # Empty after a clean finish splits into two OPPOSITE cases, and
+            # `start_time` is what tells them apart. The bot writes it exactly
+            # once, in session.rs, the instant admission is granted -- so its
+            # presence means the bot was in the room.
+            #
+            #   absent  -> never admitted. Nothing was ever recordable. A real
+            #              operational skip, ok heartbeat, no MOM.
+            #   present -> admitted, sat through the call, produced nothing.
+            #              That is a LOST MEETING, not a skip.
+            #
+            # Filing the second as `skipped_not_admitted` with an ok heartbeat
+            # is what hid the 5 Aug 2026 outage for two days: 14 sessions, 0
+            # transcripts, every heartbeat green, because a bot that sat deaf in
+            # a live meeting was indistinguishable from one left in a waiting
+            # room.
+            if data.get("start_time"):
+                st["meetings"][kid] = {**meta, "title": title,
+                                       "status": "admitted_no_audio"}
+                save_state(st)
+                heartbeat("fail", f"vexa {mid} ({title}): bot was ADMITTED and recorded "
+                                  "NOTHING -- the meeting is lost, not skipped. Check the "
+                                  "'tap stats' line in `journalctl --user -u meetbot.service`: "
+                                  "any tab_state other than 'ok' means Chrome never handed "
+                                  "over the tab's audio")
+                print(f"LOST: {kid} was admitted at {data.get('start_time')} but the "
+                      f"transcript is empty -- deaf capture, NOT a skip", file=sys.stderr)
+                return
             st["meetings"][kid] = {**meta, "title": title,
                                    "status": "skipped_not_admitted"}
             save_state(st)
-            heartbeat("ok", f"vexa {mid} ({title}): finished with empty transcript "
-                            "(likely not admitted / no audio) -- skipped, no MOM")
-            print(f"SKIPPED: {kid} finished but transcript is empty "
-                  f"(not admitted / no audio)", file=sys.stderr)
+            heartbeat("ok", f"vexa {mid} ({title}): never admitted, empty transcript "
+                            "-- skipped, no MOM")
+            print(f"SKIPPED: {kid} finished but was never admitted "
+                  f"(no start_time, empty transcript)", file=sys.stderr)
         else:
             print("no segments yet; meeting may not have started")
         return
@@ -411,8 +493,12 @@ def cmd_auto(a):
     st = load_state()
     key = api_key()
     if not dry:
-        ensure_env_url()
+        ensure_env_url()  # no-op under meetbot
         if not ensure_vexa_api():
+            if meetbot_mode():
+                heartbeat("fail", f"meetbot API unreachable at {API_BASE}; "
+                                  "restart meetbot.service or roll back to vexa")
+                sys.exit("ERROR: meetbot API down")
             heartbeat("fail", "vexa API unreachable (docker start failed)")
             sys.exit("ERROR: Vexa API down")
     if dry:
@@ -425,6 +511,7 @@ def cmd_auto(a):
 
     # 1) join upcoming calendar meetings with a Meet link
     calendar_ok = True
+    sent = 0
     try:
         r = subprocess.run([sys.executable, GCAL, "list", "--profile", "work",
                             "--days-back", "0", "--days-forward", "1", "--json"],
@@ -448,12 +535,36 @@ def cmd_auto(a):
         start = datetime.datetime.fromisoformat(stt)
         mins = (start - now).total_seconds() / 60
         kid = f"{platform}/{mid}"
+        # A recurring meeting reuses the SAME Meet code for every occurrence, so
+        # a state key of platform/code alone made the first occurrence suppress
+        # every later one -- permanently, and silently. On 20 Jul that had four
+        # of the day's meetings skipped against records from 8-17 Jul. Only the
+        # occurrence already handled TODAY may suppress a join.
+        prev = st["meetings"].get(kid)
+        done_this_occurrence = bool(
+            prev and (prev.get("sent_at") or "")[:10] == start.date().isoformat()
+        )
+        # Join EARLY, up to 8 minutes before start. This is deliberate: the bot
+        # must be the account's first presence in the call. If the owner is already
+        # in (same account), Google buries the working "Join here too" and offers
+        # only the session-stealing "Switch here", so the bot cannot join. Getting
+        # there first secondarys it -- the bot joins normally into an empty room, and
+        # when the owner arrives HE gets "Join here too", which works for a real human
+        # session. meetbot's empty_room_grace keeps it from leaving the quiet room
+        # before the meeting starts. (Window: from 8 min before to 10 min after.)
+        JOIN_EARLY_MIN, JOIN_LATE_MIN = 8, -10
+        in_window = JOIN_LATE_MIN <= mins <= JOIN_EARLY_MIN
         if dry:
-            when = "JOIN NOW" if -10 <= mins <= 3 else f"in {mins:+.0f} min"
-            tracked = " (already tracked)" if kid in st["meetings"] else ""
+            when = "JOIN NOW" if in_window else f"in {mins:+.0f} min"
+            if done_this_occurrence:
+                tracked = " (already handled today)"
+            elif prev:
+                tracked = f" (earlier occurrence {(prev.get('sent_at') or '?')[:10]}, will re-join)"
+            else:
+                tracked = ""
             print(f"[dry-run] {ev.get('summary')} -> {kid} [{when}]{tracked}")
             continue
-        if not (-10 <= mins <= 3) or kid in st["meetings"]:
+        if not in_window or done_this_occurrence:
             continue
         if not whisper_ok:
             print("skip join (whisper-server down)", file=sys.stderr)
@@ -473,6 +584,7 @@ def cmd_auto(a):
             st["meetings"][kid] = {"title": ev.get("summary") or mid,
                                    "status": "bot_sent",
                                    "sent_at": now.isoformat(timespec="seconds")}
+            sent += 1
             print(f"bot sent: {kid} ({ev.get('summary')})")
         except RuntimeError as e:
             # Record the rejection instead of losing it to stderr. The common
@@ -495,6 +607,7 @@ def cmd_auto(a):
         heartbeat("ok", "idle tick: stack healthy, no meeting events this cycle")
 
     # 2) pull + process meetings whose bot finished
+    pulled = 0
     for kid, meta in list(st["meetings"].items()):
         if meta.get("status") != "bot_sent":
             continue
@@ -519,10 +632,107 @@ def cmd_auto(a):
             ns = argparse.Namespace(meet=mid, title=meta.get("title"), final=True)
             try:
                 cmd_pull(ns)
+                pulled += 1
             except Exception as e:
                 print(f"pull failed {kid}: {e}", file=sys.stderr)
                 st["meetings"][kid]["status"] = f"pull_failed: {e}"
                 save_state(st)
+
+    # Cycle trace. Without this the cron log stays EMPTY on quiet cycles, which
+    # makes "ran fine, nothing to do" indistinguishable from "cron never fired"
+    # -- a silent-failure surface the dashboard now reads as cron freshness.
+    # One terse line per 5-min tick (~70 B, ~20 kB/day); keep it that way.
+    if not dry:
+        print(f"{now.isoformat(timespec='seconds')} "
+              f"backend={'meetbot' if meetbot_mode() else 'vexa'} "
+              f"events={len(events)} sent={sent} pulled={pulled} "
+              f"whisper={'ok' if whisper_ok else 'down'} "
+              f"calendar={'ok' if calendar_ok else 'FAIL'}", flush=True)
+
+def cmd_selftest(_):
+    """Regression test for meetbot-mode gating. Pure in-process, sends no bots,
+    touches no network, writes nothing outside a temp dir. Run it after editing
+    anything in this file:  python3 vexa_bots.py selftest"""
+    import contextlib
+    import tempfile
+
+    global API_BASE, ENV_PATH
+    saved = (API_BASE, ENV_PATH, os.environ.get("MEETBOT"))
+    failures = []
+
+    def check(label, got, want):
+        if got != want:
+            failures.append(f"{label}: got {got!r}, want {want!r}")
+
+    @contextlib.contextmanager
+    def env(base, flag):
+        global API_BASE
+        API_BASE = base
+        os.environ.pop("MEETBOT", None)
+        if flag is not None:
+            os.environ["MEETBOT"] = flag
+        try:
+            yield
+        finally:
+            API_BASE = saved[0]
+            os.environ.pop("MEETBOT", None)
+
+    # --- detection matrix. The first two rows are the backward-compat contract:
+    # unset env and the legacy :8056 base MUST stay vexa.
+    matrix = [
+        ("http://localhost:8056", None, False),   # today's default
+        ("http://localhost:8056", "", False),     # empty MEETBOT is not a signal
+        ("http://127.0.0.1:8056", None, False),
+        ("http://localhost", None, False),        # no port -> legacy
+        ("http://localhost:8060", None, True),    # port check
+        ("http://127.0.0.1:8060", None, True),
+        ("http://localhost:8056", "1", True),     # explicit override on
+        ("http://localhost:8056", "true", True),
+        ("http://localhost:8060", "0", False),    # explicit override off
+        ("http://localhost:8060", "no", False),
+        ("http://localhost:99999", None, False),  # malformed port -> legacy
+    ]
+    for base, flag, want in matrix:
+        with env(base, flag):
+            check(f"meetbot_mode(base={base}, MEETBOT={flag!r})", meetbot_mode(), want)
+
+    # --- ensure_env_url() must not touch vexa's .env under meetbot, and
+    # --- ensure_vexa_api() must not shell out to docker under meetbot.
+    calls = []
+    real_run = subprocess.run
+    with tempfile.TemporaryDirectory() as td:
+        fake_env = os.path.join(td, ".env")
+        original = "ADMIN_TOKEN=abc\nTRANSCRIPTION_SERVICE_URL=http://1.2.3.4:8083/v1/audio/transcriptions\n"
+        open(fake_env, "w", encoding="utf-8").write(original)
+        subprocess.run = lambda *a, **k: calls.append(a[0]) or real_run(["true"], capture_output=True)
+        try:
+            ENV_PATH = fake_env
+            with env("http://localhost:8060", None):
+                ensure_env_url()
+                check("meetbot: vexa .env untouched",
+                      open(fake_env, encoding="utf-8").read(), original)
+                check("meetbot: ensure_env_url ran no subprocess", calls, [])
+                # port 8060 is not listening during selftest -> the down path
+                check("meetbot: ensure_vexa_api reports down", ensure_vexa_api(), False)
+                check("meetbot: ensure_vexa_api ran no docker", calls, [])
+            # legacy path still rewrites + restarts on drift (unchanged behaviour)
+            with env("http://localhost:8056", None):
+                ensure_env_url()
+                rewritten = open(fake_env, encoding="utf-8").read()
+                check("vexa: .env rewritten on drift", rewritten != original, True)
+                check("vexa: container restarted on drift",
+                      any("docker restart vexa-lite" in " ".join(c) for c in calls), True)
+        finally:
+            subprocess.run = real_run
+            API_BASE, ENV_PATH = saved[0], saved[1]
+            if saved[2] is not None:
+                os.environ["MEETBOT"] = saved[2]
+
+    for f in failures:
+        print(f"FAIL {f}", file=sys.stderr)
+    if failures:
+        sys.exit(f"selftest: {len(failures)} failure(s)")
+    print(f"selftest OK ({len(matrix)} detection cases + gating checks)")
 
 def main():
     ap = argparse.ArgumentParser()
@@ -542,9 +752,11 @@ def main():
     p = sub.add_parser("auto")
     p.add_argument("--dry-run", dest="dry_run", action="store_true",
                    help="print join/pull decisions without sending bots")
+    sub.add_parser("selftest", help="regression-test meetbot-mode gating; sends nothing")
     a = ap.parse_args()
     {"setup": cmd_setup, "send": cmd_send, "pull": cmd_pull,
-     "stop": cmd_stop, "status": cmd_status, "auto": cmd_auto}[a.cmd](a)
+     "stop": cmd_stop, "status": cmd_status, "auto": cmd_auto,
+     "selftest": cmd_selftest}[a.cmd](a)
 
 if __name__ == "__main__":
     main()

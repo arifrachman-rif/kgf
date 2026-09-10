@@ -1,0 +1,103 @@
+{
+  "url": "https://teams.microsoft.com/meet/1234567890123",
+  "uaMode": "default",
+  "fillName": "no",
+  "stages": [
+    {
+      "at": "settled",
+      "snap": {
+        "url": "https://teams.microsoft.com/light-meetings/launch?anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=0710f8aa-70d6-44f4-b98b-3dab74e1d838&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9hbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD0wNzEwZjhhYS03MGQ2LTQ0ZjQtYjk4Yi0zZGFiNzRlMWQ4MzgmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIn0%3D&deeplinkId=cc5f395c-c3d0-4197-9345-a920aed18e54",
+        "title": "Microsoft Teams meeting | Microsoft Teams",
+        "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+        "visibleTids": [
+          "auth-sign-in-link",
+          "button-custom-video-backgrounds",
+          "calling-prejoin-render-content-container",
+          "calling-prejoin-screen",
+          "calling-prejoin-v2-computer-audio-renderer-test",
+          "calling-prejoin-v2-no-audio-renderer-test",
+          "calling-prejoin-v2-phone-audio-renderer-test",
+          "calling-slot-background",
+          "meeting-branding-v0-provider",
+          "meeting-branding-v9-provider",
+          "meeting-header-title",
+          "prejoin-audio-common-header-computer-audio",
+          "prejoin-audio-common-header-computer-no-audio",
+          "prejoin-audio-common-header-phone-audio",
+          "prejoin-cancel-button",
+          "prejoin-display-name-input",
+          "prejoin-header-content",
+          "prejoin-join-button",
+          "prejoin-meeting-details-content",
+          "prejoin-v2-video-actions",
+          "prejoin-v2-video-preview",
+          "prejoin-v2-video-preview-container",
+          "selected-microphone-display",
+          "selected-speaker-display",
+          "speaker-toggle",
+          "toggle-mute",
+          "toggle-video",
+          "video-flyout-open-button"
+        ],
+        "joinButton": {
+          "tag": "button",
+          "tid": "prejoin-join-button",
+          "role": null,
+          "aria": "Join now",
+          "ph": null,
+          "text": "Join now",
+          "domDisabled": null,
+          "ariaDisabled": null,
+          "vis": true
+        },
+        "nameInput": {
+          "tag": "input",
+          "tid": "prejoin-display-name-input",
+          "role": null,
+          "aria": null,
+          "ph": "Type your name",
+          "text": null,
+          "domDisabled": null,
+          "ariaDisabled": null,
+          "vis": true,
+          "value": ""
+        },
+        "meetingHeaderTitle": {
+          "text": "Microsoft Teams meeting",
+          "html": "<span dir=\"auto\" aria-hidden=\"true\" class=\"fui-StyledText ___jk644j0 f1pp30po fl43uef f106mvju f6dzj5z f1a3p1vp f1cmbuwj fz5stix\" data-tid=\"meeting-header-title\" title=\"Microsoft Teams meeting\">Microsoft Teams meeting</span>"
+        },
+        "alerts": [
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "text": null,
+            "domDisabled": null,
+            "ariaDisabled": null,
+            "vis": true
+          },
+          {
+            "tag": "div",
+            "tid": null,
+            "role": null,
+            "aria": null,
+            "ph": null,
+            "text": null,
+            "domDisabled": null,
+            "ariaDisabled": null,
+            "vis": true
+          }
+        ],
+        "body": "Microsoft Teams meeting\nWith camera on and\nBackground filters\nComputer microphone and speaker controls\nComputer audio\nFake Default Audio Input\nMic on\nFake Default Audio Output\nPhone audio\nPhone audio\nNo audio\nDon't use audio\nCancel\nJoin now\nSign in\nNeed help?"
+      }
+    }
+  ],
+  "navigations": [
+    "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fanon%3Dtrue&type=meet&deeplinkId=220544a7-6e8a-48aa-9d3a-798b4774b4ac&directDl=true&msLaunch=true&enableMobilePage=true",
+    "https://teams.microsoft.com/v2/?meetingjoin=true",
+    "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fanon%3Dtrue%26launchAgent%3Djoin_launcher_web%26lightExperience%3Dtrue%26correlationId%3D0710f8aa-70d6-44f4-b98b-3dab74e1d838%26anon%3Dtrue&type=meet&deeplinkId=3dd95ec7-95a2-4164-ae78-ffaa29d6e1ed&directDl=true&msLaunch=true&enableMobilePage=true",
+    "https://teams.microsoft.com/light-meetings/launch?anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=0710f8aa-70d6-44f4-b98b-3dab74e1d838&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9hbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD0wNzEwZjhhYS03MGQ2LTQ0ZjQtYjk4Yi0zZGFiNzRlMWQ4MzgmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIn0%3D&deeplinkId=cc5f395c-c3d0-4197-9345-a920aed18e54"
+  ]
+}

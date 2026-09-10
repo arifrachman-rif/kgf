@@ -45,7 +45,7 @@ window.Tabs = window.Tabs || {};
     const h = state.health;
     let chips;
     if (!h && state.healthErr) {
-      chips = `<div class="load-error">Vexa health unavailable: ${U.esc(state.healthErr)}</div>`;
+      chips = `<div class="load-error">Recorder health unavailable: ${U.esc(state.healthErr)}</div>`;
     } else if (!h) {
       chips = skeleton(1);
     } else {
@@ -65,11 +65,22 @@ window.Tabs = window.Tabs || {};
           ? Comp.badge('muted', `Local recorder idle ${U.fmtAge(ageH)}`)
           : Comp.badge('good', `Local recorder ${U.fmtAge(ageH)} ago`);
       }
-      chips = `<div class="chips">${mk('container', 'Vexa container')}${mk('api', 'API')}${mk('whisper', 'Whisper')}${localBadge}</div>`;
+      /* Chip set follows the ACTIVE backend. Hardcoding "Vexa container" here
+         survived the meetbot cutover and rendered a chip about a system that
+         was no longer recording — never label these statically again. */
+      const backendChip = h.backend === 'meetbot'
+        ? mk('service', 'meetbot service')
+        : h.backend === 'vexa'
+          ? mk('container', 'Vexa container')
+          : Comp.badge('serious', `Active recorder UNKNOWN: ${U.esc(h.backend_detected_by || 'cannot determine')}`);
+      chips = `<div class="chips">${backendChip}${mk('api', 'API')}${mk('whisper', 'Whisper')}${mk('cron', 'Cron')}${localBadge}</div>`;
     }
+    /* Always name the backend in the title: a green light must never be
+       ambiguous about WHICH recorder it refers to. */
+    const be = h && h.backend ? h.backend : '?';
     const overall = h && h.overall && h.overall !== 'ok' ? ` — ${h.overall}` : '';
     return `<div class="escalation-strip" data-key="meetings-health">
-      <div class="escalation-title">🩺 Recorder health${U.esc(overall)}</div>
+      <div class="escalation-title">🩺 Recorder health · ${U.esc(be)}${U.esc(overall)}</div>
       ${chips}
     </div>`;
   }

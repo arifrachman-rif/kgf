@@ -33,9 +33,56 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+# macOS has neither GNU `timeout` nor `grep -oP`. Both were used unguarded and
+# both fail closed on a Mac: the create step exited rc=127 before python ever
+# ran (14 Aug 2026). Resolve a timeout command once, tolerate not finding one.
+TIMEOUT_BIN=""
+if command -v timeout >/dev/null 2>&1; then
+  TIMEOUT_BIN="timeout"
+elif command -v gtimeout >/dev/null 2>&1; then
+  TIMEOUT_BIN="gtimeout"
+fi
+run_with_timeout() {   # run_with_timeout <seconds> <cmd...>
+  local secs="$1"; shift
+  if [[ -n "$TIMEOUT_BIN" ]]; then
+    "$TIMEOUT_BIN" "${secs}s" "$@"
+  else
+    "$@"
+  fi
+}
+
 [[ -z "$FILE" ]] && { echo "ERROR: --file is required" >&2; exit 2; }
 [[ ! -f "$FILE" ]] && { echo "ERROR: no such file: $FILE" >&2; exit 2; }
 [[ -z "$ID" && -z "$TITLE" ]] && { echo "ERROR: pass --id to update, or --title to create" >&2; exit 2; }
+
+# Safety net, installed BEFORE the first step that can publish the doc.
+#
+# Every convert re-publishes the doc as "anyone with link", and the restrict
+# step is deliberately LAST. Under `set -e`, any failure in between (20 Jul
+# 2026: a kroki render belonging to an unrelated PRD) exited the script with
+# the doc still world-readable. This runs on EVERY exit path: normal, `set -e`
+# abort, explicit `exit`, and INT/TERM/HUP (whose handlers below exit so this
+# EXIT trap still fires). It is a no-op once step 6 has already restricted.
+RESTRICTED=0
+PUBLISHED=0   # set to 1 the instant a step that can re-publish the doc starts
+restrict_on_failure() {
+  local rc=$?
+  if [[ $rc -ne 0 && $PUBLISHED -eq 1 && $RESTRICTED -eq 0 && $RESTRICT -eq 1 && -n "$ID" ]]; then
+    echo "" >&2
+    echo "!! publish failed (rc=$rc). Restricting $ID so it is not left public." >&2
+    if python3 .agent/scripts/drive_permissions.py restrict "$ID" \
+         --domain yourcompany.com --apply 2>&1 | tail -2 >&2; then
+      echo "!! restricted $ID to yourcompany.com" >&2
+    else
+      echo "!! RESTRICT ALSO FAILED. Doc $ID may be PUBLIC. Fix by hand now:" >&2
+      echo "!!   python3 .agent/scripts/drive_permissions.py restrict $ID --domain yourcompany.com --apply" >&2
+    fi
+  fi
+}
+trap restrict_on_failure EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+trap 'exit 129' HUP
 
 echo "==> [1/6] Readability gate on source"
 python3 scripts/readability_gate.py --source "$FILE" || {
@@ -45,29 +92,49 @@ python3 scripts/readability_gate.py --source "$FILE" || {
 }
 [[ $GATE_ONLY -eq 1 ]] && exit 0
 
+# From here on the doc can become "anyone with link" at any moment, so the EXIT
+# trap is armed. Set BEFORE the call, not after: the convert/create can publish
+# the doc and then fail.
+PUBLISHED=1
+
 if [[ -n "$ID" ]]; then
   echo "==> [2/6] Converting into existing doc $ID"
   python3 .agent/skills/work-drive-connector/gdrive_manager.py update --id "$ID" --file "$FILE" --convert >/dev/null
 else
   echo "==> [2/6] Creating new doc: $TITLE"
-  OUT=$(timeout 180s python3 .agent/skills/gdocs-create/gdocs_create.py create-doc \
-        --title "$TITLE" --file "$FILE" --account "$ACCOUNT")
+  # Capture the rc rather than letting `set -e` abort: gdocs_create can create
+  # the doc (public by default) and THEN fail or hit the timeout. Extract the
+  # ID from whatever it printed so the EXIT trap can still restrict it.
+  CREATE_RC=0
+  OUT=$(run_with_timeout 180 python3 .agent/skills/gdocs-create/gdocs_create.py create-doc \
+        --title "$TITLE" --file "$FILE" --account "$ACCOUNT" 2>&1) || CREATE_RC=$?
   echo "$OUT"
-  ID=$(echo "$OUT" | grep -oP 'ID:\s*\K[A-Za-z0-9_-]+' | head -1)
+  ID=$(echo "$OUT" | grep -oE 'ID:[[:space:]]*[A-Za-z0-9_-]+' | head -1 \
+       | sed -E 's/^ID:[[:space:]]*//' || true)
+  if [[ $CREATE_RC -ne 0 ]]; then
+    echo "ERROR: doc creation failed (rc=$CREATE_RC), treat as FAILURE" >&2
+    exit 1   # EXIT trap restricts $ID if one was created before the failure
+  fi
   [[ -z "$ID" ]] && { echo "ERROR: no file ID returned, treat as FAILURE" >&2; exit 1; }
 fi
 
 echo "==> [3/6] Embedding mermaid diagrams"
-# || guard: under set -e a failing command substitution would kill the script
-# before the error output below ever prints.
+# NON-FATAL BY DESIGN. A dead diagram renderer must never stop the pipeline
+# reaching the restrict step. Record the outcome, report it loudly at the end.
+# The || guard is required: under set -e a failing command substitution would
+# kill the script before any of this ever prints.
 EMBED_RC=0
 EMBED_OUT=$(python3 scripts/embed_mermaid_in_gdoc.py --id "$ID" --account "$ACCOUNT" 2>&1) || EMBED_RC=$?
 echo "$EMBED_OUT"
-if [[ $EMBED_RC -ne 0 ]]; then
-  echo "ERROR: mermaid embed step failed" >&2
-  exit 1
-elif ! grep -qE "EMBEDDED|error" <<<"$EMBED_OUT"; then
-  echo "  (no placeholders in this doc)"
+EMBED_PROBLEM=""
+if [[ $EMBED_RC -eq 3 ]]; then
+  EMBED_PROBLEM="one or more diagrams failed to render; literal [[PLACEHOLDER]] text is still in the doc"
+  echo "WARNING: $EMBED_PROBLEM" >&2
+  echo "WARNING: continuing to the format pass and the restrict step." >&2
+elif [[ $EMBED_RC -ne 0 ]]; then
+  EMBED_PROBLEM="the embed step failed hard (rc=$EMBED_RC); diagrams may be missing"
+  echo "WARNING: $EMBED_PROBLEM" >&2
+  echo "WARNING: continuing to the format pass and the restrict step." >&2
 fi
 
 echo "==> [4/6] Formatting pass"
@@ -97,6 +164,7 @@ fi
 if [[ $RESTRICT -eq 1 ]]; then
   echo "==> [6/6] Restricting to yourcompany.com (LAST, converts re-publish public)"
   python3 .agent/scripts/drive_permissions.py restrict "$ID" --domain yourcompany.com --apply | tail -2
+  RESTRICTED=1
 else
   echo "==> [6/6] --no-restrict passed, doc left as-is"
 fi
@@ -109,6 +177,24 @@ python3 scripts/readability_gate.py "${GATE_ARGS[@]}" || {
   echo "Published doc failed verification. Investigate before sharing the link." >&2
   exit 1
 }
+
+# The doc is now permissioned correctly, so it is safe to fail loudly. Surface
+# any diagram that never rendered: the doc is publishable but visibly broken,
+# and nobody should share it without knowing that.
+if [[ -n "$EMBED_PROBLEM" ]]; then
+  echo ""
+  echo "########################################################################" >&2
+  echo "## DOC IS NOT READY TO SHARE: $EMBED_PROBLEM" >&2
+  grep -E 'RENDER FAIL|UNRENDERED|^  - \[\[' <<<"$EMBED_OUT" >&2 || true
+  echo "##" >&2
+  echo "## Permissions ARE correct (restrict step ran). Re-run the embed once" >&2
+  echo "## the renderer recovers, then re-check the doc:" >&2
+  echo "##   python3 scripts/embed_mermaid_in_gdoc.py --id $ID --account $ACCOUNT" >&2
+  echo "########################################################################" >&2
+  echo ""
+  echo "Doc: https://docs.google.com/document/d/$ID/edit"
+  exit 1
+fi
 
 echo ""
 echo "File published: $FILE"

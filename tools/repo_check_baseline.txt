@@ -1,0 +1,4 @@
+# Accepted personal-data findings, one per line.
+# CI fails on anything NOT listed here, so this file can only shrink.
+# Most of these are fixed upstream in the export scrub, not by hand.
+

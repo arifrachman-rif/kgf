@@ -25,9 +25,34 @@ python3 .agent/skills/reply-queue/scripts/reply_queue.py report
 python3 .agent/skills/reply-queue/scripts/reply_queue.py report --all
 ```
 
+## After the queue is drafted: branch it
+
+**Standing pre-approval, 3 Aug 2026. Branch directly, do not offer first.**
+
+`journal/reply_drafts_<date>.md` hands the owner one file holding many unrelated replies, which
+forces him to context-switch through all of them at once. Once the drafts are written, split
+them:
+
+- **One branch per counterpart or per thread**, whichever is coarser. Several mentions from
+  the same person about the same thing are one session.
+- **Only what needs the owner himself.** Items you already answered, and items still sitting in
+  `## FALLBACK_TO_CLAUDE` waiting to be drafted, do not branch.
+- **One item is not a branch.** Leave it here.
+- Write ONE request file to `.asb/branches/requests/` covering every branch, per
+  `## Branching Into Sub-Sessions` in `CLAUDE.md`, then say in one line per branch what you
+  split.
+
+Each `brief` carries the inbound message quoted, who sent it, the channel and permalink, the
+drafted reply verbatim, and what you recommend. The sub-session starts blank and can not see
+this queue.
+
+**No send path here either.** Branching creates sessions, it never posts. Approving and
+sending still goes through [`slack_send.md`](../../protocols/slack_send.md) with the owner's explicit approval inside the
+sub-session.
+
 ## Notes
 
-- **No send path.** This script contains zero Slack write calls (no `chat.postMessage`, no `--action post`, no MCP send tools). Approving and actually sending a reply always goes through `/slack-draft` with the owner's explicit approval - this queue only prepares the draft text for review.
+- **No send path.** This script contains zero Slack write calls (no `chat.postMessage`, no `--action post`, no MCP send tools). Approving and actually sending a reply always goes through [`slack_send.md`](../../protocols/slack_send.md) with the owner's explicit approval - this queue only prepares the draft text for review.
 - Ledger is source of truth for open/answered state; this skill never mutates the ledger. It only reads `slack_mention_ledger.json`.
 - `draft` skips re-calling the LLM for items whose `text_hash` hasn't changed since the last draft (cheap re-runs); it only spends tokens on new or changed items.
 - On agy-bridge rc 3 (`fallback_to_claude`) or a non-zero/parse failure, the batch's items are NOT written into the drafted state - they show up in `## FALLBACK_TO_CLAUDE` in the output file every run until a human (Claude, in the SOP) drafts them or the underlying ledger item closes.

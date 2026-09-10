@@ -578,8 +578,8 @@ def cmd_draft(_args):
         + '\n\n'.join(blocks))
     try:
         proc = subprocess.run(
-            [sys.executable, AGY_BRIDGE, '--task', 'draft', '--prompt', prompt,
-             '--timeout', '120'],
+            [sys.executable, AGY_BRIDGE, '--task', 'draft', '--label', 'ai-inbox-digest',
+             '--prompt', prompt, '--timeout', '120'],
             capture_output=True, text=True, timeout=180, cwd=BASE_DIR)
         raw = (proc.stdout or '').strip()
         m = re.search(r'\[.*\]', raw, re.S)
