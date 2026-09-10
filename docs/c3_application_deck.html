@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>aGROWforests+ C3 Application Presentation — PT Klumbayan Gold Farm</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================
+       DESIGN SYSTEM & BRAND TOKENS
+       Brand: PT Klumbayan Gold Farm (KGF)
+       Medium: 16:9 Presentation Slides
+       ========================================== */
+    :root {
+      /* Colors */
+      --bg-dark: #0B130E;
+      --surface-dark: #121F17;
+      --surface-card: #182A20;
+      --surface-card-hover: #1F3629;
+      --border-dark: #254030;
+      
+      --text-main: #F2F7F4;
+      --text-muted: #9BB0A3;
+      --text-dim: #6B8073;
+      
+      --gold-accent: #E5A93C;
+      --gold-light: #F4C46B;
+      --gold-glow: rgba(229, 169, 60, 0.15);
+      
+      --emerald-accent: #2E8B57;
+      --emerald-light: #3CB371;
+      
+      /* Typography */
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      
+      /* Modular Scale (1.333 - Perfect Fourth) */
+      --size-caption: 16px;
+      --size-body: 22px;
+      --size-subhead: 30px;
+      --size-title: 44px;
+      --size-hero: 64px;
+      
+      /* Spacing (8pt Grid) */
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 24px;
+      --space-lg: 32px;
+      --space-xl: 48px;
+      --space-2xl: 64px;
+      
+      /* Safe Zone (5% Edge Margin) */
+      --safe-margin: 48px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #050A07;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Deck Viewport (Aspect Ratio 16:9) */
+    .deck-container {
+      position: relative;
+      width: 1280px;
+      height: 720px;
+      background: var(--bg-dark);
+      border-radius: 16px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border-dark);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Slides Wrapper */
+    .slides-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Individual Slide */
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: var(--safe-margin);
+      padding-bottom: 72px; /* Space for permanent footer */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.98) translateY(10px);
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  visibility 0.4s;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+      z-index: 2;
+    }
+
+    /* Background Ambient Gradients */
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, var(--gold-glow) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Category Pill Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-dark);
+      color: var(--gold-accent);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+      width: fit-content;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--gold-accent);
+    }
+
+    /* Headings */
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.15;
+    }
+
+    h1 {
+      font-size: var(--size-hero);
+      letter-spacing: -1px;
+    }
+
+    h2 {
+      font-size: var(--size-title);
+      letter-spacing: -0.5px;
+      margin-bottom: var(--space-xs);
+    }
+
+    .subtitle {
+      font-size: var(--size-subhead);
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: var(--space-lg);
+    }
+
+    .accent-text {
+      color: var(--gold-accent);
+    }
+
+    /* Grids & Cards Layout */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-sm);
+    }
+
+    .card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .card:hover {
+      background: var(--surface-card-hover);
+      border-color: var(--gold-accent);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--gold-glow);
+      color: var(--gold-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .card-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .metric-number {
+      font-family: var(--font-display);
+      font-size: 44px;
+      font-weight: 800;
+      color: var(--gold-accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .metric-label {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Permanent Slide Footer (Brand Badge + Slide Navigation) */
+    .deck-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      padding: 0 var(--safe-margin);
+      background: rgba(11, 19, 14, 0.95);
+      border-top: 1px solid var(--border-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+    }
+
+    /* Brand Logo (Rule #21) */
+    .brand-logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--gold-accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Controls & Progress */
+    .footer-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .slide-counter {
+      font-size: 14px;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .nav-btn {
+      background: var(--surface-card);
+      border: 1px solid var(--border-dark);
+      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: var(--gold-accent);
+      color: var(--bg-dark);
+      border-color: var(--gold-accent);
+    }
+
+    /* Top Progress Bar */
+    .progress-bar-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--border-dark);
+      z-index: 11;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 11.11%;
+      background: linear-gradient(90deg, var(--emerald-accent), var(--gold-accent));
+      transition: width 0.3s ease;
+    }
+
+    /* Contact Links Styling */
+    .contact-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-dark);
+      padding: 14px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: all 0.2s;
+    }
+
+    .contact-item:hover {
+      border-color: var(--gold-accent);
+      background: var(--surface-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--gold-glow);
+      color: var(--gold-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .contact-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .contact-val {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container">
+    <!-- Top Progress Bar -->
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Slides Wrapper -->
+    <div class="slides-wrapper">
+
+      <!-- SLIDE 1: HERO / TITLE -->
+      <div class="slide active" id="slide-1">
+        <div class="slide-content" style="justify-content: center; align-items: flex-start;">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            EU SWITCH-Asia Programme — Call C3 Proposal
+          </div>
+          <h1>aGROWforests+</h1>
+          <p class="subtitle">Nature-Positive Agroforestry & Green Value Chains in Indonesia</p>
+          
+          <div style="display: flex; gap: var(--space-md); margin-top: var(--space-sm); align-items: center;">
+            <div style="background: var(--surface-card); border: 1px solid var(--border-dark); padding: 12px 20px; border-radius: 10px;">
+              <span style="font-size: 13px; color: var(--text-dim); text-transform: uppercase; font-weight: 600; display: block;">Lead Presenter</span>
+              <span style="font-size: 16px; font-weight: 700; color: var(--gold-accent);">PT Klumbayan Gold Farm (KGF)</span>
+            </div>
+            
+            <div style="background: var(--surface-card); border: 1px solid var(--border-dark); padding: 12px 20px; border-radius: 10px;">
+              <span style="font-size: 13px; color: var(--text-dim); text-transform: uppercase; font-weight: 600; display: block;">Target Regions</span>
+              <span style="font-size: 16px; font-weight: 700; color: var(--text-main);">Lampung • Bangka Belitung • Aceh</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: THE PROBLEM -->
+      <div class="slide" id="slide-2">
+        <div class="slide-content">
+          <div class="badge">The Landscape Challenge</div>
+          <h2>Systemic Threats to Indonesian Agribusiness</h2>
+          <p class="subtitle">Monoculture vulnerability, climate shocks & EU market exclusion risks.</p>
+
+          <div class="grid-3" style="margin-top: auto; margin-bottom: auto;">
+            <div class="card">
+              <div class="card-icon">🌊</div>
+              <div class="card-title">USD 2–3B Climate Losses</div>
+              <div class="card-desc">Annual economic losses for Sumatran smallholders due to deforestation-induced flooding, severe droughts, and soil erosion.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-icon">📉</div>
+              <div class="card-title">Yield Degradation</div>
+              <div class="card-desc">Ageing tree stocks and monoculture soil exhaustion keep pepper, coffee, and cocoa farmers below living income thresholds.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-icon">🛡️</div>
+              <div class="card-title">EUDR Compliance Deficit</div>
+              <div class="card-desc">Without geolocation polygons & verifiable MRV traceability, 5,000+ smallholders risk complete market exclusion from the EU.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: STRATEGIC SOLUTION -->
+      <div class="slide" id="slide-3">
+        <div class="slide-content">
+          <div class="badge">Program Objectives</div>
+          <h2>Integrated Solution Architecture</h2>
+          <p class="subtitle">Combining landscape stewardship, green value chains & innovative finance.</p>
+
+          <div class="grid-3" style="margin-top: auto; margin-bottom: auto;">
+            <div class="card" style="border-top: 3px solid var(--gold-accent);">
+              <div class="card-title" style="color: var(--gold-accent);">1. Green Transformation</div>
+              <div class="card-desc">Transition 5,000 smallholders from monoculture to resilient agroforestry (Pepper, Coffee, Cocoa) with high-quality planting material.</div>
+            </div>
+
+            <div class="card" style="border-top: 3px solid var(--emerald-accent);">
+              <div class="card-title" style="color: var(--emerald-light);">2. EUDR Traceability</div>
+              <div class="card-desc">Deploy TAPAK & Traceapp for farm-to-fork polygon mapping, ensuring 100% deforestation-free compliance for EU exporters.</div>
+            </div>
+
+            <div class="card" style="border-top: 3px solid var(--gold-accent);">
+              <div class="card-title" style="color: var(--gold-accent);">3. Landscape Finance</div>
+              <div class="card-desc">Establish a Landscape Finance Approach (LFA) mechanism to leverage EU grant funding with private & blended capital.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: LANDSCAPES & COMMODITIES -->
+      <div class="slide" id="slide-4">
+        <div class="slide-content">
+          <div class="badge">Target Landscapes</div>
+          <h2>Three Strategic Commodity Hubs</h2>
+          <p class="subtitle">Deploying specialized processing & farmer empowerment across Sumatra.</p>
+
+          <div class="grid-3" style="margin-top: auto; margin-bottom: auto;">
+            <div class="card">
+              <div class="card-title">Lampung Hub</div>
+              <div class="card-desc" style="color: var(--gold-accent); font-weight: 600;">Black Pepper & Cocoa</div>
+              <div class="card-desc">PT Klumbayan Gold Farm (KGF) operates Natar Processing Facility (2,000-ton capacity) and 1,250 registered farmers.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Bangka Belitung Hub</div>
+              <div class="card-desc" style="color: var(--gold-accent); font-weight: 600;">White Pepper Agroforestry</div>
+              <div class="card-desc">PT CAN & Kelekak Demo Farm restoring post-mining soil and expanding community nurseries.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Aceh Hub</div>
+              <div class="card-desc" style="color: var(--gold-accent); font-weight: 600;">Arabica Coffee</div>
+              <div class="card-desc">Sucafina Indonesia leading EUDR-compliant farm polygon mapping & quality enhancement in Central Aceh.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: CONSORTIUM POWER -->
+      <div class="slide" id="slide-5">
+        <div class="slide-content">
+          <div class="badge">Public-Private Consortium</div>
+          <h2>World-Class Offtake & Tech Partners</h2>
+          <p class="subtitle">Bridging Indonesian farmers directly to European premium markets.</p>
+
+          <div class="grid-4" style="margin-top: auto; margin-bottom: auto;">
+            <div class="card">
+              <div class="card-title" style="font-size: 18px;">PT KGF</div>
+              <div class="card-desc" style="font-size: 13px; color: var(--gold-accent);">Lead Exporter & Operator</div>
+              <div class="card-desc" style="font-size: 14px;">Tech-enabled agribusiness managing processing, TAPAK ERP, and farmer network.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title" style="font-size: 18px;">Verstegen (VSS)</div>
+              <div class="card-desc" style="font-size: 13px; color: var(--gold-accent);">Dutch Buyer Partner</div>
+              <div class="card-desc" style="font-size: 14px;">Committed to 100% deforestation-free spice supply chain by Dec 2025.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title" style="font-size: 18px;">Fairfood</div>
+              <div class="card-desc" style="font-size: 13px; color: var(--gold-accent);">Dutch Tech NGO</div>
+              <div class="card-desc" style="font-size: 14px;">Developer of Traceapp blockchain transparency & farmer incentive reporting.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title" style="font-size: 18px;">Sucafina & CAN</div>
+              <div class="card-desc" style="font-size: 13px; color: var(--gold-accent);">Supply Chain Partners</div>
+              <div class="card-desc" style="font-size: 14px;">National B2B spice & coffee export integration across Bangka & Aceh.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: TECH ENGINE (TAPAK) -->
+      <div class="slide" id="slide-6">
+        <div class="slide-content">
+          <div class="badge">Digital Technology</div>
+          <h2>TAPAK: Event-Sourced Traceability</h2>
+          <p class="subtitle">Proprietary ERP system built by KGF for real-time EUDR validation.</p>
+
+          <div class="grid-2" style="margin-top: auto; margin-bottom: auto;">
+            <div class="card" style="justify-content: center;">
+              <div class="card-title" style="color: var(--gold-accent);">Key Features of TAPAK</div>
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
+                <li style="display: flex; align-items: center; gap: 10px; font-size: 16px;">
+                  <span style="color: var(--gold-accent);">✓</span> Polygonal GPS mapping for 5,000 smallholder plots.
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px; font-size: 16px;">
+                  <span style="color: var(--gold-accent);">✓</span> Event-sourcing graph architecture (Lot & Log tracking).
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px; font-size: 16px;">
+                  <span style="color: var(--gold-accent);">✓</span> AI Climate Decision Support (AI-CCDSS).
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px; font-size: 16px;">
+                  <span style="color: var(--gold-accent);">✓</span> Integrated AgriMEL app for offline field data collection.
+                </li>
+              </ul>
+            </div>
+
+            <div class="card" style="background: rgba(229, 169, 60, 0.05); border-color: var(--gold-accent); justify-content: center;">
+              <div class="card-title">EUDR Readiness Guaranteed</div>
+              <p class="card-desc" style="margin-top: 8px; font-size: 16px;">
+                TAPAK links every bag of Black Pepper, Coffee, and Cocoa directly to verified, non-deforested farmer plots, generating instant audit-ready EU compliance certificates.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: BAPPENAS ENDORSEMENT -->
+      <div class="slide" id="slide-7">
+        <div class="slide-content">
+          <div class="badge">Government Endorsement</div>
+          <h2>Aligned with National Priorities</h2>
+          <p class="subtitle">Formally endorsed by BAPPENAS & integrated into national planning.</p>
+
+          <div class="grid-3" style="margin-top: auto; margin-bottom: auto;">
+            <div class="card">
+              <div class="card-title">BAPPENAS Endorsed</div>
+              <div class="card-desc">Recognized at the Pepper Agroforestry Workshop (Feb 2026) as a benchmark public-private partnership model.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">FOLU Net Sink 2030</div>
+              <div class="card-desc">Agroforestry rehabilitation and verified MRV data contribute directly to national GHG reduction targets.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">RPJMN 2025–2029</div>
+              <div class="card-desc">Supports strategic commodity downstreaming and Indonesia's National Spice Downstreaming Roadmap.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 8: EXPECTED IMPACT & METRICS -->
+      <div class="slide" id="slide-8">
+        <div class="slide-content">
+          <div class="badge">Measurable Impact</div>
+          <h2>Target Key Performance Indicators</h2>
+          <p class="subtitle">Quantifiable outcomes across economic, environmental & social dimensions.</p>
+
+          <div class="grid-4" style="margin-top: auto; margin-bottom: auto;">
+            <div class="card">
+              <div class="metric-number">5,000</div>
+              <div class="metric-label">Farmers Adopt Agroforestry</div>
+              <div class="card-desc" style="font-size: 13px; margin-top: 4px;">Across 6 target communities in Sumatra.</div>
+            </div>
+
+            <div class="card">
+              <div class="metric-number">100%</div>
+              <div class="metric-label">EUDR Traceability</div>
+              <div class="card-desc" style="font-size: 13px; margin-top: 4px;">Full geolocation & deforestation-free proof.</div>
+            </div>
+
+            <div class="card">
+              <div class="metric-number">+35%</div>
+              <div class="metric-label">Farmer Income Increase</div>
+              <div class="card-desc" style="font-size: 13px; margin-top: 4px;">Via quality premiums & crop diversification.</div>
+            </div>
+
+            <div class="card">
+              <div class="metric-number">20%+</div>
+              <div class="metric-label">Women Leadership</div>
+              <div class="card-desc" style="font-size: 13px; margin-top: 4px;">Priority inclusion for women & youth (<35).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 9: CONTACT & CLOSING -->
+      <div class="slide" id="slide-9">
+        <div class="slide-content">
+          <div class="badge">Connect With Us</div>
+          <h2>Let's Build Sustainable Agribusiness Together</h2>
+          <p class="subtitle">PT Klumbayan Gold Farm — Tech-Enabled Agribusiness & Regenerative Trading</p>
+
+          <div class="contact-list">
+            <a href="https://www.klumbayangoldfarm.com" target="_blank" class="contact-item">
+              <div class="contact-icon">🌐</div>
+              <div class="contact-text">
+                <span class="contact-label">Website</span>
+                <span class="contact-val">www.agrowforests.id</span>
+              </div>
+            </a>
+
+            <a href="mailto:contact@klumbayangoldfarm.com" class="contact-item">
+              <div class="contact-icon">✉️</div>
+              <div class="contact-text">
+                <span class="contact-label">Email</span>
+                <span class="contact-val">contact@klumbayangoldfarm.com</span>
+              </div>
+            </a>
+
+            <a href="https://www.linkedin.com/company/klumbayan-gold-farm" target="_blank" class="contact-item">
+              <div class="contact-icon">💼</div>
+              <div class="contact-text">
+                <span class="contact-label">LinkedIn</span>
+                <span class="contact-val">PT Klumbayan Gold Farm</span>
+              </div>
+            </a>
+
+            <a href="https://www.instagram.com/klumbayangoldfarm" target="_blank" class="contact-item">
+              <div class="contact-icon">📸</div>
+              <div class="contact-text">
+                <span class="contact-label">Instagram</span>
+                <span class="contact-val">@klumbayangoldfarm</span>
+              </div>
+            </a>
+          </div>
+
+          <div style="margin-top: var(--space-md); background: var(--surface-card); border: 1px solid var(--border-dark); padding: 14px 20px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 14px; color: var(--text-muted);">HQ: Bandar Lampung & Gudang Natar, Lampung, Indonesia</span>
+            <span style="font-size: 14px; font-weight: 700; color: var(--gold-accent);">aGROWforests+ Consortium</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Permanent Slide Footer (Rule #21 - Logo Badge on Every Slide) -->
+    <div class="deck-footer">
+      <div class="brand-logo-badge">
+        <!-- Crisp Custom Vector KGF Logo (Golden Plant Sprout / Shield Emblem) -->
+        <svg class="logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="8" fill="#182A20" stroke="#254030" stroke-width="1"/>
+          <!-- Shield/Leaf Outer Path -->
+          <path d="M20 6C20 6 30 9 30 18C30 27 20 34 20 34C20 34 10 27 10 18C10 9 20 6 20 6Z" fill="url(#gold-grad)" opacity="0.2"/>
+          <!-- Plant Sprout -->
+          <path d="M20 30V15M20 15C17 11 11 12 11 17C11 22 20 25 20 25M20 15C23 11 29 12 29 17C29 22 20 25 20 25" stroke="url(#gold-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="gold-grad" x1="10" y1="6" x2="30" y2="34" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#F4C46B"/>
+              <stop offset="1" stop-color="#E5A93C"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <div class="brand-name">
+          <span>KLUMBAYAN GOLD FARM</span>
+          <span class="brand-sub">REGENERATIVE AGRIBUSINESS</span>
+        </div>
+      </div>
+
+      <div class="footer-controls">
+        <span class="slide-counter" id="slideCounter">Slide 1 of 9</span>
+        <button class="nav-btn" id="prevBtn" title="Previous Slide (Left Arrow)">←</button>
+        <button class="nav-btn" id="nextBtn" title="Next Slide (Right Arrow)">→</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard Navigation & Controller Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.slide');
+      const totalSlides = slides.length;
+      let currentSlide = 0;
+
+      const slideCounter = document.getElementById('slideCounter');
+      const progressBar = document.getElementById('progressBar');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      function updateSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+
+        slides.forEach((slide, idx) => {
+          if (idx === index) {
+            slide.classList.add('active');
+          } else {
+            slide.classList.remove('active');
+          }
+        });
+
+        currentSlide = index;
+
+        // Update Counter & Progress Bar
+        slideCounter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+        const progressPercent = ((currentSlide + 1) / totalSlides) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+      }
+
+      // Button Handlers
+      prevBtn.addEventListener('click', () => updateSlide(currentSlide - 1));
+      nextBtn.addEventListener('click', () => updateSlide(currentSlide + 1));
+
+      // Keyboard Event Listener (Left, Right, Space, PageUp, PageDown)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'PageDown') {
+          e.preventDefault();
+          updateSlide(currentSlide + 1);
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+          e.preventDefault();
+          updateSlide(currentSlide - 1);
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          updateSlide(0);
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          updateSlide(totalSlides - 1);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

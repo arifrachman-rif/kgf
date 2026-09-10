@@ -1,0 +1,286 @@
+# Transcript: 2026-08-30_1000_claude_pitching_mastery_sys.wav
+
+- Engine: Gemini `gemini-flash-lite-latest` (audio-in, speaker labels, ~$0.035)
+- Audio duration: 00:00
+- Generated: 2026-08-30 19:42
+
+---
+
+
+--- [PART 1 OF 4] ---
+
+[00:00] Speaker 1: eh, benar-benar secara otomatis eh, dia jalan sendiri, gitu. Eh, ya kita tinggal kasih perintah eh, tolong dong, analisa link-in saya, gitu. Terus kemudian amati apa yang kurang, gitu. Dari situ, nah, kemudian perbaiki.
+[00:18] Speaker 1: Nah, kalau misalnya itu kita bisa jalankan eh, kita tidak akan bersentuhan dengan teknis sama sekali, sama kayak yang kita lakukan hari ini. Kita cuman main skill di awal aja. Mungkin yang agak terlihat agak, agak sedikit teknis itu skills, tapi skills, eh, skills itu sendiri itu eh, sebenarnya eh, satu eh, prom yang kita tinggal save aja, gitu. Dan kalau misalnya itu eh, kita udah, makanya di sini saya menyarankan kita mainnya di PC aja. Kalau di PC kan kita bisa nginstal cloud-nya, nanti eh, kita upload file eh, zip-nya, nanti akan dibantu sendiri sama si ini, sama si cloud untuk natain.
+[01:05] Speaker 1: Gimana caranya, itu bisa jadi eh, skills, gitu. Nah, Apa inti dari eh, problem yang kita selesaikan hari ini? Jadi, ini mestinya materi jam 09.00 tadi, saya akan mengulang lagi. Ini saya sounding berkali-kali.
+[01:25] Speaker 1: Sales, karena pitch itu erat kaitannya dengan sales, ya. Sales itu ditentukan oleh dua faktor, Pak. Yang pertama adalah dari value itu sendiri. Jadi, kalau misalnya kita punya ide, ya ide itu harus memiliki value. Value-nya ide itu apa? Yaitu solusi yang benar-benar solving problem.
+[01:47] Speaker 1: Nah, terus apa? Faktor kedua adalah factorsi atau communication. Jadi, sebagus apapun ide itu, gitu, kalau misalnya kita tidak bisa eh, mengkomunikasi eh, mengkomunikasikannya ke market, itu zong juga, gitu. Makanya di sini hubungannya itu perkalian.
+[02:09] Speaker 1: Kalau value kita bagus, katakanlah value-nya sembilan, gitu. Tapi communication-nya itu dua. Ya, tentu saja eh, sales-nya enggak akan optimal, gitu. Tapi sebaliknya, communication-nya sembilan, tapi produknya tidak valuable, jadi enggak belum proven, gitu. Enggak ada track record-nya, ya tentu saja eh, traction-nya akan lemah sekali.
+[02:34] Speaker 1: Makanya ini kombinasi ya, keduanya, ya. Antara value dari produk itu sendiri, baik secara fungsi maupun secara preziv atau eh, story-nya seperti apa, gitu. Dibandingkan dengan communication.
+[02:49] Speaker 1: Nah, gambarannya seperti apa sih, gitu? Jadi, gambarannya itu kalau misalnya eh, Bapak Ibu punya data, gitu. Bapak Ibu punya data. Misalnya, dari Pak Hendri, gitu. Beliau-nya punya data maintenance mesin-mesin, ya. Dari data-data eh, maintenance mesin-mesin itu eh, menemukan data kalau eh, mesin itu tidak di-maintain, misal dilakukan eh, maintenance, misalnya overhaul atau apa, gitu.
+[03:23] Speaker 1: Setiap eh, satu tahun sekali itu berpotensi membuat sebuah perusahaan eh, kalau misalnya dia punya kapasitas produksi mampu memproduksi sekian puluh ribu produk per bulan, itu berpotensi hilang revenue itu. Bayangkan.
+[03:41] Speaker 1: Kita eh, malas mengeluarkan duit Rp10 juta per bulan, tapi eh, potensi hilangnya revenue itu dalam eh, 6 bulan atau 1 tahun itu mencapai 10 miliar. Nah, itu data.
+[03:53] Speaker 1: Tetapi bagaimana merangkai data-data itu menjadi story? Nah, itu tugasnya dari yang pertama.
+[03:59] Speaker 1: Jadi eh, data to story.
+[04:03] Speaker 1: Data to story itu sebenarnya menaikkan eh, pervalue.
+[04:09] Speaker 1: Jadi, seperti kita tahu eh, kita ketahui ya, kalau eh, bentar.
+[04:22] Speaker 1: Annotate.
+[04:33] Speaker 1: Nah, ini ya.
+[04:35] Speaker 1: Persi value itu seperti apa sih? Persi value itu kalau misalnya sama-sama eh, kemarin saya di grup itu kasih kasih satu pembeda, gitu. Jadi, kebetulan saya pas main ke Superindo gitu, belanja mingguan, eh, di sana eh, pas ambil telur itu ada nemu, gitu.
+[04:58] Speaker 1: Nemu ada telur yang eh, ayam negeri biasa ya, telur ayam, telur negeri, telur ayam negeri.
+[05:08] Speaker 1: Itu berapa harganya? Harganya cuman Rp23.000 per kilo.
+[05:17] Speaker 1: 1 kilo isi berapa, Bapak Ibu? Yang biasa belanja. Saya kalau enggak, enggak ikut istri belanja ya, enggak paham.
+[05:26] Speaker 1: Saya pernah eh, iseng-iseng ya kurang lebih 15 sampai 16 butir, tergantung size-nya. Kalau Bapak Ibu, Bapak Ibu belanja di Superindo atau Indomaret, biasanya mungkin dapatnya 15 butir, tapi kalau di pasar atau di warung sayur segar itu bisa dapatnya 16 butir karena telurnya lebih kecil-kecil.
+[05:47] Speaker 1: Nah, itu best practice ya.
+[05:49] Speaker 1: Kalau di tempat eh, di tempat Bapak Ibu mungkin eh, warung sayur segarnya lebih eh, gede telurnya.
+[05:56] Speaker 1: Nah, itu case by case ya.
+[05:58] Speaker 1: Tapi kurang lebih eh, segini harga sekarang, gitu.
+[06:02] Speaker 1: Eh, dan ini ada supplier supplier MBG juga, mestinya sangat paham ini Pak WD ya dari sini.
+[06:08] Speaker 1: Nah, terus eh, kedua eh, saya melihat di sebelahnya, gitu, ada eh, ada namanya cage-free egg.
+[06:26] Speaker 1: Bebas kandang.
+[06:27] Speaker 1: Jadi, ayam-ayamnya bebas kandang.
+[06:30] Speaker 1: Ayam-ayamnya enggak dikandang, katanya sih eh, ada perbedaan signifikan di ayam-ayam eh, yang telurnya di eh, yang telurnya dikandang, telur-telur yang ayamnya dikandang dengan yang tidak dikandang.
+[06:44] Speaker 1: Jadi, model eh, kandang aja bisa jadi eh, pendongkrak story, leverage story.
+[06:49] Speaker 1: Jadi, kalau yang cage-free egg itu jualnya di angka 34.000 per 10 butir.
+[07:00] Speaker 1: Eh, sorry, sorry.
+[07:01] Speaker 1: Ini 24.
+[07:04] Speaker 1: per 10 butir.
+[07:06] Speaker 1: Artinya apa? Artinya eh, kalau misalnya eh, kita menambahkan sebuah story dengan sebuah kaos, gitu, itu eh, berpotensi me-leverage dari eh, produk yang kita jual.
+[07:22] Speaker 1: Meskipun secara eh, fungsi sebenarnya fungsinya sama, termasuk ini ya.
+[07:28] Speaker 1: Yang saya eh, kebetulan saya kan ada di di ekosistem teman-teman nih yang mengerjakan startup-startup untuk tambang.
+[07:38] Speaker 1: Jadi, kayak misalnya sensor-sensor, gitu.
+[07:40] Speaker 1: Sama-sama sensor, gitu ya.
+[07:41] Speaker 1: Sensor misalnya untuk mendeteksi level ketinggian air, gitu.
+[07:46] Speaker 1: Kalau kita jualannya ke ke pertanian, gitu, sensor-sensor kayak gitu, paling eh, pasarannya di angka puluhan ribu sampai ratusan ribu, ketika itu diintegrasikan di kadang-kadang eh, misalnya eh, itu ditaruh sensor yang mendeteksi ketinggian eh, air di sawah.
+[08:07] Speaker 1: Eh, apakah itu dianggap eh, kurang atau eh, dianggap mencukupi gitu, atau mungkin berlebih dan berpotensi malah merusak dari padi itu sendiri.
+[08:20] Speaker 1: Nah, itu paling kalau misalnya peruntukannya untuk sawah, kita paling bisa jual sensor itu misalnya eh, dari harga beli di harga 100, gitu, dijual di 300, gitu.
+[08:31] Speaker 1: Tapi begitu kita masuk konteksnya untuk di pertambangan, gitu, wah, itu sudah beda cerita.
+[08:39] Speaker 1: Satu sensor, itu ya, meskipun eh, secara quality itu eh, enggak terlalu jauh, gitu.
+[08:44] Speaker 1: Tapi jualnya, misalnya barang Rp300.000, bisa jadi Rp3 juta, Rp4 juta.
+[08:49] Speaker 1: Bayangkan margin yang tercipta dari situ.
+[08:52] Speaker 1: Artinya apa? Di sini story itu erat kaitannya dengan konteks.
+[08:56] Speaker 1: Konteks itu siapa yang akan kita layani, gitu, siapa eh, customer profile kita.
+[09:02] Speaker 1: Makanya di sini saya berkali-kali menanyakan eh, customer profile Bapak Ibu itu siapa, gitu.
+[09:08] Speaker 1: Eh, apakah mereka memang yang eh, berpotensi punya uang untuk itu, gitu.
+[09:16] Speaker 1: Atau eh, mereka-mereka yang eh, secara lingkungan memang sangat ketat terhadap anggaran, gitu.
+[09:22] Speaker 1: Kalau misalnya eh, itu tadi, gitu.
+[09:24] Speaker 1: Contoh sensor sensor pendeteksi eh, level meternya untuk air aja itu kalau misalnya di pertanian cuman ratusan ribu, tapi kalau geser peruntukannya ke tambang, itu bisa jutaan.
+[09:39] Speaker 1: Artinya apa? Barang yang sama, beda konteks saja itu udah jauh berbeda.
+[09:45] Speaker 1: Udah jauh berbeda.
+[09:46] Speaker 1: Artinya apa? Peran dari siapa audiens kita, siapa customer kita yang berpotensi eh, me- membeli produk kita, itu sangat berpengaruh.
+[09:58] Speaker 1: Dan
+
+--- [PART 2 OF 4] ---
+
+[00:00] Speaker 1: story, percy value itu sangat dipengaruhi oleh konteks tadi. Jadi audiens itu mempengaruhi eh desain story-nya. Jadi kalau tadi eh Pak eh Pak Arif eh menyebutkan bahwa kita butuh meng-custom eh kayak misalnya
+[00:24] Speaker 1: bagaimana web kita gitu atau pitching kita itu dikustom sesuai dengan profile dari customer atau audiens itu saya setuju banget. Itu setuju banget. Makanya ketika itu benar-benar disusun untuk mereka gitu. Eh itu value-nya akan
+[00:42] Speaker 1: naik secara signifikan, Bapak Ibu.
+[00:48] Speaker 1: Bentar, saya belajar untuk menggunakan ini.
+[00:52] Speaker 2: Kedua, communication.
+[00:55] Speaker 1: Communication, ini eh sebenarnya lebih ke menghighlight, menjembatani antara pesan yang kita sampaikan tadi itu dengan eh audiens tadi gitu ya.
+[01:10] Speaker 1: Lebih singkatnya gini, eh lebih lebih gampangnya kayak gini. Kalau misalnya eh kita ngobrol dengan high level, dengan orang-orang yang eh punya kebutuhan untuk mengambil keputusan, itu tidak mungkin kita berbicara dengan eh lebih detail. Jadi concern, kenapa itu
+[01:30] Speaker 1: itu beda, ya karena memang yang menjadi concern beda. Misalnya eh kita mau eh mempropose satu solusi gitu.
+[01:40] Speaker 1: Nah, solusinya ini sebenarnya yang menggunakan itu eh levelnya dari level, ya tentu saja biasanya yang pakai ya level staff, biasanya ya untuk kebutuhan di lapangan gitu.
+[01:50] Speaker 1: Tetapi ketika ini kita present dengan pitching atau eh dengan pitch deck, dengan style-nya orang lapangan untuk pengambilan keputusan, karena yang ambil keputusan mungkin eh direktur keuangan, CFO-nya.
+[02:06] Speaker 2: Ketika CFO kita kita kouching dengan gaya style orang lapangan yang sangat teknis, pragmatis, tentu saja enggak nyambung.
+[02:15] Speaker 1: Karena CFO konsennya adalah kalau misalnya saya beli alat ini gitu, eh biaya operasional saya eh turun berapa nih? Lebih efisien berapa?
+[02:29] Speaker 1: Ebitda saya naik berapa gitu? Kayak misalnya tadi Pak Henri, kalau misalnya maintenance ini dilakukan, oke, saya kehilangan sekian juta untuk biaya maintenance, tapi eh saya bisa menyelamatkan berapa nih dari resiko bisnis yang bisa eh ini.
+[02:46] Speaker 1: Itu makanya eh kalau misalnya kita benar-benar berkomunikasi, tentu saja audiens kita itu harus benar-benar kita petakan dengan sangat baik, yang menjadi concern mereka itu apa, levelnya apa, gitu.
+[03:01] Speaker 1: Karena otomatis yang menjadi perhatian itu akan berbeda.
+[03:04] Speaker 1: Nah,
+[03:07] Speaker 1: part yang ketiga, S atau simulate ini, simulate ini lebih eh memudahkan kita untuk menjelaskan.
+[03:17] Speaker 1: Lebih memudahkan kita untuk menjelaskan. Jadi, bentar.
+[03:24] Speaker 1: Pengaruhnya di sini, Bapak Ibu.
+[03:27] Speaker 1: Story itu naikin per value.
+[03:30] Speaker 1: Jadi, barangnya sama aja tapi kalau misalnya story-nya beda, itu eh
+[03:38] Speaker 1: naiknya gila-gilaan karena eh karena eh untuk untuk terutama untuk end user ya, untuk end user itu story itu sesuatu gitu, sesuatu yang nempel di produk itu, itu punya nilai tersendiri.
+[03:51] Speaker 1: Tapi kalau untuk B2B, B2B itu beda, beda cara gitu.
+[03:56] Speaker 1: Misalnya saya mau jual ayam, karena memang sehari-hari saya jualan ayam kan Bapak Ibu ya.
+[04:01] Speaker 1: Jualan ayam untuk catering, terus eh untuk eh untuk eh Horeka gitu.
+[04:11] Speaker 1: Yang menjadi concern mereka beda.
+[04:13] Speaker 1: Jadi yang menjadi concern mereka, apakah quality-nya eh ketemu dengan eh spesifik yang mereka butuhkan?
+[04:19] Speaker 2: Kedua, harganya di berapa, gitu.
+[04:22] Speaker 1: Yang menjadi concern beda.
+[04:23] Speaker 1: Tetapi kalau misalnya eh kayak Pak Widi gitu, Pak Widi dengan ayam Chikoya, ayam Chikoya yang viral gitu.
+[04:31] Speaker 1: Nah, ketika beliaunya jualan ayam ke end user, ke customer pasti story-nya bukan efisiensi, tapi memang satu dari sisi fungsional, fungsional value eh itu enak atau enggak?
+[04:47] Speaker 1: Yang kedua, apa yang menarik dari ayam viral itu gitu.
+[04:52] Speaker 1: Bentar.
+[04:56] Speaker 2: Pak Widi, bisa open mic ya, Pak Widi?
+[04:58] Speaker 2: Open mic ya, kayak stand up komedi ya.
+[05:02] Speaker 1: Bisa, Pak.
+[05:03] Speaker 3: tapi lagi tapi ini lagi di rumah atau lagi di jalan juga?
+[05:07] Speaker 1: Lagi di gudang ayam.
+[05:11] Speaker 1: Hmm.
+[05:12] Speaker 2: Pak Widi, dulu Ciko itu viralnya orang mencari karena apa, Pak Widi?
+[05:16] Speaker 2: Ayam Ciko dong.
+[05:19] Speaker 2: Karena
+[05:22] Speaker 2: ini, Pak.
+[05:22] Speaker 2: Eh
+[05:25] Speaker 2: ayam satu ekor tuh
+[05:28] Speaker 2: tapi
+[05:29] Speaker 2: murah, Pak.
+[05:30] Speaker 1: Oh,
+[05:31] Speaker 2: Tiga ekor Rp35.000.
+[05:34] Speaker 2: Satu ekor Rp35.000, udah jadi ini ya.
+[05:37] Speaker 2: Udah jadi, padahal kan kalau di KFC aja nasi sama ayam
+[05:43] Speaker 2: waktu itu eh yang yang bikin ayam fried chicken apa wool ya, yang utuh itu kan si ricis, Pak.
+[05:51] Speaker 2: Oh, dulu seingatnya itu si ricis.
+[05:53] Speaker 2: Pertama kali ricis, pionirnya ricis.
+[05:56] Speaker 2: Cuma eh satu satu ekornya 100 up harganya.
+[06:03] Speaker 2: Ya,
+[06:04] Speaker 2: satu ekor 100-an lebih lah.
+[06:06] Speaker 2: Nah, saya bikin waktu itu satu ekor mulai 35 sampai 4 45.000-an lah, kayak sampai 50 lah.
+[06:15] Speaker 2: Ada Tapi itu tetupin dengan, Pak ya?
+[06:17] Speaker 2: Ada, Pak.
+[06:18] Speaker 2: belinya kan enggak sampai Rp20.000, Rp15.000-an waktu itu kan.
+[06:23] Speaker 2: Ya.
+[06:25] Speaker 2: Nanti eh dan itu viral di TikTok.
+[06:30] Speaker 2: Iya.
+[06:31] Speaker 2: Jadi eh mereka merasa
+[06:35] Speaker 2: merasa apa ya? eh worth it lah.
+[06:38] Speaker 2: Udah dapat satu ekor, plus harganya juga eh terjangkau dibanding beli ricis yang Rp100.000-an, gitu.
+[06:46] Speaker 2: Terus bisa lebih banyak buat
+[06:50] Speaker 2: buat semacam hampers gitu waktu itu eh buat oleh-oleh, buat kasih-kasihkan ke
+[06:56] Speaker 2: ke sanak saudara, satu ekor loh, cuman di bawah Rp50.000 gitu kan.
+[07:01] Speaker 2: Udah ayam satu ekor dapat sambal tiga, dapat sal udah lengkap siap makan gitu, tinggal bawa nasi doang.
+[07:09] Speaker 1: Iya.
+[07:10] Speaker 1: Dan itu survive ya sampai sekarang, maksudnya eh Alhamdulillah sampai sekarang.
+[07:13] Speaker 2: Alhamdulillah sampai sekarang.
+[07:14] Speaker 1: Alhamdulillah sampai sekarang.
+[07:16] Speaker 1: Nah, itu eh tapi virality itu benar-benar jadi pendongkrak ya, Pak Widi ya?
+[07:20] Speaker 2: Iya, jadi ini eh apa?
+[07:25] Speaker 2: Langsung ini, Pak, langsung, langsung sayanya yang enggak siap apa lah.
+[07:30] Speaker 1: Oh, lonjakannya luar biasa ya?
+[07:31] Speaker 2: Onjakannya eh sangat sangat ini, sangat besar.
+[07:37] Speaker 1: Iya.
+[07:39] Speaker 1: Nah, ini eh case menarik.
+[07:41] Speaker 1: Jadi, kalau misalnya Pak Widi itu perpaduan antara eh fungsionalnya dapat gitu ya, karena kan tadi pembandingnya itu eh eh gap-nya terlalu jauh gitu.
+[07:53] Speaker 1: Misalnya kayak ricis tadi angka Rp100.000-an, nah, terus Chiko itu bisa di Rp35.000 sampai Rp45.000-an, itu kan eh gap-nya itu sangat signifikan ya.
+[08:06] Speaker 1: Nah, itu kalau di story itu eh ada yang namanya amygdala hijacking.
+[08:13] Speaker 1: Jadi, kalau di otak itu ketrigger sesuatu yang eh ini ya eh sesuatu gap yang sangat signifikan atau sesuatu yang wow yang seolah-olah kayak enggak masuk akal, itu otak langsung tersentak gitu.
+[08:26] Speaker 1: Nah, itu itu dapat itu di situnya.
+[08:29] Speaker 1: Nah, mirip kayak eh case-nya ini eh si eh Pizza Hut.
+[08:36] Speaker 1: Dulu awal-awalnya di zaman pandemi, Pizza Hut itu dapat momentum yang eh cukup eh menarik ya ketika dia bikin eh secara global dia menelurkan produk eh L1 eh MO, jadi dibikin produk limo.
+[08:54] Speaker 1: Limo sebenarnya L1M itu long eh length-nya itu 1 m-an.
+[08:59] Speaker 1: 1 m-an.
+[09:00] Speaker 1: Jadi, di dinamai limo gitu.
+[09:03] Speaker 1: Eh, jadi karena pandemi kan orang enggak ke mana-mana, cenderungannya ada di rumah, dia bikin satu pizza yang memang sengaja kayak buat partainya keluarga itu.
+[09:13] Speaker 1: Jadi, eh pizza eh panjangnya 1 m, ada tiga varian rasa berbeda.
+[09:19] Speaker 1: Mungkin eh Bapak, Ibu sudah familiar itu.
+[09:21] Speaker 1: Ya, meskipun sekarang tidak segenjar itu ya, tapi eh pada saat itu itu momentumnya itu eh luar biasa menarik tuh.
+[09:31] Speaker 1: Nah, story ini benar-benar eh sangat eh sangat dibutuhkan ya, Bapak, Ibu, untuk me-leverage eh bagaimana kita membuka omongan, baik dari sisi kalau dari kasusnya Pak Widi tadi, bagaimana kita mem-picing pasar, gitu.
+[09:49] Speaker 1: Dengan sesuatu dengan produk yang punya eh diferensiasi yang berbeda.
+[09:56] Speaker 1: Nah,
+
+--- [PART 3 OF 4] ---
+
+[00:00] Speaker 1: eh kita eh ingin melakukan sesuatu maka materi terbesarnya itu justru sebenarnya ada di story ini Bapak Ibu.
+[00:08] Speaker 1: Jadi eh kalau kita coba rumuskan itu bobot dari story itu bisa di 50%.
+[00:22] Speaker 1: Ini 50 per 50%.
+[00:27] Speaker 1: Nah, terus eh slide Ini kurang lebih di 25% kalau hukum 25.
+[00:37] Speaker 1: Nah, terus kalau yang simulate simulate ini saya saya jadiin satu dengan ini ya.
+[00:46] Speaker 1: Eh meskipun ini menjadi backup ya, tapi ini kurang lebih 25%.
+[00:51] Speaker 1: Jadi yang paling eh menjadi andalan untuk membuka tadi itu sebenarnya ada di story.
+[00:58] Speaker 1: Makanya Bapak Ibu eh benar-benar harus mencari concernnya.
+[01:04] Speaker 1: Eh apa sih yang menjadi pertimbangan atau pain point dari dari ini ya eh dari market yang kita tuju.
+[01:13] Speaker 1: Nah, yang eh karena saya sering ngobrol sama Pak Widi gitu ya.
+[01:17] Speaker 1: Pak Widi ini kebetulan eh punya dua market yang berbeda gitu ya.
+[01:23] Speaker 1: Satu eh beliaunya itu pemain eh end user atau customer retail yang membutuhkan istilahnya eh reason kuat itu, faktor eh emosi seperti apa yang dibutuhkan oleh customer untuk membeli produk kita.
+[01:39] Speaker 1: Tapi di sisi beliaunya juga di ini eh di eh B2B.
+[01:44] Speaker 1: B2B itu maksudnya mensupply eh Horeka, mensupply MBG gitu.
+[01:50] Speaker 1: Jadi kalau mereka eh yang dicari adalah benar-benar kontrol quality, kontrol price gitu.
+[01:58] Speaker 2: Jadi beda ini eh beda market yang sangat signifikan.
+[02:04] Speaker 2: Nah, terus story-nya seperti apa kalau misalnya kita mengerjakan di B2B tadi gitu.
+[02:09] Speaker 1: Kalau di B2B itu story yang tercipta adalah eh story yang misalnya produk kita itu trusted eh jumlah yang dilayani gitu.
+[02:20] Speaker 1: Terus kemudian portfolionya itu menjadi story tersendiri.
+[02:24] Speaker 1: Beda ya, jadi konsep story antara eh orang yang concern dengan eh katakanlah faktor fungsi yang kuat dengan eh faktor emosi yang kuat.
+[02:35] Speaker 1: Makanya di sini meskipun eh istilahnya dari sisi apa?
+[02:43] Speaker 1: eh dari sisi 3 S tadi itu komponennya adalah value fungsional sama persif atau persepsi tetap eh dua-duanya ini enggak bisa dipisahkan.
+[02:57] Speaker 1: Fungsional tanpa persif valuenya akan rendah.
+[03:01] Speaker 1: Jadi eh istilahnya dia cuma bisa menyelesaikan masalah tetapi dia tidak bisa menaikkan harga secara signifikan.
+[03:11] Speaker 1: Tetapi persepsi aja tanpa fungsi itu zong.
+[03:14] Speaker 1: Itu manipulatif itu penipuan.
+[03:17] Speaker 1: Jadi artinya apa?
+[03:19] Speaker 1: Enggak mungkin gitu eh story-nya bagus gitu tapi secara fungsi zong.
+[03:25] Speaker 1: Contohnya apa ya?
+[03:25] Speaker 1: Contoh banyaklah, jadi sesuatu yang viral-viral gitu.
+[03:28] Speaker 1: Viral-viral secara story bagus gitu, secara persepsi bagus tapi ketika semua banyak orang datang ke sana, ngantri, mengular panjang-panjang tapi ternyata ya nilainya enggak sebanding ini cuman, nah ini mah cuman produk biasa aja gitu.
+[03:44] Speaker 1: Enggak ada spesial-spesialnya gitu.
+[03:46] Speaker 1: Akhirnya ya ya kenapa saya harus jauh-jauh ke sana gitu kalau misalnya produknya sama akhirnya zong di situ.
+[03:54] Speaker 1: Artinya apa?
+[03:55] Speaker 1: Ini saling melengkapi komponennya dan tidak bisa ditinggalkan.
+[04:00] Speaker 1: Oke, sampai di sini dulu Bapak Ibu ada yang ingin disinggung?
+[04:07] Speaker 1: Ada yang ingin ditanyakan, bukan disinggung.
+[04:11] Speaker 1: Sebentar saya bersihkan dulu coretan saya.
+[04:14] Speaker 1: Annotate.
+[04:16] Speaker 1: Clear drawing.
+[04:21] Speaker 1: Mbak Ibu kalau mau eh pas saya buka annotate, mau coret-coret juga bisa.
+[04:26] Speaker 1: Nah, ini ya, Bapak Ibu ya.
+[04:27] Speaker 1: Alurnya kurang lebih seperti ini.
+[04:30] Speaker 1: Jadi eh kita punya tiga S. Eh pagi sampai sana nanti kita punya tiga S.
+[04:35] Speaker 1: Yang pertama adalah story.
+[04:36] Speaker 1: Ini porsi yang eh kita harus benar-benar fokus itu story karena slide itu bikinnya super duper gampang.
+[04:46] Speaker 1: Prototype itu juga gampang.
+[04:48] Speaker 1: Yang penting adalah story-nya itu kuat.
+[04:50] Speaker 1: Kita mau eh bikin apa untuk mensolusi kan problema apa?
+[04:56] Speaker 1: Orang yang punya duit atau enggak, kita mendekati dengan angle yang mana?
+[05:01] Speaker 1: angle itu berarti ya eh pain point mana yang mau kita trigger gitu.
+[05:05] Speaker 1: Nah, jadi kalau tadi saya sempat menyinggung, kita ngobrol sama high level, sama level direksi, direktor keuangan, direktor eh pemasaran, direktor operasional itu beda, concern mereka beda.
+[05:18] Speaker 1: Beda dengan orang lapangan.
+[05:19] Speaker 1: Jadi jangan sampai slide yang sama antara dengan orang kita menjelaskan teknis dengan orang lapangan, dengan orang yang eh kita pakai juga untuk high level, jangan.
+[05:32] Speaker 1: Itu blunder.
+[05:34] Speaker 1: Nah, di sini saya kasih eh note ya di sini ya, Bapak Ibu ya.
+[05:39] Speaker 1: Story ini meskipun kita dibantu oleh eh dibantu, semuanya dibantu dengan cloud ya.
+[05:46] Speaker 1: Story, slide, eh simulate, simulate ini prototype itu kita dibantu dengan cloud dan kita bisa melakukannya dengan super cepat gitu.
+[05:55] Speaker 1: Nanti bahkan kita akan kasih timer ya, kalau Bapak Ibu mengerjakan semua ini kurang dari 30 menit berarti belum berhasil ya.
+[06:05] Speaker 1: Artinya apa?
+[06:06] Speaker 1: Harus dicoba lagi.
+[06:07] Speaker 1: Ada yang belum efisien, entah itu di skill-nya, entah itu di eh pendefinisian problem-nya yang belum clear.
+[06:14] Speaker 1: Nah, itu ada problem dan perlu diperbaiki.
+[06:17] Speaker 1: Makanya nanti output-nya ini harus sangat terukur.
+[06:20] Speaker 1: Oke, nah, di sini saya kasih note.
+[06:24] Speaker 2: Kenapa harus cloud, bukan desain manual?
+[06:26] Speaker 2: Saya ini orang marketing, saya juga eh istilahnya ngajar ya, nah dari cukup lama dari 2008 2009 gitu.
+[06:42] Speaker 1: Artinya eh kalau waktu kita, jadi berdasarkan pengalaman pribadi saya gitu ya, saya saya bikin materi gitu.
+[06:52] Speaker 1: Bikin materi, materinya jadi.
+[06:55] Speaker 1: Yang lama itu selalu disibukkan dengan tampilan slide-nya seperti apa ini, meskipun kita punya kadang-kadang seringkali kita punya.
+[07:04] Speaker 1: Terus kemudian dulu adanya cuman PowerPoint gitu.
+[07:07] Speaker 1: Syukur-syukur ada Canva, benar-benar sangat membantu itu.
+[07:09] Speaker 1: Dulu ketika nyari eh ada PowerPoint, itu kita dari misalnya dapatnya datanya dari Excel gitu.
+[07:17] Speaker 1: Excel bagaimana ini menjadikannya grafik gitu.
+[07:19] Speaker 1: Eh grafiknya kadang kita karena enggak tahu teorinya ya semuanya diajar dulu pakai grafik batang, kan harus sesuai profile.
+[07:27] Speaker 2: eh untuk data tertentu itu cocoknya donat.
+[07:29] Speaker 2: Kalau kita ngomongin komposisi pasar ya, paling enggak itu pie atau donat gitu.
+[07:36] Speaker 2: Kalau ngomongin growth ya ada line, ada bar chart, ada yang batang-batang gitu.
+[07:42] Speaker 2: Kalau dulu semuanya harus kita pikirin sendiri gitu dan eh seringkali kita salah posisi gitu.
+[07:47] Speaker 2: Salah ngambil keputusan.
+[07:49] Speaker 2: Tapi sekarang udah serahkan itu semuanya sama ahlinya ahli kalau untuk ngolah data.
+[07:55] Speaker 2: Cloud itu posisinya adalah bagaimana eh untuk mengolah data itu dia luar biasa powerful-nya.
+[08:01] Speaker 2: Tapi kalau kalau untuk memahami konteks eh tentang bagaimana kita menjalankan bisnis, eh kondisi lapangan seperti apa, cloud itu enggak ada apa-apanya.
+[08:13] Speaker 2: Jago teman-teman yang sudah bersentuan dengan customer, yang sudah running bisnis, meskipun katakanlah bisnisnya masih belum profit secara konsisten, itu tetap lebih jago eh Bapak Ibu dibandingkan cloud.
+[08:27] Speaker 2: Tetapi, saya sekali lagi, tetapi begitu cloud, eh cloud kan basic-nya juga sama kayak mesin learning biasa gitu.
+[08:35] Speaker 2: Ketika dia sudah ditrain dengan konteks, dengan ilmu-ilmu lapangan secara konsisten, dia benar-benar menjadi eh asisten yang super powerful, super duper powerful gitu.
+[08:52] Speaker 2: Makanya itu enggak bisa kita eh eh remehkan.
+[08:56] Speaker 2: Jadi orang menyebutkan gini, sering mengatakan gini, tahan sih ChatGPT, ngawur gitu.
+[09:03] Speaker 2: Cloud ngawur, katanya cloud hebat, kok cuman gitu aja.
+[09:07] Speaker 2: Karena dia enggak ditrain dengan cukup data.
+[09:10] Speaker 2: Tapi kalau Bapak Ibu sudah eh menggunakan eh training itu gitu, eh itu bisa menjadi sangat powerful, gitu.
+[09:21] Speaker 2: Contohnya seperti apa?
+[09:23] Speaker 2: Saya kasih yang sedikit eh ini ya.
+[09:33] Speaker 2: Bentar, saya kasih contoh eh ini.
+[09:41] Speaker 2: Ada orang yang nge-share,
+[09:58] Speaker 2: Betapa powerful-nya gitu.
+
+--- [PART 4 OF 4] ---
+
+[00:00] Speaker 1: saat kalau kita training.
+[00:06] Speaker 1: Ini link in saya ya, Bapak Ibu ya.
+[00:09] Speaker 1: Link in saya gitu.
+[00:10] Speaker 1: Saya eh share eh ilustrasi dan caption-nya keren gitu.
+[00:17] Speaker 1: Eh komen dari eh Pak Putu ini mungkin Bapak Ibu ada yang kenal beliau praktisi UMKM juga gitu.
+[00:25] Speaker 1: Eh beliau itu coach juga tapi yang mungkin beliau eh entah sadar atau tidak sadar gitu.
+[00:33] Speaker 1: Eh link in saya itu itu di-operate ya pos impression ya yang naik turun ya ini 137.000 gitu kadang mendekati 500.000 gitu.
+[00:46] Speaker 1: Tapi ini semua caption itu eh ini.
+[00:52] Speaker 1: AI yang generate, kalau Bapak Ibu teliti sebenarnya AI juga nih.
+[00:57] Speaker 1: Artinya apa?
+[00:58] Speaker 1: AI saya itu sudah bisa di-train eh benar-benar train secara konsisten, cloud.
+[01:05] Speaker 1: Eh saya pakai cloud.

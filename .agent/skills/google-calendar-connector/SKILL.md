@@ -33,7 +33,12 @@ timeout 180s python3 .agent/skills/google-calendar-connector/gcal_manager.py cre
 
 # Create with description
 python .agent/skills/google-calendar-connector/gcal_manager.py create --summary "Sync with Team" --start "2026-04-08T10:00:00" --end "2026-04-08T11:00:00" --desc "Weekly sync to discuss PRDs"
+
+# External event (no Meet link), with location and a custom reminder 4h20m (260 min) before
+python .agent/skills/google-calendar-connector/gcal_manager.py create --summary "Webinar" --start "2026-04-08T14:00:00" --end "2026-04-08T16:00:00" --no-meet --location "https://zoom.us/j/123" --reminder-minutes "260"
 ```
+
+**Reminder flag**: `--reminder-minutes` takes a comma-separated list of minutes-before (e.g. `260` or `260,30`). Each value creates BOTH a popup and an email reminder, and replaces the calendar's default reminders for that event. Times are always interpreted as `Asia/Jakarta`.
 ```
 
 ### List (Raw event listing)

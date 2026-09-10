@@ -335,7 +335,7 @@ window.Tabs = window.Tabs || {};
       <div class="rows">${rows.join('') || ''}</div>`;
     return Comp.card({
       key: `team:${team.id}`, icon: '🧩', title: team.name || team.id,
-      count: `${sc.active ?? 0}/${sc.total ?? 0} active`, body, open: false,
+      count: `${sc.active ?? 0}/${sc.total ?? 0} active`, body, open: true,
     });
   }
 
@@ -350,7 +350,7 @@ window.Tabs = window.Tabs || {};
       : teams.some(t => t.health === 'at_risk') ? 'warn' : (teams.length ? 'good' : null);
     return Comp.card({
       key: 'portfolio', icon: '🗂', title: 'Portfolio',
-      count: `${teams.length} teams · ${atRisk} at risk`, status, body, open: false,
+      count: `${teams.length} teams · ${atRisk} at risk`, status, body, open: true,
     });
   }
 

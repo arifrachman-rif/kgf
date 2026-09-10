@@ -4,6 +4,12 @@
 # Always exits 0 and emits hook JSON; never blocks the session.
 set -u
 
+# Announce async on the first line: the harness registers this hook and stops
+# blocking session init. Everything below keeps running; its output arrives as
+# an attachment instead of holding up startup.
+printf '%s
+' '{"async":true,"asyncTimeout":60000}'
+
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 json_escape() {

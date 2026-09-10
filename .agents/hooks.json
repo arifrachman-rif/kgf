@@ -1,0 +1,11 @@
+{
+  "startup-routines": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "wsl bash .agents/scripts/startup_hook.sh",
+        "timeout": 30
+      }
+    ]
+  }
+}

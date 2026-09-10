@@ -20,6 +20,38 @@ REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 DATA_DIR = os.environ.get("AGY_BRIDGE_DATA_DIR", os.path.join(REPO_ROOT, "dashboard-data"))
 PATH = os.path.join(DATA_DIR, "agent_heartbeat.jsonl")
 
+def trigger_desktop_notification(job, status, summary, needs_reauth):
+    keywords = ["manual", "approval", "persetujuan", "reauth", "re-auth", "fallback_to_claude", "accept", "submit", "tindakan", "drafted"]
+    needs_action = (
+        status == "fail"
+        or bool(needs_reauth)
+        or any(k in (summary or "").lower() for k in keywords)
+        or any(k in (job or "").lower() for k in keywords)
+    )
+    if not needs_action:
+        return
+    try:
+        import shutil
+        import subprocess
+        ps_cmd = "powershell.exe" if shutil.which("powershell.exe") else "powershell"
+        
+        is_warning = status == "fail" or bool(needs_reauth) or "fail" in (summary or "").lower() or "error" in (summary or "").lower()
+        icon_code = 48 if is_warning else 64
+        title_suffix = "Butuh Tindakan" if is_warning else "Selesai"
+        
+        title = f"Second Brain: {job.upper()} - {title_suffix}"
+        text = f"Status: {status.upper()}.\n\n{summary}"
+        title_esc = title.replace('"', '`"').replace("'", "`'")
+        text_esc = text.replace('"', '`"').replace("'", "`'")
+        
+        ps_script = (
+            f"$wshell = New-Object -ComObject Wscript.Shell; "
+            f"$wshell.Popup(\"{text_esc}\", 7, \"{title_esc}\", {icon_code})"
+        )
+        subprocess.run([ps_cmd, "-Command", ps_script], capture_output=True, timeout=15)
+    except Exception:
+        pass
+
 def write(job, status, summary, needs_reauth):
     os.makedirs(DATA_DIR, exist_ok=True)
     row = {
@@ -32,6 +64,7 @@ def write(job, status, summary, needs_reauth):
     with open(PATH, "a", encoding="utf-8") as fh:
         fh.write(json.dumps(row, ensure_ascii=False) + "\n")
     print(json.dumps(row, ensure_ascii=False))
+    trigger_desktop_notification(job, status, summary, needs_reauth)
 
 def recent(n):
     if not os.path.exists(PATH):

@@ -1,0 +1,169 @@
+{
+  "schema_version": 2,
+  "updated_wib": "2026-07-29T08:53+07:00",
+  "synced_wib": "2026-07-29T08:53+07:00",
+  "sync_source": "portfolio_sync.py",
+  "teams": [
+    {
+      "id": "kgf",
+      "name": "KGF Core Team",
+      "world": "work",
+      "owner": "Arif Rachman",
+      "initiatives": [
+        {
+          "id": "ikm_hijau_2026",
+          "name": "Pemberdayaan IKM Hijau",
+          "status": "in_progress",
+          "health": "on_track",
+          "owner": "Arif Rachman",
+          "one_liner": "Program Transformasi dan Pembinaan Sertifikasi Industri Hijau dari Kemenperin",
+          "now": "Pembaruan KBLI NIB sedang diajukan (gratis di OSS). BPJS lunas & aktif. SOP K3/Limbah sudah diterbitkan.",
+          "now_base": "Pembaruan KBLI NIB sedang diajukan (gratis di OSS). BPJS lunas & aktif. SOP K3/Limbah sudah diterbitkan.",
+          "next_milestone": "2026-08-20",
+          "blockers": [
+            {
+              "what": "Pembaruan KBLI NIB melalui portal OSS BKPM",
+              "owner": "Arif Rachman",
+              "since": "2026-07-28",
+              "source": "WAIT-0001",
+              "auto": true
+            }
+          ],
+          "links": {
+            "docs": [
+              {
+                "label": "analisis_kesesuaian_ikm_hijau.md",
+                "url": "file:///c:/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/IKM_Hijau_2026/analisis_kesesuaian_ikm_hijau.md"
+              },
+              {
+                "label": "sop_k3_dan_limbah_natar.md",
+                "url": "file:///c:/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/IKM_Hijau_2026/sop_k3_dan_limbah_natar.md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "dompet_dhuafa",
+          "name": "Kerja Sama Dompet Dhuafa",
+          "status": "in_progress",
+          "health": "on_track",
+          "owner": "Arif / Hendra",
+          "one_liner": "Proposal Kerja Kerja Sama Investasi Modal Kerja Pengadaan Lada & Kopi KGF",
+          "now": "Draf proposal sedang ditinjau ulang sebelum rapat penyelarasan di Jakarta pada 10-11 Agustus 2026.",
+          "now_base": "Draf proposal sedang ditinjau ulang sebelum rapat penyelarasan di Jakarta pada 10-11 Agustus 2026.",
+          "next_milestone": "2026-08-11",
+          "blockers": [
+            {
+              "what": "Penyelarasan draf proposal final mudharabah/musyarakah",
+              "owner": "Hendra",
+              "since": "2026-07-28",
+              "source": "WAIT-0002",
+              "auto": true
+            }
+          ],
+          "links": {
+            "docs": [
+              {
+                "label": "proposal_dompet_dhuafa_draft.md",
+                "url": "file:///c:/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/proposal_dompet_dhuafa_draft.md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "tei_2026",
+          "name": "Trade Expo Indonesia 2026",
+          "status": "in_progress",
+          "health": "on_track",
+          "owner": "Arif Rachman",
+          "one_liner": "Partisipasi KGF dalam Trade Expo Indonesia 2026 untuk promosi ekspor komoditas lada dan kopi",
+          "now": "Persiapan administrasi pendaftaran dan penyiapan sampel komoditas premium untuk dipamerkan.",
+          "now_base": "Persiapan administrasi pendaftaran dan penyiapan sampel komoditas premium untuk dipamerkan.",
+          "next_milestone": "2026-10-15",
+          "blockers": [],
+          "links": {
+            "docs": [
+              {
+                "label": "kgf.json",
+                "url": "file:///c:/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/kgf.json"
+              }
+            ]
+          }
+        },
+        {
+          "id": "agroforestry_academy",
+          "name": "Agroforestry Academy with Pak Joko",
+          "status": "in_progress",
+          "health": "on_track",
+          "owner": "Arif Rachman",
+          "one_liner": "Penyusunan modul dan penyelenggaraan program pelatihan agroforestry bagi petani wanatani KGF",
+          "now": "Penyusunan rancangan kurikulum dan kolaborasi kurasi materi wanatani bersama Pak Joko.",
+          "now_base": "Penyusunan rancangan kurikulum dan kolaborasi kurasi materi wanatani bersama Pak Joko.",
+          "next_milestone": "2026-09-30",
+          "blockers": [],
+          "links": {}
+        },
+        {
+          "id": "project_verification",
+          "name": "Project Verification by Verstegen",
+          "status": "in_progress",
+          "health": "on_track",
+          "owner": "Arif / Yuyun",
+          "one_liner": "Proses verifikasi spasial dan legalitas kepatuhan EUDR untuk suplai lada & kopi ke Verstegen",
+          "now": "Pengumpulan data koordinat poligon lahan petani via TAPAK dan validasi data bebas deforestasi.",
+          "now_base": "Pengumpulan data koordinat poligon lahan petani via TAPAK dan validasi data bebas deforestasi.",
+          "next_milestone": "2026-08-31",
+          "blockers": [],
+          "links": {
+            "docs": [
+              {
+                "label": "kgf.json",
+                "url": "file:///c:/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/kgf.json"
+              }
+            ]
+          }
+        },
+        {
+          "id": "supply_chain_audit",
+          "name": "Supply Chain Audit by Verstegen",
+          "status": "in_progress",
+          "health": "on_track",
+          "owner": "Arif / Heri",
+          "one_liner": "Audit kepatuhan rantai pasok dan kelayakan fasilitas fisik Gudang Natar oleh auditor pihak ketiga Verstegen",
+          "now": "Penerapan standar operasional K3 dan pengelolaan limbah organik di Gudang Natar menjelang jadwal audit.",
+          "now_base": "Penerapan standar operasional K3 and pengelolaan limbah organik di Gudang Natar menjelang jadwal audit.",
+          "next_milestone": "2026-08-31",
+          "blockers": [],
+          "links": {
+            "docs": [
+              {
+                "label": "sop_k3_dan_limbah_natar.md",
+                "url": "file:///c:/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/IKM_Hijau_2026/sop_k3_dan_limbah_natar.md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "po_100ton",
+          "name": "PO 100ton Verstegen",
+          "status": "in_progress",
+          "health": "on_track",
+          "owner": "Arif / Hendra",
+          "one_liner": "Pemenuhan pesanan pembelian 100 ton lada hitam KGF ke Verstegen Spices and Sauces",
+          "now": "Pembelian bahan baku lada hitam kering dari petani mitra dan pencairan uang muka pembayaran 80%.",
+          "now_base": "Pembelian bahan baku lada hitam kering dari petani mitra dan pencairan uang muka pembayaran 80%.",
+          "next_milestone": "2026-12-31",
+          "blockers": [],
+          "links": {
+            "docs": [
+              {
+                "label": "kgf.json",
+                "url": "file:///c:/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/kgf.json"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

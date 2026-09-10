@@ -2,6 +2,7 @@
 .DS_Store
 Thumbs.db
 Desktop.ini
+~$*
 
 # Python
 __pycache__/
@@ -38,3 +39,18 @@ journal/todo_*.md
 # Editor
 .vscode/
 .idea/
+
+# Large binaries & archives (GitHub 100MB limit)
+ffmpeg*
+*.zip
+*.tar.*
+*.exe
+myenv/
+
+# Temp artifacts & screenshots
+*playwright-artifacts*
+wa_*.png
+whatsapp_*.png
+whatsapp_*.html
+temp_img_*.jpg
+*.bak_*

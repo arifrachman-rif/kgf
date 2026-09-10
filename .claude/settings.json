@@ -1,14 +1,15 @@
 {
-  "model": "opus",
-  "alwaysThinkingEnabled": true,
   "permissions": {
-    "allow": [],
+    "allow": [
+      "Bash(powershell -NoProfile -Command \"wsl -d Ubuntu -- bash -lc 'cd /mnt/c/Users/rifra/AppData/Local/Temp/claude/c--Users-rifra--gemini-antigravity-ide-scratch-ai-second-brain/341128d6-9d2e-4be1-80c9-c208a815ff2a/scratchpad && timeout 420 python3 wa_list_docs.py Hariyadi 70 2>&1 | tail -40'\")"
+    ],
     "defaultMode": "bypassPermissions",
     "additionalDirectories": [
       "~/You/You",
       "~/antigravity-projects/You"
     ]
   },
+  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
@@ -117,5 +118,6 @@
         ]
       }
     ]
-  }
+  },
+  "alwaysThinkingEnabled": true
 }

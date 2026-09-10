@@ -1,0 +1,14 @@
+{
+ "generated_from": "journal/state/decisions.json",
+ "note": "Lean index. Full body (decision/sources/stakeholders) lives in decisions.json; look up by id.",
+ "count": 1,
+ "decisions": [
+  {
+   "id": "DEC-0001",
+   "title": "Penyelarasan Legalitas KBLI Usaha KGF",
+   "status": "open",
+   "decider": "Arif Rachman",
+   "deadline": "2026-08-10"
+  }
+ ]
+}

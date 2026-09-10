@@ -380,7 +380,7 @@ def run_mcp_server(profile='default'):
 
     server.run(transport="stdio")
 
-def create_event(summary, start_time, end_time, description=None, profile='default', attendees=None, add_meet=True):
+def create_event(summary, start_time, end_time, description=None, profile='default', attendees=None, add_meet=True, location=None, reminder_minutes=None):
     """Create a new calendar event. By default attaches a Google Meet link."""
     creds = authenticate(profile)
     if not creds:
@@ -400,6 +400,17 @@ def create_event(summary, start_time, end_time, description=None, profile='defau
             'timeZone': 'Asia/Jakarta',
         },
     }
+
+    if location:
+        event['location'] = location
+
+    if reminder_minutes:
+        event['reminders'] = {
+            'useDefault': False,
+            'overrides': [{'method': m, 'minutes': int(mins)}
+                          for mins in reminder_minutes
+                          for m in ('popup', 'email')],
+        }
 
     if attendees:
         event['attendees'] = [{'email': email.strip()} for email in attendees.split(',')]
@@ -459,6 +470,8 @@ def main():
     create_parser.add_argument('--attendees', help='Comma-separated emails of attendees')
     create_parser.add_argument('--desc', help='Description')
     create_parser.add_argument('--no-meet', action='store_true', help='Do NOT attach a Google Meet link (default: attach)')
+    create_parser.add_argument('--location', help='Event location (physical address or meeting URL)')
+    create_parser.add_argument('--reminder-minutes', help='Comma-separated minutes-before for popup+email reminders, e.g. "260" or "260,30". Overrides calendar defaults.')
     create_parser.add_argument('--profile', default='default', choices=['default', 'work', 'secondary'], help='Authentication profile to use')
 
     args = parser.parse_args()
@@ -471,7 +484,11 @@ def main():
     elif args.command == 'mcp':
         run_mcp_server(args.profile)
     elif args.command == 'create':
-        create_event(args.summary, args.start, args.end, args.desc, args.profile, args.attendees, add_meet=not args.no_meet)
+        reminders = None
+        if args.reminder_minutes:
+            reminders = [int(m.strip()) for m in args.reminder_minutes.split(',') if m.strip()]
+        create_event(args.summary, args.start, args.end, args.desc, args.profile, args.attendees,
+                     add_meet=not args.no_meet, location=args.location, reminder_minutes=reminders)
     else:
         parser.print_help()
 

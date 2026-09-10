@@ -249,7 +249,7 @@ def read_file(file_id):
 
     try:
         # Get file metadata to check type
-        file_meta = service.files().get(fileId=file_id, fields='mimeType, name').execute()
+        file_meta = service.files().get(fileId=file_id, fields='mimeType, name', supportsAllDrives=True).execute()
         mime_type = file_meta.get('mimeType')
         file_name = file_meta.get('name')
         print(f"Reading: {file_name} ({mime_type})")
@@ -264,7 +264,7 @@ def read_file(file_id):
             print(content.decode('utf-8'))
         else:
             # For other files, download content
-            content = service.files().get_media(fileId=file_id).execute()
+            content = service.files().get_media(fileId=file_id, supportsAllDrives=True).execute()
             # Try to decode as text; if fails, indicate binary
             try:
                 print(content.decode('utf-8'))

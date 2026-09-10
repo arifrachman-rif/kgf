@@ -1,0 +1,23 @@
+{
+  "cache_schema": 1,
+  "extra": {},
+  "records": {
+    "claude-code:cb2cd290-a6de-4fa6-bbdd-372b98616256": {
+      "backends": [],
+      "detected_at": 1788075237.7877097,
+      "entrypoint": "unknown",
+      "hooks": false,
+      "model": "unknown",
+      "platform": "unknown",
+      "repo_root": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain",
+      "run_prefix": "",
+      "run_suffix": "",
+      "runtime": "unknown",
+      "schema": 2,
+      "session_id": "cb2cd290-a6de-4fa6-bbdd-372b98616256",
+      "signature": "claude-code:cb2cd290-a6de-4fa6-bbdd-372b98616256",
+      "subagents": false,
+      "tier": "unknown"
+    }
+  }
+}

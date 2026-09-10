@@ -1,0 +1,14 @@
+{
+ "generated_from": "journal/state/commitments.json",
+ "note": "Lean index. Full body (permalink/source/confidence/notes) lives in commitments.json; look up by id.",
+ "count": 1,
+ "commitments": [
+  {
+   "id": "COM-0001",
+   "title": "Mengajukan penambahan KBLI di OSS",
+   "status": "open",
+   "to": "Kemenperin / Tim Audit",
+   "due": "2026-08-10"
+  }
+ ]
+}

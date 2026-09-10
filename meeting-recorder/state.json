@@ -1,0 +1,618 @@
+{
+  "processed": {
+    "/mnt/c/Users/rifra/MeetingRecordings/Screen_Recording_20260720_201553_WhatsAppBusiness.wav": {
+      "rec_id": "local-1784628796",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/Screen_Recording_20260720_201553_WhatsAppBusiness.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07212026_Screen_Recording_20260720_201553_WhatsAppBusiness.md",
+      "status": "drafted",
+      "ts": "2026-07-21T17:14:01+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-21_1614_tes_rec_kelas_bimtek.wav": {
+      "rec_id": "local-1784643976",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-21_1614_tes_rec_kelas_bimtek.md",
+      "mom": null,
+      "status": "needs /mom manual (agy-bridge fallback_to_claude)",
+      "ts": "2026-07-21T21:26:22+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-21_1630_pasar_rusia.wav": {
+      "rec_id": "local-1784681848",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-21_1630_pasar_rusia.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07212026_pasar_rusia.md",
+      "status": "drafted",
+      "ts": "2026-07-22T07:57:55+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-22_0946_hari_kedua_standar_mutu_keamanan_pangan.wav": {
+      "rec_id": "local-1784692047",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-22_0946_hari_kedua_standar_mutu_keamanan_pangan.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07222026_Standar_Mutu_Keamanan_Pangan.md",
+      "status": "drafted",
+      "ts": "2026-07-22T11:32:00+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-22_1111_sesi_2_hari_dua.wav": {
+      "rec_id": "local-1784697661",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-22_1111_sesi_2_hari_dua.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07222026_sesi_2_hari_dua.md",
+      "status": "drafted",
+      "ts": "2026-07-22T13:18:16+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-22_1327_Meeting.wav": {
+      "rec_id": "local-1784716410",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-22_1327_Meeting.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07222026_Meeting.md",
+      "status": "drafted",
+      "ts": "2026-07-22T17:33:50+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-22_1356_sesi_3_hari_dua.wav": {
+      "rec_id": "local-1784770626",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-22_1356_sesi_3_hari_dua.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07222026_sesi_3_hari_dua.md",
+      "status": "drafted",
+      "ts": "2026-07-23T08:37:50+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-23_0924_day_3.wav": {
+      "rec_id": "local-1784796858",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-23_0924_day_3.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07232026_day_3.md",
+      "status": "drafted",
+      "ts": "2026-07-23T15:54:57+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-23_1319_pitching_Atdag_Cairo_with_AME_and_BI.wav": {
+      "rec_id": "local-1784804518",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-23_1319_pitching_Atdag_Cairo_with_AME_and_BI.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07232026_pitching_Atdag_Cairo_with_AME_and_BI.md",
+      "status": "drafted",
+      "ts": "2026-07-23T18:02:30+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-25_1430_meet_acces_pertama.wav": {
+      "rec_id": "local-1785056219",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-25_1430_meet_acces_pertama.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07252026_meet_acces_pertama_business_matching.md",
+      "status": "drafted",
+      "ts": "2026-07-26T15:57:33+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-26_1358_Mutiara.wav": {
+      "rec_id": "local-1785057810",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-26_1358_Mutiara.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07262026_Mutiara_scope_alignment.md",
+      "status": "drafted",
+      "ts": "2026-07-26T16:24:07+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-23_1437_day_3_sesi_2.wav": {
+      "rec_id": "local-1785067094",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-23_1437_day_3_sesi_2.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07232026_day_3_sesi_2_bimtek_kemenperin.md",
+      "status": "drafted",
+      "ts": "2026-07-26T18:58:24+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-27_1100_Europe_DFI_Intro.wav": {
+      "rec_id": "local-1785132462",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-27_1100_Europe_DFI_Intro.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07272026_Europe_DFI_Intro_pitching.md",
+      "status": "drafted",
+      "ts": "2026-07-27T13:07:52+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-27_1401_Pasar_Rusia_AME.wav": {
+      "rec_id": "local-1785141189",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-27_1401_Pasar_Rusia_AME.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07272026_Pasar_Rusia_AME.md",
+      "status": "drafted",
+      "ts": "2026-07-27T15:33:22+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-27_1518_Tes_Notifikasi.wav": {
+      "rec_id": "local-1785141204",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-27_1518_Tes_Notifikasi.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07272026_Tes_Notifikasi_test.md",
+      "status": "drafted",
+      "ts": "2026-07-27T15:33:30+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-27_1520_Tes_Notifikasi.wav": {
+      "rec_id": "local-1785141215",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-27_1520_Tes_Notifikasi.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07272026_Tes_Notifikasi_notification_test.md",
+      "status": "drafted",
+      "ts": "2026-07-27T15:33:41+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-30_2119_audit_verstegen.wav": {
+      "rec_id": "local-1785429074",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-30_2119_audit_verstegen.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07302026_audit_verstegen.md",
+      "status": "drafted",
+      "ts": "2026-07-30T23:31:22+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-07-31_0826_kopi_anto.wav": {
+      "rec_id": "local-1785461409",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-07-31_0826_kopi_anto.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_07312026_kopi_anto_financial_projection.md",
+      "status": "drafted",
+      "ts": "2026-07-31T08:30:15+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-01_2004_kopi_anto1.wav": {
+      "rec_id": "local-1785590415",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-01_2004_kopi_anto1.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08012026_kopi_anto1_partnership.md",
+      "status": "drafted",
+      "ts": "2026-08-01T20:20:39+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-01_2009_anto.wav": {
+      "rec_id": "local-1785590616",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-01_2009_anto.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08012026_anto_financial_strategy.md",
+      "status": "drafted",
+      "ts": "2026-08-01T20:23:47+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-02_0648_faizal.wav": {
+      "rec_id": "local-1785742735",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-02_0648_faizal.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08022026_faizal_coffee_supply.md",
+      "status": "drafted",
+      "ts": "2026-08-03T14:43:14+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-03_1339_0803_weekly_kgf.wav": {
+      "rec_id": "local-1785743664",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-03_1339_0803_weekly_kgf.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08032026_0803_weekly_kgf.md",
+      "status": "drafted",
+      "ts": "2026-08-03T14:54:37+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-03_1411_anto_kopi_senin.wav": {
+      "rec_id": "local-1785743929",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-03_1411_anto_kopi_senin.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08032026_anto_kopi_senin_weekly.md",
+      "status": "drafted",
+      "ts": "2026-08-03T14:58:57+07:00"
+    },
+    "/mnt/c/Users/rifra/Downloads/Voice 260804_163036.m4a": {
+      "rec_id": "local-1785899713",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/Voice 260804_163036.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08042026_Voice_260804_163036_cocoa_agroforestry.md",
+      "status": "drafted",
+      "ts": "2026-08-05T10:17:23+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-05_1203_yuyun_pbph.wav": {
+      "rec_id": "local-1785909297",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-05_1203_yuyun_pbph.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08052026_yuyun_pbph_pbph_strategy.md",
+      "status": "drafted",
+      "ts": "2026-08-05T12:57:10+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-05_1308_budget_kgf.wav": {
+      "rec_id": "local-1785918624",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-05_1308_budget_kgf.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08052026_budget_kgf.md",
+      "status": "drafted",
+      "ts": "2026-08-05T15:52:51+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-06_0626_faizal_arif.wav": {
+      "rec_id": "local-1786085521",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-06_0626_faizal_arif.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08062026_faizal_arif_business_strategy.md",
+      "status": "drafted",
+      "ts": "2026-08-07T13:55:09+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-05_1601_bioekonomi_bappenas.wav": {
+      "rec_id": "local-1786093929",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-05_1601_bioekonomi_bappenas.md",
+      "mom": null,
+      "status": "needs /mom manual (agy-bridge fallback_to_claude)",
+      "ts": "2026-08-07T16:14:19+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-07_1400_elea_KGF.wav": {
+      "rec_id": "local-1786175021",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-07_1400_elea_KGF.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08072026_elea_KGF_pitching.md",
+      "status": "drafted",
+      "ts": "2026-08-08T14:46:20+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-08_1327_Meeting.wav": {
+      "rec_id": "local-1787029179",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-08_1327_Meeting.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08082026_Meeting_ai_tools.md",
+      "status": "drafted",
+      "ts": "2026-08-18T12:02:22+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-17_1946_kakao_DB.wav": {
+      "rec_id": "local-1787015057",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-17_1946_kakao_DB.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08172026_kakao_DB_cocoa_industrialization.md",
+      "status": "drafted",
+      "ts": "2026-08-18T08:04:43+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-12_0917_MUK_Kadin.wav": {
+      "rec_id": "local-1787029595",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-12_0917_MUK_Kadin.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08122026_MUK_Kadin.md",
+      "status": "drafted",
+      "ts": "2026-08-18T12:09:04+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-12_1030_MUK_Kadin.wav": {
+      "rec_id": "local-1787043705",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-12_1030_MUK_Kadin.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08122026_MUK_Kadin_business_planning.md",
+      "status": "drafted",
+      "ts": "2026-08-18T16:08:43+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-18_0835_kick_off_DSA_Export_Champion.wav": {
+      "rec_id": "local-1787016908",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-18_0835_kick_off_DSA_Export_Champion.md",
+      "status": "drafted",
+      "ts": "2026-08-19T19:15:53+07:00",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_DSA_Export_Champion_KickOff_20260818.md"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-18_1603_angin_dampak_x_kgf.wav": {
+      "rec_id": "local-1787043780",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-18_1603_angin_dampak_x_kgf.md",
+      "status": "transcribed (no MOM)",
+      "ts": "2026-08-19T19:15:53+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-19_1612_monthly_meet_aGROWforests.wav": {
+      "rec_id": "local-1787143260",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-19_1612_monthly_meet_aGROWforests.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08192026_monthly_meet_aGROWforests_strategy.md",
+      "status": "drafted",
+      "ts": "2026-08-19T19:41:14+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-21_0904_procurement_evaluation.wav": {
+      "rec_id": "local-1787368494",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-21_0904_procurement_evaluation.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08212026_procurement_evaluation.md",
+      "status": "drafted (manual: transcribe.py + MOM by hand, outside watcher)",
+      "ts": "2026-08-21T14:30:00+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-22_1650_Weekly_MNA.wav": {
+      "rec_id": "local-1787392237",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-22_1650_Weekly_MNA.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08222026_weekly_MNA.md",
+      "status": "drafted (manual: transcribe.py + MOM by hand, outside watcher)",
+      "ts": "2026-08-22T20:11:23+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-18_1435_biweekly_aGROWforests.wav": {
+      "rec_id": "local-1787038535",
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-18_1435_biweekly_aGROWforests.md",
+      "mom": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/MOM_08182026_biweekly_aGROWforests.md",
+      "status": "drafted (manual: extracted from Meet screen recording, transcribe.py + MOM by hand)",
+      "ts": "2026-08-22T21:13:30+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-28_0832_faizal_call.wav": {
+      "rec_id": "local-1787886171",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-28_0832_faizal_call.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08282026_faizal_call_pesawaran_chocolate.md",
+      "status": "drafted",
+      "ts": "2026-08-28T10:03:12+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-28_0902_procurement_progress_report.wav": {
+      "rec_id": "local-1787886337",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-28_0902_procurement_progress_report.md",
+      "mom": null,
+      "status": "transcribed (duplicate of local-1787886171, MOM draft skipped)",
+      "ts": "2026-08-28T10:05:39+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-29_1028_adm_call_meet.wav": {
+      "rec_id": "local-1787975613",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-29_1028_adm_call_meet.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08292026_adm_call_meet_partnership_call.md",
+      "status": "drafted",
+      "ts": "2026-08-29T10:53:58+07:00"
+    },
+    "/mnt/c/Users/rifra/MeetingRecordings/2026-08-30_1000_claude_pitching_mastery.wav": {
+      "rec_id": null,
+      "transcript": "/mnt/c/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/meetings/transcripts/2026-08-30_1038_claude_pitching_mastery.md",
+      "mom": null,
+      "status": "transcript only by request; sys track (31 min) transcribed, mic track (5h42m) discarded as silent",
+      "ts": "2026-08-30T19:43:05+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-29_1234_weekly_MNA_Mutiara_Nusa_Antara.wav": {
+      "status": "drafted (manual: watcher melewatkan file; mix+transcribe+MOM dikerjakan tangan 2026-09-03)"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-31_2002_weekly_coklat_lampung.wav": {
+      "status": "transcribed (manual 2026-09-03); MOM DITUNDA - sys track putus di menit 36 dari 75, separuh akhir rapat tidak terekam"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-21_1614_tes_rec_kelas_bimtek.wav": {
+      "rec_id": "local-1788588104",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-21_1614_tes_rec_kelas_bimtek.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07212026_tes_rec_kelas_bimtek_bimtek_kemenperin.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:02:09+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-21_1630_pasar_rusia.wav": {
+      "rec_id": "local-1788588143",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-21_1630_pasar_rusia.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07212026_pasar_rusia.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:02:44+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-22_0946_hari_kedua_standar_mutu_keamanan_pangan.wav": {
+      "rec_id": "local-1788588179",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-22_0946_hari_kedua_standar_mutu_keamanan_pangan.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07222026_hari_kedua_standar_mutu_keamanan_pangan_bimtek_kemenperin.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:03:20+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-22_1111_sesi_2_hari_dua.wav": {
+      "rec_id": "local-1788588210",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-22_1111_sesi_2_hari_dua.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07222026_sesi_2_hari_dua_bimtek.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:03:48+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-22_1327_Meeting.wav": {
+      "rec_id": "local-1788588238",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-22_1327_Meeting.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07222026_Meeting_weekly.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:04:12+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-22_1356_sesi_3_hari_dua.wav": {
+      "rec_id": "local-1788588263",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-22_1356_sesi_3_hari_dua.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07222026_sesi_3_hari_dua_bimtek_kemenperin.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:04:46+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-23_0924_day_3.wav": {
+      "rec_id": "local-1788588301",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-23_0924_day_3.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07232026_day_3_bimtek_kemenperin.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:05:24+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-23_1319_pitching_Atdag_Cairo_with_AME_and_BI.wav": {
+      "rec_id": "local-1788588336",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-23_1319_pitching_Atdag_Cairo_with_AME_and_BI.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07232026_pitching_Atdag_Cairo_with_AME_and_BI.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:05:55+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-23_1437_day_3_sesi_2.wav": {
+      "rec_id": "local-1788588365",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-23_1437_day_3_sesi_2.md",
+      "mom": null,
+      "status": "needs /mom manual (agy-bridge fallback_to_claude)",
+      "ts": "2026-09-05T13:06:15+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-25_1430_meet_acces_pertama.wav": {
+      "rec_id": "local-1788588385",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-25_1430_meet_acces_pertama.md",
+      "mom": null,
+      "status": "needs /mom manual (agy-bridge fallback_to_claude)",
+      "ts": "2026-09-05T13:06:37+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-26_1358_Mutiara.wav": {
+      "rec_id": "local-1788588405",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-26_1358_Mutiara.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07262026_Mutiara_strategy_alignment.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:07:02+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-27_1100_Europe_DFI_Intro.wav": {
+      "rec_id": "local-1788588427",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-27_1100_Europe_DFI_Intro.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07272026_Europe_DFI_Intro_pitching.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:07:23+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-27_1401_Pasar_Rusia_AME.wav": {
+      "rec_id": "local-1788588452",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-27_1401_Pasar_Rusia_AME.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07272026_Pasar_Rusia_AME.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:07:46+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-27_1518_Tes_Notifikasi.wav": {
+      "rec_id": "local-1788588472",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-27_1518_Tes_Notifikasi.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07272026_Tes_Notifikasi_test_notifikasi.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:08:01+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-27_1520_Tes_Notifikasi.wav": {
+      "rec_id": "local-1788588490",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-27_1520_Tes_Notifikasi.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07272026_Tes_Notifikasi.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:08:22+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-30_2119_audit_verstegen.wav": {
+      "rec_id": "local-1788588511",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-30_2119_audit_verstegen.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07302026_audit_verstegen.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:08:47+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-07-31_0826_kopi_anto.wav": {
+      "rec_id": "local-1788588537",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-07-31_0826_kopi_anto.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_07312026_kopi_anto_weekly.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:09:13+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-01_2004_kopi_anto1.wav": {
+      "rec_id": "local-1788588562",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-01_2004_kopi_anto1.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08012026_kopi_anto1_partnership.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:09:30+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-01_2009_anto.wav": {
+      "rec_id": "local-1788588579",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-01_2009_anto.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08012026_anto_finance_trading.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:09:49+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-02_0648_faizal.wav": {
+      "rec_id": "local-1788588597",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-02_0648_faizal.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08022026_faizal_tomoro_coffee.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:10:06+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-03_1339_0803_weekly_kgf.wav": {
+      "rec_id": "local-1788588615",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-03_1339_0803_weekly_kgf.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08032026_0803_weekly_kgf.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:10:27+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-03_1411_anto_kopi_senin.wav": {
+      "rec_id": "local-1788588634",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-03_1411_anto_kopi_senin.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08032026_anto_kopi_senin_weekly.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:10:44+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-05_1203_yuyun_pbph.wav": {
+      "rec_id": "local-1788588651",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-05_1203_yuyun_pbph.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08052026_yuyun_pbph.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:11:02+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-05_1308_budget_kgf.wav": {
+      "rec_id": "local-1788588669",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-05_1308_budget_kgf.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08052026_budget_kgf.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:11:22+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-05_1601_bioekonomi_bappenas.wav": {
+      "rec_id": "local-1788588686",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-05_1601_bioekonomi_bappenas.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08052026_bioekonomi_bappenas_bioeconomy_strategy.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:11:41+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-06_0626_faizal_arif.wav": {
+      "rec_id": "local-1788588705",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-06_0626_faizal_arif.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08062026_faizal_arif_strategy.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:11:56+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-07_1400_elea_KGF.wav": {
+      "rec_id": "local-1788588720",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-07_1400_elea_KGF.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08072026_elea_KGF_pitching.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:12:13+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-08_1327_Meeting.wav": {
+      "rec_id": "local-1788588735",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-08_1327_Meeting.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08082026_Meeting_ai_tools_mastery.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:12:30+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-12_0917_MUK_Kadin.wav": {
+      "rec_id": "local-1788588757",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-12_0917_MUK_Kadin.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08122026_MUK_Kadin_forestry_initiative.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:12:47+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-12_1030_MUK_Kadin.wav": {
+      "rec_id": "local-1788588773",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-12_1030_MUK_Kadin.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08122026_MUK_Kadin_muk_workshop.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:13:05+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-17_1946_kakao_DB.wav": {
+      "rec_id": "local-1788588794",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-17_1946_kakao_DB.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08172026_kakao_DB_project_restructuring.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:13:27+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-18_0835_kick_off_DSA_Export_Champion.wav": {
+      "rec_id": "local-1788588813",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-18_0835_kick_off_DSA_Export_Champion.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08182026_kick_off_DSA_Export_Champion_bimtek.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:13:51+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-18_1435_biweekly_aGROWforests.wav": {
+      "rec_id": "local-1788588841",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-18_1435_biweekly_aGROWforests.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08222026_2026_08_18_1435_biweekly_aGROWforests.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:14:18+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-18_1603_angin_dampak_x_kgf.wav": {
+      "rec_id": "local-1788588868",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-18_1603_angin_dampak_x_kgf.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08182026_2026_08_18_1603_angin_dampak_x_kgf_partnership.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:14:42+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-19_1612_monthly_meet_aGROWforests.wav": {
+      "rec_id": "local-1788588892",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-19_1612_monthly_meet_aGROWforests.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08192026_monthly_meet_aGROWforests.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:15:03+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-21_0904_procurement_evaluation.wav": {
+      "rec_id": "local-1788588911",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-21_0904_procurement_evaluation.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08212026_procurement_evaluation.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:15:33+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-21_1907_Meeting.wav": {
+      "rec_id": "local-1788589618",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-21_1907_Meeting.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08212026_Meeting_export_financing.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:28:09+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-22_1650_Weekly_MNA.wav": {
+      "rec_id": "local-1788589714",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-22_1650_Weekly_MNA.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08222026_Weekly_MNA.md",
+      "status": "drafted",
+      "ts": "2026-09-05T13:29:37+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-24_1336_weekly_kgf.wav": {
+      "rec_id": "local-1788607742",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-24_1336_weekly_kgf.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08242026_weekly_kgf.md",
+      "status": "drafted",
+      "ts": "2026-09-05T18:29:22+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-24_2009_weekly_kakao_db.wav": {
+      "rec_id": "local-1788607772",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-24_2009_weekly_kakao_db.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08242026_weekly_kakao_db.md",
+      "status": "drafted",
+      "ts": "2026-09-05T18:29:46+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-08-28_1608_faizal_call_cocoa.wav": {
+      "rec_id": "local-1788607816",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-08-28_1608_faizal_call_cocoa.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_08282026_faizal_call_cocoa_cocoa_purchasing.md",
+      "status": "drafted",
+      "ts": "2026-09-05T18:30:29+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-09-02_1604_biweekly_aGROWforests.wav": {
+      "rec_id": "local-1788607918",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-09-02_1604_biweekly_aGROWforests.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_09022026_biweekly_aGROWforests.md",
+      "status": "drafted",
+      "ts": "2026-09-05T18:32:15+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-09-04_0901_Progress_Update_KGF_VSA.wav": {
+      "rec_id": "local-1788608001",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-09-04_0901_Progress_Update_KGF_VSA.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_09042026_Progress_Update_KGF_VSA_weekly.md",
+      "status": "drafted",
+      "ts": "2026-09-05T18:33:36+07:00"
+    },
+    "C:\\Users\\rifra\\MeetingRecordings\\2026-09-05_1316_MNA_Weekly.wav": {
+      "rec_id": "local-1788614082",
+      "transcript": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\transcripts\\2026-09-05_1316_MNA_Weekly.md",
+      "mom": "C:\\Users\\rifra\\.gemini\\antigravity-ide\\scratch\\ai-second-brain\\Clients\\Work\\meetings\\MOM_09052026_MNA_Weekly.md",
+      "status": "drafted",
+      "ts": "2026-09-05T20:14:54+07:00"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+ "generated_from": "journal/state/tickets.json",
+ "source_updated_wib": "2026-07-29T08:45:00",
+ "note": "Lean index. Full body (note/comments/links) lives in tickets.json; look up by id.",
+ "count": 4,
+ "tickets": [
+  {
+   "id": "KGF-001",
+   "title": "Ajukan pembaruan KBLI NIB KGF di portal OSS RBA",
+   "status": "in_progress",
+   "priority": "P0",
+   "owner": "Arif Rachman",
+   "project": "Pemberdayaan IKM Hijau",
+   "due": "2026-08-10",
+   "initiative_id": "ikm_hijau_2026"
+  },
+  {
+   "id": "KGF-002",
+   "title": "Sosialisasi SOP K3 dan limbah di Gudang Natar",
+   "status": "todo",
+   "priority": "P1",
+   "owner": "Arif Rachman",
+   "project": "Pemberdayaan IKM Hijau",
+   "due": "2026-08-15",
+   "initiative_id": "ikm_hijau_2026"
+  },
+  {
+   "id": "KGF-003",
+   "title": "Penyelesaian draf proposal modal kerja Dompet Dhuafa",
+   "status": "in_progress",
+   "priority": "P0",
+   "owner": "Arif / Hendra",
+   "project": "Kerja Sama Dompet Dhuafa",
+   "due": "2026-08-08",
+   "initiative_id": "dompet_dhuafa"
+  },
+  {
+   "id": "KGF-004",
+   "title": "Persiapan dokumen administrasi & sampel untuk Trade Expo Indonesia 2026",
+   "status": "todo",
+   "priority": "P1",
+   "owner": "Arif Rachman",
+   "project": "Trade Expo Indonesia 2026",
+   "due": "2026-09-15",
+   "initiative_id": "tei_2026"
+  }
+ ]
+}

@@ -1,0 +1,72 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AI Second Brain//DSA Export Champion 2026//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Jakarta
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0700
+TZOFFSETTO:+0700
+TZNAME:WIB
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:dsa-export-champion-matrikulasi-2-20260820@klumbayanfarm.com
+DTSTAMP:20260818T180000Z
+DTSTART;TZID=Asia/Jakarta:20260820T140000
+DTEND;TZID=Asia/Jakarta:20260820T160000
+SUMMARY:Kelas Matrikulasi ke-2 (Siap Ekspor) - DSA Export Champion 2026
+LOCATION:Online via Zoom Meeting
+URL:https://zoom.us/j/93965481029?pwd=F9PhsNEw5wsTLm2AjmHvyu8bPAKuuk.1
+DESCRIPTION:Kelas Matrikulasi ke-2 - Siap Ekspor\nTopik: Regulasi Ekspor\
+ , Standar\, Sertifikasi dan Persyaratan Negara Tujuan\nPembicara: Fernan
+ da Reza Muhammad (Founder Akademi Mudah Ekspor)\n\nWaktu: Kamis\, 20 Agu
+ stus 2026\, 14.00-16.00 WIB\nLokasi: Online via Zoom Meeting\n\nZoom: ht
+ tps://zoom.us/j/93965481029?pwd=F9PhsNEw5wsTLm2AjmHvyu8bPAKuuk.1\nID Rap
+ at: 93965481029\nKode Sandi: 123123\n\nPenyelenggara: Desa Sejahtera Ast
+ ra Export Champion 2026 (Yayasan Astra / Akademi Mudah Ekspor)\nKontak: 
+ 0811 3518 002 (Admin AME 1)\, 0851 1137 7750 (Admin AME 2)\n\nCatatan: k
+ elas dimulai tepat waktu.
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT4H
+DESCRIPTION:Kelas Matrikulasi ke-2 (Siap Ekspor) mulai 14.00 WIB
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT20M
+DESCRIPTION:Kelas mulai 20 menit lagi (14.00 WIB)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:dsa-export-champion-matrikulasi-3-20260821@klumbayanfarm.com
+DTSTAMP:20260818T180000Z
+DTSTART;TZID=Asia/Jakarta:20260821T140000
+DTEND;TZID=Asia/Jakarta:20260821T160000
+SUMMARY:Kelas Matrikulasi ke-3 (Siap Ekspor) - DSA Export Champion 2026
+LOCATION:Online via Zoom Meeting
+URL:https://zoom.us/j/96230569564?pwd=OuVk8srl8mTM8Qdhz6DjVSaTrUBbqX.1
+DESCRIPTION:Kelas Matrikulasi ke-3 - Siap Ekspor\nTopik: to be updated (a
+ kan segera diperbarui)\nPembicara: Fernanda Reza Muhammad (Founder Akade
+ mi Mudah Ekspor)\n\nWaktu: Jumat\, 21 Agustus 2026\, 14.00-16.00 WIB\nLo
+ kasi: Online via Zoom Meeting\n\nZoom: https://zoom.us/j/96230569564?pwd
+ =OuVk8srl8mTM8Qdhz6DjVSaTrUBbqX.1\nID Rapat: 96230569564\nKode Sandi: 12
+ 3123\n\nCatatan: kelas Potensial Ekspor di slot yang sama membahas "Cara
+  Buyer Global Memilih Supplier" (Fernanda Reza Muhammad).\n\nPenyelengga
+ ra: Desa Sejahtera Astra Export Champion 2026 (Yayasan Astra / Akademi M
+ udah Ekspor)\nKontak: 0811 3518 002 (Admin AME 1)\, 0851 1137 7750 (Admi
+ n AME 2)\n\nKelas dimulai tepat waktu.
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT4H
+DESCRIPTION:Kelas Matrikulasi ke-3 (Siap Ekspor) mulai 14.00 WIB
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT20M
+DESCRIPTION:Kelas mulai 20 menit lagi (14.00 WIB)
+END:VALARM
+END:VEVENT
+END:VCALENDAR

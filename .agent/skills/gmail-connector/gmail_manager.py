@@ -14,6 +14,13 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
+# Mail bodies routinely carry characters cp1252 cannot encode (narrow no-break
+# space, smart quotes, emoji). On Windows that kills the print, not just the
+# glyph, so force UTF-8 on the console streams.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
 # Global timeout: 180 seconds
 def timeout_handler(signum, frame):
     print("[ERROR] Gmail Manager timed out after 180 seconds", file=sys.stderr)
@@ -28,7 +35,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 # credentials.json is usually in the project root
 BASE_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..', '..'))
 CREDENTIALS_FILE = os.path.join(BASE_DIR, '.agent', 'skills', 'work-drive-connector', 'credentials.json')
-TOKEN_FILE = os.path.join(SCRIPT_DIR, 'token_gmail_work.json')
+TOKEN_FILE = os.environ.get("GMAIL_TOKEN_FILE", os.path.join(SCRIPT_DIR, 'token_gmail_work.json'))
 
 # Scopes - gmail.modify allows reading and managing messages (labels/archive)
 SCOPES = ['https://www.googleapis.com/auth/gmail.modify']

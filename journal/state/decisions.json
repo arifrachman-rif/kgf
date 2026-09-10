@@ -1,0 +1,26 @@
+{
+  "next_seq": 2,
+  "last_sweep": 1785244800,
+  "items": {
+    "DEC-0001": {
+      "id": "DEC-0001",
+      "title": "Penyelarasan Legalitas KBLI Usaha KGF",
+      "status": "open",
+      "decider": "Arif Rachman",
+      "deadline": "2026-08-10",
+      "project": "Pemberdayaan IKM Hijau",
+      "notes": "Memutuskan untuk mengajukan KBLI 10761, 10772, dan 10732 sekaligus agar mencakup kopi, lada, dan rencana cokelat.",
+      "sources": [
+        {
+          "type": "file",
+          "label": "Analisis KBLI",
+          "url": "file:///c:/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/IKM_Hijau_2026/analisis_kesesuaian_ikm_hijau.md"
+        }
+      ]
+    }
+  },
+  "counts": {
+    "open": 1,
+    "total": 1
+  }
+}

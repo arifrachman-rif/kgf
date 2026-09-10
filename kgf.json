@@ -1,0 +1,117 @@
+{
+  "perusahaan": {
+    "nama_legal": "PT Klumbayan Gold Farm (KGF)[cite: 1, 7]",
+    "tahun_berdiri": "2022[cite: 1, 7]",
+    "lokasi": "Bandar Lampung, Lampung, Indonesia[cite: 2, 5]",
+    "misi": "Membangun ekosistem agribisnis regeneratif yang profesional, transparan, dan berkelanjutan dari hulu hingga ke pasar global.[cite: 1]",
+    "fokus_bisnis": "Tech-Enabled Trading & Regenerative Agribusiness[cite: 5, 7]",
+    "komoditas_utama": [
+      "Lada Hitam (Black Pepper - ASTA Grade 550)[cite: 1]",
+      "Kopi Robusta (Sorted Grade 1 Green Beans)[cite: 1, 7]",
+      "Kakao (Downstream processing)[cite: 1, 7]"
+    ],
+    "infrastruktur_fisik": {
+      "jumlah_petani": "1250[cite: 5]",
+      "fasilitas": [
+        "1 Kebun Induk[cite: 5]",
+        "1 Demoplot[cite: 5]",
+        "7 Nursery Komunitas[cite: 5]",
+        "Pengolahan Kompos[cite: 5]",
+        "Gudang Penyimpanan[cite: 5]",
+        "Pabrik Pengolahan Kecil Kakao[cite: 5]",
+        "Mesin Sortir[cite: 5]",
+        "Fasilitas Produksi Rempah[cite: 5]"
+      ]
+    },
+    "personil_internal": [
+      {
+        "nama": "Arif Rachman",
+        "jabatan": "Project Manager[cite: 3]"
+      },
+      {
+        "nama": "Hendra",
+        "jabatan": "Finance Consultant[cite: 3]"
+      },
+      {
+        "nama": "Heri",
+        "jabatan": "Operations Manager[cite: 3]"
+      }
+    ]
+  },
+  "project_dan_konsorsium": {
+    "aGROWforests": {
+      "deskripsi": "Konsorsium yang fokus pada restorasi lahan, pencegahan deforestasi, dan peningkatan etika pengadaan bahan baku.[cite: 7]",
+      "tahun_bergabung": "2024[cite: 1]",
+      "pendana": "GIZ[cite: 1]",
+      "partners": [
+        {
+          "nama": "Verstegen Spices and Sauces (VSS)",
+          "peran": "International Buyer[cite: 7]",
+          "personil": [
+            "Evert Jan (Director in Verstegen Asia)[cite: 7]",
+            "Yayang (Verstegen Asia Officer)[cite: 7]",
+            "Indira (Verstegen Asia Officer)[cite: 7]"
+          ]
+        },
+        {
+          "nama": "Fairfood",
+          "peran": "Dutch NGO / Technology Partner (Traceapp)[cite: 7]",
+          "personil": [
+            "Yuyun Kurniawan (Country Manager, Indonesia)[cite: 7]",
+            "Josje (Program Manager, Netherlands)[cite: 7]",
+            "Sander de Jong (Managing Director, Netherlands)[cite: 7]"
+          ]
+        },
+        {
+          "nama": "PT Cinquer Agro Nusantara (PT CAN)",
+          "peran": "National Partner / Indonesian B2B Supplier (Bangka Belitung partner)[cite: 1, 7]",
+          "personil": [
+            "Hatami (Director)[cite: 7]"
+          ]
+        }
+      ]
+    },
+    "eu_switch": {
+      "status": "Dalam persiapan proposal dan perbaikan standar administrasi.[cite: 3]"
+    }
+  },
+  "sistem_digital_dan_teknologi": {
+    "tapak": {
+      "nama_sistem": "TAPAK (Traceability Application KGF)[cite: 2, 7]",
+      "tipe": "ERP / Traceability System[cite: 7]",
+      "arsitektur": "Event-Sourcing (Lot & Log) Graph Model[cite: 2]",
+      "fitur_utama": [
+        "End-to-end traceability to farmers[cite: 1]",
+        "Spatial Intelligence & Validasi EUDR[cite: 5]",
+        "AI Climate Intelligence (AI-CCDSS)[cite: 5]"
+      ],
+      "modul_tambahan": "AgriMEL (Farmer Data Collection & Incentive Reporting App)[cite: 2]"
+    }
+  },
+  "perhitungan_keuangan_dan_transaksi": {
+    "transaksi_verstegen_lada_hitam_2026": {
+      "total_kontainer": 6,
+      "berat_per_kontainer_kg": 16000,
+      "harga_satuan_usd_per_kg": 7.56,
+      "total_nilai_per_kontainer_usd": 120960.00,
+      "skema_pembayaran": "Uang muka 80%, pelunasan 20%[cite: 4]",
+      "kredit_penyesuaian_usd": 41250.00,
+      "total_transfer_tunai_net_usd": 684510.00
+    },
+    "audit_keuangan_staff_2025": {
+      "total_gaji_eur": 59205,
+      "pajak_penghasilan_eur": 1300,
+      "asuransi_sosial_bpjs_eur": 8300,
+      "catatan_perbaikan": "Seluruh transaksi diubah menjadi transfer bank per Maret 2026 dan KGF mengambil alih tanggung jawab pajak serta pendaftaran asuransi (BPJS).[cite: 3]"
+    },
+    "asumsi_harga_bahan_baku_mentah": {
+      "lada_hitam_idr": "98.000 - 102.000 rupiah[cite: 2]",
+      "kopi_idr": "57.000 - 63.000 rupiah[cite: 2]"
+    }
+  },
+  "dokumen_referensi": [
+    "Daftar Petani Agroforestry 2026.xlsx[cite: 2]",
+    "TAPAK_V1_PRD.md[cite: 2]",
+    "AgriMEL_TAPAK_Merge.md[cite: 2]"
+  ]
+}

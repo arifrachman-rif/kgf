@@ -1,0 +1,51 @@
+{
+  "next_seq": 5,
+  "last_sweep": 1785244800,
+  "items": {
+    "WAIT-0001": {
+      "id": "WAIT-0001",
+      "initiative_id": "ikm_hijau_2026",
+      "what": "Pembaruan KBLI NIB melalui portal OSS BKPM",
+      "owner": "Arif Rachman",
+      "since": 1785244800,
+      "status": "open",
+      "sla_hours": 168,
+      "remaining_hours": 120
+    },
+    "WAIT-0002": {
+      "id": "WAIT-0002",
+      "initiative_id": "dompet_dhuafa",
+      "what": "Penyelarasan draf proposal final mudharabah/musyarakah",
+      "owner": "Hendra",
+      "since": 1785244800,
+      "status": "open",
+      "sla_hours": 72,
+      "remaining_hours": 48
+    },
+    "WAIT-0003": {
+      "id": "WAIT-0003",
+      "initiative_id": "second_brain_integration",
+      "what": "Setup credentials.json dan jalankan otentikasi Google Drive di WSL",
+      "owner": "Arif Rachman",
+      "since": 1785331200,
+      "status": "open",
+      "sla_hours": 168,
+      "remaining_hours": 168
+    },
+    "WAIT-0004": {
+      "id": "WAIT-0004",
+      "initiative_id": "second_brain_integration",
+      "what": "Setup Client ID dan jalankan otentikasi Microsoft OneNote di WSL",
+      "owner": "Arif Rachman",
+      "since": 1785331200,
+      "status": "open",
+      "sla_hours": 168,
+      "remaining_hours": 168
+    }
+  },
+  "counts": {
+    "open": 4,
+    "breached": 0,
+    "total": 4
+  }
+}

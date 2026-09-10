@@ -1,0 +1,92 @@
+{
+ "generated_from": "journal/state/portfolio.json",
+ "source_updated_wib": "2026-07-29T08:53:00",
+ "note": "Lean index. Full body (now/blockers/links/workstreams) lives in portfolio.json; look up by id.",
+ "count": 7,
+ "initiatives": [
+  {
+   "id": "ikm_hijau_2026",
+   "title": "Pemberdayaan IKM Hijau",
+   "status": "in_progress",
+   "health": "on_track",
+   "owner": "Arif Rachman",
+   "project": "KGF Core Team",
+   "due": "2026-08-20",
+   "blocker_count": 0,
+   "workstream_count": 0,
+   "workstreams_open": 0
+  },
+  {
+   "id": "dompet_dhuafa",
+   "title": "Kerja Sama Dompet Dhuafa",
+   "status": "in_progress",
+   "health": "on_track",
+   "owner": "Arif / Hendra",
+   "project": "KGF Core Team",
+   "due": "2026-08-11",
+   "blocker_count": 0,
+   "workstream_count": 0,
+   "workstreams_open": 0
+  },
+  {
+   "id": "tei_2026",
+   "title": "Trade Expo Indonesia 2026",
+   "status": "in_progress",
+   "health": "on_track",
+   "owner": "Arif Rachman",
+   "project": "KGF Core Team",
+   "due": "2026-10-15",
+   "blocker_count": 0,
+   "workstream_count": 0,
+   "workstreams_open": 0
+  },
+  {
+   "id": "agroforestry_academy",
+   "title": "Agroforestry Academy with Pak Joko",
+   "status": "in_progress",
+   "health": "on_track",
+   "owner": "Arif Rachman",
+   "project": "KGF Core Team",
+   "due": "2026-09-30",
+   "blocker_count": 0,
+   "workstream_count": 0,
+   "workstreams_open": 0
+  },
+  {
+   "id": "project_verification",
+   "title": "Project Verification by Verstegen",
+   "status": "in_progress",
+   "health": "on_track",
+   "owner": "Arif / Yuyun",
+   "project": "KGF Core Team",
+   "due": "2026-08-31",
+   "blocker_count": 0,
+   "workstream_count": 0,
+   "workstreams_open": 0
+  },
+  {
+   "id": "supply_chain_audit",
+   "title": "Supply Chain Audit by Verstegen",
+   "status": "in_progress",
+   "health": "on_track",
+   "owner": "Arif / Heri",
+   "project": "KGF Core Team",
+   "due": "2026-08-31",
+   "blocker_count": 0,
+   "workstream_count": 0,
+   "workstreams_open": 0
+  },
+  {
+   "id": "po_100ton",
+   "title": "PO 100ton Verstegen",
+   "status": "in_progress",
+   "health": "on_track",
+   "owner": "Arif / Hendra",
+   "project": "KGF Core Team",
+   "due": "2026-12-31",
+   "blocker_count": 0,
+   "workstream_count": 0,
+   "workstreams_open": 0
+  }
+ ]
+}

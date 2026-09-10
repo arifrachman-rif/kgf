@@ -1,0 +1,32 @@
+{
+  "_comment": "Local meeting note-taker config.",
+  "engine": "auto",
+  "language": "auto",
+  "gemini_model": "gemini-flash-lite-latest",
+  "chunk_sec": 600,
+  "auto_draft": true,
+  "draft_model": "",
+  "draft_backend": "agy",
+  "calendar_match": true,
+  "require_gpu": true,
+  "machines": {
+    "wsl": {
+      "recordings_dir": "/mnt/c/Users/rifra/MeetingRecordings",
+      "ffmpeg": "ffmpeg",
+      "whispercpp_bin": "",
+      "whispercpp_model": "",
+      "_note": "No local whisper GPU build found. Leaving empty to fallback automatically to Gemini API."
+    },
+    "macos": {
+      "recordings_dir": "~/MeetingRecordings",
+      "ffmpeg": "ffmpeg",
+      "whispercpp_bin": "whisper-cli",
+      "whispercpp_model": "~/.cache/whisper-cpp/ggml-large-v3-turbo.bin",
+      "avfoundation_audio_device": ":0"
+    },
+    "windows": {
+      "recordings_dir": "C:\\Users\\rifra\\MeetingRecordings",
+      "ffmpeg": "meeting-recorder\\\\ffmpeg.exe"
+    }
+  }
+}

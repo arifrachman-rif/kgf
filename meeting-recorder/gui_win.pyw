@@ -102,11 +102,18 @@ class App:
         self.refresh_btn.pack(side="left", padx=(6, 0))
         self.entry.focus()
 
-        self.button = tk.Button(root, text="●  Start Recording",
+        self.btn_frame = tk.Frame(root)
+        self.btn_frame.pack(fill="x", padx=12, pady=10)
+        self.button = tk.Button(self.btn_frame, text="●  Start Recording",
                                 font=("Segoe UI", 13, "bold"),
                                 bg="#1a7f37", fg="white", height=2,
                                 command=self.toggle)
-        self.button.pack(fill="x", padx=12, pady=10)
+        self.button.pack(fill="x", expand=True)
+        self.pause_button = tk.Button(self.btn_frame, text="⏸  Pause",
+                                      font=("Segoe UI", 13, "bold"),
+                                      bg="#f57c00", fg="white", height=2,
+                                      command=self.toggle_pause)
+        self.is_paused = False
 
         self.status = tk.Label(root, text="Ready", fg="#555", justify="left")
         self.status.pack(anchor="w", padx=12)
@@ -181,7 +188,15 @@ class App:
                                        "ffmpeg not found; recording audio only.")
         open(self.base + ".recording", "w").close()
         self.start_time = datetime.datetime.now(datetime.timezone.utc)
-        self.button.config(text="■  Stop Recording", bg="#c62828")
+        
+        # side-by-side button layout
+        self.button.pack_forget()
+        self.button.config(text="■  Stop", bg="#c62828")
+        self.button.pack(side="left", fill="x", expand=True)
+        self.pause_button.config(text="⏸  Pause", bg="#f57c00", fg="white")
+        self.pause_button.pack(side="right", fill="x", expand=True, padx=(8, 0))
+        self.is_paused = False
+
         self.status.config(text="\n".join(devices), fg="#1a7f37")
         self.entry.config(state="disabled")
 
@@ -198,7 +213,14 @@ class App:
         marker = self.base + ".recording"
         if os.path.exists(marker):
             os.remove(marker)
+        
+        # restore single button layout
+        self.pause_button.pack_forget()
+        self.button.pack_forget()
         self.button.config(text="●  Start Recording", bg="#1a7f37")
+        self.button.pack(fill="x", expand=True)
+        self.is_paused = False
+
         self.entry.config(state="normal")
         msg = f"Saved: {os.path.basename(self.base)}"
         if self.auto_var.get():
@@ -212,6 +234,24 @@ class App:
             except Exception as e:
                 msg += f"\nWSL processing failed to launch: {e}"
         self.status.config(text=msg, fg="#555")
+
+    def toggle_pause(self):
+        if self.cap is None:
+            return
+        if not self.is_paused:
+            self.cap.pause()
+            self.is_paused = True
+            self.pause_time = datetime.datetime.now(datetime.timezone.utc)
+            self.pause_button.config(text="▶  Resume", bg="#1a7f37")
+            self.status.config(text="Recording PAUSED", fg="#f57c00")
+        else:
+            self.cap.resume()
+            self.is_paused = False
+            if self.start_time and hasattr(self, "pause_time"):
+                paused_duration = datetime.datetime.now(datetime.timezone.utc) - self.pause_time
+                self.start_time += paused_duration
+            self.pause_button.config(text="⏸  Pause", bg="#f57c00")
+            self.status.config(text="Recording resumed...", fg="#1a7f37")
 
     def tick(self):
         if self.cap is not None and self.start_time:

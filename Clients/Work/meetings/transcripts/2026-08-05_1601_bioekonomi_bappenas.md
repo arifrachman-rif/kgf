@@ -1,0 +1,394 @@
+<!-- MOM_PREPENDED_START -->
+# Minutes of Meeting (MOM)
+
+> Status: DRAFT (local pipeline, belum direview)
+> Source: local recording `2026-08-05_1601_bioekonomi_bappenas.wav`, Gemini `gemini-flash-latest` (audio-in, speaker labels, ~$0.071) (cached)
+> Registry: local-1788588686 | Review via /mom before sharing
+
+# MOM: Bioekonomi Bappenas
+
+| Field | Value |
+|:---|:---|
+| Date | 2026-08-05 |
+| Time | 16:01 WIB / 11:01 AST |
+| Duration | 60 minutes |
+| Participants | Pak Yuyun (Lead), Pak Arif (Member), Mbak Atika (Member), Mbak Sofya (Member), Pak Hatami (Member), Bang Zul (Member), Mas Raihan (Member), Mas Faiz / Faisal (Member), Fitra / Mas Fitra (Member) |
+| Facilitator | Your Name |
+| Subject | Agroforestry Consortium Project Concept Note and Strategy Review |
+
+---
+
+## Executive Summary
+The meeting focused on reviewing and revising the concept note for the Agroforestry consortium project submitted to FOLU. Key decisions included adopting a dual preventive and curative approach for mining and agricultural areas in Bangka and Lampung, reframing the project focus toward ecosystem and community resilience, and integrating landscape modeling and carrying capacity analysis. Action items involve updating the concept note document and coordinating upcoming field visit schedules.
+
+---
+
+## Discussion
+
+### Proposal Review and Project Scope
+Discussion focused on revising the concept note for the Agroforestry consortium project submitted to FOLU, specifically covering locations, spatial mapping, and main objectives. The team addressed post-tin mining lands in Bangka and agricultural areas in Lampung. A major challenge identified is that miners may abandon restored areas and move to new mining sites, creating a cycle. The proposed solution is a dual preventive and curative approach to stop land expansion into mining while restoring existing degraded land and providing alternative livelihoods.
+
+### Bioeconomy and Value Addition
+Participants discussed emphasizing value addition through technology, such as extraction and refining from raw materials to high-end products like piperine or essential oil derivatives, rather than just selling raw materials. However, the team noted the need to balance this with realistic goals for a three-year project timeline, shifting the primary emphasis to ecosystem and community resilience.
+
+### Landscape Planning and Field Visits
+The team integrated landscape planning using Cellular Automata and System Dynamics modeling, incorporating Bappenas upcoming Carrying Capacity Analysis for Lampung and Bangka. Additionally, the participants discussed schedules for a joint field visit to Bangka or Lampung around mid-August or early September.
+
+---
+
+## Decisions Made
+
+| # | Decision | Rationale |
+|:---|:---|:---|
+| 1 | Adoption of Preventive and Curative Approach | Focusing solely on restoring already mined areas fails to address the root cause as long as miners keep migrating to new locations. |
+| 2 | Reframing the Project Focus | Strict adherence to high-level bioeconomy processing in three years is deemed too heavy and unrealistic for a concept note. |
+| 3 | Inclusion of Modeling and DDL as a New Component | To establish a solid baseline and project land-use impacts with and without interventions. |
+
+---
+
+## Action Items
+
+| # | Task | Owner | Deadline | Priority |
+|:---|:---|:---|:---|:---|
+| 1 | Create a simpler slide format for the concept note | Pak Hatami | 2026-08-12 | High |
+| 2 | Finalize field visit dates for Bangka or Lampung | Pak Yuyun, Pak Hatami, Bappenas team | 2026-08-12 | Medium |
+| 3 | Revise and update the concept note document | Pak Yuyun, Mbak Atika, Mas Fitra, and Team | 2026-08-26 | High |
+
+---
+
+## Next Meeting
+- **Date**: 2026-08-19
+- **Agenda**: Review of revised concept note draft and field visit logistics
+
+---
+
+## Revision History
+
+| Revision | Date | Summary |
+|:---|:---|:---|
+| v1.0 | 2026-08-05 | Initial MOM |
+
+---
+
+<!-- MOM_PREPENDED_END -->
+
+# Transcript: 2026-08-05_1601_bioekonomi_bappenas.wav
+
+- Engine: Gemini `gemini-flash-latest` (audio-in, speaker labels, ~$0.071)
+- Audio duration: 1:12:51
+- Generated: 2026-08-07 13:31
+
+---
+
+
+--- [PART 1 OF 11] ---
+
+**[00:00]** Pak Yuyun: Belum ada, Pak Arif.
+**[00:03]** Pak Arif: Baru mulai. Apa kabar, Pak?
+**[00:05]** Pak Yuyun: Alhamdulillah. Hatur nuhun.
+**[00:08]** Pak Yuyun: Saya coba colek Pak Hatami ya.
+**[00:11]** Pak Arif: Pak Hatami izin terlambat katanya lagi ada meeting, Pak.
+**[00:17]** Pak Yuyun: Oh, gitu?
+**[00:18]** Pak Arif: Iya. Oke, siap. Siap, siap, siap. Tapi nggak tahu kalau Mbak Sofya ya?
+**[00:26]** Pak Yuyun: Mbak Sofya atau Mbak Fani ya? Oke, saya coba cek. Saya coba cek teman-teman.
+**[00:41]** Pak Yuyun: Saya juga baru landing ini. Tadi nggak ini ya? Tadi nggak apa? Nggak ada Pak Hatami ya pas meeting?
+**[00:50]** Pak Arif: Nggak ada, Pak Arif. Kemarin Fani aja sama Mbak Yayang.
+**[00:58]** Pak Arif: Pak Hatami kayaknya nggak ini kayaknya, nggak...
+**[01:04]** Pak Yuyun: Ada pertemuan sama teman-teman yang Batika ini.
+**[01:09]** Pak Arif: Oh.
+**[01:10]** Pak Yuyun: Di Pontianak.
+**[01:43]** Mbak Atika: Sore Pak Yuyun, Pak Arif.
+**[01:46]** Pak Yuyun: Selamat sore Mbak Atika.
+**[01:47]** Pak Arif: Selamat sore, Mbak Atika.
+**[01:50]** Pak Yuyun: Bagaimana kabarnya, Mbak Atika?
+**[01:52]** Mbak Atika: Sehat. Pak Yuyun di Jakarta, ya?
+**[01:55]** Pak Yuyun: Saya di Pontianak, Mbak Atika.
+**[02:00]** Mbak Atika: Oh, iya, iya. Saya pikir Mbak Atika ikut dengan teman-teman Bappenas yang sedang ke sini. Beda tim nih, Pak.
+**[02:09]** Pak Yuyun: Beda tim ya.
+**[02:12]** Mbak Atika: Pak Arif lagi di Bandung, Pak, berarti?
+**[02:15]** Pak Arif: Nggak, saya udah di Lampung.
+**[02:22]** Mbak Atika: Oh, oke.
+**[02:27]** Mbak Atika: Ini mau kita mulai atau ada yang masih kita tunggu nih, Pak?
+**[02:32]** Pak Yuyun: Saya coba cek ke PT Can ya. Saya coba cek dulu PT Can.
+**[03:09]** Pak Arif: Nah, ini kayaknya nggak, Fani nggak masuk sih, nggak masuk di grup deh, Pak. Yang ada di grup itu si Sofya.
+**[03:17]** Pak Yuyun: Nggak masuk sini? Iya, saya baru lihat nggak masuk.
+**[03:44]** Pak Yuyun: Oh, kita bisa mulai dulu deh, nggak apa-apa, saya pikir Mbak Atika, takutnya Mbak Atika masih di kantor nih. Harusnya sudah, sudah siap-siap pulang.
+**[03:53]** Mbak Atika: Iya, ini lead-nya siapa nih, Pak Yuyun, Pak Arif?
+**[03:56]** Pak Yuyun: Oke, oke. Kalau gitu saya yang, yang lihat tuh Pak Arif yang buat link-nya deh, mangga, mangga.
+**[04:02]** Pak Arif: Yang buat link tanggung jawab ya?
+**[04:07]** Pak Yuyun: Iya, betul dong.
+**[04:11]** Pak Arif: Assalamu'alaikum warahmatullahi wabarakatuh. Alhamdulillah kita bisa ketemu nih setelah sekian lama dengan berbagai macam kesibukan, apalagi Pak Yuyun. Mudah-mudahan nanti nggak pakai ini ya Pak ya, nggak pakai oksigen ya, Pak.
+**[04:26]** Pak Yuyun: Mudah-mudahan nggak, Pak. Tapi masih asap di sini, Pak. Di Kalbar nih.
+**[04:34]** Pak Arif: Di Kalbar. Mbak Sofya juga udah gabung, jadi kira-kira udah lengkaplah kita ya. Tadi Pak Hatami insyaallah segera menyusul bergabung juga.
+**[04:44]** Pak Arif: Baik, jadi ini pertemuan kita untuk membahas proposal ya yang untuk persiapan ke bioekonomi atau sirkular ekonomi nih. Yang kemarin dokumennya sudah disampai- sudah diberikan di draft dari Pak Hatami, kemudian sudah ada beberapa masukan dari Mbak Atika. Itu. Nah, monggo selanjutnya Mbak Atika atau Pak Yuyun, gimana selanjutnya nih?
+**[05:12]** Pak Yuyun: Ya, mungkin silakan dari Mbak Atika dulu atau Mas Faisa.
+**[05:18]** Mbak Atika: Siap, terima kasih Pak Arif, Pak Yuyun. Sebelumnya kami terima kasih Pak sudah difasilitasi ya untuk rapat dan penyusunan concept note gitu ya. Kami mohon maaf juga kemarin kami lama banget review-nya karena kebetulan banyak hal berbarengan di minggu-minggu itu gitu, jadi agak terlambat. Tapi overall sebenarnya mungkin ini sebelum masuk concept note kami akan update beberapa yang mungkin kemarin sudah kami sampaikan juga ya di grup. Kemarin kami sempat beberapa kali sebenarnya pertemuan dengan teman-teman Biro Can, gitu. Jadi kami sudah coba sounding gitu ya dari sisi kami maupun dari Pak Dadang kemarin juga sudah langsung sounding ke Kepala Biro Can waktu itu. Sudah ter-info kalau kami akan mengajukan project gitu ya dengan tim konsorsium Agroforestri. Dan selama ini masih disambut baik nih sejauh ini, gitu. Kemarin kami ngobrol juga dengan Pak Kabag-nya, Pak Andi, dari beliau nanti juga infonya siap mengawal gitu ya, kita tunggu ajalah itu janji manis atau nanti terealisasi gitu ya terkait project-nya. Kemudian yang kedua, kemarin dari Pak Dadang baru tadi pagi sih sebenarnya kami ngobrol, Pak Dadang minta supaya kita berprogresnya tidak terlalu lama gitu untuk penyusunan ini. Nah, kebetulan di Direktorat KTSDA sendiri, direktorat kami, itu selain proposal ini kemarin Pak Dadang minta supaya ada proposal baru sebenarnya terkait air gitu ya untuk diajukan ke FOLU juga gitu. Jadi mungkin kalau kita bisa barengan gitu ya mengajukannya lebih baik karena nggak nggak perlu beberapa surat, gitu. Jadi prosesnya untuk pengawalannya juga lebih enak.
+
+--- [PART 2 OF 11] ---
+
+**[00:00]** Atika: kalau misalkan dalam satu surat yang sama. Kemudian yang ketiga terkait concept note sebenarnya kemarin kami sudah cek gitu, sudah review terkait hal tersebut sebetulnya overall sudah oke, cuma mungkin beberapa hal yang kalau orang awam sepertinya belum kebayang gitu. Kayak termasuk saya juga ketika membaca gitu terutama terkait lokasi gitu kan. Kalau misalkan di concept note kemarin sepertinya lokasinya kan baru di-state-nya di level kabupaten ya kalau enggak salah ingat. Sedangkan kan sebetulnya sudah ada sampai ke desa gitu. Nah itu mungkin perlu di-state dan mungkin perlu pakai peta spasial aja, jadi biar lebih kelihatan nanti persebaran kita pergerakannya di mana gitu. Sama kemarin terkait main objective-nya sih, ketika project ini gitu ya yang kita mau ajukan ke Folu itu main goals-nya dan main indicator-nya yang mana gitu. Karena kemarin kan per komponen ya ada indikator output-nya gitu, jadi mungkin perlu dibuat yang globalnya juga gitu supaya kita bisa mengukur nanti ketercapaian project secara keseluruhan. Mungkin itu dari kami, dari Mas Faiz ada tambahankah?
+**[01:13]** Mas Faiz: Enggak.
+**[01:14]** Atika: Oke, siap. Mungkin itu dulu Pak Yuyun, Pak Arif dari kami, Pak.
+
+--- [PART 3 OF 11] ---
+
+**[00:00]** Pak Yuyun: lain. Kalau nggak, kita khawatirnya menjadi leakage atau misalkan kejar-kejaran. Yang ini kemudian kita restorasi yang bekas ditambang, masyarakatnya keluar, terus kemudian mereka bekerja di tempat yang lain lagi untuk melakukan penambangan lagi. Jadi kan ini kita kejar-kejaran gitu. Jadi sebetulnya dua hal itu secara substansi bayangan saya yang perlu dilakukan kayanya kalau misalkan konteksnya tambang dan ekonomi gitu. Mungkin itu sementara yang ada di bayangan saya gitu. Mungkin dari Pak Hatami atau dari Bang Zul, Mbak Sofya, Pak Arif, atau teman-teman yang lain, apa namanya, ada masukan atau pandangan lain? Ini sebelum kita menajamkan proposal yang kita akan coba rampungkan.
+**[01:03]** Pak Yuyun: Silakan mungkin Pak Arif atau Mbak Sofya, Bang Zul, Mas Raihan?
+**[01:08]** Speaker 2: Kalau dari saya sepakat sekali, Pak Yuyun. Jadi mungkin konteks kita tambang ini mungkin dalam jangka yang panjang ya. Kalau untuk sekarang, jadi kita agak memutar gitu, walaupun masih dalam konteks apa, sasarannya adalah orang-orang yang bekerja di tambang, tetapi mereka juga petani. Dan memang kalau dari yang saya lihat di lapangan, ya seperti itu. Kita kalau, apalagi nih kalau yang di lahan tambang bekas timah itu unsur organiknya mungkin nol ya, jadi memperbaikinya tuh benar-benar effort yang sangat-sangat besar. Jadi, apa, untuk ekonomi sangat-sangat tidak masuk gitu. Ya, intinya sih saya sepakat dengan apa yang diusulkan oleh Pak Yuyun barusan.
+**[02:08]** Pak Yuyun: Ya. Bagaimana Mbak Sofya atau Mbak Atika, Pak Arif? Supaya kita clear dulu sebagai pondasinya, sehingga kemudian nanti kita menguraikannya dalam bentuk intervensi aktivitas-aktivitasnya di dua angle ini kita kemudian coba identi- coba tentukan gitu kan. Gitu.
+**[02:30]** Mbak Atika: Pak Yuyun, mungkin duluan ya, Pak. Ee mungkin ini Pak, yang menjadi catatan kami, ini tadi saya sambil scroll-scroll e apa namanya, concept note-nya gitu ya. Kalau misalkan mau pakai angle itu, mungkin kita nanti perlu jabarkan ulang ya dari sisi komponen-komponennya karena saya rasa masih belum terlihat sebenarnya e apa namanya e terkait hal tersebut. Karena beban nya di kom- di concept note menurut saya masih terkait hilirisasi, itu yang pertama. Kemudian yang kedua, e kita kan mau mengangkat salah satunya juga terkait bioekonomi ya. Saya baru keinget juga sebenarnya bahwa prinsip bioekonomi itu kan e yang paling penting yang pertama adalah nilai tambah gitu ya. Nanti kan terkait nilai tambah ini kan pasti nanti akan terjadi, sebenarnya akan tercipta gitu kan ketika kita misalkan tadi dari e hasil-hasil agroforestry nanti kan mungkin dari hasil rehabilitasi. Nah, yang kedua yang perlu diperhatikan adalah pemanfaatan teknologi nih, Pak, terkait e nilai tambah nya itu sendiri. Jadi mungkin komponen itu juga perlu kita masukkan nih Pak terkait bioekonominya kalau kita memang mau e mengangkat bioekonomi begitu ya. Kalau mau kita tonjolkan sepertinya peningkatan nilai tambah dengan pemanfaatan teknologi ini kita harus masukkan juga jadi salah satu e komponen. Nanti bisa jadi bagian dari hilirisasinya ataupun nanti bisa jadi sendiri sih. Kemudian sebenarnya e secara fondasi umumnya saya sepakat sebenarnya tadi di bangun sam- dibangun oleh Pak Yuyun gitu. Namun kami juga menitipkan pesan gitu ya terkait e peningkatan kapasitas stakeholders. Kemarin kami masukkan juga di concept note sebenarnya. Dan peningkatan kapasitas stakeholder di sini bukan hanya dari kelompok taninya, tapi juga termasuk aparatur-aparatur yang ada di daerah maupun di pusat gitu. Karena kan e ini project-nya sekarang tidak hanya konsorsium Agroforest gitu ya, ini kan ada e ada kami gitu ada Bappenas gitu ya, yang salah satu apa ya kewenangan kami dan salah satu target RPJMN juga bahwa kegiatan-kegiatan yang di lapangan itu kan harus diinternalisasi ke e pemerintah gitu kan supaya nanti sustain ke depannya. Mungkin itu sih, Pak, e poin kami.
+**[04:43]** Pak Yuyun: Ya. Sepakat, Mbak Atika. Jadi yang pertama, ee kita sepakat sih dengan peningkatan nilai tambah karena itu ee merupakan berbasis ee apa, landasan kita membangun hilirisasi, ya. Ee baik itu dalam konteks market maupun dalam konteks processing, produksi gitu ya, sehingga ada peningkatan nilai tambah. Ee yang kedua tadi yang disinggung Mbak Atika untuk ee apa namanya, ada pelibatan para pihak lain terutama pengambil kebijakan dari sisi pemerintah. Itu juga penting, bahkan kemudian kami di Agroforest saat ini sedang menyiapkan satu ee studi ee dengan pendekatan landscape. Gitu, jadi bukan tingkat kebun lagi, ee tapi kemudian landscape. Nah, landscape ini juga menyasar tentunya tidak hanya area-area ee yang existing pertanian atau misalkan kebun-kebun yang digarap masyarakat, tetapi juga area-area sekitarnya termasuk juga mungkin lahan bekas tambang maupun kemudian area-area berizin yang punya relasi ee atau hubungan dengan ee kegiatan ekonomi masyarakat. Nah, harapannya dari situ terpetakan kemudian ee bagaimana pembagian peran antar-stakeholder-nya. Gitu, ee sehingga pemerintah nanti ee dukungannya pada bagian yang mana, ee di daerah maupun di pusat, terus kemudian ee di luar dari pemerintahnya memainkan peran apa, baik dari sisi ee masyarakat maupun dari sisi pelaku usaha yang lain, gitu. Nah, cuman ee apakah peningkatan nilai tambah ini harus ee nilai tambah atau produk yang dihasilkan dari area bekas rekli- apa area hasil reklamasi atau boleh area yang lain? Karena itu sebetulnya. Kalau harus area bekas reklamasi atau area hasil reklamasi, tentunya akan makan waktu, Mbak Atika. Katakanlah tadi misalkan Bang Zul, kita lakukan perbaikan dulu lahannya, baru kemudian kita tanam dengan commodity-nya, baru kemudian kita proses peningkatan nilai tambah-nya, ee mungkin itu akan takes time banget ee secara periode waktu tidak mengejar, gitu. Tapi kalau misalkan ada dua area, kita akan lakukan ee restorasi atau reklamasi pada area bekas tambang dengan
+
+--- [PART 4 OF 11] ---
+
+**[00:00]** Yuyun: dan nanti output-nya adalah XX hektar yang diintervensi. Tapi kemudian nanti kita lakukan juga kegiatan apa namanya? Peningkatan nilai tambah yang diproses dari area non rehabilitasi. Gitu. Dan itu kemudian menjadi jaring pengaman untuk pelaku kegiatan tambang supaya mereka punya alternatif income dan juga peningkatan nilai tambah. Gitu. Jadi secara paralel dilakukan seperti itu, gitu. Jadi peningkatan nilai tambahnya bukan dari produk yang dihasilkan proses rehabilitasi. Kira-kira kalau kayak gitu gimana, Mbak Atika? Bisa enggak?
+**[00:46]** Yuyun: Masih mute kayaknya, Mbak Atika.
+**[00:51]** Atika: Iya. Maaf saya agak kelewat sedikit. Tadi kalau misalkan bukan dari lokasi tambang, argumen sama ceritanya gimana ya, Pak? Maaf.
+**[01:00]** Yuyun: Bayangan saya, asumsi saya, pelaku-pelaku tambang ini mereka punya kebun-kebun juga mungkin. Gitu, yang lahan-lahan yang memang sebetulnya mereka garap, tapi ketika di antara jeda panen atau misalkan di antara waktu-waktu luang mereka, mereka terlibat di pertambangan. Dan mengambil opportunity untuk melakukan kegiatan pertambangan. Nah, ini yang kemudian kita intervensi supaya mereka bisa fokus pada area-area lahan pribadi mereka yang dikelola, gitu. Sehingga tambangnya bisa kita fokuskan untuk kita rehabilitasi. Karena kalau misalkan kita tidak menarik mereka untuk kegiatan ekonomi di luar pertambangan, mereka berpindah ke lokasi yang lain sementara lokasi yang sudah mereka tinggalkan kita rehabilitasi. Nanti kita akan pindah lagi ke lokasi yang sudah mereka tinggalkan kita rehabilitasi lagi. Jadi kemudian enggak selesai-selesai, gitu. Seperti itu, Mbak Atika.
+**[02:04]** Atika: Oke, Pak. Ya, saya nangkep sih. Saya nangkep. Kalau boleh saya coba rangkum sedikit ya, Pak, ya. Berarti kan gini ya, tujuannya kita kan sebenarnya kalau misalkan dari cerita-cerita dan apa yang disampaikan tadi sebenarnya lebih beratnya nanti ke pemulihan ekosistem lahan bekas tambang, begitu kan. Nah, mungkin komponennya jadi ada dua mungkin yang besar ya. Yang pertama komponen terkait restorasinya itu sendiri, kemudian yang kedua terkait yang peningkatan apa ya, bukan mata pencaharian ya, apa ya, Pak, tadi ya?
+**[02:41]** Yuyun: Alternatif income masyarakat dan peningkatan nilai tambah mungkin, ya?
+**[02:47]** Atika: Nah, iya. Berarti itu ya, maksudnya terkait ekonomi lokal lah ibaratnya kan yang terkait ini ya.
+**[02:51]** Yuyun: Betul.
+**[02:53]** Atika: Berarti mungkin itu. Kemudian yang ketiga nanti terkait dari sisi governance-nya tuh, Pak. Mungkin...
+**[02:59]** Yuyun: Kalau dari sisi governance-nya bisa masuk ke dua-duanya tuh. Iya, kan?
+**[03:04]** Atika: Iya. Iya, betul.
+**[03:05]** Yuyun: Karena itu cross-cutting ya saya pikir kalau policy itu.
+**[03:09]** Atika: Iya. Betul sekali.
+**[03:10]** Yuyun: Kan gitu.
+**[03:11]** Atika: Mungkin, boleh sih, Pak. Kayaknya ini lebih tergambar ya. Maksudnya, karena kalau yang dikonsepkan sebelumnya kan sebetulnya sisi restorasinya ini belum keangkat, jadi lebih, iya, lebih beratnya di yang peningkatan ekonominya itu tadi. Jadi nanti mungkin di diarahkan ke sini sih. Boleh sih, Pak. Tapi itu tadi ya, peningkatan ekonominya nanti nitip ada saya enggak tahu ya, maksudnya tapi bukan pelaku lapangan gitu, Bapak-Bapak dan Ibu-Ibu yang lebih paham gitu. Nanti mungkin ada pemanfaatan teknologinya itu yang bisa masuk supaya kita bisa kita bisa klaim bahwa ini salah satu upaya dalam pengembangan bioekonomi Indonesia juga, gitu.
+**[03:52]** Yuyun: Betul. Kalau teknologi saya pikir juga bisa masuk ke dua-duanya ya, teknologi dalam konteks rehabilitasi ex-bekas ex-pertambangan, lahan bekas tambang, dan teknologi dalam konteks peningkatan nilai tambah apa namanya? processing produk yang dihasilkan masyarakat. Kira-kira seperti itu. Jadi bisa masuk dua, sama seperti policy ya, cross-cutting gitu sifatnya. Nah, gitu. Mungkin dari Pak Hatami ada tambahan masukan?
+**[04:25]** Hatami: Belum. Punten baru join. Tadi ada meeting mendadak di kementerian.
+**[04:32]** Hatami: Ya, maaf juga belum sempat apa namanya? Update masukan dari Bu Atika. Nanti saya bikin format yang lebih gampang untuk bisa diedit, ya. Kemarin agak repot memang format yang di-generate sama AI. Nanti saya bikin yang ini aja, yang slide aja biar gampang kita ngeditnya.
+**[04:50]** Yuyun: Siap.
+**[04:53]** Hatami: Siap.
+**[04:55]** Yuyun: Mas Fitra tadi ada angkat tangan nih, mau menyampaikan sesuatu. Silakan.
+**[05:01]** Fitra: Oh, ya. Terima kasih, Pak Yuyun, atas kesempatannya. Izin salam kenal juga kepada Mbak Atika, ya, kepada Pak Arif dan rekan-rekan di sini. Saya Fitra. Di sini izin saya join, ya, untuk berdiskusi terkait dengan konseptual note yang kemarin sempat dibikin. Dan kebetulan tadi mungkin Pak Yuyun kan sempat mention terkait dengan pendekatan perencanaan level landscape, ya, gitu. Dan saya sangat setuju, ya, untuk bisa menggunakan pendekatan itu untuk pengembangan bioekonomi. Nah, dan mungkin setelah tadi saya menyimak diskusi, saya mendapatkan semacam apa, ya, kerangka yang strategis yang cukup kita bisa implementasikan. Jadi dalam rangka apa namanya, mewujudkan konsep ini, bisa jadi pendekatannya tadi ya mungkin untuk dalam rangka menarasikan, ya, menarasikan usulan Pak Yuyun, saya bisa ingin mengusulkan dua pendekatan restorasi sebetulnya. Pertama, pendekatan preventif, ya. Yang kedua adalah pendekatan kuratif. Nah, kenapa dua pendekatan itu dalam rangka restorasi bekas tambang ini? Karena kalau melihat sudut pandang sudut pandang landscape planning, sebetulnya betul ya tadi ada permasalahan terkait kalau misalnya kita fokus merestorasi bekas tambang yang sudah tergali gitu, ya. Pertanyaan selanjutnya kan sebetulnya lantas nanti yang bekerja di tambang itu akan pergi ke mana, gitu, ya? Nah, ini kalau dalam konsep planning itu sebelum kita apa namanya, mengobati hal yang sudah terjadi, perlu juga dibarengi dengan langkah preventifnya, gitu. Yakni sebetulnya menghindari...
+
+--- [PART 5 OF 11] ---
+
+**[00:00]** Fitra: ...ekspansi dari tambang ini gitu.
+**[00:05]** Fitra: Nah, kalau mungkin kita mengenalnya konsep daya dukung daya tampung ya dari suatu lahan, di mana kita bisa memetakan sebetulnya dari lahan yang mungkin belum tereksploitasi tambang, yang sebetulnya itu bisa menjadi apa ya, potensi untuk dioptimalisasikan dan menyerap tenaga kerja tambang dan mengalihkan mereka kepada lahan yang belum optimal ini gitu, untuk pengembangan agroforestri misalnya.
+**[00:34]** Fitra: Nah, itu bisa jadi apa ya, semacam alternatif ya saat nanti kita melaksanakan proses kurasinya. Jadi saat kita sudah ada pengembangan di preventifnya, nanti kita masuk ke kurasinya, sehingga nanti ada bridging bagi yang kerja di tambang untuk bisa pindah gitu.
+**[00:55]** Fitra: Nah, jadi saya mengusulkan kita bisa fokus dulu dari yang mungkin preventifnya, salah satunya mencoba menghentikan laju pengembangan tambang ini di lahan-lahan yang kritis terhadap alih guna lahan gitu ya,
+**[01:12]** Fitra: agar itu tidak terjadi perubahan gitu ya, sehingga stres atau tekanan terhadap ekspansi itu menurun.
+**[01:20]** Fitra: Nah, nanti tahap duanya adalah
+**[01:23]** Fitra: setelah kita menekan laju ekspansi lahan itu, kita bertindak offensif gitu ya, menyerang di mana lahan-lahan yang sudah terkonversi gitu.
+**[01:38]** Fitra: Nah, ini mungkin jadi semacam usulan staging ya, staging dalam landscape planning ke depan, kita bisa prioritaskan dulu ke level preventifnya dulu, menekan stres dari tambang ini, baru ke level restorasi.
+**[01:53]** Fitra: Nah, terkait dengan teknologinya, ini sangat bisa didukung ya dengan penggunaan teknologi remote sensing salah satunya,
+**[02:02]** Fitra: di mana nanti langkah pertama dalam mensukseskan preventif ini, kita bisa memetakan lahan mana yang sebetulnya pertama tadi ya, yang kritis atau rentan terhadap alih guna lahan menjadi tambang. Nah, itu bisa jadi salah satu parameter kita menentukan prioritas preventif ini.
+**[02:19]** Fitra: Dan yang kedua, bisa menentukan lokasi mana yang sebetulnya punya potensi besar untuk agroforest tapi belum dioptimalkan gitu.
+**[02:27]** Fitra: Nah, itu bisa juga jadi layer kedua ya untuk pertimbangan lahan prioritas pengembangan preventif ini.
+**[02:35]** Fitra: Oke, gitu. Nah, itu bisa jadi salah satu kekuatan ya, kita bisa gunakan teknologi untuk monitoring bahasanya dan melihat progres perkembangan agroforest ini.
+**[02:48]** Fitra: Mungkin salah satu usulan saya untuk menarasikan atau mengembangkan konseptual seperti itu sih, Pak Yuyun, barangkali.
+**[02:56]** Fitra: Untuk sudut pandang landscape planning-nya.
+**[02:58]** Yuyun: Siap, terima kasih, Mas Fitra. Silakan yang lain kalau masih ada, kalau ada masukan-masukan.
+**[03:12]** Yuyun: Mas Faisal, mangga, Mas Faisal.
+**[03:18]** Yuyun: Masih mute, Mas.
+**[03:24]** Faisal: Sorry, sorry. Sekarang?
+**[03:26]** Yuyun: Ya, ya, sip.
+**[03:28]** Faisal: Jadi, mau menanggapi aja yang disampaikan oleh Mas Fitra ya. Kayaknya idenya cukup menarik untuk dituangkan di dalam konsep note gitu, pendekatan dengan pendekatan preventifnya yang tadi melihat daya dukung dan daya tampungnya hutan, kemudian bisa dipetakan sebenarnya seberapa hutan itu atau lokasi itu bisa menampung dan menghasilkan apa namanya, masyarakat pekerja dan berpenghasilan gitu kan.
+**[03:59]** Faisal: Nah, tapi yang boleh saya konfirmasi, Mas, sebenarnya untuk lokus kita itu apakah cuma terbatas pada komoditas lada ya? Karena saya dengar di awal konsep juga ada lada, apakah akan mengembangkan komoditas yang lain yang ada di lokasi atau seperti apa gitu? Mengingat kayaknya untuk alternatifnya untuk dari pertambangan itu kayaknya tidak bisa apple to apple, maksudnya kita sama-sama tahu dan apa, secara logic gitu ya, pertambangan itu menghasilkan hasil yang instan dan hasil yang banyak gitu, bahasanya seperti itu. Kemudian kita coba alternatifkan dengan menggunakan agroforestry, dengan itu butuh waktu, butuh tenaga, energi yang tidak sebentar gitu, namun hasilnya pun tidak, hasilnya pun tidak instan gitu.
+**[04:53]** Faisal: Nah, alternatif ini sebenarnya apa sih yang bisa dikembangkan selain dengan mengembangkan komoditas lada atau komoditas lain yang bisa senggaknya masyarakat itu kayak berpikir, ini oh iya ya, ternyata memang hasilnya cukup lumayan untuk dibandingkan dengan pertambangan gitu. Itu sih mungkin. Mungkin bisa di-, apa, dijelaskan juga sama Bapak-Bapak yang lain yang sudah turun di lapangan gitu.
+**[05:20]** Yuyun: Ya, silakan mungkin ada tanggapan dari Mas Fitra atau Pak Hatami yang sudah cukup lama nih, Pak Arif juga nih dengan kegiatan agroforestry, bisa enggak nih apple to apple dengan tambang nih secara income.
+**[05:35]** Fitra: Pak Hatami dulu mungkin, Pak.
+**[05:38]** Yuyun: Ya, boleh, siap.
+**[05:40]** Hatami: Iya, jadi, ya itu memang poin yang sangat penting gitu untuk kita bisa buktikan bahwa, apa namanya, kita bisa masuk ke skala yang, ya minimal sama gitu kan dengan, dengan, dengan pertambangan gitu kan.
+**[05:56]** Hatami: Nah, memang ketika kita hanya bermain di raw material,
+**[06:02]** Hatami: apa namanya, tanpa ada added value yang lebih lanjut, misalnya di, dijadikan ekstrak katakanlah, atau bahkan ekstraknya di, apa, dikombinasikan lagi dengan yang lain jadi produk akhir yang lebih ini, ya kan enggak bakalan bisa gitu. Makanya, makanya kemarin
+**[06:23]** Hatami: apa namanya, saya usulin untuk juga di konsorsium kita tuh ada, ada orang-orang yang memang
+**[06:33]** Hatami: apa namanya, role-nya di sana gitu. Role-nya jadi high-value product gitu kan. Jadi bukan, bukan, enggak cukup kalau posisikan...
+**[06:42]** Yuyun: Bukan raw material.
+**[06:43]** Hatami: He-eh, bukan raw material atau bahkan bukan hanya intermediate product lah. Misalnya kayak nilam itu enggak cukup kalau cuma disuling aja jadi minyak nilam, perlu di katakanlah difraksinasi lagi, minimal jadi, apa namanya, jadi bahan untuk fiksasi...
+
+--- [PART 6 OF 11] ---
+
+**[00:00]** Pak Hatami: ...afkir katakanlah di mana ada ada proses pemurnian lebih lanjut gitu kan. Nah, itu baru untungnya tebal gitu, untungnya tebal dan harganya lebih stabil dibandingkan dengan raw material, intermediate product yang yang memang kontrol itu gak ada di kita gitu. Kontrol tuh tidak ada di penjual.
+**[00:21]** Pak Hatami: Lebih banyak ditentukan oleh pembeli, faktor eksternal lah ya. Tapi ketika kita udah masuk ke dunia end product, consumer goods itu kita lebih, tadi harganya lebih stabil, untungnya lebih banyak, kontrolnya juga kita bisa lebih banyak. Kita mau masuk ke mana nih, mau segmen kualitas apa itu semuanya udah udah udah udah ini ya, udah udah mapan gitu kan si market-nya itu. Jadi itu memang kita jangan berhenti di, "Oh, ini bisa panen." gitu kan. "Bisa produktivitasnya lada tuh 1 kilo." Nggak cukup sampai di sana, meskipun itu kita susah juga gitu kan untuk untuk untuk meningkatkan atau sampai ke posisi itu. Cuman kalaupun sampai cuma di sana, itu gak cukup kita punya punya ekosistem yang yang yang stabil gitu.
+**[01:05]** Pak Hatami: Makanya kita perlu tadi apa namanya? Partner-partner yang dari sisi R&D-nya, nanti juga ada partner-partner yang tentu saja tentu saja kita butuh partner-partner yang untuk produksinya. Karena R&D itu cuma sampai R&D, cuma sampai skala lab katakan, "Oh, ini ada potensi"
+**[01:23]** Pak Hatami: apa namanya? Zat"
+**[01:25]** Pak Hatami: katakanlah kalau di lada mah ada, "Oh, ada di lada tuh ada piperin-nya." Kalau kita bisa mengambil piperin-nya dengan proses ini, kita bisa masuk ke industri katakanlah industri makanan, industri obat-obatan, industri kosmetik katakanlah, itu. Nah, tapi sesudah gerbong itu selesai, maka ada gerbong selanjutnya, ya si si industri ekstraksi ini. Nah, industri ekstraksi nanti kita bisa bisa libatkan partner yang lain ataupun kita juga lagi belajar nih, kita lagi set up processing ekstraksi juga, processing facility buat ekstraksi.
+**[01:58]** Pak Hatami: Jadi begitu mungkin, Mas Faisal. Kita memang harus"
+**[02:02]** Pak Hatami: ya ini lah, saatnya gitu. Kalau untuk cuma jualan karungan, konteneran itu sejak abad 16, sejak abad 12 juga Indonesia sudah terkenal dengan ekspor rempah-rempahnya. Tapi, ya masa kita sudah zaman abad 21 ini kita masih seperti itu gitu, sangat sangat disayangkan gitu. Makanya kolaborasi ini mudah-mudahan bisa sampai ke sana, gitu. Begitu mungkin.
+**[02:28]** Faisal: Ya. Ya. Terima kasih, Pak Har... eh, Pak Hatami. Pak Arif, ada tambahan?
+**[02:38]** Pak Arif: Gak ada, sih. Saya mengaminkan aja tadi yang sudah disampaikan itu. Memang kalau yang untuk tadi preventif tadi tuh bagus juga karena kan tadi pertanyaan Pak Yuyun, ya? Apakah tambang bisa apakah apakah bisa perkebunan menggantikan tambang? Agak sulit, sih, memang. Cuma kan tadi lagi-lagi tambang ini kan sebetulnya ya tidak sustainable kalau misalkan kita bandingkan dengan pertanian perkebunan. Sehingga ya kita perlu menunjukkan itu ke para petani, gitu. Karena apalagi kalau misalkan kayak kasus yang di Lampung kan petani melakukan penambangan tanpa teknologi yang jelas. Jadi, mereka ya gali lubang aja berdasarkan hunch-nya, gitu, atau wangsitnya, gitu. Nah, sementara kalau di pertambang- di perkebunan kan bisa lebih terukur penghasilannya, gitu. Tapi juga kalau tadi yang preventif itu ini baru ada isu isu lagi nih. Jadi, di Pringsewu itu katanya ada minyak. Jadi, mau mungkin baru akan ada eksplorasi ke sana, gitu. Nah, jadi, walaupun ya kalau minyak kayaknya gak ada ya penambangan rakyat ya kalau minyak ya, berbeda dengan emas dan timah, gitu. Tapi, bagaimanapun ini akan tetap menyedot orang untuk meninggalkan perkebunan ke lahan tambang. Satu isu yang kemarin kita temukan bahwa sebetulnya di perkebunan ini sudah mulai kekurangan tenaga kerja. Sehingga karena orang-orang pindah ke pertambangan, pindah ke sektor manufaktur mungkin atau kalau di Lampung lagi ramai untuk dikirim ke Jepang, Korea, dan lain-lain. Nah, sementara di sektor perkebunan akhirnya kekurangan tenaga kerja. Kemarin yang kopi dari petik merah udah jadi petiknya udah gak ngambil, tinggal mungut aja karena pada berguguran. Lada juga mestinya lada hijau kan gak gak nunggu merah, ya? Beda dengan lada putih. Tapi, akhirnya ya udah keburu merah-merah baru bisa dipetik, gitu. Nah, jadi ini satu isu juga bahwa kita tetap perlu regenerasi dan perlu mempertahankan perkebunan ini sebagai satu usaha yang menghasilkan baik sehingga menarik untuk orang-orang tetap berada di bidang ini. Gitu, Pak.
+**[05:10]** Speaker 4: Ya, jadi mungkin terkait dengan itu, saya sih memang saat ini keraguan soal apple-to-apple antara tambang dan pertanian atau atau ekonomi yang lain memang cukup tinggi, ya. Karena secara nilai dalam waktu yang singkat itu memang tidak sebanding, gitu ya. Tapi mungkin dalam konteks outreach, gitu ya, ke pemerintah setempat maupun kemudian ke masyarakat yang harus dikuatkan mungkin menurut kita dalam dalam project ini juga itu adalah modeling, ya. Modeling, gitu. Karena kan sepertinya kita punya data, ya. Mungkin dari lewat lewat tools GIS, kita bisa bisa memproy- memproyeksi atau memprediksi dan menghitung berapa luasan yang yang terpapar dengan tambang dan tergantikan ekonomi dari pertanian menjadi tambang. Lalu kemudian opportunity loss-nya itu berapa besar ketika itu kemudian pertanian itu hilang. Lalu kemudian juga kita kan harus mengantisipasi yang yang sudah besar ini itu kemudian bagaimana kita batasi tidak kemudian bertambah besar lagi. Sehingga perlu modeling kalau yang masih ada ini bisa kita optimalkan, maka kemudian economic gain-nya akan seberapa besar gitu untuk bisa didapat, gitu kan. Nah itu modeling itu kayaknya perlu tuh mungkin kalau dari SIG bisa dilihat, katakanlah dalam 20 tahun terakhir, berapa besar rate lajunya perubahan tutupan lahan dari pertanian ekonomi apa namanya perkebunan menjadi tambang dan itu menciptakan opportunity loss...
+
+--- [PART 7 OF 11] ---
+
+**[00:00]** Yuyun: yang sustain, terus kemudian berapa tinggi nilai ekonomi yang bisa kemudian ditimbulkan dan kemudian sustain kalau misalkan itu bisa dicegah gitu ekspansi pertambangannya. Ditambah lagi kalau misalkan reklamasinya kemudian berhasil, berapa kemudian nilai ekonomi baru yang bisa dimunculkan, termasuk juga jasa lingkungan ya saya pikir tidak hanya terbatas kepada barang gitu. Artinya kemudian environmental services-nya, baik itu air atau kemudian iklim setempat, biodiversity itu kemudian bisa dimunculkan di di modeling itu, gitu. Dan ini nyambung dengan yang tadi Mbak Atika juga sampaikan bahwa ada keinginan proposal baru lagi terkait dengan air, karena ini kan sebetulnya nyambung ya. Reklamasi tambang atau rehabilitasi tambang itu kan sebetulnya dalam konteks konservasi tanah dan air ya, sehingga kemudian itu menjadi satu kesatuan gitu. Kalaupun ada dua project tapi dia tidak sendiri-sendiri berjalan gitu. Nah, modeling ini kayaknya perlu dibuat juga dalam konteks project ini untuk bisa membangun satu konsep gitu. Kalau kita mau apa namanya mengalihkan masyarakat dan kemudian masyarakat mau untuk ngikut apa yang kita tawarkan, maka perlu ada modeling yang bisa disajikan dengan mereka. Gitu, karena tambang memang mungkin dalam dalam perbandingannya bisa 1 banding 10 gitu, pertanian 1 pertambang 10 kali lipat, tapi berapa lama dia akan bertahan? Gitu kan, sebelum kemudian semuanya menjadi habis gitu kan, kira-kira seperti itu. Gitu mungkin kalau dari saya tambahannya lagi dengan teknologi dan modeling ini.
+**[01:48]** Faisal: Ya. Izin, Pak Yuyun. Ee berarti saya saya sudah menangkap. Sebenarnya ee memang kita tidak bisa langsung apple to apple untuk antara pertambangan ini dengan ee hasil perkebunan. Perlu ada apa namanya? Olahan lagi yang itu didukung dengan teknologi dan mungkin sampai ke digitalisasi dan hilirisasi yang itu akan bisa sebanding dengan pertambangan. Ee namun pertanyaan lanjutannya itu sebenarnya apakah cukup dengan waktu 3 tahun ini kita membuat itu semua itu terealisasi? Kayaknya agak tidak memungkinkan ya kalau 3 tahun ini berjalan sampai selesai. Jadi artinya memang mungkin ee dalam dalam concept note ini perlu ditekankan bahwasanya memang 3 tahun ini sebagai apa, kemudian lanjutannya mau seperti apa, itu juga akan mempengaruhi ee penilaian juga mungkin ya. Dan ee nantinya juga sepertinya hal-hal terkait ee dengan modeling dan ee apa namanya yang tadi disampaikan Pak Yuyun, itu bisa menjadi pertimbangan bagaimana menuangkannya di dalam ee proposalnya di dalam concept- concept note-nya. Karena ee yang tadi saya tangkap valuation dari nilai ekonomi juga akan berpengaruh terhadap ee kajian, tapi dalam hal ini masih dalam bentuk tulisan desk nih, kajian, tapi belum apakah nantinya akan benar-benar bisa terimplementasi di lapangan oleh masyarakat itu sendiri kan sebenarnya poin-poin kita sebagai ee pemangku kebijakan kan ke arah sana ya. Jadi jangan sampai nantinya ini cuma sebatas kajian tapi masyarakat pun tidak bisa ee menikmati hasil kajian yang sebenarnya ini adalah menguntungkan untuk masyarakat. Jadi memang ee ini dikembalikan bagaimana nanti ee bahasa penulisan juga di dalam concept note-nya. Terus juga tadi ee di grup Mbak Atika udah nge-share, Pak, ee itu proposal yang sudah ee apa namanya? Sudah dari dari FAO. Jadi ini contoh proposal yang kita rasa, kami rasa, ini cukup menggambarkan dan lebih ringkas, padat, dan juga ee ini kayaknya udah ada pendanaannya ya, Mbak, ya? Udah goals. Jadi ini salah satu contoh proposal yang udah goals, jadi mungkin bisa ee dicontoh bentuk proposalnya seperti ini memudahkan untuk pembaca dan memahami bagaimana ee arahnya, arah program atau arah proyeknya. Begitu, Pak. Terus juga ee ada arahan satu, bukan arahan sih, tadi ada permintaan dari ee Pak Direktur, kira-kira kapan ee apakah memungkinkan ketika minggu ke, ya minggu depan berarti ya, setelah 17 Agustus kita bisa ke lapangan, mungkin ke Lampung atau ke Bangka gitu, Pak? Itu dari saya, monggo.
+**[04:50]** Yuyun: Betul, siap. Nah ini pertanyaannya ke Pak Hatami ini, apakah bisa ke Bangka?
+**[04:57]** Hatami: Bahkan sebelum 17-an bisa, Mas Faisal. Jadi kita ada acara launching Holding UMKM di tanggal 15 nih. Cuman undangan resminya belum muncul, jadi secara tidak resmi mungkin mengundang Mas Faisal sama Mbak Atika nih kalau lagi luang. Tanggal 15 hari Sabtu ada launching.
+**[05:17]** Faisal: Wah, kalau kalau tanggal 15 kebetulan Kaminya yang enggak bisa, Pak. Sayang sekali.
+**[05:24]** Hatami: Nah, boleh, saya tungguin misalnya mau tanggal berapa? 18, 18 saya masih di Bangka kalau mau.
+**[05:35]** Faisal: Mung- paling memungkinkan kita itu ada agenda di tanggal 10 sampai 14, Pak. Jadi 10 sampai 14 kita ada di luar kota, ada di Jawa Timur. Terus kemudian memungkinkan enggak, Mbak, di tanggal 19 atau 20 gitu, Pak?
+**[05:59]** Hatami: 19 itu hari Rabu, Pak, ya?
+**[06:04]** Hatami: Boleh sih kalau hari Rabu bisa saya tungguin.
+**[06:08]** Faisal: 19 hari Rabu. Mungkin terus kemudian apa, kunjungan lapangan atau ke lapangannya kita tanggal 20 gitu, Pak.
+**[06:16]** Hatami: 19 20, ya?
+**[06:17]** Faisal: He-eh. Terus 21 kita pulang gitu, Pak.
+**[06:22]** Hatami: Mm-mm. Pak Yuyun masih bisa sampai tanggal 21 di Bangka?
+**[06:28]** Yuyun: Kelamaan ya, kelamaan. Mau sampai tanggal 21?
+**[06:33]** Hatami: Saya pulang-pulang kayaknya dipanggil om ini.
+**[06:38]** Yuyun: Sudah dua...
+**[06:39]** Hatami: Enggak kenal lagi yang di rumah, ya.
+**[06:41]** Yuyun: Boleh sih, aman sih. Ini lah...
+**[06:45]** Faisal: Kan Pak Hatami kan lewat darat tuh.
+**[06:48]** Hatami: Oh iya, kalau mau ke Lampung dulu aman lah.
+**[06:51]** Faisal: Boleh, boleh.
+**[06:55]** Hatami: Nanti bisa di...
+**[06:57]** Yuyun: Perjalanan pulang ke Bandung mampir ke Lampung.
+**[06:59]** Faisal: Tanggal 19...
+
+--- [PART 8 OF 11] ---
+
+**[00:00]** Speaker 1: ...puluh.
+**[00:01]** Speaker 1: Di tanggal 19 sampai 21 itu Pak, bisa.
+**[00:07]** Speaker 2: Di Istana ya?
+**[00:09]** Speaker 1: Atau 21.
+**[00:10]** Speaker 2: Kalau Bang...
+**[00:16]** Speaker 1: Tapi upacara sih Pak, masalahnya.
+**[00:23]** Speaker 2: Izin, Pak.
+**[00:26]** Speaker 2: Kita juga upacara Pak Arif, kita kan... harus... ini...
+**[00:32]** Speaker 4: Betulnya kalau tanggal 17 saya masih bisa bertahan tuh, karena kalau 15 saya ikut di Bangka insya Allah, nanti 17 saya masih bisa bertahan hari Senin.
+**[00:55]** Speaker 4: Karena saya lagi nemenin juga Bappenas ini Bang Fa- Bang Faisal nih, Pak Faisal, Mas Faisal.
+**[01:00]** Speaker 4: Di Kalbar.
+**[01:03]** Speaker 1: Mmm, sama EKL ya, Pak?
+**[01:05]** Speaker 4: Iya. Dari sini Jakarta, terus kemudian rencananya kan ke Bangka. Jadi enggak pulang-pulang ini.
+**[01:12]** Speaker 1: Oh, pas-pas di Bangka itu Pak, 18 sampai 20.
+**[01:20]** Speaker 1: Oke Pak, nanti coba kita diskusikan juga dengan Pak Dir. Uh mungkin beliau berkenan di tanggal berapa atau bisa join di tanggal berapa. Tapi kita tawarkan opsinya berarti mungkin kalau 18 sampai 20 di Bangka, kalau 19-21 di Lampung, Pak Yuyun.
+**[01:37]** Pak Yuyun: Siap, saya join ke Lampung.
+**[01:43]** Speaker 1: Siap, siap, siap. Nanti kita coba diskusikan, nanti kita obrolkan di grup aja enggak apa-apa ya, Pak.
+**[01:50]** Speaker 4: Boleh, boleh.
+**[01:56]** Speaker 4: Oke, eh...
+**[02:00]** Speaker 2: Akhir bulan ini aja, jangan akhir bulan lah.
+**[02:03]** Speaker 1: Atau ya bisa aja sih Pak kalau di akhir...
+**[02:04]** Speaker 2: Ya awal...
+**[02:04]** Speaker 1: ...bulan ini atau di bulan depan, Pak.
+**[02:06]** Speaker 2: Awal...
+**[02:07]** Speaker 1: Awal bulan depan gitu.
+**[02:08]** Speaker 2: ...misalnya dari kemarin uh apa namanya...
+**[02:12]** Speaker 1: Akhir bulan ini gimana?
+**[02:14]** Speaker 2: Sambil kita siapin dokumen-dokumennya lagi semua. Heeh.
+**[02:21]** Speaker 2: Dia mesti renewal dia. Visanya mesti renewal nanti.
+**[02:25]** Pak Yuyun: Pulang dulu lah Pak Yuyunnya gitu.
+**[02:31]** Speaker 1: Takut dipanggil POLRI.
+**[02:33]** Pak Yuyun: Memperpanjang... memperpanjang KK dulu.
+**[02:37]** Speaker 1: Memperpanjang status Bapak.
+**[02:43]** Speaker 1: Siap, siap. Jadi mungkin kalau di akhir bulan atau awal bulan itu tetap opsinya di Lampung atau Bangka bisa ya, Pak?
+**[02:51]** Pak Yuyun: Kalau saya sih kebetulan uh awal bulan keluar. Jadi baru balik lagi tuh tanggal berapa? 11-an, 11 September baru ada di Indonesia lagi.
+**[03:09]** Pak Yuyun: Paling ya...
+**[03:12]** Pak Yuyun: ...minggu ketiga lah, minggu ketiga September baru bisa lagi.
+**[03:16]** Speaker 1: Iya, berarti ini kalau misal kalau misal kita kunci di apa? Di minggu depan nih Pak, 18-20 atau 19-21 gitu misal,
+**[03:27]** Speaker 1: itu berarti Pak Yuyun enggak ikut Pak? Tapi kalau di akhir bulan Pak Yuyun bisa ikut?
+**[03:33]** Speaker 4: Saya eh... Saya usahakan ikut, Pak. Yang penting pasti aja.
+**[03:43]** Pak Yuyun: Atau mending yang dekat dulu di Lampung dulu kali dekat, ya?
+**[03:48]** Speaker 3: Iya. Kalau enggak nanti mungkin di akhir bulan aja kali Pak. Nanti kita ke Lampung dulu, nanti mungkin sekalian kami monev kegiatannya teman-teman Kemenhut kalau di Lampung agak banyak tuh mereka kegiatannya, Agroforestry Pangan segala.
+**[04:01]** Speaker 4: Betul, betul, banyak ya.
+**[04:04]** Pak Yuyun: Boleh, boleh.
+**[04:06]** Pak Yuyun: Karena sih sama aja ininya.
+**[04:07]** Speaker 3: Iya.
+**[04:08]** Pak Yuyun: Betul. Sebenarnya sama, cuma yang satunya dari sisi agak-agak kebijakan, saya lagi mereka lagi ada PSN sebenarnya untuk Agroforestry Pangan itu.
+**[04:17]** Speaker 2: Cuman tantangannya ini ada beberapa hal tentang Bangka ya. Karena tadi eh yang Bangka kan pertambangan terbuka. Kalau Bangka kan memang masif banget gitu loh. Sehingga kalau rehabilitasi lahan di Bangka tuh eh sangat penting. Kalau di Lampung justru ekonominya yang perlu didorong itu lebih eh apa? Lebih kuat kalau kalau yang di sini, karena mereka eh rehabilitasi lahannya mungkin enggak terlalu masif lah. Tapi ekonomi yang mesti dikuatin.
+**[05:03]** Speaker 3: Kalau yang concept note kita ini menyasar keduanya kan ya Pak, ya? Lampung dan Bangka kan, ya?
+**[05:08]** Speaker 4: Keduanya, Mbak.
+**[05:09]** Pak Yuyun: Yes.
+**[05:10]** Speaker 4: Keduanya, Mbak.
+**[05:11]** Pak Yuyun: Yes.
+**[05:16]** Speaker 3: Sama tadi saya nyambung sedikit kembali ke concept note lagi Pak, izin. Uh tadi yang Pak Yuyun sampaikan tadi yang terkait modeling kayaknya itu perlu jadi satu komponen tersendiri tuh, Pak.
+**[05:27]** Speaker 3: Nanti semacam modelingnya ini hasil modelingnya ini salah satu jadi baseline sebenarnya nanti kegiatan yang restorasi dan kegiatan eh hilirisasinya tadi.
+**[05:37]** Speaker 4: Iya, iya, iya. Nah ini satu kegiatan sendiri maksudnya kegiatan dalam dalam masih dalam proposal yang sedang kita susun atau proposal baru?
+**[05:46]** Speaker 3: Satu proposal aja, Pak.
+**[05:48]** Speaker 4: Satu proposal ya.
+**[05:49]** Pak Yuyun: Section baru maksudnya ya?
+**[05:51]** Speaker 3: Bikin komponen baru aja.
+**[05:53]** Pak Yuyun: Iya, komponen baru.
+**[05:54]** Speaker 4: Betul.
+**[05:55]** Speaker 4: Gimana Mbak eh Mas Fitra ini? Karena berurusan dengan data dan analisis nih kalau soal modeling.
+**[06:03]** Mas Fitra: Iya Pak, uh sebetulnya pas banget ya, karena saya pribadi sedang ada riset dengan uh seorang associate di urban planning di Bandung. Uh kami sedang mencoba uh modeling menggunakan Cellular Automata dan juga dikombinasikan dengan system dynamics. Jadi intinya sih adalah kita ingin mencoba uh dengan Cellular Automata itu me- melihat secara historis maupun ke depan itu jika tidak ada intervensi ya itu uh seperti apa sih perubahan guna lahannya gitu. Nah ini konteks kalau di Bangka misalnya ya, kita bisa melihat kalau misalnya tidak ada intervensi 20 tahun ke depan berdasarkan data historis ke belakang uh perkembangan antara tambang versus uh agroforest misalnya itu akan seperti apa ya.
+
+--- [PART 9 OF 11] ---
+
+**[00:00]** Fitra: gitu. Melihat dinamika perkembangan dual land use itu. Nah, dari perubahan guna lahan itu, saya saya dan senior saya itu coba dikombinasikan dengan System Dynamics, sehingga bisa melihat perubahan guna lahan itu tuh nantinya berdampak kepada parameter apa lagi ya gitu di luar sektor fisik gitu. Misalnya tadi kalau kalau Pak Yuyun bilang, apa ya dampaknya jika 1 meter 1 kilometer persegi tambang itu terbuka, dampaknya kepada biodiversitas seperti apa? Dampak kepada ekonomi seperti apa? Nah, itu tools atau pendekatan System Dynamics sangat membantu, Pak, gitu. Dan kebetulan banget saya sedang menyelesaikan riset itu. Jadi kalau memang dibutuhkan untuk di konseptual note ini, saya bisa coba ya diterapkan dan juga membantu mungkin menyusun si narasi konseptual note-nya dari sisi bab itu gitu. Jadi kesimpulan dari saya sih sangat viable ya, Pak, untuk diterapkan dan justru betul itu perlu diterapkan di mungkin apa ya, stage awal ya, inception ya, untuk menggali baseline gitu ya. Kalau misalnya dibiarkan itu nanti dampak kepada sektornya seperti apa gitu.
+**[01:25]** Speaker 2: Ya, sip. Berarti bisa tuh Mbak Atika untuk dimasukkan dalam salah satu seksi kegiatan di dalam proposal ini, gitu. Dan kalau Bangka dan Belitung ini karena dia kepulauan ya, pulau-pulau juga sebetulnya dampaknya dari pertambangan itu tidak hanya pada sesama landscape terestrial. Sebetulnya akan terjadi juga potensi risiko terhadap seascape-nya, pesisir dan dan lautnya gitu, karena itu akan merubah kesehatan perairan di mangrove, terus kemudian terumbu karang maupun di ini di apa namanya? lamun, padang lamun. Yang di beberapa tempat kalau dari observasi yang saya lihat, petani lada atau petani-petani itu juga kan sebagian juga ada yang merangkap sebagai nelayan ya. Gitu, sehingga kemudian dia akan punya risiko double impact gitu. Di daratannya dia akan beresiko, di lautnya juga apa namanya? penghidupan mereka juga punya risiko gitu kalau misalkan tambang dibiarkan. Ya, kira-kira seperti itu.
+**[02:50]** Fitra: Hm. Setuju, Pak. Karena ini kan kepulauan ya. Pasti perlu ada pertimbangan analisis seascape-nya ya. Oke, oke. Setuju, setuju, Pak.
+**[03:04]** Atika: Mas Fitra, saya jadi kepikiran nih. Sebenarnya kami di Bappenas gitu ya, di tahun depan kami tuh rencananya akan ada kajian semacam kajian daya dukung daya tampung. Mirip sebenarnya yang tadi disampaikan Mas Fitra gitu ya, tapi lebih ke menghitung gimana ya, sekarang kan pemerintah hitungan sedang mengoptimalisasi agroforestry untuk pangan dan energi ya. Nah, kami tuh ingin menghitung sebenarnya yang disampaikan yang disampaikan Mas Fitra tadi, si hutannya ini ekosistemnya ini landscape-nya ini kuat nggak sih sebenarnya untuk menampung hal itu? Karena sebenarnya mau mau kita bilang agroforestry itu optimalisasi, sebenarnya di beberapa case itu kan jadi downgrade ya secara tutupan lahan gitu. Karena ada yang hutannya sudah primer tapi masyarakatnya masuk terus akhirnya agroforestry gitu kan, jadi lebih terintervensi gitu. Nah, memungkinkan nggak kalau misalkan kegiatan itu kegiatan kami itu yang perhitungan daya dukung daya tampung itu kita masukkan juga nanti di komponen yang tadi terkait analisis data, tapi khusus di Lampung dan Belitung, eh di Bangka aja gitu. Jadi nanti nyambung ke modelingnya Mas Fitra juga gimana nanti ketika kita nggak ada intervensi untuk memperbaiki ekosistem akan seperti apa apa namanya modelingnya gitu.
+**[04:30]** Fitra: Hm. Ya. Kalau menggunakan apa namanya konsep perencanaan tata ruang ya, Mbak, ya. Jawabannya adalah memang sangat bisa dan diharuskan ada analisis DDL ya, daya dukung daya tampung. Karena sebelum kita merencanakan landscape itu, kita harus melihat secara komprehensif ya dari multi multidimensi atau sektor ya. Termasuk tadi terkait dengan kajian stakeholder analysis, karena kita harus tahu siapa yang bermain ya di ruang itu gitu. Dan salah satu aspek satu lagi tuh adalah kajian lingkungan. Dan dalam kajian lingkungan ini tuh salah satu analisis wajib untuk perencanaan tuh adalah terkait dengan daya dukung daya tampung. Nah, kalau kaitannya dengan konseptual note ini, kalau ingin didetailkan maka pasti ada satu poin kebutuhan untuk analisis DDL. Jadi sangat bisa, Mbak, untuk dilakukan sih. Gitu.
+**[05:45]** Speaker 3: Langsung nyambung tahun depan aja nih.
+**[05:48]** Fitra: Nah, paling gimana cara mengonsolidasikannya ya gitu kepada dua kebutuhan ini, mangga Pak Hatami mungkin, Pak Yuyun.
+**[05:58]** Pak Yuyun: Ya betul, kalau saya sih setuju. Jadi memang apa namanya agenda-agenda masing-masing anggota konsorsium memang harus masuk di di proposal ini gitu. Jadi udah pas sekali tuh agendanya Kang Fitra, agendanya Bappenas yang tadi tuh daya dukung daya tampung, masuk ke proposal ini gitu. Mantap, mantap. Lanjut, lanjut. Termasuk kalau Pak Arif ada studi kelayakan membuka lagi tambang emas juga. Langsung-langsung, Pak Arif. Lumayan gold farm-nya beneran gold farm gitu.
+**[06:34]** Fitra: Bahkan izin Pak Hatami, Pak Yuyun, dan Bu Atika ya dan rekan-rekan. Sebetulnya kan saat ini kami di di agroforestry ini sama Mbak Sofya juga sedang ini ya mencoba menyusun kajian landscape planning ya. Jadi memang kebetulan kajian DDL ini tuh akan dilaksanakan di tahun ini sih kalau dalam project kami gitu. Nah, ini sangat...
+
+--- [PART 10 OF 11] ---
+
+**[00:00]** Speaker 1: terbuka banget ya kalau gitu mm apa ya nanti hasil analisis kami juga akan coba diperlihatkan terkait dengan DDL ini barangkali e bisa menjadi sesuatu bahan untuk tadi ya kebutuhan dari Bappenas gitu. Jadi sangat terbuka untuk dikomen, diberikan masukan, dan juga disharingkan ya terkait dengan analisis ini. Tapi ya mangga e baiknya seperti apa. Kayak gitu.
+**[00:29]** Pak Yuyun: Semakin menarik ini. Ya. Saya pikir e semakin spektrumnya semakin luas nih. Terus kemudian e kita bungkusnya aja nih kira-kira harus segera dibuat. Ini ada deadlinenya Mbak Mbak Atika? Untuk ini? Untuk proposal ini kira-kira dari Birocan?
+**[00:50]** Bu Atika: Kalau dari Birocan gak ada, Pak. Cuman lebih cepat lebih baik ya, Pak, ya. Karena takutnya keburu ganti window gitu maksudnya kita ketinggalan. Mungkin kita kalau bisa selesaikan di bulan ini sih, Pak, kalau target saya.
+**[01:05]** Speaker 2: Deadlinenya udah minggu kemarin, Pak Yuyun.
+**[01:08]** Bu Atika: Iya. Udah lewat ya, Pak. Kalau gak mungkin gini, Pak. Mungkin kita buat timeline gitu, mungkin minggu depan kita sudah bisa e apa namanya, review dan kerjakan yang dengan format baru gitu kan. Jadi tig- di 3 minggu terakhir, minggu terakhir kita tinggal tambal-tambal aja yang kurang-kurang.
+**[01:30]** Pak Yuyun: Ya. Ya, kalau jadi saya ke Bangka, mungkin kita kerja bareng Pak Hatami nanti se- setelah tanggal 15?
+**[01:36]** Pak Hatami: Setuju. Siap, siap. Keroyokan gitu ya? Kalau saya sih berangkat e hari Senin depan.
+**[01:46]** Pak Yuyun: Oh. Hari Senin depan saya masih Saya masih ada meeting di Jakarta ini dengan Kadin. Tanggal hari Jumat. Paling hari Jumat atau ya hari Jumat mungkin baru meluncur. Pak Arif mau join juga sekalian?
+**[01:59]** Pak Arif: Kita keroyokan. Harus datang ini. 12 13 ah bisa Pak, sampai 15 16.
+**[02:11]** Pak Yuyun: Ya, 12 13.
+**[02:13]** Pak Arif: Tapi saya gak ikutan ke Bangka ya, Pak. Kayaknya saya Kayaknya saya gak ikutan.
+**[02:18]** Pak Yuyun: Ah, sip. Berarti saya bareng nanti dengan Pak Arif.
+**[02:23]** Speaker 3: Saya berangkatnya juga tanggal 14, Pak.
+**[02:25]** Pak Yuyun: Langsung ke Bangka?
+**[02:29]** Pak Arif: Kan saya mau ngomong, Pak. Saya ngomong sama Pak udah ngomong sama boss gitu kan. Boss, kata diundang sama Pak Hatami tuh ke Bangka, gitu. "Lho, kita terakhir kan tahunya tanggal 18." "Jadi, tapi gak tahu lah entar coba kita klik-klik boss lagi."
+**[02:56]** Pak Yuyun: Sip, siap. Oke, masih ada lagi, Teman-teman, yang mau disampaikan?
+**[03:03]** Bu Atika: Pak Yuyun, mungkin satu lagi, Pak. Kalau lihat dari diskusi kita dari tadi sebenarnya kayaknya kan lebih beratnya ke pemulihan ekosistem ya. Kalau menurut saya nanti mungkin kita tonjolkan ke situ aja, Pak. E sisi bioekonominya mungkin gak perlu kita tonjolkan sekali gitu ya, menurut saya ya udah mendukung ke bioekonomi aja, tapi e mungkin gak perlu jadi bagian bioekonomi karena saya takutnya karena waktu kita hanya 3 tahun ya, kemudian dilihat e dari diskusi sebenarnya kalau toh hilirisasi nilai e tambah dan maksudnya kalau kita adopsi bener-bener prinsip bioekonomi kayaknya terlalu berat, saya khawatir nanti malah jadi terlihat tidak realistis aja e konsep not kita gitu.
+**[03:45]** Pak Yuyun: Ya, tapi arahnya tetap ke sana.
+**[03:47]** Bu Atika: Tapi arahnya tetap ke sana.
+**[03:48]** Pak Yuyun: Ya. Mungkin ecosystem and community resilience saja kali ya? Kan ada unsur e masyarakat di petani ya? E penghidupan dan yang lain-lain. Oke. Setuju saya untuk kita
+**[04:04]** Speaker 4: Pak Yit, e kayaknya dulu saya kan pernah ikut e terlibat di proposalnya e Center of Ex- Center of apa ya, Mbak? Center of-nya Ecosys- Center oh, ya sorry, Center of System-nya IPB. Mereka juga bikin e kajian oh bukan kajian, mereka bikin kegiatan terkait dengan hilirisasi aren. Nah, itu memang e arahnya memang ke produk e hasil arennya di kom- e di hutan adat kalau gak salah. Nah, itu mereka itu sudah dapat e sekarang infonya akhir bulan ini tuh sudah e pengumuman untuk mm kelayakan proposal, jadi mereka udah gol, infonya udah gol dari dari biro perencanaannya udah gol, udah ACC, tapi pendanaannya itu tidak sebanyak yang mereka ajukan. Nah, salah satu perbaikannya yang menjadi catatan e mereka adalah bahwasanya e mereka itu dituntut untuk lebih ke spesifik pemanfaatan ke masyarakatnya, Pak. Jadi, jangan lupa di concept note-nya lebih ditonjolkan juga, maksudnya kalau kita menekankan restorasi ekosistemnya jangan sampai itu melupakan bahwa implementasi apa e hasilnya itu di dinikmati masyarakat itu dalam hal apa. Karena e masyarakat ini sebagai poinnya FOLU ini supaya mereka bisa menerima manfaatnya secara langsung dan berkelanjutan. Itu sih, Pak.
+**[05:41]** Pak Yuyun: Ya. Ya, setuju. Makanya tadi saya sampaikan
+**[05:43]** Pak Hatami: Ini tuh yang e proposalnya di-share sama Bu Atika ya? Yang IPB itu ya?
+**[05:51]** Bu Atika: Bukan, yang IPB saya share-nya dulu banget sih, Pak, awal-awal.
+**[05:55]** Pak Hatami: Ini yang baru lagi kayaknya Pak Hatami.
+**[05:58]** Bu Atika: Kalau gimana ya mbahasnya?
+**[06:00]** Pak Hatami: Bukan yang kemarin itu IPB juga kan, yang di-share?
+**[06:02]** Bu Atika: Iya, iya, iya. Waktu itu. Bukan yang barusan ya, bukan. Kalau barusan ada
+**[06:05]** Pak Hatami: Oh bukan ya? Bukan. Oh, oke, oke.
+**[06:09]** Bu Atika: Yang IPB yang ini. Sama sih, Pak.
+**[06:11]** Pak Hatami: Kan komoditasnya itu kan sama ya, gula aren juga?
+**[06:15]** Speaker 4: Iya, gula aren.
+**[06:17]** Bu Atika: Iya, itu yang saya up di grup tuh, Pak, yang Center of System.
+**[06:23]** Pak Hatami: Iya, yang itu kan, ya?
+**[06:25]** Speaker 4: Iya, betul. Nah, ini yang sudah
+**[06:27]** Pak Hatami: Ini kalau boleh tahu itu dipangkas berapa itu si budgetnya? Kan budgetnya kan gede sekali tuh, 60-an.
+**[06:33]** Speaker 4: Kalau itu belum belum ini sih, Pak, belum dispill berapa ininya yang didapatin.
+**[06:40]** Pak Hatami: Tapi lumayan dipangkas.
+**[06:43]** Bu Atika: Iya, lumayan kepangkas kok. Itu kepangkas banyak waktu itu.
+**[06:48]** Speaker 4: Jadi mereka karena karena ini kan mereka ngajuin di dua proposal kegiatan kan, Pak. E di pengembangan LMS-nya. Nah, terus masukannya dari si apa e panitia
+
+--- [PART 11 OF 11] ---
+
+**[00:00]** Faisal: ...volumenya itu akhirnya diminta jadi satu proposal terus dipangkas banyak sih. Hitungannya banyak, Pak.
+**[00:08]** Speaker 2: Oke, betul. Sebetulnya itu yang dipangkas itu karena ada proposal kita yang ditunggu. Jadi, jadi yang dipangkas beda gitu.
+**[00:16]** Speaker 3: Sangat optimis sekali ini Pak, ya.
+**[00:18]** Faisal: Sangat optimis. Husnuzan ini kita ya, husnuzan.
+**[00:22]** Speaker 4: Aamiin, aamiin.
+**[00:24]** Speaker 2: Iya.
+**[00:28]** Speaker 2: Ya, jadi ekosistem dan community resilience itu apa namanya? Yang dari sisi community-nya memang harapannya juga kita bisa memunculkan hal-hal yang real ya dan saya pikir lewat project Agroforest kita sudah ada pembelajaran ya, baik di Bangka maupun di Lampung. Hal yang realnya apa saja dan tidak satu commodity kan. Sehingga mudah-mudahan itu bisa menjadi nilai plus di tim panelnya Folu gitu ya, untuk proposal kita gitu. Mungkin itu bisa kita kuatkan gitu di situ. Gitu, Mas Faisal.
+**[01:06]** Faisal: Oke, siap. Mantap, Pak.
+**[01:08]** Speaker 2: Siap.
+**[01:10]** Speaker 2: Saya rasa mungkin kita sudah 1 jam lewat ini. Ee yang di kantor ini apa berburu kendaraan ini nanti terlalu sore.
+**[01:21]** Speaker 2: Kalau yang di rumah kita enggak enggak pusing-pusing dengan dengan kendaraan.
+**[01:26]** Speaker 5: Saya masih di kebun, Pak.
+**[01:28]** Speaker 2: Oh, masih di kebun. Bang Arif juga masih di kebun.
+**[01:31]** Speaker 2: Siap.
+**[01:33]** Speaker 2: Oke, kalau tidak ada tambahan, mungkin kita cukupkan dulu. Ee kita sepakati kapan kira-kira pembaharuannya bisa kita lihat lagi ya, kira-kira?
+**[01:45]** Speaker 2: Apakah sebelum ke Bangka, teman-teman apa setelah dari Bangka gitu?
+**[01:48]** Speaker 6: Mmm minggu depan lah ya.
+**[01:52]** Speaker 2: Siap.
+**[01:54]** Speaker 6: Ya.
+**[01:55]** Speaker 2: Minggu depan di sekarang hari Rabu, berarti kurang lebih di hari Rabu juga ya kita akan coba lihat hasilnya. Siap.
+**[02:03]** Faisal: Siap.
+**[02:04]** Speaker 2: Baik. Terima kasih banyak Mbak Atika, Mas Faisal, Pak Hatami, Pak Arif, Bang Zul, Mas Raihan, Mas Mas Fitra, Mas Sofyan, semuanya. Mudah-mudahan sehat selalu dan kita lancar untuk merampungkan konsep note ini.
+**[02:22]** Speaker 2: Sementara mungkin demikian, kita tutup diskusinya. Assalamualaikum warahmatullahi wabarakatuh.
+**[02:29]** Speaker 6: Wa'alaikumussalam warahmatullahi wabarakatuh.
+**[02:31]** Faisal: Wa'alaikumussalam.
+**[02:32]** Speaker 5: Wa'alaikumussalam warahmatullahi wabarakatuh.
+**[02:37]** Atika: Terima kasih Bapak Ibu semua.
+**[02:40]** Speaker 2: Terima kasih, Assalamualaikum.

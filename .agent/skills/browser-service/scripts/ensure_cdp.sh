@@ -38,17 +38,8 @@ fi
 
 echo "   Using: $CHROME_PATH"
 
-# ── 3. Launch headless Chromium with CDP ──
-nohup "$CHROME_PATH" \
-    --headless \
-    --remote-debugging-port=$CDP_PORT \
-    --remote-debugging-address=127.0.0.1 \
-    --no-sandbox \
-    --disable-gpu \
-    --disable-dev-shm-usage \
-    --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" \
-    --user-data-dir="$HOME/.config/antigravity-chrome-data" \
-    > /tmp/chrome_stdout.log 2>/tmp/chrome_stderr.log &
+# ── 3. Launch headless Chromium with CDP via Playwright ──
+nohup xvfb-run -a python3 "$(dirname "$0")/playwright_cdp_server.py" > /tmp/chrome_stdout.log 2>&1 &
 
 # ── 4. Wait up to 5 seconds for CDP to become responsive ──
 for i in $(seq 1 10); do

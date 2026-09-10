@@ -1,56 +1,114 @@
 ---
 name: WhatsApp Connector
-description: Allows the agent to read and send messages, check status, and monitor communities on WhatsApp Web using a persistent session.
+description: Read and send on WhatsApp Web over a persistent CDP browser session inside WSL. Find contacts, dump chat history, list and download document attachments, and send messages with target verification so a private message can never land in a group.
 ---
 
-# WhatsApp Connector Skill
+# WhatsApp Connector
 
-This skill enables the agent to interact with WhatsApp Web. It relies on a persistent Chromium session managed by the `browser-service`.
+Drives an already-logged-in WhatsApp Web session through Chrome DevTools
+Protocol. Nothing here logs in or scans a QR code by itself.
 
-## Capabilities
+## Where things actually live
 
-1. **Send Messages**: Search for a contact or group and send text messages.
-2. **Read Today's Updates**: Summarize chats, communities, and status updates from the last 24 hours.
-3. **Monitor Status**: Check recent status updates from contacts.
-4. **Community Access**: Access and read updates from joined communities.
+| Bagian | Lokasi |
+| :--- | :--- |
+| Sesi login (profil Chrome, ~1 GB) | `~/.config/antigravity-chrome-data` **di dalam WSL Ubuntu** |
+| Browser service | WSL, port `9222`, dijalankan dengan `xvfb-run` |
+| Repo dilihat dari WSL | `/mnt/c/Users/<user>/.gemini/antigravity-ide/scratch/ai-second-brain` |
 
-## Prerequisites
+Ini **hanya jalan dari dalam WSL**. Tidak ada profil WhatsApp di sisi Windows,
+dan `ensure_cdp.sh` memang skrip Linux (`xvfb-run`, path `chrome-linux`).
 
-- The `browser-service` must be running with the persistent data directory:
-  `--user-data-dir="$HOME/.config/antigravity-chrome-data"`
-- User must have performed the initial QR scan.
+## Menyalakan browser service
 
-## Usage Guidelines
+Harus proses **persisten**. Menjalankannya dengan `&` di dalam
+`wsl -- bash -lc "... &"` akan mati begitu perintah WSL selesai, dan gejalanya
+membingungkan: CDP sempat hidup lalu hilang beberapa detik kemudian.
 
-### Sending a Message
-1. Use `browser_subagent` to navigate to `https://web.whatsapp.com`.
-2. Click the search bar (Selector: `div[contenteditable="true"][data-tab="3"]`).
-3. Type the contact/group name.
-4. Click the correct chat from the results.
-5. Type the message in the input box (Selector: `div[contenteditable="true"][data-tab="10"]`).
-6. Press Enter.
+```bash
+# di dalam WSL, tahan prosesnya (mis. sebagai background task yang tidak ditutup)
+exec xvfb-run -a python3 .agent/skills/browser-service/scripts/playwright_cdp_server.py
+```
 
-### Reading Today's Updates
-1. Navigate to `https://web.whatsapp.com`.
-2. Scan the left sidebar for chats with recent timestamps.
-3. To read Status: Click the Status icon (Selector: `span[data-icon="status-v3"]` or similar).
-4. To read Communities: Click the Communities icon (Selector: `span[data-icon="community-v2"]`).
+Cek siap atau belum:
 
-### Forwarding from Channels
-1. Navigate to `https://web.whatsapp.com`.
-2. Click the 'Channels' icon in the sidebar (Selector: `span[data-icon="newsletter-outline"]` or `span[data-icon="channels-outline"]`).
-3. Click the desired channel (e.g., "Karir & Growth You").
-4. Identify the latest post (usually the bottom-most entry).
-5. Hover over the post and click the 'Forward' arrow icon (appears on the top right or bottom of the message block).
-6. In the search box of the 'Forward message to' dialog, search for the target groups/contacts.
-7. Check the boxes for all intended recipients.
-8. Click the green 'Send' circle button.
-9. **Limitation**: WhatsApp Web currently does not support forwarding channel posts to 'My Status'.
+```bash
+curl -s http://127.0.0.1:9222/json/version
+python3 .agent/skills/whatsapp-connector/check_wa.py   # "WhatsApp is connected and ready."
+```
 
-## Safety & Privacy
-- **DO NOT** read messages outside the scope requested by the user.
-- **DO NOT** share private chat content with external APIs unless explicitly instructed.
-- Always confirm before sending sensitive or bulk messages.
+Kalau muncul QR code, sesi kedaluwarsa dan pemilik harus memindai ulang sekali
+lewat jendela Chrome yang terlihat.
 
-## Persistence Note
-The session is stored in `~/.config/antigravity-chrome-data`. If the agent reports a QR code screen, it means the session has expired or was cleared.
+## Perkakas: `wa_tools.py`
+
+Semua dijalankan dari root repo, di dalam WSL.
+
+```bash
+S=.agent/skills/whatsapp-connector/wa_tools.py
+
+# cari kontak, dan lihat apakah namanya cocok PERSIS
+python3 $S find "Yuyun"
+
+# tampilkan seluruh pesan yang termuat, dengan nomor baris
+python3 $S dump "Hariyadi"
+
+# daftar lampiran dokumen beserta nomor barisnya
+python3 $S list-docs "Hariyadi"
+
+# unduh lampiran berdasarkan nomor baris dari list-docs
+python3 $S download "Hariyadi" --rows 35,37,38 --out ./wadocs
+
+# kirim: TANPA --send hanya verifikasi target, tidak mengirim apa pun
+python3 $S send "Yuyun Kurniawan" --file pesan.txt
+python3 $S send "Yuyun Kurniawan" --file pesan.txt --send
+```
+
+`--file` dipakai untuk pesan multi-baris. Enter di WhatsApp berarti kirim, jadi
+baris baru diketik sebagai Shift+Enter.
+
+## Aturan pengiriman
+
+**Selalu jalankan dry-run lebih dulu, dan tetap minta persetujuan pemilik
+sebelum `--send`.** Approval gate di CLAUDE.md berlaku penuh untuk WhatsApp.
+
+`send` membatalkan diri sendiri kalau:
+
+- nama di header percakapan tidak **sama persis** dengan argumen `chat`, atau
+- header memuat penanda grup (`participants`, `is also in this group`, dan
+  sejenisnya).
+
+Ini bukan kehati-hatian berlebihan. Mencari "Yuyun" memunculkan kontak lain
+("Yuyun Keripik Asya") dan beberapa grup yang memuat teks
+"Yuyun Kurniawan is also in this group" (aGROWforests Reborn, Mitra Kadin RFBH).
+Tanpa verifikasi, pesan personal bisa tersiar ke grup, dan itu tidak bisa
+ditarik kembali.
+
+## `wa_manager.py` (lama)
+
+Masih ada karena punya jalur kirim lampiran berkas yang belum dipindahkan ke
+`wa_tools.py`. **Jangan pakai untuk mengirim teks**: ia memilih chat dengan
+`get_by_title(name).first` tanpa verifikasi apa pun, sehingga bisa nyasar ke
+grup seperti dijelaskan di atas.
+
+```bash
+# hanya untuk melampirkan berkas, dan pastikan nama kontaknya persis
+python3 .agent/skills/whatsapp-connector/wa_manager.py send \
+  --to "Nama Persis" --message "..." --file /path/berkas.pdf
+```
+
+## Catatan selector (hasil coba-coba, jangan diubah tanpa alasan)
+
+- Kotak pencarian dan kotak ketik ada di balik shadow root Lexical milik Meta.
+  Selector CSS meleset; `get_by_role("textbox")` menembusnya.
+- Scroll dengan mouse wheel **tidak** memicu pemuatan riwayat. Kontainer scroll
+  yang sebenarnya harus dicari lalu digerakkan lewat `scrollTop`.
+- Bubble dokumen hanya punya afordans `title="View ..."`. Tombol unduhnya ada di
+  **viewer layar penuh**, sebagai `button[aria-label="Download"]`.
+- Viewer yang tertinggal terbuka dari pemanggilan sebelumnya akan menelan semua
+  klik berikutnya. Setiap perintah menutupnya lebih dulu.
+- `[title]` pertama di header chat adalah tombol "Profile details", bukan nama
+  kontak. Nama chat adalah baris pertama `innerText` header.
+- Deteksi dokumen tidak boleh hanya mengandalkan ekstensi berkas. WhatsApp
+  kadang menampilkan nama tanpa ekstensi (mis. `DOC-20260225-WA0016.`), jadi
+  baris metadata ("40 pages - PDF - 2 MB") dan ikon dokumen ikut diperiksa.

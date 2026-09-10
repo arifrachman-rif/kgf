@@ -1,0 +1,285 @@
+<!-- MOM_PREPENDED_START -->
+# Minutes of Meeting (MOM)
+
+> Status: DRAFT (local pipeline, belum direview)
+> Source: local recording `2026-08-18_1435_biweekly_aGROWforests.wav`, Gemini `gemini-flash-lite-latest` (audio-in, speaker labels, ~$0.025) (cached)
+> Registry: local-1788588841 | Review via /mom before sharing
+
+# MOM: aGROWforests Biweekly Meeting
+
+| Field | Value |
+|:---|:---|
+| Date | 2026-08-22 |
+| Time | 21:06 WIB / 16:06 AST |
+| Duration | 60 minutes |
+| Participants | Speaker 1 (Facilitator / Presenter), Speaker 2 (Sandra), Speaker 3 (Pak Arif), Speaker 4 (Presenter on Findings), Silvia, Roy, Vera, Paris, Yuyun, Hatami, Everjan, Dean |
+| Facilitator | Speaker 1 |
+| Subject | Maglung Project Visit Findings, Switch Asia Extension Programs, and Internal Coordination |
+
+---
+
+## Executive Summary
+The team discussed the Maglung project visit findings and how they will be combined with the BDO report to structure the GIZ and EU Switch Asia extension period programs. Six core proposed programs focusing on supply chain, food safety, farmer capacity, organizational development, gender, and youth engagement were outlined to improve operations and compliance. Additionally, the team addressed calendar overlaps, internal Solidaridad alignment, and the rescheduling of the annual meeting due to the cancellation of the October delegation visit.
+
+---
+
+## Discussion
+
+### Maglung Project Visit Findings and Extension Period Preparation
+The team reviewed the objectives of the recent Maglung project visit, which included verifying KGF project implementation, training organization, farmer monitoring, and documentation such as lab books and M&E databases. These findings will be combined with the BDO report findings to inform the GIZ and EU Switch Asia extension period. The primary goal is to improve KGF operations, business, supply chain compliance, and farmer capacity. Six proposed programs were detailed: Supply Chain and Quality Management Strengthening; Food Safety, Good Manufacturing Practice, and Warehouse Management; Farmer Capacity Building and Extension System; Organizational Development and Governance; Gender and Inclusion; and Youth Engagement. Budget modifications for the Switch Asia grant are currently pending review following documentation submission.
+
+### Internal Solidaridad Alignment, Communication, and Annual Meeting
+The discussion covered the need to align operations between the Solidaridad office and team in Indonesia regarding roles and responsibilities. The team also addressed meeting calendar overlaps, specifically noting the monthly meeting involving Hatami and Everjan, and agreed that non-attendance must be communicated in advance. Furthermore, the in-person visit by the Solidaridad and Ministry of Foreign Affairs delegation in early October was cancelled due to a personal health situation of a ministry employee. The team needs to decide whether to hold the annual meeting around the original early October dates or postpone it to the end of November.
+
+---
+
+## Decisions Made
+
+| # | Decision | Rationale |
+|:---|:---|:---|
+| 1 | Findings from the Maglung visit and BDO report will be combined and summarized to structure the GIZ/EU Switch Asia extension period programs and improve operational compliance. | To ensure cohesive program planning and meet strict EU and GIZ requirements for the grant extension. |
+| 2 | Monthly coordination meetings will be added to the schedule alongside biweekly meetings to evaluate checklist action points against monthly reports. | To improve organizational governance and track progress effectively. |
+| 3 | WhatsApp group check will be used to verify the status of the overlapping monthly meeting with Hatami and Everjan. | To resolve scheduling conflicts and ensure proper communication among participants. |
+
+---
+
+## Action Items
+
+| # | Task | Owner | Deadline | Priority |
+|:---|:---|:---|:---|:---|
+| 1 | Summarize findings, highlights, and proposed programs on paper and share with KGF (with Sandra and Yuyun in CC). | Speaker 1 / Speaker 2 | 2026-08-30 | High |
+| 2 | Share and work on action points and priorities for the extension programs. | Speaker 1, Speaker 2, Pak Arif | 2026-08-30 | High |
+| 3 | Check WhatsApp group to confirm if the monthly meeting with Hatami and Everjan is ongoing. | Meeting participants | 2026-08-23 | Medium |
+| 4 | Discuss internally and decide on the timing of the annual meeting (early October vs. end of November) following the cancellation of the October delegation visit. | Meeting participants | 2026-09-05 | Medium |
+
+---
+
+## Next Meeting
+- **Date**: 2026-09-04
+- **Agenda**: Extension program prioritization, KGF system development session planning, and annual meeting schedule confirmation.
+
+---
+
+## Revision History
+
+| Revision | Date | Summary |
+|:---|:---|:---|
+| v1.0 | 2026-08-22 | Initial MOM |
+
+---
+
+<!-- MOM_PREPENDED_END -->
+
+# Transcript: 2026-08-18_1435_biweekly_aGROWforests.wav
+
+- Engine: Gemini `gemini-flash-lite-latest` (audio-in, speaker labels, ~$0.025)
+- Audio duration: 00:00
+- Generated: 2026-08-22 21:09
+
+---
+
+
+--- [PART 1 OF 3] ---
+
+**[00:00]** Speaker 1: Uh, Paris is still on the uh on the preparation. Paris, you will receive the official reports from from the the certification, but then um last Friday I had a chance to to sit together with Silvia, Roy and also Vera to discuss about findings that we found in Maglung. Um, you will also receive an email about that. Yeah.
+**[00:23]** Speaker 1: Uh-huh.
+**[00:24]** Speaker 1: Uh, we are drafting it internally.
+**[00:27]** Speaker 1: So, uh send her a little bit context to you. The the purpose of the visit is to verify uh the project implementation uh by KGF. So, we look at how the training was organized, uh how farmers are being monitored, and how the documentation related to the project like if it is well documented, if we have the uh the lab book, if we have the monitoring and evaluation database,
+**[00:59]** Speaker 1: something like that. Um so that's the purpose of the visit.
+**[01:03]** Speaker 1: Uh and we are also planning to use the findings from the visit to base for uh recommend uh recommendation for the extension period. What are the activities we want to focus on based on the current situation uh of the ground.
+**[01:23]** Speaker 1: So let me share some of the highlights uh Paris and also you uh because we have great we have quite some findings uh but then I will just mention uh the the most important one that we need to put attention on.
+**[01:44]** Speaker 2: Maybe we can combine those findings with the findings also from um from the BDO uh report.
+**[01:52]** Speaker 1: Yes. Sure.
+**[01:53]** Speaker 2: We can use the the extension with the GIZ extension to focus to not only just continue the work, but also uh focus on the the the most important uh findings and improve uh our if's uh companies uh operations where where it it can be improved.
+**[02:17]** Speaker 2: Because also with when you use which Asia will start, the EU will only be more strict than GIZ. uh so.
+**[02:25]** Speaker 1: Indeed.
+**[02:27]** Speaker 2: If if if if you want to join these kind of these kind of bigger uh grants, then then um it's important that you improve your operations and improve your business. And this is obviously part of being a startup, right?
+**[02:46]** Speaker 2: So, this is there's no from my perspective, there's nothing wrong with it, but it's just something that's you have to show that you're improving um uh your your operations uh and be able to grow.
+**[03:01]** Speaker 1: Yeah, indeed.
+**[03:02]** Speaker 1: And then uh I'm worried if it might seem to be like uh many points to improve, but then uh we will support you on that. So, uh we are already thinking to have like uh a dedicated uh session uh and setting up system together like for for example, like a week uh here in where uh you can send the KGF team uh to sit together with us and then uh develop the system that we are aiming to have to help you in uh in doing the operation.
+**[03:39]** Speaker 1: So the the purpose of uh the focus of our extension period and also improvement in the future is to strengthen uh KGF supply chain uh compliance and also farmer capacity.
+**[03:52]** Speaker 1: The first program that we are going to uh propose is about the supply chain and quality management strengthening.
+**[03:59]** Speaker 4: Uh, we propose this because uh we have uh findings related to the pricing, quality, traceability, COGS and also purchasing plan that's we think that we still need to improve on.
+**[04:13]** Speaker 4: Uh, the first point is to to have like a transparent pricing and also grading system.
+**[04:19]** Speaker 4: So in this case, uh we could uh have like a structure on how you define a transparent pricing so then you can communicate that easily to the farmers.
+**[04:31]** Speaker 4: Uh you already have like mechanism for now, but then uh we need to put it into uh something written and something uh structured.
+**[04:41]** Speaker 4: And the second one uh it's still for the first program, yeah.
+**[04:44]** Speaker 4: It's about the post harvest and quality control training.
+**[04:48]** Speaker 4: Um uh so what we found is that uh the training we had so far, it's it's uh individual training and sometimes uh how to say some of the farmers got the got training on the post harvest some of the uh not yet.
+**[05:05]** Speaker 4: So, we would like to train farmers on proper harvesting and trying so that we can prevent the uh the moldy berries.
+**[05:13]** Speaker 4: Uh for that, we need to establish the SOP for rejecting moldy berries.
+**[05:19]** Speaker 4: And uh perhaps we can think about uh giving uh building building the drying facility, a simple one, something that farmers can replicate.
+**[05:29]** Speaker 4: So, uh I don't know if we can still put that into uh the project budget during the extension period to have like an example of uh drying facility.
+**[05:42]** Speaker 4: It doesn't need to be a fancy one.
+**[05:44]** Speaker 4: Uh it is more important that the drying facility that we develop is something that farmers can copy easily if they have uh for example like uh capacity to do that.
+**[05:55]** Speaker 4: So it doesn't need to be really fancy.
+**[05:59]** Speaker 4: And then uh we also think about end-to-end traceability system.
+**[06:04]** Speaker 4: Uh so we need to develop a simple digital or manual system.
+**[06:08]** Speaker 4: I think digital would be better uh from farmer to KGF and then to first station.
+**[06:15]** Speaker 4: So uh I understood that you already developed the traceability dashboard.
+**[06:21]** Speaker 4: So then we can perhaps optimize that and put that into practice on the ground.
+**[06:28]** Speaker 4: So, yeah, hopefully we can have like uh and with the support from Fair Food uh with the app uh so then hopefully we can have like uh each bag that you delivered to first station, it's with the QR code and farmer data.
+**[06:44]** Speaker 4: And also uh the COGS calculation and purchasing plan.
+**[06:48]** Speaker 4: So, uh we would like to develop uh together the COGS and also purchasing plan.
+**[06:56]** Speaker 4: So, we know uh like uh already like forecast for six until 12 months purchasing based on uh the demand we have now, 400 uh metric tons.
+**[07:11]** Speaker 4: That's uh for the first program.
+**[07:13]** Speaker 4: The second program is about the food safety, good uh manufacturing practice and warehouse management because we found that uh personal hygiene and warehouse uh compliance is still uh subject for improvement.
+**[07:30]** Speaker 4: So, we would like to introduce basic HACCP and GMP in the warehouse uh including the SOP for personal hygiene, sanitation and pest control.
+**[07:42]** Speaker 4: I think we need to start focusing on that part of uh for for the warehouse uh in KGF.
+**[07:52]** Speaker 4: And also uh for the warehouse improvement, I think it's important to organize like storage area, proper labelling and also training to your staff.
+**[08:01]** Speaker 4: I think it's the one of the highlight that uh you should have like um uh training uh for for your team.
+**[08:11]** Speaker 4: So they are well uh well trained, well equipped and could make the decision based on the uh on the standard.
+**[08:22]** Speaker 4: And also uh start uh start thinking about the internal audit so we could have like monthly internal audits uh with corrective action tracking.
+**[08:35]** Speaker 4: Um we can start small and then keep growing with that.
+**[08:40]** Speaker 4: The third program is about the farmer capacity building and extension system.
+**[08:45]** Speaker 4: So, we have quite some findings about the training.
+**[08:50]** Speaker 4: We uh we found that uh not not all farmers have been visited uh especially for the focus farmers.
+**[09:00]** Speaker 4: Their farm not all of their farms have been visited.
+**[09:04]** Speaker 4: So, uh we would like to to improve on that and also uh we found that some of the farmers demand for the for the trainings because uh for now the training is seems to be uh limited.
+**[09:21]** Speaker 4: Uh not limited yet, like you uh there's uh sometimes the the number of particip participate uh participate participant is limit uh it's you limit the number of participants for the training so some of them could not join.
+**[09:39]** Speaker 4: So, perhaps we should improve that in the future.
+**[09:42]** Speaker 4: So, what we what would be suggested is to have uh farmer field school and farm visits.
+**[09:49]** Speaker 4: So, at least uh uh each each farms of the of the focus farmers, those 200 farmers are visited by
+
+--- [PART 2 OF 3] ---
+
+**[00:00]** Speaker 1: field officers at least once a month, uh uh I think that should be an idea, uh not be not to demanding and not too little visit.
+**[00:15]** Speaker 1: Uh so then we can uh we can really select the focus farmers based on the productivity and the potential of of their farm, not only the participation and their uh activeness in the training, something like that.
+**[00:29]** Speaker 1: Because at the end uh they need to produce and sell to you.
+**[00:33]** Speaker 1: Uh that's the the the main uh goal.
+**[00:38]** Speaker 1: And then for the nursery, uh it's already well placed, uh well uh well developed, but uh I think SOP will will help.
+**[00:49]** Speaker 1: Uh we need to develop the SOP for that.
+**[00:52]** Speaker 1: And then for the financial literacy and record keeping.
+**[00:56]** Speaker 1: Uh you already started the financial literacy training, um which is really good.
+**[01:02]** Speaker 1: I really like that.
+**[01:03]** Speaker 1: Um, so hopefully we can also expand that the financial literacy training for the extension period.
+**[01:11]** Speaker 1: So then uh the awareness about uh financial part is is uh is there.
+**[01:18]** Speaker 1: So farmers are aware that uh they cannot just do the farming, but they also have to maintain the business, something like that.
+**[01:26]** Speaker 1: Um, and also think about redesign the log books to make it more farmer friendly, so then they can fill it by themselves because now, uh, only one farmer who really feel in the log book,
+**[01:43]** Speaker 1: uh, which is uh good, but then it's sad because the other farmers I am must be in the office.
+**[01:49]** Speaker 1: So, our target is to to make and train farmers uh on how to fill in the log book independently.
+**[01:56]** Speaker 1: So then all of the focus farmers uh could have uh could have the log books fill in according to the activities they carried out uh in the field.
+**[02:08]** Speaker 1: And also uh to to make the training more available uh to to all farmers uh and not really limited.
+**[02:19]** Speaker 1: And then to really look at uh uh the needs of farmers, yeah, for the training because uh it seems that they some of them still need more trainings.
+**[02:33]** Speaker 1: Uh the the fourth program is the organizational development and governance.
+**[02:39]** Speaker 1: Uh we found out that the coordination, the SOP, monitoring and evaluation is still lacking.
+**[02:46]** Speaker 1: Uh management system and documentation need to be developed.
+**[02:50]** Speaker 1: So, um uh I heard from Sylvia that you have the organization chart, job description, but I think it's good to make them into like uh one document that always accessible, so you can easily show it to to any auditors that uh hey, this is the organization chart, this is person in charge, this is their job description.
+**[03:13]** Speaker 1: So, uh it's it will help you to make to make the audit easily in the future, especially if we work with EU switch Asia like uh like uh Sandra has mentioned before.
+**[03:26]** Speaker 1: And then for the communication and coordination, uh I think it's good to to have like a monthly coordination meetings uh.
+**[03:36]** Speaker 1: We have this biweekly meetings, but I think uh it will be good to have like a monthly meetings to discuss about the the monthly reports uh and then uh put like the checklist on for example actions points that we have decide uh for example for next months and then at the end of the the next months we we evaluate if we already uh accomplished all the checklist or not, something like that.
+**[04:06]** Speaker 1: Including uh like all the activities, training, training, uh something like that.
+**[04:13]** Speaker 1: And then the last program is about the gender and inclusion.
+**[04:18]** Speaker 1: Uh, I heard that uh you have like a good program with uh KWT, kelompok wanita tani, which is really good.
+**[04:25]** Speaker 1: I really like that.
+**[04:26]** Speaker 1: Um, so we could have uh more trainings with uh with them, especially for the post harvest handling and household financial record training because uh what I heard uh during the very first baseline in the past uh when uh the project manager was still Dean, uh women play like a significant role in the uh in of like in the financial structure of the uh of pepper farming because they influence the decision of the farmers whether they will buy the the inputs or not and whether they will spend budget on the food seedlings or not.
+**[05:15]** Speaker 1: So, I think involving woman uh uh in the post harvest handling and also financial also financial record training will be really a good idea to work on.
+**[05:28]** Speaker 1: And the last one is the youth engagement.
+**[05:31]** Speaker 1: So, uh we can consider to to engage with the young farmers available in the area to become potential future facilitators if we expand uh the beneficiaries.
+**[05:49]** Speaker 1: That's what we we are going to to propose uh Sandra, Arif, Masto and others uh through GIZ for the extension period based on the findings we we found during the visit of Sylvia and right.
+**[06:10]** Speaker 1: That's all from my side.
+**[06:14]** Speaker 1: Any comments or questions?
+**[06:17]** Speaker 2: It's quite a lot, so, so you will probably Indeed.
+**[06:21]** Speaker 2: You probably have something on paper, right?
+**[06:24]** Speaker 1: Yeah.
+**[06:25]** Speaker 2: Yeah, it's already written, so I can uh later on uh what we will do is like we will uh summarize the findings, the highlights and then the uh the proposed uh programs and share it with uh KGF.
+**[06:41]** Speaker 2: I'll put you and also Yuyun in cc, so you can read them.
+**[06:45]** Speaker 2: Excellent.
+**[06:46]** Speaker 2: I think this will be very helpful also to direct the extension um for the year 27.
+**[06:53]** Speaker 2: Yeah.
+**[06:54]** Speaker 2: It will I think we also need some time during our annual meeting to discuss these uh the findings and also how Arif and team are um which of these findings need to be prioritized.
+**[07:09]** Speaker 2: Um and and and which uh and how Arif and team um will um yeah, what activities will they deploy to um uh to pick this up?
+**[07:23]** Speaker 2: So, that I think it's um what what do you think uh, Pak Arif?
+**[07:29]** Speaker 3: Yes, actually uh a lot of opportunities, yeah.
+**[07:32]** Speaker 3: I found that uh from the uh from the audit and the findings then lot of opportunities for us uh especially during the the extension and uh with the switch Asia, so then we can define uh activities that still falls under agroforestry and then the new activities that will fall uh under switch Asia.
+**[07:55]** Speaker 3: Yeah, we so now we have uh we have a lot of things that we can uh put on these two uh programs.
+**[08:05]** Speaker 1: Indeed.
+**[08:06]** Speaker 1: Um, yeah, uh the we will also uh share the action points, Pak Arif, so then we can uh how to say like uh together uh slowly work on on the priority which one we need to address uh soon as a as soon as possible and which one we can still prepare and plan for that.
+**[08:28]** Speaker 1: So, don't worry.
+**[08:30]** Speaker 1: And uh while we're and we're on that, uh so we can still modify the uh uh budget, right, Senator for the Switch Asia?
+**[08:46]** Speaker 2: Yes.
+**[08:47]** Speaker 2: We can there will be enough room to to to change uh, yeah.
+**[08:53]** Speaker 2: So, um, we we are still, I mean, it's still pending the approval, right?
+**[09:01]** Speaker 2: Because we needed to send in the the documentation last week, so they are now reviewing, so there's still chances that they are uh that that's that they say, well, it's not good enough, that's not continue, but I don't expect that.
+**[09:15]** Speaker 2: And then um we have quite some time we have in September we have time to change budgets.
+**[09:22]** Speaker 2: We also from Solidaridad perspective also need to change uh some things also organizationally wise, because uh as you know, there is also a Solidaridad office and team in Indonesia.
+**[09:37]** Speaker 2: Uh, so we need to find also internally align um the operations and also see how we can um who's doing what, who's picking up what role, etc.
+**[09:49]** Speaker 2: Um, so that's also still to be discussed.
+**[09:53]** Speaker 2: Um, yeah, one more check.
+**[09:57]** Speaker 2: Um, Arif, are we having our uh monthly.
+
+--- [GAP RECOVERED: absolute 19:45 - 22:10, re-transcribed separately;
+     chunk 3 of the original run started at 22:00 and dropped this stretch] ---
+
+**[00:00]** Speaker 1: Uh who's doing what? Who's picking up what role, etc.
+**[00:04]** Speaker 1: Um, so that's also still to be discussed.
+**[00:08]** Speaker 1: Mhm.
+**[00:09]** Speaker 1: Um, yeah.
+**[00:10]** Speaker 1: One more check.
+**[00:11]** Speaker 1: Um, Arif, are we having our month
+**[00:17]** Speaker 1: Hey, you're muted.
+**[00:19]** Speaker 1: apologies.
+**[00:19]** Speaker 1: Yeah.
+**[00:19]** Speaker 1: Are we having our monthly meeting in 30 minutes, um, um, with uh with Hatami and uh and Everjan and you, do you know?
+**[00:29]** Speaker 1: Mhm.
+**[00:32]** Speaker 1: Mhm.
+**[00:32]** Speaker 3: Um.
+**[00:37]** Speaker 3: Are you muted, uh, Arif?
+**[00:41]** Speaker 2: Yeah, I'm just checking the calendar.
+**[00:43]** Speaker 2: Uh, yes, there is a monthly meeting, but, uh, I'm not sure because I think Hatami is also, is, uh, still travelling.
+**[00:51]** Speaker 2: I think today is his travel day from, uh, Bangkok, and then, uh, with Everjan, uh, I'm not sure about that.
+**[1:03]** Speaker 2: Let me check it,
+**[1:04]** Speaker 1: Oh, actually.
+**[1:06]** Speaker 1: Yeah.
+**[1:06]** Speaker 1: Actually, uh, I have, uh, Ever and I have, uh, like, uh, internal meeting just now.
+**[1:13]** Speaker 1: Uh, I already
+**[1:15]** Speaker 1: told, uh, Era that I still on the call with you guys, but I don't know if Ever, uh, can join, will join which meeting, because it seems that everything overlaps.
+**[1:26]** Speaker 1: Yeah.
+**[1:27]** Speaker 1: Uh-huh.
+**[1:28]** Speaker 1: Too many meetings,
+**[1:29]** Speaker 2: Okay, but then it's good to
+**[1:30]** Speaker 3: Too many meetings, but then if people are not joining, then they should, uh, communicate this, uh, to each other, right?
+**[1:36]** Speaker 3: Because now, yeah.
+**[1:37]** Speaker 3: still in my agenda and I also blocked other other meetings that to not continue, so we could have had this meeting, um.
+**[1:46]** Speaker 3: So, in the future, I appreciate that if people are not joining that they communicate this to each other.
+**[1:52]** Speaker 3: Mhm.
+**[1:53]** Speaker 1: Yeah, maybe maybe let's check in the WhatsApp group, like text if, uh, the monthly meeting is still ongoing, uh, perhaps, uh, they also wait for for you guys, for the party, and you send there to respond.
+**[2:07]** Speaker 1: Yeah.
+**[2:08]** Speaker 1: Let me, uh, let me send them message in the in the app group.
+**[2:13]** Speaker 1: Yeah.
+**[2:15]** Speaker 1: Okay, um, good, uh, I think that's it.
+**[2:20]** Speaker 3: I think one more thing, but I wanted to the community discuss this also in the in the other meeting, but
+
+
+--- [PART 3 OF 3] ---
+
+**[02:00]** Speaker 1: uh good. Uh that's it.
+**[02:04]** Speaker 1: I think one more thing, but I wanted to discuss this also in the in the other meeting, but maybe since we're in this meeting now, I have an update from that.
+**[02:12]** Speaker 1: So I I text text you last week on the uh in person visit also from the delegation from um Solidarity and the Ministry of Foreign Affairs
+**[02:26]** Speaker 1: beginning October that that mission is not is not uh uh coming because of a personal situation um uh health personal health situation is with one of the employees from the ministry.
+**[02:42]** Speaker 1: So we will uh that mission is not happening uh in the first week of October or last week of September.
+**[02:52]** Speaker 1: So let's discuss internally when we want to have our annual meeting uh if we still uh if we still want to have it around that date or postpone it to the initial date of end November.
+**[03:07]** Speaker 1: So um let's uh let's discuss.
+**[03:09]** Speaker 1: This was also something that I wanted to discuss with you uh in the meeting in 30 minutes.
+**[03:14]** Speaker 1: But uh we need then need to find another moment to discuss that point.
+**[03:19]** Speaker 1: Uh but already for you and already for you to know that um that mission is not uh that delegation is not coming end of September.
+**[03:30]** Speaker 1: It will be become they will come later in the later in the year.
+**[03:34]** Speaker 1: Okay, thank you so much for the time.
+**[03:39]** Speaker 1: Okay, no worries.
+**[03:41]** Speaker 1: All right, then uh let's uh yeah.
+**[03:44]** Speaker 1: I'll see you in 30 minutes.
+**[03:46]** Speaker 1: 25.
+**[03:46]** Speaker 2: Yeah, let's.
+**[03:47]** Speaker 1: Yeah.
+**[03:49]** Speaker 1: Let's see.
+**[03:50]** Speaker 1: All right, have a good uh good day everyone.
+**[03:52]** Speaker 2: Have a good day.
+**[03:52]** Speaker 2: Thank you.
+**[03:53]** Speaker 2: Thank you.
+**[03:54]** Speaker 1: Bye.
+**[03:54]** Speaker 2: Okay.
+**[03:56]** Speaker 2: Bye.
+**[03:56]** Speaker 1: Thank you.
+**[03:57]** Speaker 2: See you.
+**[03:58]** Speaker 1: Bye Nico.
+**[03:59]** Speaker 1: Bye.

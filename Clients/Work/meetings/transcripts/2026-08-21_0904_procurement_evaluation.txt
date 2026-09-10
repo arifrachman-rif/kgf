@@ -1,0 +1,596 @@
+
+--- [PART 1 OF 7] ---
+
+**[00:03]** Speaker 1: Okay, I'm back.
+**[00:05]** Speaker 2: Okay, well, come back.
+**[00:07]** Speaker 1: Hello.
+**[00:08]** Speaker 2: Hello.
+**[00:09]** Speaker 1: Okay.
+**[00:20]** Speaker 1: Okay, now, welcome back.
+**[00:22]** Speaker 1: Okay, I think let's just start.
+**[00:25]** Speaker 1: So, thank you, uh, thank you all for joining today as we discussed.
+**[00:30]** Speaker 1: We will have a a session
+**[00:35]** Speaker 1: to discuss about the, uh, procurement activity, the evaluation and the plan
+**[00:41]** Speaker 1: for for next week.
+**[00:42]** Speaker 1: But before we, uh, start with the evaluation and summary of the activity of this week and plan for next week, uh, we would like also to share the, uh, the
+**[00:54]** Speaker 1: report of, uh, the last visit from our colleagues, right?
+**[00:58]** Speaker 1: And I think it will be better if Roy explain it by himself because it is his, um,
+**[01:11]** Speaker 1: So, uh, the first agenda, Roy,
+**[01:42]** Speaker 3: eh
+**[01:44]** Speaker 3: Selamat pagi, good morning, eh, Assalamualaikum warahmatullahi wabarakatuh.
+**[01:52]** Speaker 3: eh
+**[01:56]** Speaker 3: Apa namanya? eh
+**[02:01]** Speaker 3: Maybe, uh, today, this morning, I will, uh, share
+**[02:06]** Speaker 3: some of the findings from my side, uh, during my visit,
+**[02:13]** Speaker 3: the last three weeks, uh, in
+**[02:18]** Speaker 3: Tanggamus, in, uh, Bantarkat, in Tekat,
+**[02:24]** Speaker 3: eh, in this, uh, uh, Excel.
+**[02:27]** Speaker 3: So, uh, from my side, uh, there is like some important, uh, point
+**[02:38]** Speaker 3: that I would expect from KGF.
+**[02:41]** Speaker 3: First, regarding the hygiene rules, uh, what I observe is,
+**[02:49]** Speaker 3: eh,
+**[02:50]** Speaker 3: the hairnet, oh, no, the the mask and also the alcohol for hygiene is not, uh, stocked, uh, accordingly,
+**[03:00]** Speaker 3: even there is no stock of hygiene alcohol found when I ask,
+**[03:05]** Speaker 3: uh, Samudra.
+**[03:07]** Speaker 3: And then also mask, hairnet and hygiene,
+**[03:11]** Speaker 3: alcohol is not, uh, disciplinedly or every time used based on my observation.
+**[03:18]** Speaker 3: And then I think it is also good if we have, uh, poster
+**[03:24]** Speaker 3: about personal hygiene inside the warehouse as
+**[03:28]** Speaker 3: our common reminder to always use, uh, mask, hairnet and always use, uh, hygiene alcohol before,
+**[03:36]** Speaker 3: uh,
+**[03:38]** Speaker 3: this inside the warehouse.
+**[03:41]** Speaker 3: And then from my side also, I think the palette arrangement in the Tekat warehouse, the small warehouse,
+**[03:47]** Speaker 3: is too tight, yeah, for, uh, people flow,
+**[03:52]** Speaker 3: uh, and for sampling,
+**[03:54]** Speaker 3: for Samudra and for, uh, Pak Tosa, gitu, ya.
+**[04:03]** Speaker 3: It is not good, ya. It's not good to stepping on the palette.
+**[04:07]** Speaker 3: So, it is better to put the material and, uh, step, uh, above the,
+**[04:17]** Speaker 3: And then what I found is,
+**[04:20]** Speaker 3: uh, we we still found, uh, dirty palettes, machinery, walls, etc. in the Nata warehouse, and I ask, uh, there is no cleaning schedule yet to
+**[04:33]** Speaker 3: Pak Tegu and from Samudra.
+**[04:36]** Speaker 3: And then also from my side, the Rastafer placement in Teka Warehouse is not ideal.
+**[04:41]** Speaker 3: If you remember the Rastafer is in the
+**[04:45]** Speaker 3: corner of the, uh, warehouse,
+**[04:49]** Speaker 3: I guess it is better to move it near to the entrance,
+**[04:54]** Speaker 3: so we could reach it more easily, uh, and it is not obstructed by the pile of the material.
+**[05:03]** Speaker 3: And then if you remember also, there is still open, uh, exhaust fan or blower,
+**[05:10]** Speaker 3: not yet closed in Nata Warehouse and
+**[05:13]** Speaker 3: I still found there is still some wooden component, yeah,
+**[05:18]** Speaker 3: in machinery and in tools use in, uh, the warehouse.
+**[05:23]** Speaker 3: That's for the hygiene,
+**[05:26]** Speaker 3: for supplier management system, I guess,
+**[05:29]** Speaker 3: not I guess, but I I saw that, uh, the Moldyberries, uh, acceptance is sometimes still subjective, ya.
+**[05:39]** Speaker 3: Sometimes it's, oh, it's okay, sometimes, uh, still
+**[05:43]** Speaker 3: still bought, ya, even though it is moldy berries, just because
+**[05:48]** Speaker 3: the material has a high density.
+**[05:52]** Speaker 3: So, it is all
+**[05:54]** Speaker 3: important parameters to be accounted, not only the density.
+**[06:00]** Speaker 3: And then for foreign material and glass determination, I know, uh, Pak Widi has experience, but, uh, of course, we prefer
+**[06:09]** Speaker 3: an exact, uh, analysis or determination using sieve and using, uh, balance.
+**[06:17]** Speaker 3: So, to, so to set, uh, consistent pricing and, uh, more exact, uh, analysis.
+**[06:27]** Speaker 3: And then also, uh, for me, uh, there is no clear explanation yet to me about how to determine the basis price.
+**[06:36]** Speaker 3: Is it arbitrary or is it any national or local price database reference that KGF use?
+**[06:45]** Speaker 3: And then also, uh, how to manage hygiene and materials bags in farmers and collectors, so they don't use,
+**[06:52]** Speaker 3: uh, ex,
+**[06:54]** Speaker 3: a pesticide or, uh, fertilizers bags.
+**[06:58]** Speaker 3: And then for QAQC system,
+**[07:03]** Speaker 3: uh, I know it is good that, uh, Samudra and Pak Tosa do, uh, quality check, ya,
+**[07:11]** Speaker 3: at Tekat warehouse, but I saw that the,
+**[07:15]** Speaker 3: the reject result is not yet recorded.
+**[07:20]** Speaker 3: Thus, the next time it should be recorded.
+**[07:24]** Speaker 3: And then the density record for each production lot,
+**[07:29]** Speaker 3: I ask Samudra is also not kept or archive well.
+**[07:36]** Speaker 3: They, uh, write it, but still in, uh, like spread out everywhere.
+**[07:41]** Speaker 3: So, I,
+**[07:43]** Speaker 3: I ask, uh,
+**[07:46]** Speaker 3: the production team to have a,
+**[07:48]** Speaker 3: kept or well maintained, uh, density report of each production lot.
+**[07:54]** Speaker 3: And then also regarding the magnet strength in the Suton machine has not also been monitored routinely and
+**[08:01]** Speaker 3: I suggest there should be a record, a record for, uh, magnet strength monitoring.
+**[08:09]** Speaker 3: For warehouse and production activity, I still found unlabeled bags in the warehouse.
+**[08:17]** Speaker 3: So, everything should be labeled, ya, uh,
+**[08:21]** Speaker 3: everything should be known, what is it inside?
+**[08:24]** Speaker 3: What is it, uh, what lot is it?
+**[08:27]** Speaker 3: Uh, what material is it?
+**[08:30]** Speaker 3: Uh, of course, uh,
+**[08:33]** Speaker 3: either black peppers or, uh, you also have, uh, slices, slice ginger and, etc.
+**[08:40]** Speaker 3: It should be all labeled, uh, either it is raw materials and finish goods.
+**[08:49]** Speaker 3: And then for my input, for my observation, the warehouse in the warehouse in Nata,
+**[08:56]** Speaker 3: yeah, of course, also in Tekat, there is no clear line marking
+**[09:01]** Speaker 3: for designated area for non-conforming materials
+**[09:05]** Speaker 3: or rejected materials.
+**[09:06]** Speaker 3: So, uh, yeah, I know you put it, uh, separately, but there should be a, uh, clear line marking for designated areas.
+**[09:15]** Speaker 3: And then for pest control, I saw that there is only for flight and pest, the UV lamp
+**[09:23]** Speaker 3: for Roden pest or, uh, red, ya.
+**[09:26]** Speaker 3: There should be, uh, also, uh, any control to control the, the pests.
+**[09:32]** Speaker 3: For waste management,
+**[09:34]** Speaker 3: yeah, I know that, uh, we just wait, ya, until the waste is
+**[09:41]** Speaker 3: full enough, but for better practice, there should be waste designated area and there should be waste disposal schedule.
+**[09:50]** Speaker 3: For document control, uh, I ask Pak Herry,
+**[09:55]** Speaker 3: there are already numbering rules, but I
+**[09:58]** Speaker 3: saw that the,
+
+--- [PART 2 OF 7] ---
+
+**[00:00]** Speaker 1: number in groups and the documents not been fully implemented across organization.
+**[00:09]** And from my side, regarding a recall and traceability, it is better ya to use ID of farmers, no more lota, no numberers, a list of farmers for our traceability,
+**[00:27]** such when we are having a problem, last problem, when we have pesticide residue exceeding limit.
+**[00:38]** So there should be complete record of the composition of each lot, the composition of farmers and collectors for each batch that you send to first taken.
+**[00:59]** And then for rework and reject, I guess it is also mandatory to have the procedure and written record for product rework and for any rejected material.
+**[01:17]** For calibration, yeah, it should be any calibration record also for any of the analysis instrument, either it is a seram moisture analyzer, the the measuring glass,
+**[01:37]** and then the the balance, etc.
+**[01:45]** And then maybe from these findings, we would like to suggest and improve improvement priority.
+**[01:54]** Maybe I want to, okay, for me.
+**[01:59]** So from from those findings, we propose a improvement priority regarding hygiene rules, supplier management system, QCC system, warehouse and production activity,
+**[02:16]** and then the warehouse, pest control, waste management, and etc.
+**[02:22]** For hygiene rules, there should be determine or they should be established how are we going to set the minimum personal hygiene rules for the tech house, for the Nator warehouse,
+**[02:42]** and then the hygienic building and layout design for Teca warehouse and Nator warehouse.
+**[02:48]** And then we should also determine the basic requirement for hygiene practice for collector and for farmers.
+**[02:58]** For supplier management system,
+**[03:01]** I propose that we should gather a complete data for supplier contact, supplier location, their harvest period, harvest volume, quality, and the
+**[03:20]** purchasing history.
+**[03:22]** So we know for the next period, where to collect and where to ask, where to procure,
+**[03:36]** and we know the quality as well from each of the our farmers.
+**[03:42]** And then for procurement activity, there should be also clear plan and strategy, whether it is when is the harvest season is low, how is the strategy, and then
+**[03:57]** how is the price determination, the consistent price determination, and then also, there should be farmers and collectors sensibility.
+**[04:06]** What I mean is the the list of the farmers and collectors from what we buy,
+**[04:16]** from who we buy.
+**[04:18]** For QAQ system, there should be maybe training, ya, or resocialization about sampling method, and then about how to maintain, retain sample,
+**[04:38]** and then analysis method, and then magnetic strength measurement for Suto machine,
+**[04:46]** and then also for GHP and hazard risk assessment, and also for incoming material, quantity and quality record.
+**[04:57]** For warehouse and production activity, I see that there is already records regarding drying activity.
+**[05:04]** It it is good and uh, but uh my note is in the drying activity record, there should be also detailed about uh, uh, especially when we buy from uh collectors,
+**[05:23]** from what farmers are there in the in one collectors.
+**[05:29]** And then for uh production record, the suton machine record, there should be also mass balance.
+**[05:37]** What I mean is like the how many output is become the target, how many output become the libraries,
+**[05:47]** and then the broken berries and etc.
+**[05:49]** So like each of the output from the suton machine should be recorded and should be maintained well the record.
+**[06:01]** And there should be also uh batch number system, clear batch number system and uh expiry date,
+**[06:10]** and of course the batch and lot composition.
+**[06:15]** For for warehouse, uh uh what I mentioned earlier, there should be area segregation or clear line marking for raw materials area, which area is that?
+**[06:29]** For work in process materials, for finished good area,
+**[06:37]** clear area segregation.
+**[06:40]** And then etc, pest control, waste management, etc.
+**[06:45]** For the highest priority, we urge to uh to fix first the
+**[06:55]** management system and warehouse and production activity which we urge to have a deadline on 4 September 2016 26.
+**[07:11]** And for the rest, uh it will be followed after this to our fix yet.
+**[07:25]** Yeah, I think that's all from me. Uh there is also a document plan from us and maybe we can discuss it in the different meeting.
+**[07:37]** But this is like from us, the priority is to fix the supplier management system and also the warehouse and production activity.
+**[07:48]** Thank you.
+**[07:55]** Okay, thank
+**[08:00]** you for explaining. Uh, we summarize uh from findings.
+**[08:09]** Um, do you have any any, um, is it clear to you, Pa Arif and Rafiq, or do you have any questions or something in mind?
+**[08:20]** clear uh, very clear.
+**[08:26]** uh, thank you for the observation yeah and then uh, a lot of uh, suggestion feedback that uh, we need to implement in our uh processing facility.
+**[08:40]** Yeah, I think uh, it's that's very uh, quite a lot of uh homework for us.
+**[08:46]** But uh, yeah, inshallah we can we can do that and especially now we have the materials, we can uh, immediately implement uh, on the uh, processing and also supplier management.
+**[09:00]** Yeah.
+**[09:03]** Yeah, I think Yes, um, so uh, overall, what we found is, okay, uh, the processing facility is uh, still has so many rooms for improvement, but we also see the the management uh, system, uh, how
+**[09:20]** how KGF manage the task uh, especially for the uh, quality system, food safety system and production system, also the procurement.
+**[09:29]** Like we we found that uh, there's a like in a um, like coordination and communication within the team.
+**[09:38]** So I think that needs to be improved too, aside from all this um, like operational activity, Pa Arif and Rafiq.
+**[09:47]** Like they uh, there should be someone who can take the lead on uh, develop these things, uh, develop the uh, your the improvement plan of KGF because it cannot be
+
+--- [PART 3 OF 7] ---
+
+[00:00] Speaker 1: uh then only by like only but only you like only two of you understands about it, but you need to to have someone who can be reliable to uh to carry out this point.
+[00:19] Speaker 2: Yeah, actually we are already uh start uh distributing the workload, yeah.
+[00:26] Speaker 2: As you know now we have uh Tegu is fully in charge with the production.
+[00:31] Speaker 2: So all this uh hygiene rules, Q&Q QC warehouse, uh Tegu will be responsible on that.
+[00:39] Speaker 2: And for the supplier management, currently we are developing that and uh the systems may look quite good.
+[00:49] Speaker 2: It's the implementation I think that we need to uh be more be more, how do you say, be more disciplined and consistent on uh implementing it and then after that we can evaluate on that also.
+[01:04] Speaker 2: And Pak Herry is uh doing a tremendous uh work on that and I think that's uh that's a that's already a basis uh a good start for us for that, for this by manageable system.
+[01:24] Speaker 2: And it also will be linked to the processing also later on.
+[01:31] Speaker 1: Okay.
+[01:32] Speaker 1: Yeah, so that uh you work on the procurement uh activity like the supplier management, the uh though like you make a website and all, but I hope that it uh it can, yeah, like you you maintain it because uh it's uh both traceability.
+[01:53] Speaker 1: But what I want to point out, uh and I I would like to ask is uh Pak Tegu, uh the one who will be in charge with the production, QA and QC activity, this uh is is he capable of doing all these things to make it digitalized, um to make a digitalized document so it can be accessible for us like anytime we can we want to see the result uh of analysis for this lot or for this batch number, we can see it on the spreadsheet.
+[02:23] Speaker 1: like we don't have to wait for it like like real time updating on the spreadsheet.
+[02:30] Speaker 1: Is he capable of doing that or?
+[02:33] Speaker 2: Yes, he is uh capable, Ma'am.
+[02:35] Speaker 2: Uh, he and also he will, he will work with uh Pak Herry and uh I and Rofiq and also Sam will be there.
+[02:46] Speaker 2: Sam Sam indeed needs a lot of uh still needs a lot of support on that.
+[02:52] Speaker 2: So, yeah, but Tegu is uh quite capable on that.
+[02:57] Speaker 2: So, he will be the one that actually uh laying off all the the foundation and implement it.
+[03:03] Speaker 2: And then we will uh help him on the digitalization.
+[03:12] Speaker 2: Actually, just this morning, I I agree with you just this morning, I was I was talking with Sam lecturing him that I, look, we need we need one simple system with one click.
+[03:23] Speaker 2: This is the the the the volume of uh product available in uh in the warehouse.
+[03:28] Speaker 2: So we don't we don't we don't want to go here and there looking for different spreadsheets and then take a calculator.
+[03:36] Speaker 1: Yes.
+[03:36] Speaker 2: And then putting the numbers.
+[03:38] Speaker 1: Yes.
+[03:38] Speaker 2: Then then we get we get the the the total volume.
+[03:42] Speaker 2: No, we just want one sheet where it's available.
+[03:45] Speaker 2: And also Tegu also uh I I also talked to him this morning also and he actually agree on that and said uh so we will we will work on that.
+[03:55] Speaker 2: We have the same agreement on that.
+[03:59] Speaker 1: Okay.
+[04:00] Speaker 1: Uh, I hope that we are on the same uh page yeah tariff then uh for this uh digitalization of documents and like because every time it's a new spreadsheet link.
+[04:11] Speaker 1: Yeah.
+[04:12] Speaker 1: So, uh actually it's um kind of uh makes us confuse like which one that uh we should um access every time we want to know the update of uh of the quality uh analysis result or uh the current stock in uh in the warehouse.
+[04:32] Speaker 1: So that's why we are kind of confused for that.
+[04:35] Speaker 1: And then for the uh yeah like what Roy explained uh we try to to divide it uh back divide it but like prioritize it um so you to to to to to make the workload and burden uh much lighter.
+[04:59] Speaker 1: Just just just to be focused on certain topics.
+[05:03] Speaker 1: So, uh please feel free to reach us out if you want to ask.
+[05:10] Speaker 1: Uh we also provide the document plan here.
+[05:13] Speaker 1: Uh the document plan basically just like the what uh what is the procedure needs to be and then uh what instruction needs to be and etc.
+[05:22] Speaker 1: Of course, uh you can also explore or add some points there.
+[05:27] Speaker 1: Uh but this is uh actually just basic things that we want to see from KGF side.
+[05:33] Speaker 1: So, uh please see this not as only um a development or improvement on document, but the whole system.
+[05:41] Speaker 1: So, it's the system, documentation, recording, record keeping.
+[05:45] Speaker 1: Uh it's the whole system.
+[05:48] Speaker 1: Like that.
+[05:53] Speaker 1: Okay, um AA, Fu, do you have any additional um words or you want to say something?
+[06:04] Speaker 1: And also Yayang?
+[06:07] Speaker 3: Yeah, I find it um like there is uh as as mentioned by Ali is a lot to improve, a lot of things to do to be done and I'm sure uh that the things are being done or or have been addressed.
+[06:25] Speaker 3: But what we now see also from the report of Roy like uh we see notebooks with right handwriting things about volumes and and from the warehouse.
+[06:37] Speaker 3: It's very simple uh to make an Excel about that or to have a structured system on that and that should have already been in place, right?
+[06:45] Speaker 3: So that is something we should think of because last year when we were at Dioran the the the recording of the ship was really bad, was really was not there.
+[06:56] Speaker 3: Uh and then we already commented it to improve.
+[06:59] Speaker 3: And until now we don't see any real good system uh there, right?
+[07:04] Speaker 3: And we don't have to have a system with one one click uh button and then you see the volume because that needs a lot of development and in idea, but just think about how to manage your stocks and and how to record everything.
+[07:19] Speaker 3: It's not that complicated.
+[07:20] Speaker 3: We can scroll to an Excel, but there should be a system like that because that is something we want to work with a company like you, like uh educated people who who can think about those things, right?
+[07:32] Speaker 3: And it doesn't have to be very complex, but also not very compound style and and and uh same level as as the current collector we are working with, right?
+[07:42] Speaker 3: Because then there is no need to work with you.
+[07:57] Speaker 1: Yeah, Yayang, do you have any comments?
+[08:03] Speaker 4: Uh yeah, from my side um it's also works the same for the project uh Paris because uh from the findings from Sylvia the uh the management on the data is also uh lacking um and uh we have uh informed you about that last year during our uh project implementation verification trial that uh the documentation from the project is simply uh not there and still need to work on and it's been a year and then uh yeah, I think I have told uh your team several times especially to Nico about that, but um yeah, it seems to to hard to to make a progress so um I was discussing with Iran also Sylvia and also Roy on how we could improve that and then uh uh perhaps it can be started uh by uh you and your team having a uh evaluation on the the management of the project and also the the procurement like uh what is lacking uh what what kind of document it's not there yet and then if you already uh and it's also you can also use the findings uh shared by Roy and also Sylvia, I'll I will after this meeting I will share it to you via email.
+[09:35] Speaker 4: Look at those findings and then um you can start evaluating uh your system and then and then afterwards uh think about uh what you should do first.
+[09:50] Speaker 4: If needed, we can also assisting you on how to say uh developing the system uh since uh since
+
+--- [PART 4 OF 7] ---
+
+[00:00] **Speaker 1:** uh it's quite urgent. After the procurement activities done, I think that's the most uh important thing for now. After that, let's think about how we can set up a good uh management system for KGF for both the project and also the the the trading.
+[00:20] **Speaker 1:** We were thinking to have your team coming here, uh the important people that will handle the data on the training and also the trading, so that we can sit together and uh uh assist and supervise your team on developing the the documents because the the pattern that we observe is like uh we uh you made uh you made a documents and then we uh give an inputs on that and then suddenly the document is gone.
+[00:53] **Speaker 1:** You made a new one. Uh we cannot work that way, uh if uh we're using that approach, we will not go anywhere because uh we keep changing uh and then we cannot track the the progress. It is difficult. It's the same with the famous data.
+[01:11] **Speaker 1:** Uh I've been complaining a lot about this because uh yeah, for example, the data from quarter one is already uh submitted. I put it in our database and then in the quarter two, when I uh check the data for quarter one is changing.
+[01:27] **Speaker 1:** For example, if it was like 100 farmers and then in the quarter two, suddenly the data of farmers from quarter one is 150.
+[01:36] **Speaker 1:** The problem is because uh when I ask your team, the problem is because they uh actually the the data has not been uh uploaded uh completely.
+[01:47] **Speaker 1:** But we cannot do it that way. We should have like schedule, we should have like um to dead as a try etc because we cannot keep changing data like that uh or changing the data on the on site when there is an update happening.
+[02:01] **Speaker 2:** It's not how we should work.
+[02:03] **Speaker 1:** We should work uh best on the system and the structure.
+[02:07] **Speaker 1:** So that's the the proposal for our site after the the procurement is done.
+[02:13] **Speaker 1:** Let's sit together and uh work on that uh developing the the system for KGF.
+[02:22] **Speaker 1:** It is really urgent in our um our perspective because we have been observing when we and uh there is no significant progress for that.
+[02:37] **Speaker 1:** That's all.
+[02:40] **Speaker 1:** From me.
+[02:46] **Speaker 3:** Yeah.
+[02:48] **Speaker 3:** Thank you, Mbak Ayang. Uh and also uh I heard for your for your comments.
+[02:54] **Speaker 3:** Uh okay Pak Arif and Rofiq, before we move to the next topic uh about the summary of the this week activity and the plan for next week, do you have any uh final statement uh for the improvement plan?
+[03:16] **Speaker 3:** Yeah.
+[03:17] **Speaker 3:** No, no, no, uh final statement.
+[03:19] **Speaker 3:** It's it's not final yet.
+[03:20] **Speaker 3:** We still They're only for this topic.
+[03:22] **Speaker 3:** Yeah, we still improving.
+[03:24] **Speaker 3:** So not final yet.
+[03:26] **Speaker 3:** Uh yeah, but uh thank you for the the feedback, the input.
+[03:30] **Speaker 3:** Uh we do have a lot of uh to uh improve here and uh we are I myself also uh pushing the the data team, uh Nico and then also Rofiq also pushing Nico uh to uh improve the the database.
+[03:52] **Speaker 3:** And uh again Pak Herri also uh he's been helping uh with the digitization and uh pushing for one uh one database, one system that uh everyone is using and not simply uh changing.
+[04:08] **Speaker 3:** So that's why uh we are we are uh we're trying to move from uh the excel where it can be changed.
+[04:18] **Speaker 3:** Uh we try to have one system that uh not easily change.
+[04:23] **Speaker 3:** Yeah, so uh uh Herri is uh helping us uh developing that system.
+[04:32] **Speaker 2:** But that's a role for you, Arif.
+[04:33] **Speaker 2:** You, you need to say this is the system or format we are using and that need to be applied, right?
+[04:39] **Speaker 2:** Otherwise if if people in the organization are free to use whatever they want, then this happens, right?
+[04:44] **Speaker 2:** But if you say this is the form, this wants me to be filled, I need to see it every day, then then it will happen, right?
+[04:52] **Speaker 3:** Yeah, yeah, but but yeah, yeah.
+[04:55] **Speaker 3:** I'm I'm trying that also pushing that uh on that also.
+[05:02] **Speaker 3:** Yeah.
+[05:03] **Speaker 2:** Now also from our side, we were discussing with the team and we asked them to do things and they don't follow up and then at the end, uh we are a bit uh helpless and it costs a lot of energy and then the people said, yeah, what to do now, right?
+[05:16] **Speaker 2:** So they don't want to do what we ask and they don't come up with a good idea by themselves.
+[05:22] **Speaker 2:** Like if you have a good idea, good system, I'm fine to copy what you're doing, but if there's nothing coming, then we're going to create something, right?
+[05:30] **Speaker 2:** Yeah, yeah, yeah.
+[05:31] **Speaker 2:** Yeah, I understand.
+[05:33] **Speaker 2:** So and and if people don't want to do what you say, then we don't want to communicate with those people anymore, then we come to you and they said uh need to solve it and then uh we cannot discuss it with that person anymore.
+[05:49] **Speaker 2:** Mhm.
+[05:49] **Speaker 3:** Yeah, yeah, yeah.
+[05:49] **Speaker 2:** I I don't want to be that strict, but uh and and and and it seems like uh yeah, nothing is moving.
+[06:01] **Speaker 2:** Uh people are keep on doing what they they are aware doing and and we tell them what to do and they say, yeah, yeah, and they don't do it.
+[06:07] **Speaker 2:** Then we come back to you and said this need to be done, please make sure.
+[06:17] **Speaker 1:** Yeah, yeah.
+[06:18] **Speaker 1:** Okay, back.
+[06:30] **Speaker 3:** Okay, uh so I think uh we are um clear on the um discussion for this improvement plan.
+[06:39] **Speaker 3:** Uh we will send it to KGF team uh through email.
+[06:43] **Speaker 3:** Uh the yeah, like the document that Roy uh shared and explained, we will share it through email.
+[06:51] **Speaker 3:** Uh okay and then uh we are moving to the next topic because uh we only have uh 19 minutes left before you left for school.
+[07:00] **Speaker 3:** Um so we we would like to see the um summary of the procurement activity uh of this week and also what is the plan for uh the procurement activity next week and the plan of monitoring the team and etc.
+[07:14] **Speaker 3:** So Pak Arif and Pak Fiq, the time is yours.
+[07:19] **Speaker 3:** Okay.
+[07:20] **Speaker 3:** Uh thank you, Mbak eee Mbak Ira.
+[07:25] **Speaker 3:** Yeah, so currently we are uh still there developing and then uh like uh effort ask that the we need one uh again one one document where we can see the plan and uh how it's going.
+[07:43] **Speaker 3:** So uh we make one one sheet where we can uh collect the the information uh that I uh shared to you.
+[07:56] **Speaker 3:** So uh the currently we are uh distributing the the how do you say the the PIC how who can uh fill that uh information?
+[08:11] **Speaker 3:** Currently, it's just uh me and Rofiq that uh in charge uh for filling that uh sheet to avoid um misperception and then misfeeling and all that.
+[08:27] **Speaker 3:** So, yeah, so that in if you see in the document,
+[08:49] **Speaker 3:** So, in the document, we have the the weekly plan.
+[08:59] **Speaker 3:** Yes.
+[09:07] **Speaker 3:** You want me to share the sheet or are you just too looking for it?
+[09:14] **Speaker 3:** Uh I think if you have I think you have better connection there.
+[09:18] **Speaker 3:** You're on Yeah, okay.
+[09:21] **Speaker 3:** Yes, yes.
+[09:22] **Speaker 3:** Here, can you see my screen now?
+[09:25] **Speaker 3:** Uh yeah, loading content.
+[09:27] **Speaker 3:** Okay, yeah.
+[09:28] **Speaker 3:** Yeah, so that's the the summary, the database.
+[09:31] **Speaker 3:** So and then uh the weekly plan is actually the weekly plan is uh if you go to the next uh tab, the weekly plan.
+[09:41] **Speaker 3:** Mhm.
+[09:43] **Speaker 3:** So, this is the the weekly plan.
+[09:45] **Speaker 3:** We're trying also to uh make this as uh as how do you say yeah?
+[09:55] **Speaker 3:** Probably as as little as uh people can touch like for example, you see the the grey area.
+
+--- [PART 5 OF 7] ---
+
+**[00:00]** Speaker 1: is already uh it has already formula and then uh we only need to fill in the uh and the that the information most of them are actually come from the supplier pipeline.
+**[00:13]** Speaker 1: So uh we we will uh there in the we started uh last week on the 17th of August until 23 of August.
+**[00:24]** Speaker 1: So the the plan is to have one metric ton uh per week uh and then uh that the the pipeline expected that's from the uh supplier pipelines uh from the collector and farmers.
+**[00:42]** Speaker 1: And then uh the actual comes from the purchase lock and there will be some variance uh the remaining that needs to be filled uh on the second week.
+**[00:57]** Speaker 1: And then uh that's the team that in charge for the the information uh where the uh product comes from.
+**[01:07]** Speaker 1: uh like Rafik, Pak Widi is on the field, uh Nicole also helping uh since uh his wife is actually working in uh in Dinas in Lampung Utara and also to go.
+**[01:21]** Speaker 1: And then uh that's uh the relized uh supplier like uh last week we had uh we have we had Denny uh supplied uh 3.7.
+**[01:32]** Speaker 1: Uh this is the thing with Denny uh because uh well he works quietly, but uh he's been delivering uh good products uh so far.
+**[01:43]** Speaker 1: Like uh even even this morning, I I I think yesterday yesterday he asked like uh how much is the price uh I said like the price remain the same.
+**[01:54]** Speaker 1: But uh do you have the the product? I said like, yeah, we we have the uh product currently we are uh processing.
+**[02:00]** Speaker 1: And just this morning he told me we're on our our way to uh take out warehouse.
+**[02:06]** Speaker 1: I ask him, please send us the the photo or the video when you're uh doing the quality.
+**[02:13]** Speaker 1: I I'm already on the way mass there.
+**[02:15]** Speaker 1: So, uh that's that's that's uh one thing about Denny, but uh he's been uh delivering uh good quality and quite consistent.
+**[02:26]** Speaker 1: Um, a few days ago, for example, you remember I told him I told you about uh one supplier, one collector from Naningan, J.
+**[02:35]** Speaker 1: Yeah, J.
+**[02:36]** Speaker 1: Yeah, J.
+**[02:37]** Speaker 1: So, uh initially he wanted to deliver to Natar uh directly.
+**[02:44]** Speaker 1: But uh I but somehow uh oh initially we wanted to send Pak Widi to his warehouse because they are they are new, yeah.
+**[02:54]** Speaker 1: So we wanted to say uh to send Pak Widi to uh his warehouse to check on the quality.
+**[03:00]** Speaker 1: But unfortunately, Pak Widi uh was unable to make it.
+**[03:03]** Speaker 1: So J came to take out warehouse and then uh we did the quality checking there.
+**[03:11]** Speaker 1: And then uh the quality was different from what he said to our uh checking.
+**[03:18]** Speaker 1: So he asked us to uh do it to uh to do it several times to do to recheck.
+**[03:25]** Speaker 1: We do it again several times.
+**[03:27]** Speaker 1: Still uh not uh according to uh what he said.
+**[03:32]** Speaker 1: And but then when he said that uh probably the the the the checking in uh Take is uh not correct.
+**[03:41]** Speaker 1: But I said we've been doing uh this with Danny and it's pretty consistent.
+**[03:47]** Speaker 1: So probably uh the your product is uh uh is not right.
+**[03:53]** Speaker 1: So he asked us to to to open the hole bag, take all the bags from the the the truck uh and then open the hole bags.
+**[04:03]** Speaker 1: I said, we don't have that capacity in Take.
+**[04:05]** Speaker 1: So if you want to do that, uh we can do that in in Natar.
+**[04:09]** Speaker 1: But uh when you send the product to Natar, if the quality is also different, then we will negotiate there according to the price when what we found in Natar.
+**[04:22]** Speaker 1: So since he's insisted and he will he's willing to take the risk, then uh he went to Natar.
+**[04:29]** Speaker 1: In Natar we check uh it's pretty much the same uh the the result what we had in Natar with the one we had in in Take.
+**[04:37]** Speaker 1: So he didn't accept it and then so we we checked the the product.
+**[04:44]** Speaker 1: Yeah, so that's that's the thing with uh Denny, he's been uh delivering uh quite consistently.
+**[04:50]** Speaker 1: So, yeah.
+**[04:52]** Speaker 1: So that's the thing with Denny.
+**[04:55]** Speaker 1: Uh we're still trying to uh balance uh not really balance.
+**[05:01]** Speaker 1: I mean, we're trying to buy as much as possible from uh farmers, yeah, the field facilitators.
+**[05:07]** Speaker 1: Uh they are visiting farmers, identifying who uh who are actually have um harvest already.
+**[05:20]** Speaker 1: And in Pesawaran also, Pesawaran uh several farmers they prefer to sell us uh the berries instead of uh dried uh paper.
+**[05:32]** Speaker 1: So, we we are uh hiring one farmer to do the drying.
+**[05:39]** Speaker 1: So, Mas Riski is uh supervising that uh in Pesawaran.
+**[05:45]** Speaker 1: Yeah, so this is the purchase lock.
+**[05:47]** Speaker 1: Uh uh I I put the the link of the purchase uh evidence there.
+**[05:53]** Speaker 1: So it's actually in the same uh Google uh drive folder, yeah.
+**[05:58]** Speaker 1: So in that uh folder there is uh the the file and then uh the evidence is actually photos of the products, the measurement and also if it's purchased then the photo of the receipt.
+**[06:19]** Speaker 1: Yeah.
+**[06:19]** Speaker 1: But for the uh for the the pipeline, we do have some photos there uh in the Google Drive, but we don't put the link uh in the in the sheet.
+**[06:34]** Speaker 1: So this is the supplier pipeline.
+**[06:36]** Speaker 1: So uh we have uh farmers.
+**[06:39]** Speaker 1: This is are actually uh farmers uh farmers who have uh uh paper probably then how how much uh they're going to deliver.
+**[06:52]** Speaker 1: Uh and also some uh collectors uh that we can uh rely on.
+**[07:01]** Speaker 1: And yesterday also we have one uh collector uh this is a new collector from uh from Pesawaran.
+**[07:10]** Speaker 1: He's actually uh supplying coffee to the big exporter in Bandar Lampung.
+**[07:17]** Speaker 1: So he came to take out with one sample yesterday and then uh we show him how to sample.
+**[07:24]** Speaker 1: He's actually just confirming uh our method and his method is pretty much uh the same.
+**[07:29]** Speaker 1: Yeah.
+**[07:30]** Speaker 1: So, and then uh yesterday he contacted us again uh and he said he's going to deliver around one metric ton per week.
+**[07:42]** Speaker 1: That's from Pesawaran.
+**[07:42]** Speaker 1: We haven't uh get a chance to uh visit him.
+**[07:46]** Speaker 1: He just uh came to us yesterday.
+**[07:48]** Speaker 1: So, next week we are planning to visit him, see his uh warehouse.
+**[07:56]** Speaker 1: Uh but his area is uh quite far from our area, yeah.
+**[08:00]** Speaker 1: Our area is in uh Harapan Jaya.
+**[08:03]** Speaker 1: His area is actually around uh Bulok which is bordering Tanggamus.
+**[08:11]** Speaker 1: So, around probably one and one to two hours from our area.
+**[08:18]** Speaker 1: His name is uh Rendy.
+**[08:20]** Speaker 1: Yeah, so this is uh collector and he's going to deliver to uh Natar.
+**[08:27]** Speaker 1: Natar.
+**[08:29]** Speaker 1: One metric ton, you said.
+**[08:31]** Speaker 1: Uh, but this is this is one thing that we need to confirm with him one metric ton per week because uh if he's going to deliver one metric ton per week, it's going to cost him uh the transport.
+**[08:42]** Speaker 1: Because uh one small truck minimum is 2.5 or two metric tons.
+**[08:47]** Speaker 1: If he only deliver one one ton uh he's going to waste uh the the the ship the delivery capacity.
+**[08:56]** Speaker 1: So, we need to check with him again whether he whether he is going to deliver one metric ton, probably he has method while shipping uh while delivering coffee, for example.
+**[09:07]** Speaker 1: We're not sure, but uh we need to we need to check with him whether he's going to deliver one metric ton per week or two metric ton per two weeks.
+**[09:18]** Speaker 1: Okay, I see.
+**[09:19]** Speaker 1: And price uh his price is still uh it's actually better because the quality yesterday we checked his quality is 5 uh 30, 5:30 and then the price is 96 in Natar.
+**[09:31]** Speaker 1: Uh sorry, 98, yeah.
+**[09:32]** Speaker 1: 98 in Natar.
+**[09:34]** Speaker 1: 98.
+**[09:35]** Speaker 1: Yeah, 98 bar.
+**[09:36]** Speaker 1: While uh Denny, Denny uh well Denny of course he's he's a bit further, but his price is 102 in uh Take.
+**[09:50]** Speaker 1: So, his price uh Randy is actually better.
+**[09:57]** Speaker 1: Okay.
+**[09:58]** Speaker 1: I see.
+**[09:59]** Speaker 1: That's all this.
+
+--- [PART 6 OF 7] ---
+
+**[00:00]** Speaker 1: super pipeline and uh this is the weekly plan.
+**[00:04]** Speaker 1: So next week, uh the target is 6.12 MT is that correct?
+**[00:10]** Speaker 1: If I'm not mistaken.
+**[00:12]** Speaker 2: Uh, yeah, yeah.
+**[00:14]** Speaker 1: Or 3.5.
+**[00:14]** Speaker 1: This one, right?
+**[00:15]** Speaker 2: Yeah, yeah.
+**[00:16]** Speaker 2: Uh that's the the the target, but it's already uh because, oh yeah, yeah, yeah, that's that's like, yeah, yeah, yeah, that's right, that's right.
+**[00:27]** Speaker 1: Yeah, this this one is the target, right, the objective?
+**[00:30]** Speaker 2: Yes, right.
+**[00:31]** Speaker 1: Yes, the target.
+**[00:33]** Speaker 1: Uh, this is expected coming from the supplier pipeline.
+**[00:36]** Speaker 1: Mhm.
+**[00:38]** Speaker 1: Coming from the supplier pipeline is 3.5 metric tons.
+**[00:43]** Speaker 1: Mhm.
+**[00:43]** Speaker 1: Uh, and then this is like the realization after you are buying.
+**[00:50]** Speaker 1: And this is like the gaps uh like uh how many gaps from the uh actual to the goals, right?
+**[00:56]** Speaker 2: That's right.
+**[00:57]** Speaker 1: And then uh as you see here, if uh from the supply pipeline, you uh you will uh KGF will procure uh expectedly 3.5 metric tons.
+**[01:07]** Speaker 1: And what is your plan to to to fulfill this goal uh this target to reach to reach 6.12 metric tons?
+**[01:17]** Speaker 1: Because at least you need like three point.
+**[01:21]** Speaker 1: Yeah.
+**[01:21]** Speaker 1: Um yeah, something 2.6.
+**[01:25]** Speaker 2: Okay.
+**[01:25]** Speaker 2: Uh just like I inform you that uh Denny is uh before we expect Denny to deliver uh 3 point uh five yeah per uh per week.
+**[01:38]** Speaker 2: But it seems he's uh to deliver around eight eight uh ton per two weeks per two weeks, yeah.
+**[01:46]** Speaker 2: Minimum metric tons per two weeks.
+**[01:49]** Speaker 2: Because uh he to us uh I think last two Tuesday Tuesday and then uh he's delivering again uh today.
+**[02:00]** Speaker 2: So, um yeah, so uh I think we will increase uh the the pipeline from uh Denny.
+**[02:08]** Speaker 2: Uh okay.
+**[02:10]** Speaker 1: I see.
+**[02:10]** Speaker 2: is already uh he's already he's already uh working on the first uh metric ton.
+**[02:19]** Speaker 2: So if he can delivers that uh next week, then uh we will have uh 4.5 for next week.
+**[02:31]** Speaker 1: Ah, yeah, I see.
+**[02:33]** Speaker 1: Okay, Paris, so the target is already defined until November to fulfill the 100 metric tons of um our PO.
+**[02:44]** Speaker 1: Mhm.
+**[02:44]** Speaker 2: Uh, okay.
+**[02:46]** Speaker 1: Okay, so this is what we would like to see uh every week like the uh if the goals is uh if the target is achieved or not for the procurement.
+**[02:57]** Speaker 1: And uh we for the quality records we we record, we prefer to have it more like uh like a table rather than a picture.
+**[03:08]** Speaker 1: Of of course picture and evidence is needed uh that's the underlying data, but uh to make it easier, we we prefer to see the uh to see the table first and to compare the quality and all.
+**[03:21]** Speaker 1: Like a recap of the quality uh record like what uh we ask uh who uh the group chat, like.
+**[03:30]** Speaker 1: Yeah.
+**[03:30]** Speaker 1: Do you have a quality report or not?
+**[03:32]** Speaker 2: Yeah, okay.
+**[03:33]** Speaker 1: So with this, do you think uh one question from uh Yes, sorry.
+**[03:38]** Speaker 1: Do you still need update in the group then, Mbak?
+**[03:41]** Speaker 2: Maybe once in a while, yeah.
+**[03:47]** Speaker 1: Yeah, of course, if uh please uh do keep us updated because here, but if the change from the last time we see, then uh we will still hound you in the group chat.
+**[04:02]** Speaker 2: Yeah.
+**[04:04]** Speaker 1: Yes.
+**[04:05]** Speaker 1: And from Daos, uh is he performing okay in the quality?
+**[04:09]** Speaker 1: Because the last time it was really low in density, right?
+**[04:13]** Speaker 2: Yes, uh Daos And also he makes the mold the berries with the good one.
+**[04:18]** Speaker 2: Yeah.
+**[04:19]** Speaker 2: With Daos, we haven't uh been in touch again uh for this season, yeah.
+**[04:24]** Speaker 2: So, I think he's still focusing on coffee uh probably.
+**[04:30]** Speaker 2: So, uh we'll we will keep him in mind and then uh we'll check on him uh maybe next week or uh yeah next week I think we can we can reach out to him and see if he can uh deliver.
+**[04:47]** Speaker 2: But uh yeah, we will keep keep in mind that uh last time he's uh he delivered uh low quality uh paper.
+**[05:04]** Speaker 1: Okay.
+**[05:07]** Speaker 1: Okay, uh I think that's the question from my side and this is like the processing and shipment also with the quality, it will be updated here, right?
+**[05:16]** Speaker 1: Uh, okay, this the bridges lock and it will be updated here as well.
+**[05:25]** Speaker 1: Um, and these are uh, that's the the references, that's the the the people who are actually in charge, uh it can be can be uh, how do you say?
+**[05:42]** Speaker 1: Uh, it will be modified once once uh once one.
+**[05:46]** Speaker 1: This is like like a general information, but usually like uh information from Pak Utara from uh Nico, and then uh things like that.
+**[05:59]** Speaker 1: Okay, so if we would like to know some information about it, we can also reach out to the people list here.
+**[06:07]** Speaker 2: Yeah, yeah.
+**[06:08]** Speaker 2: Yeah.
+**[06:09]** Speaker 1: Okay.
+**[06:11]** Speaker 1: And this is like the reporting commitments to first day, here.
+**[06:16]** Speaker 1: So the procurement updates, so we expect to hear much more from you, Rafik, uh for the procurement update.
+**[06:23]** Speaker 1: And also the uh plan uh progress against the weekly objective and also that's for from Pak Arif uh food venture video and this one the production schedule, the block cleaning and grading schedule, it will also uh be informed by Rafik.
+**[06:41]** Speaker 2: Yes, I think it's better uh from uh Rafik or.
+**[06:48]** Speaker 1: Okay.
+**[06:49]** Speaker 2: Okay.
+**[06:50]** Speaker 2: Okay, Pak Arif.
+**[06:52]** Speaker 2: Thank you.
+**[06:52]** Speaker 2: And uh, um, only one more thing again from my side.
+**[06:58]** Speaker 2: Uh, so we are planning to have a eight metric tons of black pepper, but without any processing from your side.
+**[07:05]** Speaker 2: So, only only like you you only do repacking on the raw materials without any sorting and grading process.
+**[07:14]** Speaker 2: Is that possible to arrange that?
+**[07:17]** Speaker 2: Uh, not even drying.
+**[07:22]** Speaker 2: How uh what is the moisture content?
+**[07:26]** Speaker 2: Uh still from uh uh uh we we did uh drying in Tkad uh for around I think 3 m uh two or three metric ton that uh we received last week.
+**[07:41]** Speaker 2: Uh we dried them uh the moisture is around uh 15 15 to 16.
+**[07:52]** Speaker 1: Uh, anchara?
+**[07:53]** Speaker 2: Yeah.
+**[07:53]** Speaker 2: No, no.
+**[07:54]** Speaker 2: Your uh your measurement.
+**[07:58]** Speaker 2: Uh already uh calculated our measurement.
+**[08:01]** Speaker 2: Uh how about the eight metric tons that we have now in the in Natar warehouse?
+**[08:06]** Speaker 2: Natar uh around the same, Mbak, uh around 16 to 17.
+**[08:16]** Speaker 2: 16 to 17.
+**[08:21]** Speaker 2: Let me check.
+**[08:23]** Speaker 2: Well, I think not right.
+**[08:25]** Speaker 2: It's eight metric tons.
+**[08:26]** Speaker 2: Is it like even for all the materials?
+**[08:29]** Speaker 2: Can you uh can you uh provide the data for that?
+**[08:33]** Speaker 2: Uh the moisture and uh yeah the moisture and density recap of the eight metric tons of materials that you have now in the Natar warehouse?
+**[08:44]** Speaker 2: Yeah, we can.
+**[08:45]** Speaker 2: We actually we have uh I think we have uh around 7 m 7 metric ton from Denny only ya.
+**[08:54]** Speaker 2: From Denny only we already have currently we have a total uh around 11 metric ton.
+**[09:00]** Speaker 1: Okay.
+**[09:05]** Speaker 1: Uh we can send only from him.
+**[09:12]** Speaker 1: Hmm, okay.
+**[09:13]** Speaker 1: But uh please do provide all the data first for the 11 metric tons, and we will uh decide uh on which material that we would like to process without any sorting process from uh KGF.
+**[09:30]** Speaker 1: Yes, okay.
+**[09:30]** Speaker 1: Uh that's from my side.
+**[09:32]** Speaker 1: Um, I heard Yayang and Roy, uh maybe do you have any questions or doubt or anything uh the comments on the procurement plan?
+**[09:44]** Speaker 3: Um, not directly.
+**[09:46]** Speaker 3: I think the most important is that we keep on communicating.
+**[09:51]** Speaker 3: Um, perhaps we should have a meeting like this every week to discuss the progress, right?
+**[09:55]** Speaker 3: And then we have like a one-on-one or direct discussion on
+
+--- [PART 7 OF 7] ---
+
+**[00:00]** Speaker 1: what happened or what are the issues etc. So we
+**[00:04]** Speaker 1: may.
+**[00:12]** Speaker 1: Um, and then of course with the daily updates and and etc. Let's see how how much is needed. Uh, but I think that is necessary in this phase to, to to make some good progress, right?
+**[00:24]** Speaker 2: Yes.
+**[00:26]** Speaker 2: Yes, yes.
+**[00:27]** Speaker 2: And also like to add on that, please don't hesitate to reach us if you want to discuss about something or schedule a meeting or etc. because uh we we don't know if you never ask uh like your question or you still have doubt. We don't know if you struggles on certain uh topics or um challenges.
+**[00:52]** Speaker 2: So please let us know on that.
+**[00:56]** Speaker 1: Yeah, so maybe we can schedule the same call every week now on Friday?
+**[1:01]** Speaker 2: Yes, yes. I will make make it recurring. So from 9.00 to 10.
+**[1:07]** Speaker 1: I'm fine with it, yeah.
+**[1:08]** Speaker 2: Yeah. Okay.
+**[1:10]** Speaker 1: 9 to 10 here, recurring.
+**[1:12]** Speaker 2: Uh, every one week.
+**[1:18]** Speaker 1: Uh, until the end of the year.
+**[1:28]** Speaker 2: Yeah, I think you will receive it on your email. So I already make it uh, as everything every caring agenda every week, evaluation of procurement. But uh, not only procurement, but also the development of the system, I will rename the agent, the meeting name later on.
+**[1:47]** Speaker 2: Okay?
+**[1:48]** Speaker 2: Um, Ray, Yayan,
+**[1:51]** Speaker 2: any comments or questions?
+**[1:55]** Speaker 1: No?
+**[1:56]** Speaker 2: Good.
+**[1:57]** Speaker 2: Okay, uh, Pak,
+**[1:58]** Speaker 1: Halo.
+**[2:00]** Speaker 3: Pak.
+**[2:01]** Speaker 3: Please reimbursement uh, yeah, please uh reimbursement the hotel cost for Ray in Bandar Lampung. Uh it's not done yet. Ray is too shy to ask to to you and Rafi.
+**[2:17]** Speaker 3: So I'm speaking on behalf of him.
+**[2:20]** Speaker 1: I think
+**[2:20]** Speaker 3: you can receive the the uh account number, yeah?
+**[2:25]** Speaker 3: Have you send the account number?
+**[2:27]** Speaker 1: Oh, it's already shared to Rafi.
+**[2:30]** Speaker 3: Or Rafi.
+**[2:31]** Speaker 1: Yeah.
+**[2:32]** Speaker 2: Yeah, please Rafi.
+**[2:37]** Speaker 3: No problem.
+**[2:40]** Speaker 3: But don't forget.
+**[2:43]** Speaker 1: I think we will give him uh in cash here when he arrives here next.
+**[2:51]** Speaker 2: Okay, that's all. Thank you.
+**[2:54]** Speaker 2: Okay. Uh thank you all. Uh from my side I don't have anything left to say. Uh, but please uh be committed uh to fill in this um spreadsheet because uh yeah it's a ready for us to communicate, right? Uh and to keep updated, to keep us updated on their progress.
+**[3:12]** Speaker 2: That's all I think. Uh if and traffic didn't yes,
+**[3:16]** Speaker 1: Ah, admitted to uh just delivered to uh without processing, yeah?
+**[3:24]** Speaker 2: Yes, without processing. So you you only did the repackaging, but please please on the label, yeah. Then make it the same like finished good, yeah, Pak Rief. So last time the the unprocessed one was uh having the same label as the finished good, like the process one. So we are kind of confused to separate it.
+**[3:43]** Speaker 2: Please just uh make it maybe like raw material of Lampung gold, like pepper unprocessed or make it make a clear name for it.
+**[3:52]** Speaker 1: Okay.
+**[3:53]** Speaker 2: Make it clear.
+**[3:54]** Speaker 2: Yeah.
+**[3:55]** Speaker 1: And then so then uh we will continue uh buying and then for the for the processing uh it will be on the second eight metric
+**[4:04]** Speaker 3: foto dulu Pak.
+**[4:05]** Speaker 2: Yes, yes, that's right.
+**[4:14]** Speaker 2: Yes, correct.
+**[4:17]** Speaker 2: Yeah.
+**[4:18]** Speaker 2: Okay.
+**[4:18]** Speaker 2: So, I think that's all. It's already uh 9 minutes over from 10 p.m.
+**[4:24]** Speaker 1: Sorry, maybe do you want to say something?
+**[4:26]** Speaker 1: Uh Speak.
+**[4:28]** Speaker 1: Yeah, yeah.
+**[4:29]** Speaker 1: Uh so maybe for uh our easiness in Sentul, maybe can you please also provide the uh what was it? The mixing or the lot composition for for each of the lot because uh it is easier for us if the density and moisture from each lot is uh uniform and maybe uh yeah, uh we should have a plan on that uh what to uh what to what farmers and what collectors uh for each lot.
+**[5:07]** Speaker 1: Yeah.
+**[5:08]** Speaker 1: Okay, yeah, that's why.
+**[5:10]** Speaker 1: So we have a uniform density.
+**[5:12]** Speaker 1: Okay, yeah, that's why I said uh we will then just uh send the the ones that we received uh from Danni because uh the quality from him uh has been pretty consistent so far.
+**[5:25]** Speaker 1: I think only uh one, the one, yes.
+**[5:36]** Speaker 1: Okay.
+**[5:38]** Speaker 3: Okay, siap. Thank you, Pak Arif.
+**[5:42]** Speaker 2: Okay, uh I think that's all uh for our meeting today.
+**[5:47]** Speaker 2: So, thank you for joining. Uh see you again next week and please uh keep us updated on the progress.
+**[5:56]** Speaker 2: Okay, thank you.
+**[5:57]** Speaker 1: Okay, thank you all.
+**[5:59]** Speaker 1: Thank you all.
+**[6:00]** Speaker 3: Bye bye.
+**[6:01]** Speaker 1: Thank you.

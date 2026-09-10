@@ -1,0 +1,258 @@
+{
+ "days": {
+  "2026-07-25": {
+   "date": "2026-07-25",
+   "weekday": "Sat",
+   "start_min": 875,
+   "end_min": 906,
+   "start": "14:35",
+   "end": "15:06",
+   "wall_h": 0.5,
+   "actual_h": 0.5,
+   "effective_h": 0.5,
+   "attention_h": 0.5,
+   "leverage": 1.0,
+   "human_equiv_h": 0.5,
+   "output_x": 1.0,
+   "ai_speed": 2.5,
+   "meeting_h": 0.5,
+   "ai_h": 0.0,
+   "lane_hours": {
+    "meetings": 0.5,
+    "work": 0.0,
+    "you": 0.0,
+    "other": 0.0
+   },
+   "sessions": 0,
+   "meetings_count": 1,
+   "automated_runs": 0,
+   "runtimes": {
+    "meetings": {
+     "streams": 1,
+     "hours": 0.5,
+     "minutes": 31,
+     "automated_runs": 0
+    }
+   },
+   "streams": [
+    {
+     "id": "meet-2026-07-25-0",
+     "lane": "meetings",
+     "kind": "meeting",
+     "runtime": "meetings",
+     "label": "Meeting",
+     "source": "recorded",
+     "minutes": 31,
+     "blocks": [
+      [
+       875,
+       906
+      ]
+     ]
+    }
+   ],
+   "commits": []
+  },
+  "2026-07-26": {
+   "date": "2026-07-26",
+   "weekday": "Sun",
+   "start_min": 838,
+   "end_min": 874,
+   "start": "13:58",
+   "end": "14:34",
+   "wall_h": 0.6,
+   "actual_h": 0.6,
+   "effective_h": 0.6,
+   "attention_h": 0.6,
+   "leverage": 1.0,
+   "human_equiv_h": 0.6,
+   "output_x": 1.0,
+   "ai_speed": 2.5,
+   "meeting_h": 0.6,
+   "ai_h": 0.0,
+   "lane_hours": {
+    "meetings": 0.6,
+    "work": 0.0,
+    "you": 0.0,
+    "other": 0.0
+   },
+   "sessions": 0,
+   "meetings_count": 1,
+   "automated_runs": 0,
+   "runtimes": {
+    "meetings": {
+     "streams": 1,
+     "hours": 0.6,
+     "minutes": 36,
+     "automated_runs": 0
+    }
+   },
+   "streams": [
+    {
+     "id": "meet-2026-07-26-0",
+     "lane": "meetings",
+     "kind": "meeting",
+     "runtime": "meetings",
+     "label": "Meeting",
+     "source": "recorded",
+     "minutes": 36,
+     "blocks": [
+      [
+       838,
+       874
+      ]
+     ]
+    }
+   ],
+   "commits": []
+  },
+  "2026-07-27": {
+   "date": "2026-07-27",
+   "weekday": "Mon",
+   "start_min": 660,
+   "end_min": 921,
+   "start": "11:00",
+   "end": "15:21",
+   "wall_h": 4.3,
+   "actual_h": 1.9,
+   "effective_h": 1.9,
+   "attention_h": 1.9,
+   "leverage": 1.0,
+   "human_equiv_h": 1.9,
+   "output_x": 1.0,
+   "ai_speed": 2.5,
+   "meeting_h": 1.9,
+   "ai_h": 0.0,
+   "lane_hours": {
+    "meetings": 1.9,
+    "work": 0.0,
+    "you": 0.0,
+    "other": 0.0
+   },
+   "sessions": 0,
+   "meetings_count": 4,
+   "automated_runs": 0,
+   "runtimes": {
+    "meetings": {
+     "streams": 4,
+     "hours": 1.9,
+     "minutes": 113,
+     "automated_runs": 0
+    }
+   },
+   "streams": [
+    {
+     "id": "meet-2026-07-27-0",
+     "lane": "meetings",
+     "kind": "meeting",
+     "runtime": "meetings",
+     "label": "Meeting",
+     "source": "recorded",
+     "minutes": 43,
+     "blocks": [
+      [
+       660,
+       703
+      ]
+     ]
+    },
+    {
+     "id": "meet-2026-07-27-1",
+     "lane": "meetings",
+     "kind": "meeting",
+     "runtime": "meetings",
+     "label": "Meeting",
+     "source": "recorded",
+     "minutes": 68,
+     "blocks": [
+      [
+       841,
+       909
+      ]
+     ]
+    },
+    {
+     "id": "meet-2026-07-27-2",
+     "lane": "meetings",
+     "kind": "meeting",
+     "runtime": "meetings",
+     "label": "Meeting",
+     "source": "recorded",
+     "minutes": 1,
+     "blocks": [
+      [
+       918,
+       919
+      ]
+     ]
+    },
+    {
+     "id": "meet-2026-07-27-3",
+     "lane": "meetings",
+     "kind": "meeting",
+     "runtime": "meetings",
+     "label": "Meeting",
+     "source": "recorded",
+     "minutes": 1,
+     "blocks": [
+      [
+       920,
+       921
+      ]
+     ]
+    }
+   ],
+   "commits": []
+  }
+ },
+ "gcal_cache": {
+  "2026-07-25": [],
+  "2026-07-26": [],
+  "2026-07-27": []
+ },
+ "calendar_ok": true,
+ "last_sweep_wib": "2026-07-29T08:54:27+07:00",
+ "boundary_hour": 4,
+ "ai_speed_factor": 2.5,
+ "sources": {
+  "claude-code": {
+   "present": false,
+   "paths": [
+    "/home/user/.claude/projects"
+   ],
+   "measured": [
+    "activity timestamps",
+    "human-typed message timestamps",
+    "entrypoint (interactive vs sdk automation)"
+   ],
+   "inferred": [],
+   "unavailable": [],
+   "caveats": [
+    "no /home/user/.claude/projects on this machine; no Claude hours counted"
+   ]
+  },
+  "antigravity": {
+   "present": false,
+   "paths": [],
+   "conversations_scanned": 0,
+   "one_shot_excluded": 0,
+   "interactive_counted": 0,
+   "measured": [
+    "activity timestamps",
+    "user-turn timestamps"
+   ],
+   "inferred": [
+    "interactive vs automation",
+    "lane / client attribution"
+   ],
+   "unavailable": [
+    "model attribution"
+   ],
+   "caveats": [
+    "no Antigravity conversation store found; no Antigravity hours counted"
+   ]
+  }
+ },
+ "runtimes_counted": [],
+ "sweep_seconds": 0.7
+}

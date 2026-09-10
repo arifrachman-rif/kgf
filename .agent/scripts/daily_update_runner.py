@@ -131,6 +131,7 @@ class HarvestAccumulator:
             "morning_plan": "",
             "portfolio": "",
             "git_sync": "",
+            "onenote": [],
         }
         self.meta = {
             "step_errors": [],
@@ -195,6 +196,10 @@ class HarvestAccumulator:
 
     def set_git_sync(self, status_text):
         self.sections["git_sync"] = status_text
+
+    def set_onenote(self, raw_text):
+        if raw_text:
+            self.sections["onenote"] = [l for l in raw_text.splitlines() if l.strip()]
 
     def add_error(self, step_label):
         self.meta["step_errors"].append(step_label)
@@ -561,6 +566,19 @@ def _main_logic(mode, dry_run=False):
     harvest.add_calendar("work", out)
     sections.append(f"## Calendar: Work\n{out}\n")
     write_output(sections, output_file)
+
+    # ── Step 4.5: Microsoft OneNote Sync ──────────────────────────────
+    onenote_script = os.path.join(BASE_DIR, '.agent', 'skills', 'onenote-connector', 'scripts', 'onenote_client.py')
+    onenote_token_json = os.path.join(BASE_DIR, '.agent', 'skills', 'onenote-connector', 'token.json')
+    if os.path.exists(onenote_token_json) or dry_run:
+        print("[4.5] Microsoft OneNote sync...", flush=True)
+        out_onenote = _step("Microsoft OneNote Sync", [
+            sys.executable, onenote_script,
+            '--action', 'sync-journal'
+        ] + (['--dry-run'] if dry_run else []), timeout=60)
+        harvest.set_onenote(out_onenote)
+        sections.append(f"## Microsoft OneNote Sync\n```\n{out_onenote}\n```\n")
+        write_output(sections, output_file)
 
     # ── Step 5: Work Slack (Married) ────────────────────────────────
     work_token = get_skill_token('slack-connector')

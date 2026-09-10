@@ -1,0 +1,16 @@
+**[00:00]** Speaker 1: Hi everyone, thank you for coming today.
+**[00:02]** Speaker 1: Hari ini kita mau bahas progress project aplikasi baru.
+**[00:06]** Speaker 1: Bisa tolong update dari tim frontend dulu?
+**[00:09]** Speaker 2: Sure. Untuk frontend, UI design-nya udah selesai sekitar 80%.
+**[00:15]** Speaker 2: Tapi masih ada beberapa komponen yang butuh adjustment, terutama di mobile view.
+**[00:20]** Speaker 1: Oke, kapan kira-kira bisa beres?
+**[00:22]** Speaker 2: Target kita akhir minggu ini sih udah beres semua.
+**[00:25]** Speaker 1: Sip, kalau dari backend gimana?
+**[00:28]** Speaker 3: Backend API untuk autentikasi user udah kelar.
+**[00:32]** Speaker 3: Sekarang kita lagi fokus pengerjaan API buat payment gateway.
+**[00:37]** Speaker 3: Ada sedikit kendala di integrasi third party-nya, tapi kita lagi coba resolve bareng tim vendor.
+**[00:43]** Speaker 1: Got it. Tolong keep me updated ya soal payment gateway itu.
+**[00:48]** Speaker 1: Itu crucial banget buat launch nanti. Ada hal lain?
+**[00:52]** Speaker 2: Dari QA mungkin butuh staging environment yang lebih stabil buat start testing minggu depan.
+**[00:58]** Speaker 3: Oke, nanti gue koordinasi sama tim DevOps buat prep environment-nya.
+**[01:03]** Speaker 1: Great. Thank you guys, let's wrap this up and get back to work.

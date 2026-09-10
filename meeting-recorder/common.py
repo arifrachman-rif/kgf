@@ -115,14 +115,25 @@ def parse_json_tail(text):
     raise ValueError("no JSON found in output")
 
 def load_gemini_key():
-    """Reuse the Gemini API key from the gemini-image skill (metered, the owner's)."""
+    """Reuse the Gemini API key from the environment, root .env, or gemini-image skill."""
     key = os.environ.get("GEMINI_API_KEY")
     if key:
         return key
+    # Check root .env file
+    root_env = os.path.join(REPO_ROOT, ".env")
+    if os.path.exists(root_env):
+        for line in open(root_env, encoding="utf-8", errors="replace"):
+            line = line.strip()
+            if line.startswith("GEMINI_API_KEY="):
+                val = line.split("=", 1)[1].strip()
+                if val:
+                    return val
+    # Fallback to gemini-image skill
     env_path = os.path.join(REPO_ROOT, ".agent", "skills", "gemini-image", "token.env")
     if os.path.exists(env_path):
         for line in open(env_path, encoding="utf-8"):
             line = line.strip()
             if line.startswith("GEMINI_API_KEY="):
                 return line.split("=", 1)[1].strip()
-    sys.exit("ERROR: no GEMINI_API_KEY (env or .agent/skills/gemini-image/token.env)")
+    sys.exit("ERROR: no GEMINI_API_KEY (env, root .env, or .agent/skills/gemini-image/token.env)")
+

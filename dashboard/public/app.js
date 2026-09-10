@@ -127,12 +127,13 @@ async function refreshOverview(manual = false) {
   if (document.hidden && !manual) return;
   const btn = $id('btn-refresh');
   btn.classList.add('is-busy');
-  const [ovRes, progRes, briefRes, aiRes, cqRes] = await Promise.allSettled([
+  const [ovRes, progRes, briefRes, aiRes, cqRes, portRes] = await Promise.allSettled([
     U.fetchJSON('/api/overview'),
     U.fetchJSON('/api/progress'),
     U.fetchJSON('/api/briefing'),
     U.fetchJSON('/api/ai-task?list=1'),
     U.fetchJSON('/api/command-queue'),
+    U.fetchJSON('/api/portfolio'),
   ]);
   if (aiRes.status === 'fulfilled') AI.adoptList(aiRes.value && aiRes.value.runs);
   App.commandQueue = cqRes.status === 'fulfilled' ? cqRes.value : null;
@@ -146,6 +147,7 @@ async function refreshOverview(manual = false) {
   }
   App.progress = progRes.status === 'fulfilled' ? progRes.value : null;
   App.briefing = briefRes.status === 'fulfilled' ? briefRes.value : null;
+  App.portfolio = portRes.status === 'fulfilled' ? portRes.value : null;
   btn.classList.remove('is-busy');
   updateChrome();
   loadActiveTab();
@@ -198,6 +200,41 @@ function skeletonBlock(lines = 3) {
   return out + '</div>';
 }
 
+/* 🗂 Active Projects card — list of active initiatives from /api/portfolio.
+   Visible on the Today landing tab so the owner doesn't have to hunt for it. */
+function activeProjectsCard() {
+  const p = App.portfolio;
+  if (!p || !p.teams || !p.teams.length) return '';
+  const initiatives = p.teams.flatMap(t => t.initiatives || []);
+  if (!initiatives.length) return '';
+
+  const rows = initiatives.map(it => {
+    const healthKind = it.health === 'on_track' ? 'good' : (it.health === 'at_risk' ? 'warn' : (it.health === 'blocked' ? 'serious' : 'muted'));
+    const healthLabel = it.health === 'on_track' ? 'on track' : (it.health === 'at_risk' ? 'at risk' : (it.health === 'blocked' ? 'blocked' : 'planning'));
+    const links = it.links && it.links.docs ? it.links.docs.map(l => ({ url: l.url, label: l.label })) : [];
+    const right = it.next_milestone ? Comp.badge('muted', it.next_milestone) : '';
+
+    return Comp.listRow({
+      key: `proj-today:${it.id}`,
+      icon: it.status === 'planning' ? '🗓' : '▸',
+      title: it.name,
+      badges: [Comp.badge(healthKind, healthLabel)],
+      meta: it.one_liner || '',
+      right: right,
+      expandBody: `<p>${U.esc(it.now || '')}</p>` + (links.length ? `<p><b>Docs:</b> ${Comp.linkChips(links)}</p>` : '')
+    });
+  }).join('');
+
+  return Comp.card({
+    key: 'active-projects-today',
+    icon: '🗂',
+    title: 'Daftar Proyek Berjalan (Active Projects)',
+    count: `${initiatives.length} active`,
+    body: `<div class="rows">${rows}</div>`,
+    open: true
+  });
+}
+
 function renderToday() {
   const panel = $id('tab-today');
   if (!canRender(panel)) return;
@@ -212,6 +249,7 @@ function renderToday() {
     heroTiles(ov),
     momentumBand(),
     briefingCard(),
+    activeProjectsCard(),
     escalationStrip(ov),
     `<div id="today-approvals">${approvalsCard()}${failuresCard()}</div>`,
     actionItemsCard(ov),

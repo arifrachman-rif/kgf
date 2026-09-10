@@ -1,0 +1,82 @@
+{
+  "updated_wib": "2026-07-29T08:45:00",
+  "source": "manual",
+  "tickets": [
+    {
+      "id": "KGF-001",
+      "title": "Ajukan pembaruan KBLI NIB KGF di portal OSS RBA",
+      "status": "in_progress",
+      "priority": "P0",
+      "kind": "self",
+      "owner": "Arif Rachman",
+      "project": "Pemberdayaan IKM Hijau",
+      "due": "2026-08-10",
+      "initiative_id": "ikm_hijau_2026",
+      "note": "Menambahkan KBLI Industri Pengolahan Kopi (10761), Rempah-rempah (10772), dan Kakao (10732). Penambahan gratis di OSS.",
+      "links": [
+        "file:///c:/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/IKM_Hijau_2026/analisis_kesesuaian_ikm_hijau.md"
+      ],
+      "comments": [
+        {
+          "by": "Arif Rachman",
+          "change": "status -> in_progress",
+          "text": "Mulai pengisian data di portal OSS",
+          "ts_wib": "2026-07-28T10:00:00"
+        }
+      ]
+    },
+    {
+      "id": "KGF-002",
+      "title": "Sosialisasi SOP K3 dan limbah di Gudang Natar",
+      "status": "todo",
+      "priority": "P1",
+      "kind": "self",
+      "owner": "Arif Rachman",
+      "project": "Pemberdayaan IKM Hijau",
+      "due": "2026-08-15",
+      "initiative_id": "ikm_hijau_2026",
+      "note": "Memastikan staf gudang memahami APD wajib (masker lada), APAR, dan logbook kompos kulit kopi.",
+      "links": [
+        "file:///c:/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/IKM_Hijau_2026/sop_k3_dan_limbah_natar.md"
+      ],
+      "comments": []
+    },
+    {
+      "id": "KGF-003",
+      "title": "Penyelesaian draf proposal modal kerja Dompet Dhuafa",
+      "status": "in_progress",
+      "priority": "P0",
+      "kind": "self",
+      "owner": "Arif / Hendra",
+      "project": "Kerja Sama Dompet Dhuafa",
+      "due": "2026-08-08",
+      "initiative_id": "dompet_dhuafa",
+      "note": "Menyempurnakan analisis kelayakan usaha lada dan kopi KGF untuk diajukan ke Dompet Dhuafa.",
+      "links": [
+        "file:///c:/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/proposal_dompet_dhuafa_draft.md"
+      ],
+      "comments": [
+        {
+          "by": "Hendra",
+          "change": "Menambahkan analisis margin",
+          "text": "Struktur biaya dan proyeksi margin lada hitam Verstegen telah diintegrasikan.",
+          "ts_wib": "2026-07-28T16:00:00"
+        }
+      ]
+    },
+    {
+      "id": "KGF-004",
+      "title": "Persiapan dokumen administrasi & sampel untuk Trade Expo Indonesia 2026",
+      "status": "todo",
+      "priority": "P1",
+      "kind": "self",
+      "owner": "Arif Rachman",
+      "project": "Trade Expo Indonesia 2026",
+      "due": "2026-09-15",
+      "initiative_id": "tei_2026",
+      "note": "Mempersiapkan sampel lada hitam ASTA 550 dan Robusta green beans Grade 1.",
+      "links": [],
+      "comments": []
+    }
+  ]
+}

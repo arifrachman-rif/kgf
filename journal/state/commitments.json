@@ -1,0 +1,27 @@
+{
+  "next_seq": 2,
+  "last_sweep": 1785244800,
+  "items": {
+    "COM-0001": {
+      "id": "COM-0001",
+      "text": "Mengajukan penambahan KBLI di OSS",
+      "status": "open",
+      "to": "Kemenperin / Tim Audit",
+      "due": "2026-08-10",
+      "project": "Pemberdayaan IKM Hijau",
+      "first_seen": 1785244800,
+      "confidence": "high",
+      "notes": [
+        "Langkah administrasi wajib agar lolos seleksi administratif IKM Hijau."
+      ],
+      "source": {
+        "type": "meeting-local",
+        "ref": "file:///c:/Users/rifra/.gemini/antigravity-ide/scratch/ai-second-brain/Clients/Work/IKM_Hijau_2026/analisis_kesesuaian_ikm_hijau.md"
+      }
+    }
+  },
+  "counts": {
+    "open": 1,
+    "total": 1
+  }
+}

@@ -27,7 +27,7 @@ import time
 import urllib.error
 import urllib.request
 
-from common import REPO_ROOT, fmt_ts, load_config, load_gemini_key
+from common import REPO_ROOT, detect_platform, fmt_ts, load_config, load_gemini_key
 
 LOG_PATH = os.path.join(REPO_ROOT, "dashboard-data", "meeting_recorder_log.jsonl")
 GEMINI_BASE = "https://generativelanguage.googleapis.com"
@@ -57,8 +57,26 @@ def log_row(row):
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
+def _is_interop(bin_path):
+    """True only when a Linux process shells out to a Windows .exe (WSL interop).
+
+    A .exe target alone is not enough: running natively on Windows also targets
+    .exe, but there the paths are already Windows paths and `wslpath` does not
+    exist, so translating them raises WinError 2 instead."""
+    return bin_path.lower().endswith(".exe") and detect_platform() == "wsl"
+
+def _winpath(p):
+    """WSL path -> Windows path for args passed to a Windows .exe via interop."""
+    import subprocess
+    return subprocess.run(["wslpath", "-w", p], capture_output=True,
+                          text=True, check=True).stdout.strip()
+
 def audio_duration(path, ffmpeg):
     ffprobe = os.path.join(os.path.dirname(ffmpeg), "ffprobe") if os.sep in ffmpeg else "ffprobe"
+    if ffmpeg.lower().endswith(".exe"):
+        ffprobe = ffprobe + ".exe" if not ffprobe.lower().endswith(".exe") else ffprobe
+        if _is_interop(ffmpeg):
+            path = _winpath(path)
     try:
         out = subprocess.run([ffprobe, "-v", "quiet", "-show_entries",
                               "format=duration", "-of", "csv=p=0", path],
@@ -69,11 +87,6 @@ def audio_duration(path, ffmpeg):
 
 # ---------- engine: whisper.cpp (GPU only) ----------
 
-def _winpath(p):
-    """WSL path -> Windows path for args passed to a Windows .exe via interop."""
-    return subprocess.run(["wslpath", "-w", p], capture_output=True,
-                          text=True, check=True).stdout.strip()
-
 def run_whispercpp(audio, cfg, lang):
     machine = cfg["machine"]
     bin_path = machine.get("whispercpp_bin") or ""
@@ -83,7 +96,7 @@ def run_whispercpp(audio, cfg, lang):
 
     # A Windows .exe invoked from WSL can't read WSL-only paths (/tmp): keep the
     # temp files on a Windows drive and pass Windows-style path arguments.
-    win_interop = bin_path.lower().endswith(".exe")
+    win_interop = _is_interop(bin_path)
     tmp_parent = os.path.dirname(bin_path) if win_interop else None
 
     ffmpeg = machine.get("ffmpeg", "ffmpeg")
@@ -122,37 +135,78 @@ def run_whispercpp(audio, cfg, lang):
 
 # ---------- engine: cli (Gemini API, audio-in) ----------
 
-def _gemini_req(url, body, key, timeout=1800):
-    req = urllib.request.Request(
-        url, data=json.dumps(body).encode(),
-        headers={"Content-Type": "application/json", "x-goog-api-key": key})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.load(r)
+def _gemini_req(url, body, key, timeout=600):
+    import subprocess
+    import tempfile
+    max_retries = 10
+    backoff = 10
+    for attempt in range(max_retries):
+        tf_path = None
+        try:
+            with tempfile.NamedTemporaryFile("w", delete=False, encoding="utf-8") as tf:
+                json.dump(body, tf)
+                tf_path = tf.name
+            cmd = ["curl", "-s", "-X", "POST",
+                   "-H", "Content-Type: application/json",
+                   "-H", f"x-goog-api-key: {key}",
+                   "-d", f"@{tf_path}",
+                   "--max-time", str(timeout), url]
+            r = subprocess.run(cmd, capture_output=True, text=True, check=True)
+            data = json.loads(r.stdout)
+            if "error" in data:
+                raise Exception(f"API Error: {data['error']}")
+            return data
+        except Exception as e:
+            if attempt == max_retries - 1:
+                raise e
+            print(f"[transcribe] Request failed: {e}. Retrying in {backoff}s...", file=sys.stderr, flush=True)
+            time.sleep(backoff)
+            backoff *= 2
+        finally:
+            if tf_path and os.path.exists(tf_path):
+                try: os.remove(tf_path)
+                except: pass
 
 def _gemini_upload_file(path, mime, key):
-    """Files API resumable upload; returns the file URI once ACTIVE."""
+    """Files API resumable upload using curl; returns the file URI once ACTIVE."""
     size = os.path.getsize(path)
-    start = urllib.request.Request(
-        f"{GEMINI_BASE}/upload/v1beta/files",
-        data=json.dumps({"file": {"display_name": os.path.basename(path)}}).encode(),
-        headers={"x-goog-api-key": key,
-                 "X-Goog-Upload-Protocol": "resumable",
-                 "X-Goog-Upload-Command": "start",
-                 "X-Goog-Upload-Header-Content-Length": str(size),
-                 "X-Goog-Upload-Header-Content-Type": mime,
-                 "Content-Type": "application/json"})
-    with urllib.request.urlopen(start, timeout=120) as r:
-        upload_url = r.headers["X-Goog-Upload-URL"]
+    filename = os.path.basename(path)
+    
+    req_start = urllib.request.Request(
+        f"{GEMINI_BASE}/upload/v1beta/files?key={key}",
+        data=json.dumps({"file": {"display_name": filename}}).encode(),
+        headers={
+            "X-Goog-Upload-Protocol": "resumable",
+            "X-Goog-Upload-Command": "start",
+            "X-Goog-Upload-Header-Content-Length": str(size),
+            "X-Goog-Upload-Header-Content-Type": mime,
+            "Content-Type": "application/json"
+        },
+        method="POST"
+    )
+    with urllib.request.urlopen(req_start, timeout=60) as r:
+        upload_url = r.headers.get("X-Goog-Upload-URL")
+    
     with open(path, "rb") as f:
-        blob = f.read()
-    up = urllib.request.Request(
-        upload_url, data=blob,
-        headers={"X-Goog-Upload-Command": "upload, finalize",
-                 "X-Goog-Upload-Offset": "0",
-                 "Content-Length": str(size)})
-    with urllib.request.urlopen(up, timeout=1800) as r:
-        info = json.load(r)["file"]
-    # wait until processed
+        data = f.read()
+        
+    req_up = urllib.request.Request(
+        upload_url,
+        data=data,
+        headers={
+            "X-Goog-Upload-Command": "upload, finalize",
+            "X-Goog-Upload-Offset": "0",
+            "Content-Length": str(size)
+        },
+        method="POST"
+    )
+    try:
+        with urllib.request.urlopen(req_up, timeout=300) as r:
+            info = json.loads(r.read())["file"]
+    except Exception as e:
+        raise RuntimeError(f"Upload failed: {e}")
+        
+    # 3. Wait until processed (ACTIVE)
     for _ in range(60):
         if info.get("state") == "ACTIVE":
             return info["uri"]
@@ -169,58 +223,175 @@ def run_gemini(audio, cfg, lang):
     ffmpeg = machine.get("ffmpeg", "ffmpeg")
     model = cfg.get("gemini_model", "gemini-2.5-flash")
 
-    with tempfile.TemporaryDirectory() as td:
-        # compress to ogg/opus 16k mono: ~1 MB per 8 min, keeps requests small
-        ogg = os.path.join(td, "audio.ogg")
-        subprocess.run([ffmpeg, "-y", "-v", "quiet", "-i", audio, "-ac", "1",
-                        "-ar", "16000", "-c:a", "libopus", "-b:a", "24k", ogg],
-                       check=True, timeout=600)
-        size = os.path.getsize(ogg)
-        prompt = GEMINI_PROMPT
-        if lang != "auto":
-            prompt += f"\nThe meeting is primarily in '{lang}'."
-        if size < 15 * 1024 * 1024:  # inline under the ~20MB request cap
-            audio_part = {"inline_data": {
-                "mime_type": "audio/ogg",
-                "data": base64.b64encode(open(ogg, "rb").read()).decode()}}
-        else:
-            uri = _gemini_upload_file(ogg, "audio/ogg", key)
-            audio_part = {"file_data": {"mime_type": "audio/ogg", "file_uri": uri}}
-
-        body = {"contents": [{"parts": [audio_part, {"text": prompt}]}],
-                "generationConfig": {"temperature": 0.1, "maxOutputTokens": 65536}}
-        try:
-            data = _gemini_req(f"{GEMINI_BASE}/v1beta/models/{model}:generateContent",
-                               body, key)
-        except urllib.error.HTTPError as e:
-            raise EngineSkip(f"Gemini HTTP {e.code}: {e.read().decode()[:300]}")
-
+    import wave
+    import re
+    duration = 0
     try:
-        text = data["candidates"][0]["content"]["parts"][0]["text"]
-    except (KeyError, IndexError):
-        raise EngineSkip(f"Gemini returned no text: {json.dumps(data)[:300]}")
+        # Run ffmpeg -i to extract the duration from the stderr output
+        r_dur = subprocess.run([ffmpeg, "-i", audio], capture_output=True, text=True, timeout=15)
+        match = re.search(r"Duration:\s*(\d+):(\d+):(\d+\.\d+)", r_dur.stderr)
+        if match:
+            h, m, s = match.groups()
+            duration = int(h) * 3600 + int(m) * 60 + float(s)
+        elif audio.lower().endswith(".wav"):
+            with wave.open(audio, "rb") as wf:
+                duration = wf.getnframes() / float(wf.getframerate())
+    except Exception as e:
+        print(f"[transcribe] failed to read duration via ffmpeg/wave: {e}", file=sys.stderr)
 
-    usage = data.get("usageMetadata", {})
-    in_tok = usage.get("promptTokenCount", 0)
-    out_tok = usage.get("candidatesTokenCount", 0)
-    cost = (in_tok * GEMINI_PRICE_PER_MTOK["in"] +
-            out_tok * GEMINI_PRICE_PER_MTOK["out"]) / 1e6
-    log_row({"kind": "transcribe", "engine": f"gemini:{model}",
-             "file": os.path.basename(audio), "in_tok": in_tok,
-             "out_tok": out_tok, "est_usd": round(cost, 4)})
+    parts_dir = audio + ".parts"
+    os.makedirs(parts_dir, exist_ok=True)
 
-    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
-    if not lines:
-        raise EngineSkip("Gemini transcript empty")
-    return lines, f"Gemini `{model}` (audio-in, speaker labels, ~${cost:.3f})"
+    with tempfile.TemporaryDirectory() as td:
+        # 5-minute chunks by default. On a metered/free-tier key the request
+        # COUNT is the scarce resource, not the tokens, so `chunk_sec` lets a
+        # long meeting be sent as a few big chunks instead of dozens of small
+        # ones. Gemini bills audio at ~32 tok/sec, so even 30 min is ~58k tokens.
+        # CHUNK_SEC in the environment wins, so a one-off long meeting can be
+        # sent as fewer, bigger requests when the daily request quota is tight,
+        # without editing the owner's config.
+        chunk_duration = int(os.environ.get("CHUNK_SEC") or cfg.get("chunk_sec", 300))
+        if duration > chunk_duration + 30:  # Allow 30s buffer to avoid tiny tail chunks
+            num_chunks = int(duration // chunk_duration) + (1 if duration % chunk_duration > 0 else 0)
+            chunks = []
+            for i in range(num_chunks):
+                start_time = i * chunk_duration
+                chunks.append((i, start_time))
+            print(f"[transcribe] Audio duration ({duration/60:.1f} min) exceeds limit. Split into {len(chunks)} chunks.", flush=True)
+        else:
+            chunks = [(0, 0)]
+            chunk_duration = duration
+
+        total_in_tok = 0
+        total_out_tok = 0
+        total_cost = 0.0
+        all_lines = []
+        
+        import concurrent.futures
+
+        def process_chunk(idx, start_time):
+            chunk_txt = os.path.join(parts_dir, f"chunk_{idx}.txt")
+            if os.path.exists(chunk_txt):
+                with open(chunk_txt, "r", encoding="utf-8") as f:
+                    cached_lines = f.read().splitlines()
+                print(f"[transcribe] Resuming Part {idx + 1}/{len(chunks)} from cache...", flush=True)
+                return idx, cached_lines, 0, 0, 0.0
+
+            # extract chunk and compress to ogg/opus 16k mono
+            chunk_wav = os.path.join(td, f"chunk_{idx}.wav")
+            
+            win_interop = _is_interop(ffmpeg)
+            def _wp(p): return _winpath(p) if win_interop else p
+
+            if len(chunks) > 1:
+                subprocess.run([ffmpeg, "-y", "-v", "quiet", "-nostdin", "-ss", str(start_time), "-t", str(chunk_duration),
+                                "-i", _wp(audio), "-c", "copy", _wp(chunk_wav)], check=True, timeout=180)
+            else:
+                chunk_wav = audio
+                
+            ogg = os.path.join(td, f"audio_{idx}.ogg")
+            subprocess.run([ffmpeg, "-y", "-v", "quiet", "-nostdin", "-i", _wp(chunk_wav), "-ac", "1",
+                            "-ar", "16000", "-c:a", "libopus", "-b:a", "24k", _wp(ogg)],
+                           check=True, timeout=600)
+            size = os.path.getsize(ogg)
+            prompt = GEMINI_PROMPT
+            if lang != "auto":
+                prompt += f"\nThe meeting is primarily in '{lang}'."
+            if len(chunks) > 1:
+                prompt += f"\nThis is Part {idx + 1} of {len(chunks)} of the meeting. Keep speaker labels consistent if possible."
+
+            if size < 15 * 1024 * 1024:  # inline under the ~20MB API payload limit
+                audio_part = {"inline_data": {
+                    "mime_type": "audio/ogg",
+                    "data": base64.b64encode(open(ogg, "rb").read()).decode()}}
+            else:
+                uri = _gemini_upload_file(ogg, "audio/ogg", key)
+                audio_part = {"file_data": {"mime_type": "audio/ogg", "file_uri": uri}}
+
+            text = None
+            for temp in [0.1, 0.3, 0.5]:
+                body = {"contents": [{"parts": [audio_part, {"text": prompt}]}],
+                        "generationConfig": {"temperature": temp, "maxOutputTokens": 65536}}
+                try:
+                    data = _gemini_req(f"{GEMINI_BASE}/v1beta/models/{model}:generateContent",
+                                       body, key, timeout=180)
+                except Exception as e:
+                    raise EngineSkip(f"Gemini API error on Part {idx + 1}: {e}")
+
+                cand = data.get("candidates", [{}])[0]
+                reason = cand.get("finishReason", "")
+                if reason == "RECITATION":
+                    print(f"[transcribe] Recitation block triggered on Part {idx + 1} at temp {temp}. Retrying with higher temperature...", flush=True)
+                    continue
+
+                try:
+                    text = cand["content"]["parts"][0]["text"]
+                    break
+                except (KeyError, IndexError):
+                    if reason and reason != "STOP":
+                        print(f"[transcribe] Blocked by safety/other reason on Part {idx + 1}: {reason}. Retrying with higher temperature...", flush=True)
+                        continue
+                    raise EngineSkip(f"Gemini returned no text on Part {idx + 1}: {json.dumps(data)[:300]}")
+
+            if not text:
+                raise EngineSkip(f"Gemini transcription failed due to safety/recitation blocks on Part {idx + 1}")
+
+            usage = data.get("usageMetadata", {})
+            in_tok = usage.get("promptTokenCount", 0)
+            out_tok = usage.get("candidatesTokenCount", 0)
+            cost = (in_tok * GEMINI_PRICE_PER_MTOK["in"] +
+                    out_tok * GEMINI_PRICE_PER_MTOK["out"]) / 1e6
+            
+            lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+            if lines:
+                with open(chunk_txt, "w", encoding="utf-8") as f:
+                    f.write("\n".join(lines))
+            
+            print(f"[transcribe] Completed Part {idx + 1}/{len(chunks)}", flush=True)
+            return idx, lines, in_tok, out_tok, cost
+
+        results = []
+        with concurrent.futures.ThreadPoolExecutor(max_workers=min(len(chunks), 15)) as executor:
+            futures = {executor.submit(process_chunk, idx, st): idx for idx, st in chunks}
+            for future in concurrent.futures.as_completed(futures):
+                try:
+                    results.append(future.result())
+                except Exception as e:
+                    raise EngineSkip(f"Thread failed: {e}")
+
+        results.sort(key=lambda x: x[0])
+        total_in_tok = sum(r[2] for r in results)
+        total_out_tok = sum(r[3] for r in results)
+        total_cost = sum(r[4] for r in results)
+        
+        all_lines = []
+        for idx, lines, _, _, _ in results:
+            if not lines: continue
+            if len(chunks) > 1:
+                all_lines.append(f"\n--- [PART {idx + 1} OF {len(chunks)}] ---\n")
+            all_lines.extend(lines)
+
+        # log consolidated usage
+        log_row({"kind": "transcribe", "engine": f"gemini:{model}",
+                 "file": os.path.basename(audio), "in_tok": total_in_tok,
+                 "out_tok": total_out_tok, "est_usd": round(total_cost, 4)})
+
+        if not all_lines:
+            raise EngineSkip("Gemini transcript empty")
+            
+        try:
+            import shutil
+            shutil.rmtree(parts_dir)
+        except Exception:
+            pass
+            
+        return all_lines, f"Gemini `{model}` (audio-in, speaker labels, ~${total_cost:.3f})"
 
 # ---------- engine: cpu (explicit only, legacy faster-whisper) ----------
 
 def run_cpu(audio, cfg, lang, out_md):
-    venv_py = os.path.expanduser("~/.venvs/whisper/bin/python")
+    venv_py = "python3"
     script = os.path.join(REPO_ROOT, "scripts", "transcribe_audio.py")
-    if not os.path.exists(venv_py):
-        raise EngineSkip("whisper venv missing (~/.venvs/whisper)")
     subprocess.run([venv_py, script, "--in", audio, "--out", out_md,
                     "--model", "small", "--lang", lang], check=True)
     return None, "faster-whisper small (cpu, explicit)"
@@ -229,6 +400,20 @@ def run_cpu(audio, cfg, lang, out_md):
 
 def transcribe(audio, out_md, engine=None, lang=None, cfg=None):
     """Returns (out_md, engine_note). Raises RuntimeError if all engines fail."""
+    if os.path.isfile(out_md) and os.path.getsize(out_md) > 100:
+        note = "cached"
+        try:
+            with open(out_md, "r", encoding="utf-8") as f:
+                for _ in range(5):
+                    line = f.readline()
+                    if line.startswith("- Engine:"):
+                        note = line.split(":", 1)[1].strip() + " (cached)"
+                        break
+        except Exception:
+            pass
+        print(f"[transcribe] OK (reusing existing transcript) -> {out_md}", flush=True)
+        return out_md, note
+
     cfg = cfg or load_config()
     engine = engine or cfg.get("engine", "auto")
     lang = lang or cfg.get("language", "auto")

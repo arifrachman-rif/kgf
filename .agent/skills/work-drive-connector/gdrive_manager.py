@@ -388,7 +388,11 @@ def read_file(file_id):
     service = build('drive', 'v3', credentials=creds)
 
     try:
-        file_meta = service.files().get(fileId=file_id, fields='mimeType, name').execute()
+        # search() passes supportsAllDrives, so anything on a shared drive is
+        # findable. Without the same flag here it is findable but unreadable:
+        # the API answers 404 for a file the search just returned.
+        file_meta = service.files().get(fileId=file_id, fields='mimeType, name',
+                                        supportsAllDrives=True).execute()
         mime_type = file_meta.get('mimeType')
         file_name = file_meta.get('name')
         print(f"[Work Drive] Reading: {file_name} ({mime_type})")
@@ -401,7 +405,8 @@ def read_file(file_id):
             content = service.files().export(fileId=file_id, mimeType='text/csv').execute()
             print(content.decode('utf-8'))
         else:
-            content = service.files().get_media(fileId=file_id).execute()
+            content = service.files().get_media(fileId=file_id,
+                                                supportsAllDrives=True).execute()
             try:
                 print(content.decode('utf-8'))
             except:

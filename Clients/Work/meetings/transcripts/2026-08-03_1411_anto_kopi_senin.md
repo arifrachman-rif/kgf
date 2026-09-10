@@ -1,0 +1,394 @@
+<!-- MOM_PREPENDED_START -->
+# Minutes of Meeting (MOM)
+
+> Status: DRAFT (local pipeline, belum direview)
+> Source: local recording `2026-08-03_1411_anto_kopi_senin.wav`, Gemini `gemini-flash-lite-latest` (audio-in, speaker labels, ~$0.028)
+> Registry: local-1785743929 | Review via /mom before sharing
+
+# MOM: anto kopi senin
+
+| Field | Value |
+|:---|:---|
+| Date | 2026-08-03 |
+| Time | 14:11 WIB / 09:11 AST |
+| Duration | 45 minutes |
+| Participants | Mas Anto (Speaker 1), Pak Arif (Speaker 2) |
+| Facilitator | Mas Anto |
+| Subject | Weekly Cash Flow, Spreadsheet Formulas, and Purchasing Strategy Review |
+
+---
+
+## Executive Summary
+The meeting covered a review of weekly cash flow calculations, spreadsheet formulas, purchasing strategies based on market fluctuations, and working capital management. Participants discussed inventory buffers, yield variations from raw coffee materials, and ensuring spreadsheet cells contain active formulas rather than hardcoded values. Mas Anto was assigned to re-verify the running working capital calculation and resend the updated spreadsheet.
+
+---
+
+## Discussion
+
+### Cash Flow and Excel Spreadsheet Formulas
+The discussion focused on weekly cash flow calculations, figures, and formulas within the spreadsheet. Specific cells related to revenue, gross profit, operational costs, shrinkage, inventory buffer stock, and working capital were reviewed. Pak Arif noted that certain values were copied as static values rather than active formulas, and they traced the sources of specific cells such as column D128, K121, and J107 to improve auditability.
+
+### Purchasing and Market Strategy
+Participants reviewed buying strategies based on daily market price fluctuations, such as purchasing varying tonnages across days and selling on specific days to manage cash flow and prevent fund depletion. They also discussed yield fluctuations caused by varying quality of raw coffee materials purchased from the field, alongside shrinkage estimates during transport.
+
+### Working Capital and Profit Calculations
+The meeting covered the calculation of weekly net profit and the formula for running working capital, which combines initial capital, projected profit, and inventory deductions. Mas Anto agreed to audit the specific cell for running working capital to ensure the formula accurately reflects initial capital plus profit minus inventory.
+
+---
+
+## Decisions Made
+
+| # | Decision | Rationale |
+|:---|:---|:---|
+| 1 | Mas Anto will re-check and trace the exact formula for the running working capital cell. | To ensure the spreadsheet uses active formulas rather than hardcoded values for easier auditing. |
+| 2 | Maintain a flexible purchasing schedule based on market price fluctuations. | To manage cash flow effectively and prevent fund depletion. |
+
+---
+
+## Action Items
+
+| # | Task | Owner | Deadline | Priority |
+|:---|:---|:---|:---|:---|
+| 1 | Check working capital calculation and spreadsheet formulas, fix numbers, and resend the updated sheet to Pak Arif. | Mas Anto | 2026-08-06 | High |
+
+---
+
+## Next Meeting
+- **Date**: TBD
+- **Agenda**: Review of updated spreadsheet and cash flow performance
+
+---
+
+## Revision History
+
+| Revision | Date | Summary |
+|:---|:---|:---|
+| v1.0 | 2026-08-03 | Initial MOM |
+
+---
+
+<!-- MOM_PREPENDED_END -->
+
+# Transcript: 2026-08-03_1411_anto_kopi_senin.wav
+
+- Engine: Gemini `gemini-flash-lite-latest` (audio-in, speaker labels, ~$0.028)
+- Audio duration: 20:14
+- Generated: 2026-08-03 14:58
+
+---
+
+
+--- [PART 1 OF 3] ---
+
+**[00:00]** Speaker 1: itu sih dikopilah.
+**[00:02]** Speaker 1: Kan ladalah dua itulalah.
+**[00:05]** Speaker 1: Heeh.
+**[00:07]** Speaker 1: Heeh.
+**[00:08]** Speaker 2: Kan lada kan enggak, ada itu toh?
+**[00:11]** Speaker 1: Enggak, maksud saya di panennyalah gitu dipanen sama di harga lokal.
+**[00:26]** Speaker 2: Iya iya.
+**[00:27]** Speaker 1: Jadi gitu, benar.
+**[00:29]** Speaker 1: Jadi iya saya terima kasih banget terutama Pak Arif tuh.
+**[00:34]** Speaker 1: Oke.
+**[00:34]** Speaker 1: Sampai ketemu istilah surplus cash dan Oh.
+**[00:41]** Speaker 2: Ini tapi eh apa angkanya nih masih angka aja belum belum
+**[00:48]** Speaker 1: Halo halo.
+**[00:54]** Speaker 2: Iya ini angkanya masih ini eh ini masih angka-angka aja belum sama rumusnya yang masih.
+**[01:05]** Speaker 1: Halo Pak Arif.
+**[01:07]** Speaker 2: Halo Pak Arif.
+**[01:08]** Speaker 1: Halo.
+**[01:09]** Speaker 1: Heeh.
+**[01:10]** Speaker 1: Heeh.
+**[01:10]** Speaker 2: Ini masih masih cuma angka aja belum belum dimasukin rumus ya Mas ya.
+**[01:15]** Speaker 1: Nah ini itu rumusnya tuh dimasukin di sini, Pak.
+**[01:18]** Speaker 1: Jadi Pak Arif kan minta nih eh Mas Anto belanjanya kayak mana sih gitu kan.
+**[01:23]** Speaker 1: Senin misal.
+**[01:25]** Speaker 1: Senin kita belanja 10 ton.
+**[01:27]** Speaker 1: Itu itemnya itu.
+**[01:31]** Speaker 1: Kadar air sekian, kemudian Jlorong sekian, ketemu Randemen sekian, kemudian dijual,
+**[01:37]** Speaker 2: Di cash flow-nya?
+**[01:39]** Speaker 2: Cash flow apa tuh?
+**[01:40]** Speaker 2: Itu di bagian cash flow itu enggak ada enggak ada eh ininya, enggak ada apa namanya?
+**[01:49]** Speaker 2: Enggak ada rumusnya yang di bawah itu.
+**[01:52]** Speaker 1: Yang di mana?
+**[01:52]** Speaker 1: Yang di kolom berapa?
+**[01:53]** Speaker 1: Cash flow mingguan ini?
+**[01:55]** Speaker 2: cash flow per minggu di kolom D128 misalnya.
+**[01:59]** Speaker 1: Nah, nah, itu saya cuman pakai ini sih apa namanya rumus Excel biasa.
+**[02:06]** Speaker 1: Itu perjalanan uang sih.
+**[02:09]** Speaker 1: Misal nih ya di posisi minggu kita itu ada persediaan 500, untung kita diprediksi eh berapa?
+**[02:18]** Speaker 1: 100.
+**[02:19]** Speaker 1: Kemudian biaya operasional 104.
+**[02:23]** Speaker 1: Uang yang harus ada dalam rekening itu 2,4.
+**[02:27]** Speaker 1: Ah gitu-gitu, Pak.
+**[02:29]** Speaker 2: Kalau rumusnya saya belum paham, tapi mekanismenya gitu.
+**[02:34]** Speaker 2: Iya, tapi kan maksud saya berarti kan jenengan untuk dapat angka misalnya tuh yang D128 itu, penjualan itu jadi berapa kali berapa kali berapa gitu ketemu 8045451 ini?
+**[02:50]** Speaker 1: Ya, yang ini kan 8045 kan?
+**[02:54]** Speaker 2: Heeh.
+**[02:55]** Speaker 1: Yang apa penjualan ini, ini dapatnya dari sini Pak, yang di kuning Pak.
+**[03:00]** Speaker 2: Yang di kuning.
+**[03:03]** Speaker 2: Eh no no no.
+**[03:03]** Speaker 2: Di penjumlahan antara kuning, hijau sama biru, Pak, di jumlah.
+**[03:16]** Speaker 2: Dijumlah terus.
+**[03:19]** Speaker 1: Ini yang kuning udah ya, yang kuning itu yang 8, heeh, itu, kemudian nanti eh apa namanya?
+**[03:28]** Speaker 1: eh tenaga apa namanya?
+**[03:31]** Speaker 1: biaya operasionalnya itu total dari donasi yang beli dikalikan 800.
+**[03:38]** Speaker 1: Yang 10, 20, 40, nah gitu-gitu.
+**[03:41]** Speaker 2: Oh iya ya ya.
+**[03:44]** Speaker 1: Heeh.
+**[03:52]** Speaker 1: Geser, Pak, geser itunya.
+**[03:54]** Speaker 1: Itu sudah saya ini juga.
+**[03:56]** Speaker 1: Biru, kuning, hijau sama strateginya.
+**[04:00]** Speaker 1: Nah cuman yang baru minggu.
+**[04:01]** Speaker 1: Itu ya, maksud ya.
+**[04:02]** Speaker 1: Heeh ya, ngecun ya.
+**[04:04]** Speaker 2: Yang 345 enggak ada ya.
+**[04:07]** Speaker 1: Nah, yang 34, ini saya kan enggak bisa tuh, akhirnya saya mengkonfirmasi di minggu 1 sama minggu kedua.
+**[04:16]** Speaker 1: Saya diturangkan tambah kurang seperti itu, karena saya enggak bisa nge-breakdown kan di harganya.
+**[04:23]** Speaker 1: Tuh.
+**[04:30]** Speaker 2: Terus kalau misalnya Mas, eh Heeh heeh heeh.
+**[04:38]** Speaker 2: Kalau misalnya eh ini kenapa minggu kenapa di sana belinya 10 ton di Selasa 20.
+**[04:46]** Speaker 1: Oke.
+**[04:47]** Speaker 1: Nah, itu berkaitan dengan naik turunnya.
+**[04:51]** Speaker 1: Nah, hari Senin itu kan si stabil.
+**[04:54]** Speaker 1: Iya, kan?
+**[04:56]** Speaker 1: Kemudian saya prediksi selasanya itu turun, minus 1.
+**[05:00]** Speaker 1: Tapi nanti di hari rabunya itu naik.
+**[05:07]** Speaker 1: Gitu.
+**[05:08]** Speaker 1: Itu hanya strategi penggunaan cash flow, Pak.
+**[05:12]** Speaker 1: Biar nanti kita enggak jebol, seperti itu.
+**[05:16]** Speaker 1: Itu alasannya di grafik pasar kopi lokal dan analisis pasar kopi yang kamera-kamera ini tuh.
+**[05:27]** Speaker 1: Gitu ceritanya.
+**[05:30]** Speaker 2: Kalaulah misalkan rendemen ini naik turun ini bisa kenapa?
+**[05:34]** Speaker 1: Ah, kualitas kopi, Pak Arif.
+**[05:36]** Speaker 1: Jadi kualitas kopi kita beli kan enggak mungkin kita naik terus turun terus.
+**[05:41]** Speaker 1: Jadi ada fluktuatif seperti itu.
+**[05:43]** Speaker 1: Itu berkaitan dengan kualitas.
+**[05:46]** Speaker 2: Iya, betul memang.
+**[05:47]** Speaker 2: Cuma maksud saya apa yang menentukan eh apa prediksinya Mas Anto hari Senin rendemen 89, hari Selasa rendemen 91, hari Kamis.
+**[05:58]** Speaker 1: Oh.
+**[05:59]** Speaker 2: Oh.
+**[06:00]** Speaker 2: Kalau itu bahan baku, Pak.
+**[06:02]** Speaker 2: Kan bahan baku kita enggak bisa prediksi tuh.
+**[06:05]** Speaker 2: Iya.
+**[06:05]** Speaker 2: Hanya sebatas gambaran aja.
+**[06:07]** Speaker 2: Heeh.
+**[06:08]** Speaker 2: Eh, Mas Anto, ketika naro angka ini di di forecast ini, Heeh.
+**[06:15]** Speaker 2: itu eh basisnya apa?
+**[06:17]** Speaker 2: Oh, basisnya itu di lapanganlah, di lapangan.
+**[06:21]** Speaker 2: Kondisi lapangan, bahan bakunya sekarang naik turunnya kayak gitu, gitu.
+**[06:28]** Speaker 2: Mas Ari sudah sih ya.
+**[06:37]** Speaker 2: Kalau di eh ini kan Senin, Selasa, Rabu beli ya.
+**[06:47]** Speaker 2: Kemudian hari Kamis baru jual ya.
+**[06:50]** Speaker 1: Ya, itu heeh, itu yang saya sebut berdasarkan misal nih, oh, ternyata eh di minggu pertama itu yang paling
+
+--- [PART 2 OF 3] ---
+
+[00:00] Speaker 1: bagus, naiknya itu kan dua kali tuh.
+[00:03] Speaker 1: Iya kan?
+[00:05] Speaker 1: Nah, naik yang paling tinggi di hari Kamis misalkan.
+[00:08] Speaker 1: Nah, itu baru kita jual.
+[00:32] Speaker 1: Pertama, berkaitan dengan kekuatan uang kita.
+[00:39] Speaker 1: Seperti itu.
+[00:51] Speaker 1: Kalau misalkan ini kan kalau di kolom K itu ya, itu ada pembelian kemudian penjualan, di bawahnya itu apa, Mas?
+[01:00] Speaker 1: Yang mana nih?
+[01:01] Speaker 1: Yang kolom apa?
+[01:02] Speaker 1: Yang kuartal 4.
+[01:05] Speaker 1: Yang?
+[01:07] Speaker 1: Kolom apa?
+[01:08] Speaker 1: Kolom K.
+[01:11] Speaker 1: Bukan.
+[01:11] Speaker 1: Ini di cash flow per mingguan apa?
+[01:16] Speaker 1: Kolom K.
+[01:18] Speaker 1: Kolom K udah, terus heeh.
+[01:21] Speaker 1: Kolom K 120.
+[01:22] Speaker 1: Kolom K 12 121 sorry.
+[01:25] Speaker 1: 1 2 1 1 2 1.
+[01:32] Speaker 1: Oke, susut ini maksudnya?
+[01:35] Speaker 1: Oh, itu susut.
+[01:36] Speaker 1: Susut, Pak.
+[01:37] Speaker 1: Jadi kan enggak mungkin tuh timbangan kita akan sama dengan pembelian.
+[01:41] Speaker 1: Jadi itu susut, Pak.
+[01:42] Speaker 1: Kita ramalkan dalam pengiriman 330 ton itu susutnya 140 kilo gitu.
+[01:49] Speaker 1: Baik yang diaduk, apalah, tercecer, segala macam, susut timbang.
+[01:53] Speaker 1: Bukan bukan bukan, di kolom K loh, Mas, yang 204.
+[01:57] Speaker 1: 204.
+[01:58] Speaker 1: Oh, 204 ini, ya ya ya, itu kan penjualan dikurangin pembelian gitu ya.
+[02:04] Speaker 1: Berarti Oh ya, ini untung, Pak.
+[02:09] Speaker 1: Gitu.
+[02:23] Speaker 1: 128 ini berarti minus ya.
+[02:29] Speaker 1: 12.
+[02:33] Speaker 1: Yang 104 ini HPP, yang 100 104 ini untung.
+[02:40] Speaker 1: Sehingga untungnya kurang lebih 1,29.
+[02:44] Speaker 1: Seperti itu.
+[02:45] Speaker 1: 1,28.
+[02:47] Speaker 1: Gitu.
+[02:48] Speaker 1: yang 123 ini apa?
+[02:50] Speaker 1: Biaya operasional.
+[02:52] Speaker 1: 123 bukan 123, 104.
+[02:58] Speaker 1: Iya, enggak.
+[02:59] Speaker 1: 124 kan itu kan untung kan, tapi rumusnya itu 123 124 itu untung, untung kotor.
+[03:07] Speaker 1: Iya, Mas.
+[03:07] Speaker 1: Cuma rumusnya di 124 itu adalah 123 / 107.
+[03:15] Speaker 1: 123.
+[03:20] Speaker 1: Maksudnya?
+[03:21] Speaker 1: Rumusnya?
+[03:22] Speaker 1: Maksudnya saya salah rumusnya gitu.
+[03:25] Speaker 1: Enggak, makanya ini kalau misalkan untung itu, itu kan ini kan wong hitung persentase, untungnya kan?
+[03:34] Speaker 1: Heeh heeh heeh.
+[03:36] Speaker 1: Berarti 123 dibagi 107.
+[03:41] Speaker 1: Heeh heeh.
+[03:42] Speaker 1: Kenapa?
+[03:42] Speaker 1: Kalau punya Pak Arif.
+[03:44] Speaker 1: Operasional dibagi penjualan ya?
+[03:49] Speaker 1: Kan untung kotor dibagi dikurang operasional.
+[03:58] Speaker 1: Penjualan dikurang pembelian, itu bruto.
+[04:07] Speaker 1: Iya, ini kan kan 204 ini kan susut ya?
+[04:13] Speaker 1: Bruto, Pak, bruto, Pak.
+[04:14] Speaker 1: Untung untung bruto, Pak.
+[04:15] Speaker 1: Untung bruto, untung bruto.
+[04:17] Speaker 1: Untung bruto, untung.
+[04:21] Speaker 1: Yang 104 ini apa?
+[04:22] Speaker 1: Anu, HPP, biaya operasional, ya.
+[04:39] Speaker 1: eh operational.
+[04:44] Speaker 1: Oh, ini netonya.
+[04:46] Speaker 1: Hmm, netonya berapa punya Pak Arif?
+[04:49] Speaker 1: 100 201 kan?
+[04:51] Speaker 1: Hmm, itu, jadi neto neto saya 121.
+[04:55] Speaker 1: Nah, 121 neto dibagi 3 miliar dikali 100, ketemulah 1,28.
+[05:13] Speaker 1: sama kebiasaan.
+[05:24] Speaker 1: ya ya ya.
+[05:52] Speaker 1: 13 di-upload lagi, itu.
+[05:55] Speaker 1: Kita yang kita paling paling paling ininya, paling bawahnya itu harus cari.
+[05:59] Speaker 1: Kita paling bawahnya kerja.
+[06:01] Speaker 1: kerja, narik, penantian, kembali, kembali,
+[06:11] Speaker 1: Oke, berarti per minggu sekitar 1,28.
+[06:14] Speaker 1: Heeh.
+[06:16] Speaker 1: Gitu.
+[06:17] Speaker 1: Tu ya, ininya ya, karena lebih daripada itu kita enggak berani, Pak.
+[06:25] Speaker 1: Kalau lebih ya sukur lah, alhamdulillah gitu kan.
+[06:28] Speaker 1: Berarti kita menang.
+
+--- [PART 3 OF 3] ---
+
+[00:00] **[ 0:00 ]** Speaker 2: 2426
+[00:02] **[ 0:02 ]** Speaker 2: Ini persediaan model berjalan dari mana, Mas?
+[00:05] **[ 0:05 ]** Speaker 1: Apa?
+[00:07] **[ 0:07 ]** Speaker 1: Yang berjalan.
+[00:08] **[ 0:08 ]** Speaker 1: Oke, nah sekarang kita ke cashflow mingguan kan, pengennya Pak Arif kan?
+[00:13] **[ 0:13 ]** Speaker 2: Iya, heeh.
+[00:14] **[ 0:14 ]** Speaker 1: Iya.
+[00:15] **[ 0:15 ]** Speaker 2: Heeh.
+[00:16] **[ 0:16 ]** Speaker 1: Jadi ini kan kita keluar nih, 3 miliar, ya kan?
+[00:20] **[ 0:20 ]** Speaker 1: Kemudian dianjakkan dengan jual apa namanya kontrak.
+[00:24] **[ 0:24 ]** Speaker 1: Nah, ketemulah uang yang harus ada modal berjalan itu setiap minggu, di minggu pertama itu harus ada di rekening itu 24, 2,4.
+[00:36] **[ 0:36 ]** Speaker 1: Heeh.
+[00:37] **[ 0:37 ]** Speaker 1: Baper stock itu 596.
+[00:41] **[ 0:41 ]** Speaker 1: Jadi 24 ini sudah plus 100.
+[00:54] **[ 0:54 ]** Speaker 2: Enggak ini tapi jenengan angka ini dapat dari mana sih?
+[00:59] **[ 0:59 ]** Speaker 1: Yang mana?
+[01:00] **[ 1:00 ]** Speaker 2: Kan kalau inis loh, maksud saya modal berjalan ini yang 246 kan kalau tadi ya yang 8045 ini kan begini mestinya ini.
+[01:09] **[ 1:09 ]** Speaker 1: Heeh.
+[01:09] **[ 1:09 ]** Speaker 2: Ee apa?
+[01:12] **[ 1:12 ]** Speaker 2: Ini kan Mas Anto kan ee mengcopy dari ee sel yang sudah ada hitungannya sebetulnya.
+[01:21] **[ 1:21 ]** Speaker 1: Heeh.
+[01:22] **[ 1:22 ]** Speaker 1: Betul, betul, nge-copy semua.
+[01:23] **[ 1:23 ]** Speaker 2: Hanya saja heeh hanya tapi di dicopy value-nya saja.
+[01:28] **[ 1:28 ]** Speaker 1: Heeh.
+[01:29] **[ 1:29 ]** Speaker 2: Ee kan jadi kita tapi kan mesti nyari kan ini dari mana gitu.
+[01:32] **[ 1:32 ]** Speaker 1: Betul.
+[01:33] **[ 1:33 ]** Speaker 2: Nah kalau ee ee ini sebetulnya jangan jangan dicopy value-nya tapi di ditambah dengan aja.
+[01:40] **[ 1:40 ]** Speaker 2: Jadi misalnya
+[01:42] **[ 1:42 ]** Speaker 1: Heeh.
+[01:42] **[ 1:42 ]** Speaker 2: Heeh.
+[01:42] **[ 1:42 ]** Speaker 1: Mingguan minggu pertama itu yang 28 itu
+[01:47] **[ 1:47 ]** Speaker 2: Heeh.
+[01:47] **[ 1:47 ]** Speaker 1: itu ditambah dengan kolom K121
+[01:53] **[ 1:53 ]** Speaker 1: Heeh.
+[01:53] **[ 1:53 ]** Speaker 2: 120
+[01:54] **[ 1:54 ]** Speaker 1: Heeh.
+[01:55] **[ 1:55 ]** Speaker 2: Kan jadi ketahuan kan, kita lihat di situ oh minggu pertama ini angka dari mana penjualan ini?
+[02:00] **[ 2:00 ]** Speaker 2: Oh dari sini kelihatan 120 ada itu adalah bagian dari
+[02:07] **[ 2:07 ]** Speaker 1: 184
+[02:08] **[ 2:08 ]** Speaker 2: Heeh.
+[02:09] **[ 2:09 ]** Speaker 1: 20
+[02:09] **[ 2:09 ]** Speaker 2: Heeh.
+[02:11] **[ 2:11 ]** Speaker 1: Juga dengan pembelian, pembelian
+[02:19] **[ 2:19 ]** Speaker 2: 7,8
+[02:21] **[ 2:21 ]** Speaker 2: Heeh.
+[02:22] **[ 2:22 ]** Speaker 1: itu
+[02:23] **[ 2:23 ]** Speaker 2: Heeh.
+[02:24] **[ 2:24 ]** Speaker 1: juga dengan
+[02:25] **[ 2:25 ]** Speaker 1: 104 operasional.
+[02:28] **[ 2:28 ]** Speaker 2: Heeh.
+[02:29] **[ 2:29 ]** Speaker 1: Gitu kan,
+[02:30] **[ 2:30 ]** Speaker 2: Heeh.
+[02:34] **[ 2:34 ]** Speaker 1: Nah tapi kalau yang tadi itu 79
+[02:39] **[ 2:39 ]** Speaker 2: 7945
+[02:42] **[ 2:42 ]** Speaker 1: ini
+[02:43] **[ 2:43 ]** Speaker 2: totalnya ini?
+[02:44] **[ 2:44 ]** Speaker 1: Ya total dari sel D yang terjual, Pak.
+[02:49] **[ 2:49 ]** Speaker 2: operasional.
+[02:50] **[ 2:50 ]** Speaker 1: Heeh, sampai E.
+[02:51] **[ 2:51 ]** Speaker 2: Heeh.
+[02:52] **[ 2:52 ]** Speaker 1: Heeh, kemudian.
+[02:54] **[ 2:54 ]** Speaker 2: Baper stock yang hijau, lima.
+[02:58] **[ 2:58 ]** Speaker 1: Gitu.
+[03:00] **[ 3:00 ]** Speaker 2: Untuk keuntungan ini.
+[03:02] **[ 3:02 ]** Speaker 1: Nah, ini kan keuntungan kan ada rumus ya ini, jadi di 108 dikurangi 131
+[03:17] **[ 3:17 ]** Speaker 2: Heeh.
+[03:17] **[ 3:17 ]** Speaker 1: kurangi
+[03:19] **[ 3:19 ]** Speaker 2: Nah, terus kemudian persediaannya itu dari mana?
+[03:21] **[ 3:21 ]** Speaker 1: Ini, yang kita belanja belum terjual di kolom J, Pak.
+[03:28] **[ 3:28 ]** Speaker 1: J107.
+[03:31] **[ 3:31 ]** Speaker 2: Kolom apa?
+[03:33] **[ 3:33 ]** Speaker 1: J, J107.
+[03:37] **[ 3:37 ]** Speaker 1: Heeh, yang warna hijau.
+[03:38] **[ 3:38 ]** Speaker 2: Oh, iya ya ya.
+[03:40] **[ 3:40 ]** Speaker 1: Itu.
+[03:42] **[ 3:42 ]** Speaker 2: Itu adalah persediaan.
+[03:48] **[ 3:48 ]** Speaker 1: 59650.
+[03:52] **[ 3:52 ]** Speaker 1: Terus kalau yang model berjalan 2469
+[03:55] **[ 3:55 ]** Speaker 2: Itu uang yang harus ada di dalam rekening.
+[04:00] **[ 4:00 ]** Speaker 2: Itu adalah
+[04:01] **[ 4:01 ]** Speaker 1: Iya.
+[04:02] **[ 4:02 ]** Speaker 1: Hitungannya dari
+[04:03] **[ 4:03 ]** Speaker 2: Oke, 3 miliar.
+[04:07] **[ 4:07 ]** Speaker 1: Oke, plus 100 untung
+[04:14] **[ 4:14 ]** Speaker 2: Heeh.
+[04:15] **[ 4:15 ]** Speaker 1: min persediaan 596.
+[04:18] **[ 4:18 ]** Speaker 1: Itu, Pak, rumusnya.
+[04:20] **[ 4:20 ]** Speaker 2: Plus 100 untung
+[04:27] **[ 4:27 ]** Speaker 2: persediaan.
+[04:31] **[ 4:31 ]** Speaker 2: Enggak, 25 2,5 2504.
+[04:35] **[ 4:35 ]** Speaker 1: Ininya?
+[04:36] **[ 4:36 ]** Speaker 2: Nah, ini yang butuh kita diskusi sel-nya.
+[04:44] **[ 4:44 ]** Speaker 2: Bagaimana tuh?
+[04:45] **[ 4:45 ]** Speaker 1: Oke, karena kita beli kan, nanti saya cek ya, karena kita udah beli nih posisi.
+[04:52] **[ 4:52 ]** Speaker 2: Heeh.
+[04:53] **[ 4:53 ]** Speaker 1: Berarti ada minus berapa, Pak?
+[04:55] **[ 4:55 ]** Speaker 1: Tak cariin nanti.
+[04:57] **[ 4:57 ]** Speaker 2: Ya, itu kan kalau misalnya ee modal awal 3 miliar, kemudian dikurangi ee keuntungan
+[05:07] **[ 5:07 ]** Speaker 1: Iya, kan?
+[05:08] **[ 5:08 ]** Speaker 2: Ditambah, ditambah keuntungan.
+[05:10] **[ 5:10 ]** Speaker 1: Oh, ya ditambah keuntungan, kemudian
+[05:12] **[ 5:12 ]** Speaker 2: Oke, dikurangi baper stock,
+[05:15] **[ 5:15 ]** Speaker 1: persediaan, heeh.
+[05:16] **[ 5:16 ]** Speaker 2: Heeh.
+[05:17] **[ 5:17 ]** Speaker 1: Nah, itu ketemunya 2504.
+[05:21] **[ 5:21 ]** Speaker 2: Oke.
+[05:22] **[ 5:22 ]** Speaker 2: Bentar, saya cek.
+[05:25] **[ 5:25 ]** Speaker 2: Ini tambah ini
+[05:36] **[ 5:36 ]** Speaker 2: minus
+[05:43] **[ 5:43 ]** Speaker 2: 3C, minus stock,
+[05:48] **[ 5:48 ]** Speaker 2: stock-nya
+[05:56] **[ 5:56 ]** Speaker 2: 2504 harusnya.
+[06:00] **[ 6:00 ]** Speaker 1: Oke.
+[06:00] **[ 6:00 ]** Speaker 2: 2504 harusnya.
+[06:01] **[ 6:01 ]** Speaker 1: Oke, coba, oke, tak, tak cari dulu ya, Pak.
+[06:03] **[ 6:03 ]** Speaker 1: Nanti kalau ketemu saya kirim lagi.
+[06:06] **[ 6:06 ]** Speaker 2: Oke.
+[06:07] **[ 6:07 ]** Speaker 1: Ya wis.
+[06:07] **[ 6:07 ]** Speaker 2: Siap.
+[06:08] **[ 6:08 ]** Speaker 1: Oke.
+[06:09] **[ 6:09 ]** Speaker 2: Iya, ya, ya, ya, welcome.

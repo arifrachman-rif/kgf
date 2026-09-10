@@ -1,0 +1,7 @@
+Laporan Pemindaian Situs Pevesindo:
+
+❌ https://www.pevesindo.co.id/: Ditemukan sisa 'hommilux' di halaman berikut:
+  - https://www.pevesindo.co.id/
+
+✅ https://www.pevesindo.com/: BERSIH dari kata 'hommilux' di halaman utama dan struktur.
+

@@ -1,0 +1,287 @@
+P R O J E C T C O N C E P T N O T E
+Agroforestry, a Model of Livelihood-Based Regenerative Forest Management
+A Social-Forestry Bioeconomy across Three Landscapes
+Bangka   Belitung   ·   Lampung   ·   West   Java
+Supporting FOLU Net Sink 2030 through the Social Forestry Integrated Area Development approach (IAD-PS), Pentahelix governance, and the 10 G20 High-Level Principles on Bioeconomy (2024).
+P R O J E C T C O N C E P T N O T E	2026-07-10 · version 2.0
+C O N T E N T S
+Table of Contents
+S E C T I O N 0 1
+Project Summary
+S E C T I O N 0 2
+Implementing Team — Core Consortium and Supporting Partners
+Core Consortium (convened by Bappenas; funded under the NC Investment Plan through BPDLH, with Kemenhut as programme-responsible ministry):
+Convening + fiscal
+Bappenas — Ministry of National Development Planning / Bappenas, Directorate of Forestry and Water Resources Conservation
+bappenas.go.id/unit-kerja/0502 Kemenhut — Ministry of Forestry of the Republic of Indonesia kehutanan.go.id
+Convening of the consortium; programme responsibility and endorsement of the implementing-partner proposal under the NC Investment Plan
+Technical assistance
+GIZ Indonesia
+Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ) GmbH
+giz.de
+Climate technical assistance; EUDR/CS3D bridging; international cooperation
+Commercial anchor
+PT CAN
+PT Cinquer Agro Nusantara
+cinquer.id
+Commercial Anchor: aggregation, off-take, market linkage, and downstream scale-up; West Java aggregator hub with a fifteen-year operational track record
+Production anchor (Lampung)
+PT KGF
+PT Klumbayan Gold Farm
+klumbayanfarm.com
+Production and farmer on-boarding in Lampung; aGROWforests consortium partner
+Landscape conservation (oversight)
+YKAN
+Yayasan Konservasi Alam Nusantara (The Nature Conservancy affiliate) ykan.or.id
+Landscape Conservation Lead: conservation leadership at landscape level, safeguards standards, and community- MRV oversight (FPIC). Sets standards and quality-assures field delivery — engaging and supervising the on-the- ground implementer rather than executing community organising itself
+Social- Forestry delivery (field)
+Titian
+Yayasan Titian Lestari
+yayasantitian.org
+Social-Forestry Delivery Lead: on-the-ground Social Forestry group (KUPS) strengthening, FPIC facilitation, community organising, and institutional readiness for KUPS-to-UMKM. Operates at the community/field tier under YKAN’s landscape-level conservation oversight; 20+ years' Social Forestry experience and BPDLH intermediary (Lemtara) standing, deployed into the programme landscapes
+Supporting Implementing Partners:
+Existing programme asset. happyfarmers.id, a traceability and supply-chain-intelligence platform with more than 1,000 farmers registered at verified origin, is already operational and forms the digital spine of the Connect function (see §6 and §7).
+S E C T I O N 0 3
+Background and Problem
+The three target landscapes share one structural condition: forest, smallholder farmland, and mining concessions overlap on the same ground. In Bangka Belitung, extensive kolong (former tin-mining pits) and continuing mining pressure draw young labour away from farms. In Lampung, robusta-coffee households repeatedly fall back on artisanal gold mining as a survival strategy, leaving chemical residues in the soil. In southern West Java, illegal gold mining and highland vegetable monoculture erode strategic upper watersheds.
+The cost registers on two ledgers at once. One is the erosion of the FOLU carbon sink, which runs counter to Indonesia’s NDC and its FOLU Net Sink 2030 commitment. The other is a livelihoods gap: land that remains productive is not productive enough, or not bankable enough, to compete with the extractive economy next to it. Conventional after-the-fact reclamation of degraded land is slow and expensive, and often fails economically because no market awaits its output.
+The programme intervenes at the more effective point, which lies with the land that is still productive rather than with land already lost. Where standing forest, smallholder gardens, and coastal mangrove are managed as one productive mosaic and connected to real markets, the same hectares can carry both a higher household income and a measurable carbon contribution. Mining is treated here as context that motivates the problem, not as the organising axis of the design.
+S E C T I O N 0 4
+Landscape-Based Approach
+This is the organising idea of the programme. The programme manages a multi-functional landscape, from standing forest to smallholder gardens and coastal mangrove — and rather than treating a farm plot, a forest block, and a mangrove belt as separate projects, it manages them as one land–coast mosaic, extending to the shoreline and stopping before open water. Agroforestry is the livelihood-based model through which this landscape is managed regeneratively. Carbon and value are accounted at the level of that whole mosaic, not plot by plot.
+Why the landscape unit matters.
+Boundary definition. The landscape boundary is not asserted at concept stage. It is defined during the Year-1 baseline, combining forest-management-unit (KPH) areas, district (kabupaten) administration, watershed (DAS) hydrology, and the cluster of Social Forestry villages. All scale ranges in this note flow from that delineation.
+Governance. Multi-party landscape governance (farmers, KPH, and local government) is facilitated by the consortium, not imposed. A landscape forum convenes on a boundary-aligned membership and documents its decisions.
+Ownership of the landscape layer.
+Because FOLU accounting is done at the landscape level across the mosaic, the additionality and permanence arguments that third-party verification and national FOLU Net Sink accounting require rest on a stronger and more auditable footing than any single-parcel claim could provide.
+S E C T I O N 0 5
+Theory of Change
+Framing. The programme manages one land–coast landscape as a whole mosaic. Inside that frame, three value- chain functions operate (Produce, Connect and Enable, Transform) over a binding layer of landscape governance and MRV. The theory of change is that moving farmers' point of value capture up the value ladder (raw material, to intermediate, to high-value compound) while keeping the landscape mosaic standing produces two interlocking impacts: (A) farmer welfare rises, and (B) a verified FOLU carbon contribution is generated. These two impacts, A and B, are referenced throughout this note, including the "Serves impact" column below.
+Causal chain. 
+"Serves impact" key: A = farmer welfare; B = verified landscape-level FOLU carbon; A + B = the governance lock that secures both.
+Key mechanism. Produce raises the volume and quality of raw material; Connect links it to institutions, traceability, financing, and contracted off-take; Transform raises the value level (raw to compound). Each rung of the ladder that is climbed is a larger share of value captured by farmers, which is Impact A. In parallel, agroforestry on degraded land plus protected standing forest plus restored mangrove constitutes a net sink, measured by landscape-level MRV and taken to third-party verification, which is Impact B.
+The cross-lock (why the two impacts are one system). Prosperous farmers have an economic reason to keep the mosaic standing, which secures the permanence that Impact B requires. In the other direction, the connecting (midstream) system that sustains farmer welfare is financed within the grant period by programmatic NC funding and sustained after it by commercial value-chain revenue, with potential NEK/SPE-GRK incentives as a conditional supplement under a single-claim discipline; the programme’s verified contribution, in turn, strengthens the case for continued NC allocations to the landscape. Landscape governance (OC5) is the gate that locks the two together.
+Funding and contribution logic. Impact A and Impact B are framed as equal and interlocking. The programme is financed programmatically under the NC Investment Plan: grant funding is disbursed up front against an approved proposal and Annual Work Plan, not paid per tonne of carbon. The verified carbon result (Impact B) is therefore not a unit the programme sells; it is the programme’s measurable, auditable contribution to the national FOLU Net Sink result — the result that underpins Norway’s contribution to Indonesia (see §10). Farmer welfare (Impact A) functions as the pathway of change and as the co-benefit that secures permanence, which is what makes the carbon contribution durable and credible. Equal in the narrative; the verified carbon is the programme’s measurable contribution to the national result.
+S E C T I O N 0 6
+Programme Components (by the three functions)
+The value chain is named by function (Produce, Connect and Enable, Transform). Product value level (raw, intermediate, pure compound) is a value ladder within Transform. Off-take is always a Connect function, whatever rung of product is being sold.
+Produce (upstream) OC1
+Multi-strata agroforestry built on a multi-commodity portfolio rather than a single crop, beginning from what already grows and is familiar to farmers, then raising its class agronomically. The portfolio spans pepper, coffee (robusta and Priangan arabica), patchouli, cocoa, cinnamon, nutmeg, cloves, bamboo (West Java), and ginger and other rhizomes, spices and herbs. It is a model adaptive to each landscape, not a fixed planting recipe, and pepper is one commodity among many.
+Indicative anchor commodities per landscape (finalised after the Year-1 assessment):
+The multi-commodity, multi-strata design gives income diversification (Impact A) and a net sink (contribution to B) on the same land. Climbing crops such as the pepper liana require a vertical living support, so across the portfolio the agroforestry logic and the carbon logic reinforce each other by construction rather than by rhetoric.
+Connect and Enable (midstream) OC2
+This function is the heart of value flow. It turns thousands of dispersed farmers into one bankable, off-takeable counterparty with verified origin, then locks demand through contracts and channels working capital.
+The institutional pathway is KUPS to UMKM, not cooperative. KUPS rise into formal UMKM units under the Cluster- based MSME Holding sector #4; a UMKM shell without institutional readiness is a risk, not an output.
+Transform (downstream) OC3
+Simple extraction rising toward high-value compounds moves the product from a commodity market (price-taker) to a specialty-ingredient market (specification-driven). The value ladder lives here.
+Value ladder (Axis B), shown as a gradient inside Transform:
+Technical downstream targets (compound purity, extraction yield, unit-line capacity and economics) will be detailed with the downstream technical partner during pilot design. The commercial logic above holds at the level of logic, not of numbers.
+6.4 Financing
+Pepper agroforestry farmer groups today are trapped in high-cost, unsustainable informal financing (debt bondage/middlemen lending). The goal of this component is to shift the financing source from informal schemes toward a structured local mechanism linked to national instruments.
+6.5 Strengthening Stakeholders’ Capacity 
+Pepper agroforestry stakeholders today rely on fragmented, informally transmitted knowledge with no standardized quality control across sites. The goal of this component is to shift capacity from individual, ad-hoc know-how toward institutionalized, replicable skill systems that outlast the project. 
+S E C T I O N 0 7
+Track Record — Why This Consortium
+The programme is a curated scale-up of a value-chain model already operating, distinguishing it from an aspirational proposal collecting data to prove a concept. The evidence is operational, not a set of exclusive terms.
+The aGROWforests results are demonstration-stage evidence rather than a scale target. Partner landscape assets are counted only once assessed within the programme boundary; the track record above rests on the aGROWforests, Verstegen, and CAN evidence (see §13).
+S E C T I O N 0 8
+Policy Alignment
+G20 Bioeconomy Principles, mapped to programme functions (each principle traceable to at least one component):
+S E C T I O N 0 9
+MRV and Carbon Logic
+Carbon claims are made at the landscape level, across the whole mosaic (standing forest, agroforestry, and mangrove) rather than parcel by parcel. This is what gives the additionality and permanence arguments an auditable footing.
+Methodology by carbon pool. The MRV is built from complementary methods matched to each carbon pool. Agrivision supplies the soil-carbon (SOC) and agroforestry MRV layer — compliance-grade SOC and biomass measurement (satellite/UAV plus AI/ML modelling) with farm-level traceability through a Farm Identification Code (FID) plot registry, taken to standard-aligned reporting that is ready for independent third-party validation. The standing-forest and mangrove (blue-carbon) components are measured with complementary forest- and coastal-carbon methods appropriate to those pools. The layers are consolidated into one landscape-level account, nested into national FOLU accounting.
+MRV stands for Measurement, Reporting and Verification. The programme builds it in a deliberately conservative sequence. Within 2027–2029 the target is to set the baseline, run operational MRV, and have the first third-party verification cycle begin (verifier engaged and protocol ready), rather than to complete a verification cycle inside the period; the closing of the first cycle falls beyond the period. The function of verification here is to provide auditable evidence of the programme’s contribution to national FOLU Net Sink accounting — nested into the national registry (SRN) and measured against the national reference level (FREL) — not to generate carbon units for sale.
+Carbon targets are set after the Year-1 baseline; no tCO₂e figures are asserted at concept stage. Additionality rests on the landscape counterfactual and on measured net sink; permanence rests on the economic incentive for farmers to keep the mosaic standing (the cross-lock in §5).
+S E C T I O N 1 0
+Financing
+The organising principle is that capital is disbursed against an approved plan and accounted against verified results. Each instrument is tied to a plan, a milestone, or a real result (an approved Annual Work Plan, a signed off- take contract, an institutional graduation, a verified landscape contribution), not to a nominal amount to be spent.
+Funding mechanics. The programme’s primary in-period funding is a programmatic grant under the Norway’s Contribution (NC) Investment Plan. In this mechanism, an implementing partner submits a proposal and an Annual Work Plan (AWP); once the proposal passes verification, funds are disbursed up front to run the approved activities, monitored quarterly and annually against the AWP. The funds are managed by BPDLH / the Indonesian Environment Fund (IEF) as fund manager under the Ministry of Finance, with Kemenhut holding programme responsibility. For context, the Results-Based Contribution (RBC) operates one layer above this programme: it is the state-to-state mechanism under which Norway contributes to Indonesia after verified reductions in national emissions against the national reference level (FREL), under the 2022 Indonesia–Norway FOLU partnership (contributions to date of roughly USD 216 million). This programme is not paid per tonne; it is financed programmatically and delivers a measurable, auditable contribution to the national result on which that partnership rests.
+Execution capacity as programme value. Disbursement of NC funds to the field has so far run well behind the funds Indonesia has received — on the order of ten per cent (~9.7%) of roughly Rp 2.91 trillion received. The binding constraint on the domestic layer is execution capacity, not capital. A consortium that arrives execution-ready — with contracted off-take, an operating traceability platform, tied working capital, and a decade of purchasing history — is built to convert an approved AWP into delivered, monitorable activity from Year 1.
+The financing cross-lock, without circularity. Programmatic NC funding builds the Produce, Connect, and MRV systems within the grant period. Post-grant, the Connect (midstream) system is sustained by commercial value- chain revenue, with potential NEK/SPE-GRK incentives as a conditional supplement. Prosperous farmers keep the mosaic standing, which secures permanence; the programme’s verified contribution to the national FOLU Net Sink result, in turn, strengthens the case for continued NC allocations to the landscape. Welfare secures the carbon; the demonstrated contribution sustains the funding case.
+Indicative budget. Rp 70–100 billion over three years (2027–2029), indicative and finalised after the Year-1 landscape assessment. The lower bound corresponds to a phased start (Babel and West Java first, Lampung in a later phase); the upper bound to all three landscapes at full scale from year one. Inter-layer allocation, continued off-take-advance size, impact-investor ticket, and the scale of any NEK/SPE-GRK incentive are held until the finance scheme and baseline are locked. The impact-investor layer is a candidate (Acces Capital under consideration); no Islamic-finance instruments are used in this version.
+S E C T I O N 1 1
+Governance and Delivery
+Steering. Bappenas, through the Directorate of Forestry and Water Resources Conservation, is the policy convener. Kemenhut holds programme responsibility for FOLU Net Sink implementation; BPDLH/IEF, under the Ministry of Finance, manages the NC funds. The Steering Committee meets at least quarterly with a standing agenda: milestone review, tranche-allocation decisions, and resolution of inter-partner escalations.
+Executing Consortium. The core institutions operate under a governance charter that fixes veto rights at outcome level, quarterly co-audit, a RACI matrix per outcome, and performance-based tranche disbursement to prevent stalling at the MoU stage.
+Landscape forum. At the landscape level, the multi-party forum (farmers, KPH, local government) convenes on a boundary-aligned membership, facilitated by the consortium, and documents its governance decisions (OC5).
+Social-Forestry roles run on two tiers to avoid overlap: YKAN holds landscape-level conservation oversight (standards, safeguards, MRV assurance) while Titian leads on-the-ground Social Forestry delivery (KUPS strengthening, FPIC facilitation, community organising) under that oversight.
+Endorsement-to-execution flow. Bappenas issues a policy recommendation; Kemenhut, as programme-responsible ministry, endorses the consortium’s implementing-partner proposal under the NC Investment Plan; funds flow , disbursed against the approved Annual Work Plan in monitored tranches. The consortium reports quarterly to the Steering Committee and the PMU, and annually to the public (FOLU transparency).
+Pentahelix principle. The five-actor configuration is realised through consortium composition: Kemenhut, Bappenas, Kemen UMKM, and Kemnaker (Government); CAN, KGF, and EBM (Business); EBM’s academic partners (Academia); YKAN, Titian, TLE, and KUPS/UMKM (Community); and programme communication through donor and public channels (Media).
+S E C T I O N 1 2
+Measurement
+Measurement tracks the two impacts on their own terms.
+Impact A — Farmer welfare is tracked on four indicators (baseline to endline; targets locked post-baseline):
+Impact B — Verified carbon is measured post-baseline. No carbon figures are asserted at concept stage; targets are set after the Year-1 baseline, with verification treated conservatively (cycle started, not completed; see §9).
+Scale (hectares of managed mosaic, farmers reached) is an indicative range, finalised after the Year-1 landscape assessment. The aGROWforests figures serve as demonstration-stage credibility, not as scale targets.
+S E C T I O N 1 3
+Risks and Assumptions
+Each assumption below is load-bearing: if it collapses, a link in the Theory of Change collapses. Each carries a mitigation.
+External factors under monitoring, beyond the programme’s control: global commodity prices; cross-cabinet policy continuity after 2029; EUDR regulation and EU trade conditions; and fluctuations in local mining demand.
+S E C T I O N 1 4
+Exit and Sustainability
+The programme is designed to stand on three legs, all of which must be upright by Year 3.
+Leg 1 — Commercial. Verstegen and other premium off-take contracts operate at commercial volume; CAN and KGF serve as long-term commercial anchors; a floor price plus volume floor locks in a minimum household income.
+Leg 2 — Institutional. KUPS graduate into formal UMKM under the Cluster-based MSME Holding sector #4, owned by their members and able to access commercial credit and the KUR programme; Kemnaker-certified agripreneurs serve as the management cadre. The pathway is KUPS to UMKM, not to a cooperative.
+Leg 3 — Carbon-linked incentives and continued allocation. The programme’s verified landscape contribution supports two conditional channels: potential domestic NEK/SPE-GRK incentives, subject to SRN registration and a strict single-claim discipline with the national FOLU Net Sink result, and a strengthened case for continued programmatic allocations under the NC framework. A share of any incentive returns to villages and UMKM through a benefit-sharing mechanism agreed by the consortium; landscape MRV continues on a fee-for-service basis.
+Post-grant governance. Bappenas and Kemenhut remain institutional patrons; the consortium transitions from a project consortium to a standing bioeconomy alliance under a permanent charter; the funder relationship shifts from a time-bound grant toward a standing programmatic partnership within the national FOLU Net Sink architecture.
+Year-3 gate. A majority of mentored village cash flow derived from off-take, downstream processing, and carbon- linked incentives rather than grant funding; KUPS graduated into UMKM; the Holding operating with registered transaction volume; the consortium signing a permanent governance charter.
+S E C T I O N 1 5
+Timeline
+Three years (2027–2029), sequenced per landscape and per function, with the carbon track kept deliberately conservative.
+Post-grant horizon: a maturing productive climax system, a continuing verified carbon contribution to the national FOLU Net Sink result, and upper-watershed environmental services, with the closing of the first verification cycle falling beyond the grant period.
+FOLU-Bioeconomy PCN · 2026-07-10 · version 2.0
+ 01 | Project Summary    	 |  03
+ 02 | Implementing Team — Core Consortium and Supporting Partners    	 |  04
+ 03 | Background and Problem    	 |  06
+ 04 | Landscape-Based Approach    	 |  07
+ 05 | Theory of Change    	 |  08
+ fig. | Theory of Change — one-page diagram    	 |  09
+ 06 | Programme Components (by the three functions)    	 |  10
+ 07 | Track Record — Why This Consortium    	 |  13
+ 08 | Policy Alignment    	 |  14
+ 09 | MRV and Carbon Logic    	 |  15
+ 10 | Financing    	 |  16
+ 11 | Governance and Delivery    	 |  17
+ 12 | Measurement    	 |  17
+ 13 | Risks and Assumptions    	 |  18
+ 14 | Exit and Sustainability    	 |  19
+ 15 | Timeline    	 |  20
+ | 
+Element | Content
+Short title | Agroforestry, a Model of Livelihood-Based Regenerative Forest Management — A Social-Forestry Bioeconomy
+Fund manager & programme responsibility | BPDLH / Indonesian Environment Fund (IEF) is the fund manager of the Norway’s Contribution (NC), under the Ministry of Finance — not an implementing entity. The Ministry of Forestry of the Republic of Indonesia (Kemenhut) is the programme-responsible ministry. The implementing entity is the consortium, which submits as an implementing partner under the NC Investment Plan
+Policy convener | Ministry of National Development Planning / Bappenas — Directorate of Forestry and Water Resources Conservation (Direktorat Kehutanan dan Konservasi Sumber Daya Air)
+Executing consortium (core) | GIZ Indonesia, technical assistance; PT CAN, Commercial Anchor (aggregation, off-take, market linkage, scale-up); PT KGF, Production Anchor (Lampung); YKAN, Landscape Conservation Lead; Titian, Social-Forestry Delivery Lead
+Strategic objective | To manage a land–coast Social Forestry landscape as one mosaic so that a three-function agroforestry value chain raises farmer welfare (real income, agripreneur transition, income diversification, fair market access) while generating a verified, landscape-level FOLU carbon contribution to the national FOLU Net Sink result, with the two outcomes structured as one interlocking system.
+Policy alignment | FOLU Net Sink 2030; RPJPN 2025–2045 (bioeconomy pillar); RPJMN 2025–2029; Asta Cita; IAD-PS (Social Forestry Integrated Area Development); Presidential Regulation 98/2021 on Carbon Economic Value (NEK); Cluster-based MSME Holding sector #4 (Plantation / Agriculture / Fisheries); 10 G20 High-Level Principles on Bioeconomy (Rio, September 2024)
+Duration | 3 years (2027–2029), with a projected post-grant sustainability horizon
+Landscapes | (1) Bangka Belitung; (2) Lampung; (3) West Java
+Scale | Indicative and finalised after the Year-1 landscape assessment: a managed productive mosaic (multi-strata agroforestry plus restored mangrove) in the low thousands of hectares, within a wider Social Forestry landscape of influence; farming households in the low thousands. Ranges are set post- baseline, not committed at concept stage.
+Proposed budget | Rp 70–100 billion (USD ~4.5–6 million), indicative; final allocation after the Year-1 landscape assessment
+Primary financing | Programmatic grant funding under the Norway’s Contribution (NC) Investment Plan (funds managed by BPDLH; programme responsibility with Kemenhut), disbursed against an approved proposal and Annual Work Plan (AWP); complemented by a co-financing and sustainability stack (technical-assistance grant, off-take advance, revolving UMKM fund, CSR mining-rehabilitation mandate, and a candidate impact-investor layer)
+Function | Partner | Role
+Premium off-take | Verstegen — Verstegen Spices & Sauces | Premium spice off-taker and anchor EU buyer; sustained
+(EU) | BV | purchase relationship with CAN spice farmers since 2012
+ | verstegen.nl/en | 
+ |  | 
+Transform | PT EBM — PT EBM Saintifik dan Teknologi | Downstream extraction pilot and product R&D; technical
+(downstream) | ebmscitech.com | specifications to be detailed with EBM
+ |  | 
+Soil-carbon MRV | Agrivision — PT Visi Agrikultur Indonesia | Compliance-grade soil-carbon (SOC) MRV for the
++ traceability | agrivisiontech.com | agroforestry landscape: land-eligibility and spatial
+ |  | mapping, near-real-time SOC/yield modelling
+ |  | (satellite/UAV + AI/ML), and farm-level traceability through
+ |  | a Farm Identification Code (FID) plot registry; operates a
+ |  | validation-ready MRV platform (measurement to standard-aligned reporting with audit trail)
+Enterprise + | TLE — The Local Enablers | Landscape strategy; enterprise-ecosystem enabling;
+landscape | thelocalenablers.id | agripreneur incubation and mentoring
+strategy |  | 
+Certification | Kemnaker — Ministry of Manpower of the | Vocational training and professional certification for
+ | Republic of Indonesia | agripreneurs
+ | kemnaker.go.id | 
+ |  | 
+Institutional | Kemen UMKM — Ministry of MSMEs of the | Formalisation of KUPS into UMKM under Cluster-based
+(post-grant) | Republic of Indonesia | MSME Holding sector #4
+ | umkm.go.id | 
+Dimension | Plot-by-plot approach | Landscape-based approach (this PCN)
+Carbon accounting | Fragmented, per-parcel, weak baselines | Accounted across the mosaic (forest + agroforestry + mangrove), giving a defensible net-sink baseline
+Additionality and permanence | Hard to argue; leakage between parcels | Stronger: gains and protection are measured together across the unit, and permanence is anchored in the whole system
+Governance | Individual agreements | One multi-party forum aligned to the landscape boundary
+Value capture | Scattered smallholders as weak counterparties | Aggregated origin, one bankable counterparty, contracted off-take
+Task | Owner
+Soil-carbon + agroforestry MRV, land-eligibility, and farm- level traceability (Farm ID) | Agrivision
+Landscape strategy and agripreneur cadre | TLE
+Landscape Conservation Lead — conservation leadership, safeguards, community-MRV oversight; engages and quality- assures local implementing partners | YKAN
+# | Outcome | Function / layer | Serves impact
+ OC1 | Landscape production base standing and productive — multi-strata agroforestry, nurseries, soil health, restored mangrove yielding output | Produce (upstream) | A (and contributes to B through the carbon sink)
+ OC2 | Connecting system operational — post-harvest and QC, aggregation, happyfarmers.id traceability, KUPS-to-UMKM formalisation, financing access, and contracted off-take flow value to farmers | Connect (midstream) | A
+ OC3 | High-value downstream proven from pilot to production — extraction of specific compounds, pilot into commercial scale-up, certified specialty products entering premium markets | Transform (downstream) | A
+ OC4 | FOLU contribution measured and verified at landscape level — baseline, additionality, net sink, third-party verification (MRV-ready) | Carbon | B
+ OC5 | Multi-party landscape governance running — boundary defined, forum facilitated, MRV governance, permanence secured | Governance | A + B (the lock)
+Landscape | Anchor commodities
+Bangka Belitung | Muntok pepper + tamanu + patchouli
+Lampung | Robusta coffee + pepper + cocoa
+West Java | Priangan arabica coffee + Garut patchouli + cinnamon + bamboo
+Component | Content | Key output
+Multi-strata, multi- commodity agroforestry | Living-support-tree transition (from dead poles to leguminous living supports such as Gliricidia/Erythrina); a diversified income portfolio (pepper, coffee, patchouli, cocoa, cinnamon, nutmeg, cloves, rhizomes and herbs) across canopy, mid-canopy, and ground strata for staggered cash flow and food | Hectares planted or enriched across the mosaic (range final post- baseline)
+Nursery and improved seedlings | Village nurseries supplying the multi-commodity planting programme | Nursery units operational; seedling capacity
+Soil health and organic inputs | On-site composting, indigenous microbial soil inputs, and living- support prunings as an internal nutrient loop that lowers external input cost | Farmers applying the organic-input protocol
+Mangrove restoration and silvofishery | Coastal mangrove restoration with a silvofishery module | Hectares of mangrove restored (range indicative)
+Component | Content | Key output
+Post-harvest and QC | QC units and protocols; graded lots | Active QC units; share of lots passing grade
+Spice Hub aggregation | Village Spice Hubs feeding landscape aggregation hubs | Volume aggregated
+happyfarmers.id traceability | Supply-chain intelligence and verified origin scaled from the existing base of 1,000+ farmers; opens market and finance access (including EUDR-sensitive demand) | Farmers at verified origin (range post-baseline)
+KUPS to UMKM formalisation | KUPS strengthened and formalised into UMKM under Cluster-based MSME Holding sector #4 (coordinated with Kemen UMKM). Institutional readiness precedes formalisation | KUPS formalised as UMKM
+Financing access | Working capital tied to contracts; revolving fund at cluster level | Funds disbursed; farmers passing financial literacy
+Off-take and market linkage | Contracted off-take across all product rungs (a Connect function), with tied off-take advance as working capital | Active contracts; contracted volume and value flowed
+MRV and landscape governance | Spatial MRV and multi-party forum (see §9 and §11) | MRV operational; forum convening
+Rung | Example product (pepper) | Value capture today | Target
+ Rung 1 | Raw material (dried pepper) | Farmer, then middleman/exporter | Farmer, via Connect off-take
+ Rung 2 | Intermediate (crude oleoresin / extract) | Overseas processor | Cluster (Transform + Connect off-take)
+ Rung 3 | Pure compound (e.g. piperine) | Global ingredient industry | Cluster (Transform + Connect off-take)
+Component | Content | Key output
+Extraction line | Simple extraction toward high-value compounds (e.g. piperine from pepper) | Validated extraction processes; purity/yield targets to be detailed with the downstream domain expert
+Pilot into commercial production | The R&D and extraction pilot runs, and validated specifications scale into commercial production | Pilot operational; batches meeting specification (to be detailed with the downstream domain expert); commercial line running
+Specialty certification and premium markets | Food/pharma-grade and specialty certification; premium and export contracts. Buyer types include specialty flavour and spice houses, nutraceutical/pharma ingredient buyers, and personal- care actives | Certificates issued; premium/export contracts
+Component | Content | Key output
+Bankability Groundwork  | Legalization and governance strengthening of cooperatives; development of business plans and cash flow projections for farmer groups; land certification (Social Forestry permits) as a collateral substitute  | Legally registered cooperatives with solid governance; validated business plans; initial credit track record established 
+Local FInancing Mechanism Pilot | Piloting a district-level revolving fund with blended sources (regional budget/APBD, private CSR, donor grants); simple risk-sharing scheme in one initial location  | Pilot operational (disbursement size and mechanism to be detailed with financial partners/local government); at least one farmer group receiving pilot financing 
+Institutional Linkage & Scale-up Recommendation  | Pilot evaluation; assessment of options to connect to a BPDLH window or other national mechanism as an exit strategy  | Evaluation report; policy recommendation on long-term financing institutional arrangements 
+Evidence | Function | What it demonstrates | Status
+aGROWforests demonstration — Verstegen–Fairfood– CAN–KGF consortium under GIZ/BMZ (Dec 2022–May 2027, EUR 4 million, 2,300-farmer target). Three demonstration plots (~5.35 ha); white-pepper production rose from 487 kg (2023) to 590 kg (2024); yield per plant improved from 0.40 to 0.53 kg | Produce | The pepper-agroforestry model delivers measurable productivity gains under premium off-take | Demonstration- stage, not proof of scale
+Verstegen off-take — sustained purchase relationship since 2012; LoI for 80,000 kg / USD 798,400 under a three- year framework | Connect | A decade-long purchasing relationship with a specialty spice house — the natural buyer for climbing the ladder from raw to intermediate; the forward volume is under a Letter of Intent, not yet a binding contract | Active relationship; LoI non-binding, framework contract targeted Year 1
+CAN off-take advance — more than Rp 1 billion disbursed to 107 pepper farmers, repayment tied to actual sales | Connect | Contracted off-take and tied working capital already run together | Validated (real advance)
+happyfarmers.id — traceability and supply-chain intelligence, 1,000+ farmers at verified origin | Connect | An operational digital spine that opens finance and market access and prevents value leakage to intermediaries | Validated (operational)
+ | 
+ Framework |  PCN contribution
+FOLU Net Sink 2030 — NDC commitment for forestry and land use | Landscape-level net sink from agroforestry, protected standing forest, and restored mangrove, taken toward third-party verification as a measurable contribution to the national FOLU Net Sink result
+Renop FOLU Net Sink — national and sub- national operational plans (Rencana Operasional) | Programme activities aligned to the relevant Renop(s) — a prerequisite for implementing-partner eligibility under the NC Investment Plan
+RPJPN 2025–2045 — bioeconomy as an engine of green growth | Operationalises bioeconomy at the landscape level, using the 10 G20 Principles as design criteria
+RPJMN 2025–2029 — food self-sufficiency, green economy, downstreaming | Anchors premium spice commodities with downstream extraction toward high-value compounds
+Asta Cita — food sovereignty, economic self-reliance | Multi-strata production meets members' primary needs and diversifies income
+IAD-PS (Social Forestry Integrated Area Development) | Governance unit: HKm/HD/HTR and conservation partnerships managed as one landscape
+Presidential Regulation 98/2021 (NEK) | National carbon-economic-value framework: registration in the national registry (SRN) and potential domestic SPE-GRK incentives, held under a single-claim discipline with the national FOLU Net Sink result
+Cluster-based MSME Holding sector #4 | Post-grant institutional vehicle: KUPS formalised into UMKM (coordinated by Kemen UMKM)
+10 G20 High-Level Principles on Bioeconomy | Adopted explicitly as design criteria
+# | G20 Principle | Realised by
+P-1 | Eradication of hunger and poverty | Premium off-take raises cash income; the revolving UMKM fund breaks dependence on informal lenders
+P-2 | Inclusion of local communities | KUPS-to-UMKM as the community vehicle; conservation leadership and safeguards; enterprise incubation; FPIC
+P-3 | Climate mitigation and adaptation | Low-emission multi-strata agroforestry; mangrove restoration
+P-4 | Biodiversity conservation | Multi-commodity portfolio rather than monoculture; native high-canopy stands
+ P-5 | Sustainable production and consumption | traceability enabling EUDR/CS3D compliance; internal-nutrient-loop soil health
+# | G20 Principle | Realised by
+P-6 | Circular use of biological resources | Living-support prunings to mulch; processing residues to biochar
+ P-7 | Bioeconomy trade | Premium EU export plus premium domestic ingredient markets
+P-8 | Market conditions and decent work | Kemnaker agripreneur certification; graduation conditioned on real transactions
+P-9 | International cooperation | International conservation-affiliate partnership; bilateral technical cooperation; EU buyer bridging; implementation within the Indonesia–Norway FOLU partnership architecture
+P-10 | Measurable and comparable sustainability | Landscape-level MRV plus community MRV
+Element | Content
+Baseline | Set in Year 1: landscape spatial mapping, land-eligibility, and carbon baseline across the mosaic
+Measurement | Landscape-level carbon accounting; net-sink measured against baseline
+Verification | First independent third-party verification cycle started (engagement plus verification protocol), not completed within the period
+Governance | Community MRV, FPIC and safeguards; internal technical assurance on baseline, additionality, permanence, and uncertainty
+ Role |  Instruments |  Tied to
+Primary in-period funding — builds and runs Produce, Connect, and MRV in 2027–2029 | Programmatic NC grant (BPDLH-managed), disbursed up front against the approved proposal and AWP | Approved proposal and AWP; quarterly and annual monitoring
+Co-financing and sustainability stack | Off-take advance (working capital); GIZ technical- assistance grant; CSR mining-rehabilitation mandate; revolving UMKM fund; impact-investor layer for downstream scale-up (candidate) | Contracts; construction milestones; institutional graduations
+Post-grant continuity | Commercial value-chain revenue (off-take and downstream margins); potential domestic NEK/SPE- GRK incentives under a single-claim discipline | Commercial contracts; verified landscape contribution registered in the SRN
+Indicator | Measure of verification
+Real household income | Household panel survey (baseline, endline)
+Agripreneur transition | Registration of farmers transitioning to agripreneurs
+Income diversification | Average number of income lines/commodities per household
+Market access and fair price | Share of farmers with contracted off-take plus transparent floor/premium; happyfarmers.id contract and price data
+Assumption | Risk if it fails | Mitigation
+Programmatic NC funding is accessible to the consortium — an implementing-partner allocation for non-government consortia is available; the proposal and Annual Work Plan pass verification (VERAS); alignment with the relevant Renop FOLU Net Sink is met | The primary in-period funding does not flow without an approved proposal and AWP | Submit through the NC Investment Plan window with Kemenhut endorsement; consortium legal entities meet implementing-partner eligibility (registered legal entities of three or more years with audited finances); align the design to the national and sub-national Renop(s) before submission
+Landscape-level FOLU accounting is accepted by the verifier and Kemenhut | The OC4-to-Impact-B link breaks if the cross-mosaic methodology fails audit | Lock methodology and baseline (Agrivision) in Year 1 before any claim
+Permanence holds and the verification timeline is realistic | Reversal (re-deforestation, fire) voids the contribution claim and weakens the national result the programme reports into | Keep targets conservative (baseline plus operational MRV plus first cycle only beginning); use farmer economic incentive (A) plus governance (OC5) as permanence guards; do not overpromise a completed cycle
+Off-take is real, not aspirational | Value reaches farmers only where contracts and operational evidence exist | Anchor on the Verstegen LoI and CAN advance as evidenced outcomes, not on aspirational buyer matching
+Downstream is technically and economically viable from pilot to production, and demand for the specific compound is confirmed | OC3 is fragile if the EBM/CAN technical gap is not closed | Set purity/yield indicators with the downstream technical partner before scale-up; require research or a market signal before scale-up
+Productivity gains are captured by farmers, not eroded by intermediaries | Impact A weakens | Traceability plus transparent floor/premium pricing
+Landscape assets are not pre- committed baselines | Presenting a partner’s pre- existing landscape assets as committed would overstate the baseline | Carry only assessed, in-boundary assets after the Year-1 baseline; anchor OC5 on facilitated governance rather than any single conservation lead’s pre-existing programme
+Assumption | Risk if it fails | Mitigation
+aGROWforests is demonstration- stage | It is credibility, not a scale target | Final scale ranges only after the Year-1 assessment
+Landscape boundary is not yet locked | All scale ranges depend on Year-1 delineation | Delineate in Year 1 (KPH + kabupaten + DAS + PS-village cluster) before committing figures
+Year | Produce | Connect | Transform | Governance and MRV
+ Y1 2027 | Nurseries; living-support-tree and cover-crop planting; year-1 cash-flow crops; soil-health training | happyfarmers.id onboarding at scale; KUPS readiness assessment and strengthening; first off-take contracts | Extraction pilot scoped | Landscape boundary delineated; carbon baseline set; MRV made operational; forum convened; governance charter signed
+ Y2 2028 | Portfolio commodities on living supports (pepper, coffee, cocoa, patchouli, cinnamon and others per landscape); canopy strata; phase-2 mangrove restoration | UMKM formalisation begun; QC and aggregation active; financing tied to contracts; additional off-take contracts | Extraction pilot batches; specification testing | MRV running; forum convening; verifier engagement begun
+ Y3 2029 | Early fruiting across the portfolio; coffee and patchouli in production; mangrove established | UMKM operational under Holding sector #4; contracted off-take flowing | Validated specifications into commercial production; specialty certification; premium/export contracts | First third-party verification cycle started (not completed); Year-3 gate reviewed
