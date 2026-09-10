@@ -86,7 +86,7 @@ class App:
             "recordings_dir", r"F:\Meeting Recordings Automation")
 
         root.title("Meeting Recorder")
-        root.geometry("360x255")
+        root.geometry("360x330")
         root.attributes("-topmost", True)
         root.resizable(False, False)
 
@@ -102,18 +102,26 @@ class App:
         self.refresh_btn.pack(side="left", padx=(6, 0))
         self.entry.focus()
 
-        self.btn_frame = tk.Frame(root)
-        self.btn_frame.pack(fill="x", padx=12, pady=10)
-        self.button = tk.Button(self.btn_frame, text="●  Start Recording",
+        # Ad-hoc: a meeting the owner creates himself (Slack huddle, phone call).
+        # Auto-ticks as soon as the typed title stops matching a calendar entry,
+        # so the common case needs no thought; the tick can still be forced.
+        self.adhoc_var = tk.BooleanVar(value=False)
+        tk.Checkbutton(root, text="Ad-hoc meeting (not on calendar)",
+                       variable=self.adhoc_var).pack(anchor="w", padx=12, pady=(4, 0))
+        self.title_var.trace_add("write", self._on_title_typed)
+
+        tk.Label(root, text="Attendees (optional, comma separated):").pack(
+            anchor="w", padx=12, pady=(6, 0))
+        self.attendees_var = tk.StringVar(value="")
+        self.attendees = ttk.Entry(root, textvariable=self.attendees_var,
+                                   font=("Segoe UI", 10))
+        self.attendees.pack(fill="x", padx=12)
+
+        self.button = tk.Button(root, text="●  Start Recording",
                                 font=("Segoe UI", 13, "bold"),
                                 bg="#1a7f37", fg="white", height=2,
                                 command=self.toggle)
-        self.button.pack(fill="x", expand=True)
-        self.pause_button = tk.Button(self.btn_frame, text="⏸  Pause",
-                                      font=("Segoe UI", 13, "bold"),
-                                      bg="#f57c00", fg="white", height=2,
-                                      command=self.toggle_pause)
-        self.is_paused = False
+        self.button.pack(fill="x", padx=12, pady=10)
 
         self.status = tk.Label(root, text="Ready", fg="#555", justify="left")
         self.status.pack(anchor="w", padx=12)
@@ -131,6 +139,16 @@ class App:
         self.refresh_calendar()
         self.tick()
 
+    def _on_title_typed(self, *_):
+        """Title no longer matches a calendar candidate -> it is an ad-hoc
+        meeting. Never un-ticks a box the owner ticked on purpose."""
+        if self.cap is not None or self.adhoc_var.get():
+            return
+        current = self.title_var.get().strip()
+        candidates = list(self.entry["values"])
+        if current and candidates and current not in candidates:
+            self.adhoc_var.set(True)
+
     def refresh_calendar(self):
         """Fetch calendar candidates in the background; safe to hit anytime."""
         self.refresh_btn.config(state="disabled")
@@ -147,13 +165,19 @@ class App:
                 return  # recording; don't touch the title or status
             if not candidates:
                 self.status.config(text="No calendar match, type a name", fg="#555")
+                self.adhoc_var.set(True)
                 return
             self.entry["values"] = candidates
-            # prefill unless the owner typed something custom
+            # prefill unless the owner typed something custom or ticked ad-hoc:
+            # an ad-hoc title must never be overwritten by a calendar refresh
             current = self.title_var.get().strip()
-            if current in ("", "Meeting") or current in list(self.entry["values"]):
+            if not self.adhoc_var.get() and (
+                    current in ("", "Meeting") or current in candidates):
                 self.title_var.set(candidates[0])
-            self.status.config(text=f"Calendar: {len(candidates)} match", fg="#555")
+            self._on_title_typed()
+            self.status.config(
+                text=("Ad-hoc, calendar ignored" if self.adhoc_var.get()
+                      else f"Calendar: {len(candidates)} match"), fg="#555")
 
         self.root.after(0, apply)
         # idle auto-refresh every 5 minutes so a left-open window stays current
@@ -188,17 +212,10 @@ class App:
                                        "ffmpeg not found; recording audio only.")
         open(self.base + ".recording", "w").close()
         self.start_time = datetime.datetime.now(datetime.timezone.utc)
-        
-        # side-by-side button layout
-        self.button.pack_forget()
-        self.button.config(text="■  Stop", bg="#c62828")
-        self.button.pack(side="left", fill="x", expand=True)
-        self.pause_button.config(text="⏸  Pause", bg="#f57c00", fg="white")
-        self.pause_button.pack(side="right", fill="x", expand=True, padx=(8, 0))
-        self.is_paused = False
-
+        self.button.config(text="■  Stop Recording", bg="#c62828")
         self.status.config(text="\n".join(devices), fg="#1a7f37")
         self.entry.config(state="disabled")
+        self.attendees.config(state="disabled")
 
     def stop(self):
         title = self.title_var.get().strip() or "meeting"
@@ -209,19 +226,15 @@ class App:
             self.screen = None
             if video:
                 parts = list(parts) + [video]
-        write_sidecar(self.base, title, self.start_time, parts, "windows")
+        write_sidecar(self.base, title, self.start_time, parts, "windows",
+                      ad_hoc=self.adhoc_var.get(),
+                      attendees=self.attendees_var.get().split(","))
         marker = self.base + ".recording"
         if os.path.exists(marker):
             os.remove(marker)
-        
-        # restore single button layout
-        self.pause_button.pack_forget()
-        self.button.pack_forget()
         self.button.config(text="●  Start Recording", bg="#1a7f37")
-        self.button.pack(fill="x", expand=True)
-        self.is_paused = False
-
         self.entry.config(state="normal")
+        self.attendees.config(state="normal")
         msg = f"Saved: {os.path.basename(self.base)}"
         if self.auto_var.get():
             try:
@@ -234,24 +247,6 @@ class App:
             except Exception as e:
                 msg += f"\nWSL processing failed to launch: {e}"
         self.status.config(text=msg, fg="#555")
-
-    def toggle_pause(self):
-        if self.cap is None:
-            return
-        if not self.is_paused:
-            self.cap.pause()
-            self.is_paused = True
-            self.pause_time = datetime.datetime.now(datetime.timezone.utc)
-            self.pause_button.config(text="▶  Resume", bg="#1a7f37")
-            self.status.config(text="Recording PAUSED", fg="#f57c00")
-        else:
-            self.cap.resume()
-            self.is_paused = False
-            if self.start_time and hasattr(self, "pause_time"):
-                paused_duration = datetime.datetime.now(datetime.timezone.utc) - self.pause_time
-                self.start_time += paused_duration
-            self.pause_button.config(text="⏸  Pause", bg="#f57c00")
-            self.status.config(text="Recording resumed...", fg="#1a7f37")
 
     def tick(self):
         if self.cap is not None and self.start_time:

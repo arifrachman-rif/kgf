@@ -1,34 +1,25 @@
 #!/usr/bin/env python3
-"""Shared helpers for the local meeting note-taker (recorder / transcribe / watcher).
+"""Shared helpers for the local meeting recorder.
 
-Platform detection is delegated to .agent/scripts/harness_config.py, which caches
-the output of detect_platform.sh. This file used to keep its own Python copy of
-that table; two implementations of one rule is one too many.
+Trimmed copy of the harness module, carrying only what `recorder.py` imports:
+detect_platform, load_config, slugify (and resolve_ffmpeg, which load_config uses).
+
+The full version also has transcription and Gemini helpers. Those belong to the
+pipeline that turns a recording into notes, not to capturing one, and they reach
+into a repo layout a member's workspace does not have -- so they are deliberately
+absent rather than shipped and unreachable.
 """
 import json
 import os
 import platform
 import re
 import shutil
-import sys
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT = os.path.dirname(MODULE_DIR)
 CONFIG_PATH = os.path.join(MODULE_DIR, "config.json")
 
-# Appended, not inserted at 0, so this never shadows a module the recorder
-# scripts import from their own directory.
-_AGENT_SCRIPTS = os.path.join(REPO_ROOT, ".agent", "scripts")
-if _AGENT_SCRIPTS not in sys.path:
-    sys.path.append(_AGENT_SCRIPTS)
-try:
-    import harness_config
-except Exception:  # absent or unimportable -> the inline fallback below takes over
-    harness_config = None
-
-# Cron runs with a minimal PATH that excludes ~/.local/bin, so a bare "ffmpeg"
-# in config resolves fine in an interactive shell and dies under cron with
-# FileNotFoundError. Search these before giving up.
+# A bare "ffmpeg" in config resolves fine in an interactive shell and dies under a
+# launcher with a minimal PATH. Search these before giving up.
 FFMPEG_FALLBACK_DIRS = (
     os.path.expanduser("~/.local/bin"),
     "/usr/local/bin",
@@ -39,27 +30,13 @@ FFMPEG_FALLBACK_DIRS = (
 def detect_platform():
     """Return macos | wsl | windows, matching config.json's `machines` keys.
 
-    Asks harness_config first so there is one platform table in the repo. The
-    inline table stays as a fallback only: the recorder runs under cron and must
-    not fail to pick a machine profile because a helper module moved.
-
-    Must stay on harness_config's platform-only path (platform_facts, which
-    platform() also wraps) and never on load(): load() resolves the RUNTIME too, and
-    outside claude-code that shells into `agy models` behind an 8s timeout,
-    measured at 6.9s. This function only ever needed the OS name, and the
-    recorder calls it on every cron tick."""
-    if harness_config is not None:
-        try:
-            plat = harness_config.platform_facts().get("platform")
-            if plat in ("macos", "wsl", "windows"):
-                return plat
-        except Exception:
-            pass
+    `wsl` also covers plain Linux: both capture through PulseAudio, so they share
+    a config section rather than duplicating one."""
     sysname = platform.system()
     if sysname == "Darwin":
         return "macos"
     if sysname == "Linux":
-        return "wsl"      # the owner's Linux is always WSL
+        return "wsl"
     return "windows"
 
 def resolve_ffmpeg(value):
@@ -90,8 +67,6 @@ def load_config():
     machine = dict(cfg.get("machines", {}).get(plat, {}))
     if machine.get("recordings_dir"):
         machine["recordings_dir"] = os.path.expanduser(machine["recordings_dir"])
-    if machine.get("whispercpp_model"):
-        machine["whispercpp_model"] = os.path.expanduser(machine["whispercpp_model"])
     machine["ffmpeg"] = resolve_ffmpeg(machine.get("ffmpeg"))
     cfg["platform"] = plat
     cfg["machine"] = machine
@@ -100,40 +75,3 @@ def load_config():
 def slugify(title):
     slug = re.sub(r"[^A-Za-z0-9]+", "_", title).strip("_")
     return slug[:60] or "meeting"
-
-def fmt_ts(seconds):
-    m, s = divmod(int(seconds), 60)
-    h, m = divmod(m, 60)
-    return f"{h:d}:{m:02d}:{s:02d}" if h else f"{m:02d}:{s:02d}"
-
-def parse_json_tail(text):
-    """gcal_manager prints a 'Fetching events...' line before the JSON on
-    stdout; parse from the first [ or { onward."""
-    for i, ch in enumerate(text):
-        if ch in "[{":
-            return json.loads(text[i:])
-    raise ValueError("no JSON found in output")
-
-def load_gemini_key():
-    """Reuse the Gemini API key from the environment, root .env, or gemini-image skill."""
-    key = os.environ.get("GEMINI_API_KEY")
-    if key:
-        return key
-    # Check root .env file
-    root_env = os.path.join(REPO_ROOT, ".env")
-    if os.path.exists(root_env):
-        for line in open(root_env, encoding="utf-8", errors="replace"):
-            line = line.strip()
-            if line.startswith("GEMINI_API_KEY="):
-                val = line.split("=", 1)[1].strip()
-                if val:
-                    return val
-    # Fallback to gemini-image skill
-    env_path = os.path.join(REPO_ROOT, ".agent", "skills", "gemini-image", "token.env")
-    if os.path.exists(env_path):
-        for line in open(env_path, encoding="utf-8"):
-            line = line.strip()
-            if line.startswith("GEMINI_API_KEY="):
-                return line.split("=", 1)[1].strip()
-    sys.exit("ERROR: no GEMINI_API_KEY (env, root .env, or .agent/skills/gemini-image/token.env)")
-

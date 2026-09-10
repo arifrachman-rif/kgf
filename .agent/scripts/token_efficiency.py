@@ -175,7 +175,7 @@ def collect_agy_log(weeks, cutoff_week_keys):
         week = _week_from_ts(r.get('ts_wib', ''))
         if week is None or week not in cutoff_week_keys:
             continue
-        task_type = r.get('task') or 'offload'
+        task_type = r.get('label') or r.get('task') or 'offload'
         tokens = (r.get('input_tokens') or 0) + (r.get('output_tokens') or 0)
         cost = r.get('actual_usd') or 0.0
         backend = r.get('backend') or ''

@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>headless webaudio probe</title></head>
+<body>
+<audio id="a" controls></audio>
+<pre id="out">idle</pre>
+<script>
+// Autoplay policy can leave ctx.resume() / el.play() pending forever instead of
+// rejecting. Every await below is bounded so a probe reports "blocked" rather
+// than hanging the driver.
+// Without an output device Chrome drives the graph from a "null audio sink"
+// that can take a moment to spin up. Wait until the audio clock is actually
+// advancing before trusting any measurement, and report how long that took.
+async function waitForClock(ctx, ms) {
+  const t0 = performance.now();
+  const c0 = ctx.currentTime;
+  while (performance.now() - t0 < ms) {
+    await new Promise(r => setTimeout(r, 25));
+    if (ctx.currentTime > c0) return performance.now() - t0;
+  }
+  return null;
+}
+
+function onceEvent(el, name, ms) {
+  return new Promise(r => {
+    const h = () => { el.removeEventListener(name, h); r(true); };
+    el.addEventListener(name, h);
+    setTimeout(() => { el.removeEventListener(name, h); r(false); }, ms);
+  });
+}
+
+function withTimeout(p, ms, tag) {
+  return Promise.race([
+    Promise.resolve(p).then(v => ({ ok: true, value: v })).catch(e => ({ ok: false, err: String(e && e.name) + ': ' + String(e && e.message) })),
+    new Promise(r => setTimeout(() => r({ ok: false, err: 'TIMEOUT after ' + ms + 'ms (' + tag + ')' }), ms)),
+  ]);
+}
+
+// Build a 5 second 440Hz stereo WAV in memory and hand it to a real <audio>
+// element. This is the faithful analogue of a WebRTC MediaStream driving a
+// media element: the graph node is a MediaElementAudioSourceNode either way.
+function makeWavBlob(seconds, freq, sampleRate) {
+  const n = Math.floor(seconds * sampleRate);
+  const ch = 2;
+  const bytesPerSample = 2;
+  const dataBytes = n * ch * bytesPerSample;
+  const buf = new ArrayBuffer(44 + dataBytes);
+  const dv = new DataView(buf);
+  const ascii = (off, s) => { for (let i = 0; i < s.length; i++) dv.setUint8(off + i, s.charCodeAt(i)); };
+  ascii(0, 'RIFF');
+  dv.setUint32(4, 36 + dataBytes, true);
+  ascii(8, 'WAVE');
+  ascii(12, 'fmt ');
+  dv.setUint32(16, 16, true);
+  dv.setUint16(20, 1, true);              // PCM
+  dv.setUint16(22, ch, true);
+  dv.setUint32(24, sampleRate, true);
+  dv.setUint32(28, sampleRate * ch * bytesPerSample, true);
+  dv.setUint16(32, ch * bytesPerSample, true);
+  dv.setUint16(34, 8 * bytesPerSample, true);
+  ascii(36, 'data');
+  dv.setUint32(40, dataBytes, true);
+  let off = 44;
+  for (let i = 0; i < n; i++) {
+    const v = Math.round(Math.sin(2 * Math.PI * freq * i / sampleRate) * 0.8 * 32767);
+    dv.setInt16(off, v, true); off += 2;
+    dv.setInt16(off, v, true); off += 2;
+  }
+  return new Blob([buf], { type: 'audio/wav' });
+}
+
+// Probe A: <audio> -> MediaElementSource -> Analyser  (the real meetbot case)
+window.probeMediaElement = async function (opts) {
+  const res = {
+    probe: 'media_element_analyser',
+    ctxState: null, ctxStateAfterResume: null,
+    playCalled: false, playError: null,
+    currentTimeStart: null, currentTimeEnd: null,
+    ctxTimeStart: null, ctxTimeEnd: null,
+    sampleRate: null, frames: 0, nonZeroFrames: 0,
+    peakAbs: 0, rmsMax: 0, dominantHz: null, error: null,
+  };
+  try {
+    const el = document.getElementById('a');
+    el.src = URL.createObjectURL(makeWavBlob(5, 440, 48000));
+    el.loop = true;
+    if (opts && opts.muteElement) el.muted = true;
+    res.canPlay = await onceEvent(el, 'canplaythrough', 5000);
+
+    const ctx = new AudioContext();
+    res.sampleRate = ctx.sampleRate;
+    res.ctxState = ctx.state;
+    const src = ctx.createMediaElementSource(el);
+    const an = ctx.createAnalyser();
+    an.fftSize = 2048;
+    src.connect(an);
+    // Also connect to destination, exactly like a normal page would.
+    an.connect(ctx.destination);
+
+    const rr = await withTimeout(ctx.resume(), 2000, 'ctx.resume');
+    res.resumeResult = rr.ok ? 'resolved' : rr.err;
+    res.ctxStateAfterResume = ctx.state;
+
+    const pr = await withTimeout(el.play(), 3000, 'el.play');
+    res.playCalled = pr.ok;
+    if (!pr.ok) res.playError = pr.err;
+
+    res.clockStartMs = await waitForClock(ctx, 5000);
+    res.playingEvent = el.readyState >= 2 && !el.paused;
+    res.currentTimeStart = el.currentTime;
+    res.ctxTimeStart = ctx.currentTime;
+
+    const td = new Float32Array(an.fftSize);
+    const fd = new Float32Array(an.frequencyBinCount);
+    const deadline = performance.now() + (opts && opts.ms || 3000);
+    while (performance.now() < deadline) {
+      await new Promise(r => setTimeout(r, 50));
+      an.getFloatTimeDomainData(td);
+      res.frames++;
+      let peak = 0, sum = 0;
+      for (let i = 0; i < td.length; i++) {
+        const v = Math.abs(td[i]);
+        if (v > peak) peak = v;
+        sum += td[i] * td[i];
+      }
+      const rms = Math.sqrt(sum / td.length);
+      if (peak > 1e-6) res.nonZeroFrames++;
+      if (peak > res.peakAbs) res.peakAbs = peak;
+      if (rms > res.rmsMax) res.rmsMax = rms;
+      if (peak > 1e-4 && res.dominantHz === null) {
+        an.getFloatFrequencyData(fd);
+        let bi = 0, bv = -Infinity;
+        for (let i = 0; i < fd.length; i++) if (fd[i] > bv) { bv = fd[i]; bi = i; }
+        res.dominantHz = bi * ctx.sampleRate / an.fftSize;
+      }
+    }
+    res.currentTimeEnd = el.currentTime;
+    res.ctxTimeEnd = ctx.currentTime;
+  } catch (e) {
+    res.error = String(e && e.stack || e);
+  }
+  return res;
+};
+
+// Probe B: same graph but pulled by an AudioWorklet (what a real capture path
+// would use to get PCM out). Proves the render quantum actually advances.
+window.probeWorklet = async function (opts) {
+  const res = {
+    probe: 'media_element_worklet',
+    ctxState: null, playError: null, sampleRate: null,
+    quanta: 0, nonZeroQuanta: 0, peakAbs: 0, framesSeen: 0,
+    ctxTimeStart: null, ctxTimeEnd: null, currentTimeEnd: null, error: null,
+  };
+  try {
+    const el = document.createElement('audio');
+    document.body.appendChild(el);
+    el.src = URL.createObjectURL(makeWavBlob(5, 440, 48000));
+    el.loop = true;
+    res.canPlay = await onceEvent(el, 'canplaythrough', 5000);
+
+    const workletSrc = `
+      class Probe extends AudioWorkletProcessor {
+        constructor() { super(); this.q = 0; this.nz = 0; this.peak = 0; this.frames = 0; }
+        process(inputs) {
+          const inp = inputs[0];
+          this.q++;
+          if (inp && inp.length && inp[0] && inp[0].length) {
+            const c = inp[0];
+            this.frames += c.length;
+            let p = 0;
+            for (let i = 0; i < c.length; i++) { const v = Math.abs(c[i]); if (v > p) p = v; }
+            if (p > 1e-6) this.nz++;
+            if (p > this.peak) this.peak = p;
+          }
+          if (this.q % 50 === 0) {
+            this.port.postMessage({ q: this.q, nz: this.nz, peak: this.peak, frames: this.frames });
+          }
+          return true;
+        }
+      }
+      registerProcessor('probe', Probe);
+    `;
+    const ctx = new AudioContext();
+    res.sampleRate = ctx.sampleRate;
+    await ctx.audioWorklet.addModule(URL.createObjectURL(new Blob([workletSrc], { type: 'application/javascript' })));
+    const src = ctx.createMediaElementSource(el);
+    const node = new AudioWorkletNode(ctx, 'probe');
+    node.port.onmessage = (ev) => {
+      res.quanta = ev.data.q;
+      res.nonZeroQuanta = ev.data.nz;
+      res.peakAbs = ev.data.peak;
+      res.framesSeen = ev.data.frames;
+    };
+    src.connect(node);
+    node.connect(ctx.destination);
+
+    const rr2 = await withTimeout(ctx.resume(), 2000, 'ctx.resume');
+    res.resumeResult = rr2.ok ? 'resolved' : rr2.err;
+    res.ctxState = ctx.state;
+    const pr2 = await withTimeout(el.play(), 3000, 'el.play');
+    if (!pr2.ok) res.playError = pr2.err;
+
+    res.clockStartMs = await waitForClock(ctx, 5000);
+    res.ctxTimeStart = ctx.currentTime;
+    await new Promise(r => setTimeout(r, (opts && opts.ms) || 3000));
+    res.ctxTimeEnd = ctx.currentTime;
+    res.currentTimeEnd = el.currentTime;
+  } catch (e) {
+    res.error = String(e && e.stack || e);
+  }
+  return res;
+};
+
+// Probe C: control. Pure oscillator, no media element, no autoplay policy.
+// Isolates "does the graph render at all" from "does the element play".
+window.probeOscillator = async function (opts) {
+  const res = { probe: 'oscillator_analyser', ctxState: null, frames: 0, nonZeroFrames: 0,
+                peakAbs: 0, ctxTimeStart: null, ctxTimeEnd: null, error: null };
+  try {
+    const ctx = new AudioContext();
+    const osc = ctx.createOscillator();
+    osc.frequency.value = 440;
+    const an = ctx.createAnalyser();
+    an.fftSize = 2048;
+    osc.connect(an);
+    an.connect(ctx.destination);
+    osc.start();
+    const rr3 = await withTimeout(ctx.resume(), 2000, 'ctx.resume');
+    res.resumeResult = rr3.ok ? 'resolved' : rr3.err;
+    res.ctxState = ctx.state;
+    res.clockStartMs = await waitForClock(ctx, 5000);
+    res.ctxTimeStart = ctx.currentTime;
+    const td = new Float32Array(an.fftSize);
+    const deadline = performance.now() + ((opts && opts.ms) || 2000);
+    while (performance.now() < deadline) {
+      await new Promise(r => setTimeout(r, 50));
+      an.getFloatTimeDomainData(td);
+      res.frames++;
+      let peak = 0;
+      for (let i = 0; i < td.length; i++) { const v = Math.abs(td[i]); if (v > peak) peak = v; }
+      if (peak > 1e-6) res.nonZeroFrames++;
+      if (peak > res.peakAbs) res.peakAbs = peak;
+    }
+    res.ctxTimeEnd = ctx.currentTime;
+  } catch (e) {
+    res.error = String(e && e.stack || e);
+  }
+  return res;
+};
+</script>
+</body>
+</html>

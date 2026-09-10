@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# DISABLED 26 Jul 2026 - the owner found the focus-steal annoying. The PostToolUse hook that
+# invoked this script was removed from .claude/settings.local.json. Do NOT re-wire it.
+# Present a consolidated clickable link list at the end of a task instead (memory:
+# feedback_batch_file_writes_link_list). Script kept only for reference.
+exit 0
 # PostToolUse hook: auto-open Work deliverable .md files in VS Code so the owner can read + comment.
 # Reads the tool-call JSON on stdin, extracts the file path, and opens it in the existing VS Code window.
 # Scope: only .md files under a Clients/ directory. Skips *_output.md scratch renders.

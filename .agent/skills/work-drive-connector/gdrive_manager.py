@@ -17,6 +17,26 @@ import io
 import signal
 
 # Global timeout: 180 seconds
+ACCOUNT_NAME = 'work'
+
+def _format_pass(file_id, file_metadata, label):
+    """Pageless + content-aware column widths, on any convert that produced a Doc.
+
+    The pass used to be a manual step after `--convert`, and a skipped step is
+    why table-heavy docs kept landing at the cramped default width. It runs only
+    for Google Docs (a Sheet has no table columns to widen) and never raises.
+    """
+    if file_metadata.get('mimeType') != 'application/vnd.google-apps.document':
+        return
+    if os.environ.get('GDOC_FORMAT_PASS_DISABLE') == '1':
+        return
+    try:
+        sys.path.insert(0, os.path.join(REPO_ROOT, '.agent', 'skills', 'gdocs-create'))
+        from format_pass import auto_format
+        auto_format(file_id, ACCOUNT_NAME, label=label)
+    except Exception as e:
+        print(f"[format_pass] skipped ({type(e).__name__}: {e})")
+
 def timeout_handler(signum, frame):
     print("[ERROR] Google Drive Manager timed out after 180 seconds", file=sys.stderr)
     sys.exit(1)
@@ -32,6 +52,7 @@ TOKEN_FILE = os.path.join(SCRIPT_DIR, 'token.json')
 REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..', '..'))
 sys.path.insert(0, os.path.join(REPO_ROOT, '.agent', 'scripts'))
 from file_utils import assert_drive_result  # Drive Operation Verification (CLAUDE.md)
+from file_utils import apply_visibility, add_visibility_arg, resolve_visibility  # sharing (CLAUDE.md LANDMINE)
 
 # Full drive access for Work's shared drive
 SCOPES = ['https://www.googleapis.com/auth/drive']
@@ -80,17 +101,16 @@ def authenticate():
             token.write(creds.to_json())
     return creds
 
-def set_commenter_permission(service, file_id):
-    """Set permissions to 'anyone' can 'comment'."""
-    try:
-        print(f"Setting permissions for {file_id} to 'anyone' can 'comment'...")
-        user_permission = {'type': 'anyone', 'role': 'commenter'}
-        service.permissions().create(fileId=file_id, body=user_permission, fields='id').execute()
-        print("Permission set successfully.")
-    except Exception as e:
-        print(f"Failed to set permissions: {e}")
+def set_commenter_permission(service, file_id, visibility='domain'):
+    """Deprecated shim. Sharing now lives in file_utils.apply_visibility.
 
-def update_file(file_id, file_path, convert_to_docs=False):
+    Kept so any caller outside this file keeps working, but it no longer
+    publishes: the default is domain-restricted. See file_utils.apply_visibility
+    for why this stopped being a local 'always make it public' helper.
+    """
+    apply_visibility(service, file_id, visibility)
+
+def update_file(file_id, file_path, convert_to_docs=False, visibility='domain'):
     """Update an existing file in Work's Google Drive without deleting it."""
     creds = authenticate()
     if not creds:
@@ -184,11 +204,11 @@ def update_file(file_id, file_path, convert_to_docs=False):
             fields='id, webViewLink'
         ).execute()
         assert_drive_result(file, 'gdrive_manager (work) update')
+        _format_pass(file.get('id'), file_metadata, 'update')
         print(f"File ID: {file.get('id')}")
         print(f"Link: {file.get('webViewLink')}")
 
-        # Always set permissions to anyone can comment by default
-        set_commenter_permission(service, file.get('id'))
+        apply_visibility(service, file.get('id'), visibility)
 
         return file.get('id')
     except Exception as e:
@@ -219,7 +239,7 @@ def share_file(file_id, email, role='commenter'):
     except Exception as e:
         print(f"[Work Drive] An error occurred sharing with {email}: {e}")
 
-def upload_file(file_path, folder_id=None, convert_to_docs=False, share=False):
+def upload_file(file_path, folder_id=None, convert_to_docs=False, visibility='domain'):
     """Upload a file to Work's Google Drive."""
     creds = authenticate()
     if not creds:
@@ -322,11 +342,11 @@ def upload_file(file_path, folder_id=None, convert_to_docs=False, share=False):
     try:
         file = service.files().create(body=file_metadata, media_body=media, fields='id, webViewLink').execute()
         assert_drive_result(file, 'gdrive_manager (work) upload')
+        _format_pass(file.get('id'), file_metadata, 'upload')
         print(f"File ID: {file.get('id')}")
         print(f"Link: {file.get('webViewLink')}")
 
-        # Always set permissions to anyone can comment by default
-        set_commenter_permission(service, file.get('id'))
+        apply_visibility(service, file.get('id'), visibility)
 
         return file.get('id')
 
@@ -388,11 +408,7 @@ def read_file(file_id):
     service = build('drive', 'v3', credentials=creds)
 
     try:
-        # search() passes supportsAllDrives, so anything on a shared drive is
-        # findable. Without the same flag here it is findable but unreadable:
-        # the API answers 404 for a file the search just returned.
-        file_meta = service.files().get(fileId=file_id, fields='mimeType, name',
-                                        supportsAllDrives=True).execute()
+        file_meta = service.files().get(fileId=file_id, fields='mimeType, name', supportsAllDrives=True).execute()
         mime_type = file_meta.get('mimeType')
         file_name = file_meta.get('name')
         print(f"[Work Drive] Reading: {file_name} ({mime_type})")
@@ -405,8 +421,7 @@ def read_file(file_id):
             content = service.files().export(fileId=file_id, mimeType='text/csv').execute()
             print(content.decode('utf-8'))
         else:
-            content = service.files().get_media(fileId=file_id,
-                                                supportsAllDrives=True).execute()
+            content = service.files().get_media(fileId=file_id, supportsAllDrives=True).execute()
             try:
                 print(content.decode('utf-8'))
             except:
@@ -511,7 +526,7 @@ def main():
     upload_parser.add_argument('--file', required=True, help='Path to the file')
     upload_parser.add_argument('--folder', help='Folder ID to upload to')
     upload_parser.add_argument('--convert', action='store_true', help='Convert to Google Docs')
-    upload_parser.add_argument('--share', action='store_true', help='Share with anyone to comment')
+    add_visibility_arg(upload_parser)
 
     search_parser = subparsers.add_parser('search', help='Search for files')
     search_parser.add_argument('--query', required=True, help='Search query')
@@ -527,6 +542,7 @@ def main():
     update_parser.add_argument('--id', required=True, help='File ID of existing Drive file to update')
     update_parser.add_argument('--file', required=True, help='Path to the new local file')
     update_parser.add_argument('--convert', action='store_true', help='Convert markdown to Google Doc')
+    add_visibility_arg(update_parser)
 
     rename_parser = subparsers.add_parser('rename', help='Rename a file')
     rename_parser.add_argument('--id', required=True, help='File ID')
@@ -546,12 +562,12 @@ def main():
 
     if args.command == 'upload':
         if os.path.exists(args.file):
-            upload_file(args.file, args.folder, args.convert, args.share)
+            upload_file(args.file, args.folder, args.convert, resolve_visibility(args))
         else:
             print(f"File not found: {args.file}")
     elif args.command == 'update':
         if os.path.exists(args.file):
-            update_file(args.id, args.file, args.convert)
+            update_file(args.id, args.file, args.convert, resolve_visibility(args))
         else:
             print(f"File not found: {args.file}")
     elif args.command == 'search':

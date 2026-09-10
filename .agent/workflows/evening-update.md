@@ -5,7 +5,7 @@ description: Evening closing update - full day recap, accomplishments vs morning
 
 # Evening Update Workflow
 
-This workflow should be triggered each evening at ~21:30 WIB (or on-demand with `/evening-update`) to close the day with a full recap and completion tracking.
+This workflow should be triggered each evening at ~21:30 WIB (or on-demand with `/daily-update evening`) to close the day with a full recap and completion tracking.
 
 ## Run Automated Script (Evening Mode)
 
@@ -29,6 +29,7 @@ the owner acts off email too, so sweep it every evening (the runner does NOT pul
 ## Closing Recap & Completion Tracking
 
 0. **Mention Ledger pass (mandatory)**: `python3 .agent/skills/slack-tracker/scripts/mention_ledger.py report` → embed "🔴 Waiting on your reply" in the recap (anything still open at end of day is a carryover candidate for tomorrow's plan); run `... classify` to GLM-triage the day's channel digest. The ledger is the source of truth for unanswered mentions/DMs/threads — never re-derive from raw dumps.
+0a. **Access requests**: embed the 🔑 block from the same report, plus the Drive share requests in `journal/state/access_requests.json`. Anything still there at end of day is a person who could not work today, so it carries into tomorrow's top items, not into the general carryover list.
 1. The script writes two outputs: `daily_update_evening.md` (human-readable) and `_temp/harvest_evening_[date].json` (structured sidecar).
 2. **For synthesis, read `_temp/harvest_evening_[date].json` first** -- it is a compact structured JSON (sections: slack, jira, calendar, files_modified, files_created, backlogs, fathom, morning_plan, portfolio) and avoids re-reading the full 150-180 KB markdown dump. Fall back to `daily_update_evening.md` only if the JSON is missing or a section is empty. The markdown remains the user-facing deliverable and is NOT deleted.
 3. Cross-reference the morning's proposed priorities from `_temp/daily_plan_[date].md`:
@@ -46,7 +47,8 @@ the owner acts off email too, so sweep it every evening (the runner does NOT pul
    - **Decision log**: `python3 .agent/skills/decision-log/scripts/decision_log.py report` → embed. Then capture today's decided items: for every decision that actually landed today (in a meeting, Slack thread, or doc), run `decision_log.py decide <DEC-id> --decision "<what was decided>"`; brand-new decisions surfaced today get an `add` first (with `--source` + `--source-type`).
    - **Commitments**: `python3 .agent/skills/commitment-ledger/scripts/commitment_ledger.py sweep` then `... report` → embed. Where the mechanical auto-close missed something the owner verifiably delivered today (sent DM, shared doc, MOM evidence), close it manually: `commitment_ledger.py close <COM-id> --note "<evidence>"`.
    - **Waiting-on watchdog**: `python3 .agent/skills/waiting-watchdog/scripts/waiting_watchdog.py report` → embed. Any 🚨 BREACHED item carries into tomorrow's plan as an explicit escalation action.
-   - **Stakeholder pages**: `python3 .agent/skills/stakeholders/scripts/stakeholders.py render --all` (regenerates the AUTO blocks on every `Clients/Work/People/` page from today's ledger state; idempotent).
+   - **Stakeholder pages**: `python3 .agent/skills/stakeholders/scripts/stakeholders.py render --all` (regenerates the AUTO blocks on every promoted `Clients/Work/People/` page from today's ledger state; idempotent. Roster-only people with no page are skipped and listed, not an error - see the skill's docstring for the two-tier model, and `promote <slug>` to give someone a page).
+   - **Followup tracker**: `python3 .agent/skills/project-tracking-update/scripts/render_followup_tracker.py` (regenerates `journal/master_followup_tracker.md` as a GENERATED VIEW over the three ledgers above - the runner also calls this mechanically, this is the belt-and-suspenders re-run after any manual ledger edits made during this pass. Never hand-edit the tracker file itself.)
    - **Monday only — outcomes loop**: `python3 .agent/skills/outcomes-loop/scripts/outcomes_loop.py report` → embed (the weekly `check` cron ran Monday 08:20 WIB; if a metric shows `needs_reauth`, surface the Metabase re-auth need to the owner).
 5a-bis. **MOM coverage reconcile (mandatory — the pipeline cannot self-report a meeting it missed):**
    - `python3 meeting-recorder/mom_reconcile.py` → reads `journal/state/mom_coverage.json`. It now enumerates directly from LIVE Fathom, so it no longer depends on `fathom_registry_sync.py` having run first (that chain is retired).
@@ -65,6 +67,16 @@ the owner acts off email too, so sweep it every evening (the runner does NOT pul
    - Never mark done on guesswork; if unverifiable, leave open and note "unverified as of [date]".
    - Refresh `journal/state/portfolio.json` `updated_wib` + any initiative whose health/workstream status changed today, then regenerate the mirror via `python3 .agent/scripts/portfolio_render.py`.
    - Target end-state: zero tickets showing "stale ≥3d" on the dashboard Today tab without an explanatory comment.
+5c. **Work tree refresh (mandatory, narrow — the dashboard Work tab has no other writer):**
+   - `journal/state/work_tree.json` is read by `/api/work-tree` and `dashboard/public/tab-work.js` and written by NOTHING else. Before this step existed it sat frozen at 30 Jul 2026 for five days while SAIB shipped a BRD revision, so the tab showed a client card whose `next` pointed at a session that never happened and whose `blocker` was `null` while the work was in fact blocked. A stale tree is worse than an empty one: it reads as live.
+   - **Only touch threads that actually moved today.** Derive the moved set mechanically, do not scan all 51 threads: `files_modified` + `files_created` + `jira` + `slack` + `portfolio` from `_temp/harvest_evening_[date].json`, today's new MOMs, and the ledger deltas from step 5a. Typical night is under 12 threads. A thread with no evidence of movement is left byte-identical.
+   - For each moved thread rewrite only `progress`, `blocker`, `next`, and `status`, and add `"updated_wib": "<ISO+07:00>"`. Append any new primary artifact to `sources` (doc, Figma, published page, Slack permalink). Never invent a node: a genuinely new workstream gets added under its existing parent with the same field set.
+   - Then set the top-level `"refreshed_wib"` to now. Leave `period` and `generated_wib` alone: those belong to the weekly regeneration in `/weekly-report`, and overwriting them would claim a full-tree refresh this step does not do.
+   - **The judgment is the whole point, so do not delegate this to a subagent or to agy.** You have already formed it while writing the `(Malam)` section, and this step is a write pass, not a fresh analysis. Costed 4 Aug 2026 against `journal/state/token_usage.json`: as a byproduct here it is roughly $1.50 to $3 a night on top of a run that already costs about $11, because the harvest is already paid for. The same job as a standalone offloaded cron costs about $0.40 and produces `blocker: "waiting on estimate from Teammate"`, which is worthless. The value lives in the sentence a scrape cannot write, for example "80 hours is identical across all four options, so the client has nothing to choose between."
+   - `blocker` must name the specific obstruction and who owns it, or be `null`. Banned as filler: "waiting on feedback", "pending review", "in progress". If nothing blocks it, `null` is the honest answer.
+   - Validate before moving on: `python3 -c "import json; json.load(open('journal/state/work_tree.json'))"`. A malformed tree makes the whole tab go blank, not just one card.
+   - Say in one line of the recap how many threads were refreshed out of the total, so a night where the moved set comes back empty is visible rather than silent.
+
 6. Sync Fathom meeting notes and Work Document Index.
 7. Run GitHub sync to push all changes.
 8. Present to the owner:

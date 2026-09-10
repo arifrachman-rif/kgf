@@ -35,7 +35,11 @@ MASTER_DOCS = {
     'Gamification': '<YOUR_DRIVE_ID>',
     'Promotion Engine': '<YOUR_DRIVE_ID>',
     'Blockchain': '<YOUR_DRIVE_ID>',
+    # Live doc verified 29 Jul 2026. The ID printed in the Master Product List
+    # markdown (1QPv80qG...) returns 404 and must not be reused.
+    'OMS': '<YOUR_DRIVE_ID>',
     'Mixed Payment': None,  # Add Master Doc ID when created
+    'Fulfillment Service': None,  # Add Master Doc ID when created
 }
 
 # Aliases for flexible component matching
@@ -51,6 +55,12 @@ COMPONENT_ALIASES = {
     'crypto': 'Blockchain',
     'mixed payment': 'Mixed Payment',
     'payment': 'Mixed Payment',
+    'oms': 'OMS',
+    'order management': 'OMS',
+    'fulfillment': 'Fulfillment Service',
+    'fulfilment': 'Fulfillment Service',
+    'fulfillment service': 'Fulfillment Service',
+    'fulfilment service': 'Fulfillment Service',
 }
 
 # Global timeout: 180 seconds
@@ -72,70 +82,137 @@ def resolve_component(component_input):
             return canonical
     return component_input  # Return as-is if no match
 
-def update_spreadsheet(sheets, component, url, name):
-    """Update Documents/Links column for all rows matching the component."""
+def update_spreadsheet(sheets, component, url, name, feature=None, force=False):
+    """Update the Documents/Links column for rows matching the component.
+
+    The sheet is L0: Product | L1: Component | L2: Feature | Documents/Links.
+    Matching is on L1 under ANY L0. The original version required L0 to be the
+    literal string 'Shared Components', so a real row under 'Ecom Solutions'
+    reported 'no rows found' and silently did nothing (seen 29 Jul 2026 on the
+    Work Fulfillment Service PRD).
+
+    A component usually spans several features, and column D is per feature, so
+    writing one link across every row of a component would destroy the other
+    features' links. When the matched rows span more than one feature, --feature
+    is required.
+    """
     result = sheets.spreadsheets().values().get(
         spreadsheetId=SHEET_ID,
-        range=f"'{SHEET_NAME}'!A1:H300"
+        range=f"'{SHEET_NAME}'!A1:H400",
+        valueRenderOption='FORMULA'
     ).execute()
 
     rows = result.get('values', [])
-    updates = []
     formula = f'=HYPERLINK("{url}","{name}")'
 
+    matched = []
     for i, row in enumerate(rows, start=1):
-        if not row:
+        if not row or i == 1:
             continue
-        l0 = row[0] if len(row) > 0 else ''
-        l1 = row[1] if len(row) > 1 else ''
-        if l0 == 'Shared Components' and l1 == component:
-            updates.append({
-                'range': f"'{SHEET_NAME}'!D{i}",
-                'values': [[formula]]
-            })
+        l1 = row[1].strip() if len(row) > 1 else ''
+        l2 = row[2].strip() if len(row) > 2 else ''
+        cur = row[3] if len(row) > 3 else ''
+        if l1 != component:
+            continue
+        if feature and l2 != feature:
+            continue
+        matched.append((i, l2, cur))
+
+    if not matched:
+        scope = f"component '{component}'" + (f", feature '{feature}'" if feature else "")
+        print(f"  ⚠ Spreadsheet: No rows found for {scope}")
+        return 0
+
+    features = sorted({l2 for _, l2, _ in matched})
+    if not feature and len(features) > 1:
+        print(f"  ⚠ Spreadsheet: '{component}' spans {len(features)} features. "
+              f"Pass --feature to avoid overwriting the others:")
+        for f in features:
+            print(f"      --feature \"{f}\"")
+        return 0
+
+    updates, already, clobber = [], 0, []
+    for i, _l2, cur in matched:
+        if url in str(cur):
+            already += 1
+            continue
+        if str(cur).strip() and not force:
+            clobber.append((i, cur))
+            continue
+        updates.append({'range': f"'{SHEET_NAME}'!D{i}", 'values': [[formula]]})
+
+    if clobber and not force:
+        print(f"  ⚠ Spreadsheet: {len(clobber)} row(s) already hold a different link. "
+              f"Re-run with --force to replace them:")
+        for i, cur in clobber[:5]:
+            print(f"      row {i}: {str(cur)[:90]}")
+        return 0
 
     if updates:
         sheets.spreadsheets().values().batchUpdate(
             spreadsheetId=SHEET_ID,
             body={'valueInputOption': 'USER_ENTERED', 'data': updates}
         ).execute()
-        print(f"  ✓ Spreadsheet: Updated {len(updates)} rows for '{component}'")
-    else:
-        print(f"  ⚠ Spreadsheet: No rows found for component '{component}'")
+        print(f"  ✓ Spreadsheet: Updated {len(updates)} row(s) for '{component}'"
+              + (f" / '{feature}'" if feature else ""))
+    if already:
+        print(f"  ✓ Spreadsheet: {already} row(s) already linked to this URL, left alone")
     return len(updates)
 
-def update_master_doc(service, component, url, name, doc_type):
-    """Append new link to Related Documents section of the Master Doc."""
+def _doc_text(doc):
+    out = []
+    for el in doc.get('body', {}).get('content', []):
+        para = el.get('paragraph')
+        if not para:
+            continue
+        for run in para.get('elements', []):
+            out.append(run.get('textRun', {}).get('content', ''))
+    return ''.join(out)
+
+def update_master_doc(creds, component, url, name, doc_type):
+    """Add the new link to the Master Doc's Related Documents section.
+
+    Idempotent: a URL already present in the doc is left alone. When there is no
+    Related Documents section, one is created with a real heading instead of
+    dropping a stray table-shaped line after whatever the doc happened to end on.
+    """
     master_doc_id = MASTER_DOCS.get(component)
     if not master_doc_id:
         print(f"  ⚠ Master Doc: No Master Doc registered for '{component}'")
         return False
 
-    docs = build('docs', 'v1', credentials=service._http.credentials)
-
-    # Read current doc content to find Related Documents section
+    docs = build('docs', 'v1', credentials=creds)
     doc = docs.documents().get(documentId=master_doc_id).execute()
-    content = doc.get('body', {}).get('content', [])
 
-    # Find the end index of the document to append
-    end_index = doc['body']['content'][-1]['endIndex'] - 1
+    if url in _doc_text(doc):
+        print(f"  ✓ Master Doc: '{name}' already linked, left alone")
+        return True
 
-    # Build the text to append
-    new_line = f"\n| {name} | {doc_type.upper()} — {url} |"
+    heading_idx = None
+    for el in doc.get('body', {}).get('content', []):
+        para = el.get('paragraph')
+        if not para:
+            continue
+        text = ''.join(r.get('textRun', {}).get('content', '') for r in para.get('elements', []))
+        if text.strip().lower().startswith('related documents'):
+            heading_idx = el['endIndex'] - 1
+            break
+
+    if heading_idx is not None:
+        insert_at = heading_idx
+        payload = f"\n{name}, {doc_type.upper()}: {url}"
+    else:
+        insert_at = doc['body']['content'][-1]['endIndex'] - 1
+        payload = f"\nRelated Documents\n{name}, {doc_type.upper()}: {url}"
 
     docs.documents().batchUpdate(
         documentId=master_doc_id,
-        body={
-            'requests': [{
-                'insertText': {
-                    'location': {'index': end_index},
-                    'text': new_line
-                }
-            }]
-        }
+        body={'requests': [{'insertText': {'location': {'index': insert_at}, 'text': payload}}]}
     ).execute()
 
-    print(f"  ✓ Master Doc: Added '{name}' to Related Documents")
+    where = "Related Documents" if heading_idx is not None else "a new Related Documents section"
+    print(f"  ✓ Master Doc: Added '{name}' to {where}")
+    print(f"    https://docs.google.com/document/d/{master_doc_id}/edit")
     return True
 
 def main():
@@ -145,6 +222,10 @@ def main():
     parser.add_argument('--component', required=True, help='Shared component name (e.g., "IAM", "Blockchain")')
     parser.add_argument('--type', default='reference', choices=['prd', 'master', 'reference'],
                         help='Type of document: prd, master, or reference')
+    parser.add_argument('--feature', default=None,
+                        help='L2 feature name. Required when the component spans several features')
+    parser.add_argument('--force', action='store_true',
+                        help='Replace an existing different link in Documents/Links')
     parser.add_argument('--spreadsheet-only', action='store_true',
                         help='Only update spreadsheet, skip Master Doc update')
 
@@ -160,15 +241,15 @@ def main():
 
     creds = authenticate()
     sheets = build('sheets', 'v4', credentials=creds)
-    drive = build('drive', 'v3', credentials=creds)
 
     # Update spreadsheet
-    updated = update_spreadsheet(sheets, component, args.url, args.name)
+    updated = update_spreadsheet(sheets, component, args.url, args.name,
+                                 feature=args.feature, force=args.force)
 
     # Update Master Doc (skip if --spreadsheet-only or if this IS a master doc)
     if not args.spreadsheet_only and args.type != 'master':
         try:
-            update_master_doc(drive, component, args.url, args.name, args.type)
+            update_master_doc(creds, component, args.url, args.name, args.type)
         except Exception as e:
             print(f"  ⚠ Master Doc update failed (Docs API may not be enabled): {e}")
             print(f"  → Manually add to Master Doc: {MASTER_DOCS.get(component, 'Not registered')}")

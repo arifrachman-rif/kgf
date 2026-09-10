@@ -58,6 +58,30 @@ WAITING_ON_PATH = os.path.join(BASE_DIR, 'journal', 'state', 'waiting_on.json')
 
 GCAL_SCRIPT = os.path.join(BASE_DIR, '.agent', 'skills', 'google-calendar-connector', 'gcal_manager.py')
 HEARTBEAT_SCRIPT = os.path.join(BASE_DIR, '.agent', 'scripts', 'heartbeat.py')
+JIRA_SCRIPT = os.path.join(BASE_DIR, '.agent', 'skills', 'jira-connector', 'scripts', 'jira_client.py')
+
+sys.path.insert(0, os.path.join(BASE_DIR, '.agent', 'scripts'))
+try:
+    from portfolio_tagger import ALIASES as PORTFOLIO_ALIASES, resolve_storefront
+except ImportError:      # tagger missing -> cards degrade to unfiltered, never crash
+    PORTFOLIO_ALIASES = {}
+    def resolve_storefront(text):
+        return None
+
+# Meeting-title keywords that name a portfolio outright. Checked before the
+# topic aliases, since a title like "Marketplace - Sprint Review" is explicit.
+PORTFOLIO_TITLE_HINTS = {
+    'marketplace': ['marketplace', 'market place'],
+    'platform': ['platform'],
+    'b2c': ['b2c', 'superapp', 'super app'],
+    'ecom-solution': ['e-commerce solution', 'ecommerce solution', 'ecom solution',
+                      'seller portal', ' sp ', 'pim', 'oms'],
+}
+# "storefront" is deliberately absent above: Marketplace owns the storefront
+# instances and E-Commerce Solution owns the storefront product, so the word
+# alone decides nothing. resolve_storefront() reads the surrounding context.
+
+SPRINT_TITLE_WORDS = ('sprint', 'backlog', 'refinement', 'grooming')
 
 WIB = datetime.timezone(datetime.timedelta(hours=7))
 CARD_RETENTION_DAYS = 14
@@ -353,6 +377,70 @@ def channel_label(item, channel_names, resolve_user):
 
 # --------------------------------------------------------------- card build --
 
+# ------------------------------------------------------------------ portfolio --
+
+def infer_meeting_portfolios(event):
+    """Which of the owner's four portfolios this meeting is actually about.
+
+    Returns a set, because some standups genuinely straddle two ("B2C + SP + PIM").
+    An empty set means "could not tell" and the caller must NOT filter, otherwise
+    an unrecognised meeting would silently show an empty card.
+
+    Deliberately reads the TITLE only. Attendee lists are the very thing that
+    caused cross-portfolio bleed: a wide invite is not evidence of scope.
+    """
+    title = (event.get('summary') or '').lower()
+    if not title:
+        return set()
+    padded = f' {title} '
+
+    storefront = resolve_storefront(padded)
+    if storefront:
+        return {storefront}
+
+    found = set()
+    for pid, needles in PORTFOLIO_TITLE_HINTS.items():
+        for needle in needles:
+            if needle in padded:
+                found.add(pid)
+                break
+    if found:
+        return found
+
+    for pid, needles in PORTFOLIO_ALIASES.items():
+        for needle in needles:
+            if needle in padded:
+                found.add(pid)
+                break
+    return found
+
+def split_by_portfolio(items, meeting_portfolios):
+    """(in_scope, out_of_scope). No filtering when the meeting is unclassified."""
+    if not meeting_portfolios:
+        return list(items), []
+    in_scope, out_of_scope = [], []
+    for it in items:
+        (in_scope if it.get('portfolio') in meeting_portfolios else out_of_scope).append(it)
+    return in_scope, out_of_scope
+
+def is_sprint_meeting(event):
+    title = (event.get('summary') or '').lower()
+    return any(w in title for w in SPRINT_TITLE_WORDS)
+
+def fetch_sprint_status(portfolio, stale_before):
+    """Active-sprint snapshot via the jira connector. Never fatal: a missing token
+    or a slow board degrades the card to 'unavailable' rather than killing the run."""
+    try:
+        proc = subprocess.run(
+            [sys.executable, JIRA_SCRIPT, 'sprint-status',
+             '--portfolio', portfolio, '--stale-before', stale_before],
+            capture_output=True, text=True, timeout=90)
+        if proc.returncode != 0:
+            return {'error': (proc.stderr or proc.stdout or 'jira_client failed').strip()[:200]}
+        return json.loads(proc.stdout)
+    except Exception as e:
+        return {'error': str(e)[:200]}
+
 def build_card(event, people, tickets, registry, mention_items, decisions,
                 commitments, waiting_items, user_names=None, channel_names=None):
     start_dt = parse_event_dt(event.get('start'))
@@ -372,17 +460,32 @@ def build_card(event, people, tickets, registry, mention_items, decisions,
                        if d.get('status') == 'open'
                        and (set(d.get('stakeholder_slugs', [])) & attendee_slugs)]
 
-    you_owe_them = [c for c in commitments.values()
-                     if c.get('status') == 'open' and c.get('to_slug') in attendee_slugs]
+    # Attendee membership decides WHO could answer; portfolio decides WHETHER the
+    # item belongs in this room at all. Both gates, in that order.
+    owe_candidates = [c for c in commitments.values()
+                       if c.get('status') == 'open' and c.get('to_slug') in attendee_slugs]
+    owed_candidates = [w for w in waiting_items.values()
+                        if w.get('status') in ('open', 'breached')
+                        and w.get('owner_slug') in attendee_slugs]
 
-    they_owe_you = [w for w in waiting_items.values()
-                      if w.get('status') in ('open', 'breached')
-                      and w.get('owner_slug') in attendee_slugs]
+    meeting_portfolios = infer_meeting_portfolios(event)
+    you_owe_them, you_owe_other = split_by_portfolio(owe_candidates, meeting_portfolios)
+    they_owe_you, they_owe_other = split_by_portfolio(owed_candidates, meeting_portfolios)
+
+    sprint = None
+    if is_sprint_meeting(event) and len(meeting_portfolios) == 1:
+        stale_before = (wib_now() - datetime.timedelta(days=7)).strftime('%Y-%m-%d')
+        sprint = fetch_sprint_status(next(iter(meeting_portfolios)), stale_before)
 
     tix = related_tickets(event, tickets)
 
     lines = []
     lines.append(f'# {time_wib} WIB — {title}')
+    lines.append('')
+    if meeting_portfolios:
+        lines.append(f"**Portfolio:** {', '.join(sorted(meeting_portfolios))}")
+    else:
+        lines.append('**Portfolio:** unclassified — items below are NOT filtered by portfolio')
     lines.append('')
     lines.append('## Attendees')
     if attendee_display:
@@ -453,12 +556,61 @@ def build_card(event, people, tickets, registry, mention_items, decisions,
         lines.append('- None matched.')
     lines.append('')
 
+    if sprint:
+        lines.append('## Sprint board')
+        if sprint.get('error'):
+            lines.append(f"- Unavailable: {sprint['error']}")
+        else:
+            for b in sprint.get('boards', []):
+                if b.get('error'):
+                    lines.append(f"- {b.get('name')}: {b['error']}")
+                    continue
+                base = f"https://{b['domain']}/browse/"
+                lines.append(f"**{b['name']} ({b['project_key']}) · {b.get('sprint_name')} "
+                             f"· ends {b.get('end_date')}**")
+                lines.append(f"- {b['total']} issues: {b['done']} done, {b['open']} open")
+                order = sorted(b.get('by_status', {}).items(), key=lambda kv: -kv[1])
+                status_str = ', '.join(f'{k} {v}' for k, v in order)
+                lines.append(f"- Status: {status_str}")
+                top = list(b.get('by_assignee', {}).items())[:1]
+                if top and b['open']:
+                    who, n = top[0]
+                    lines.append(f"- Heaviest load: {who} holds {n} of {b['open']} open "
+                                 f"({round(n / b['open'] * 100)}%)")
+                stale = b.get('stale', [])
+                if stale:
+                    lines.append(f"- ⚠️ {len(stale)} open issue(s) untouched for over a week:")
+                    for r in stale[:8]:
+                        lines.append(f"    - [{r['key']}]({base}{r['key']}) · {r['updated']} "
+                                     f"· {r['status']} · {r['assignee']} · {r['summary'][:60]}")
+                    if len(stale) > 8:
+                        lines.append(f"    - ...and {len(stale) - 8} more")
+                lines.append('')
+        lines.append('')
+
+    if you_owe_other or they_owe_other:
+        lines.append('## Other portfolios — do NOT raise here')
+        lines.append('<details>')
+        lines.append('<summary>Open items these attendees carry that belong to another '
+                     'portfolio or are unclassified</summary>')
+        lines.append('')
+        for c in you_owe_other:
+            lines.append(f"- (you owe · {c.get('portfolio', '?')}) {c.get('text', '')} `{c.get('id')}`")
+        for w in they_owe_other:
+            lines.append(f"- (they owe · {w.get('portfolio', '?')}) {w.get('what', '')} `{w.get('id')}`")
+        lines.append('')
+        lines.append('</details>')
+        lines.append('')
+
     return '\n'.join(lines), {
         'title': title, 'time_wib': time_wib,
         'attendee_slugs': sorted(attendee_slugs),
         'n_decisions': len(open_decisions), 'n_pings': len(pings),
         'n_you_owe': len(you_owe_them), 'n_they_owe': len(they_owe_you),
         'n_tickets': len(tix), 'has_last_meeting': bool(fathom_hit),
+        'portfolios': sorted(meeting_portfolios),
+        'n_filtered_out': len(you_owe_other) + len(they_owe_other),
+        'has_sprint': bool(sprint and not sprint.get('error')),
     }
 
 # --------------------------------------------------------------------- prune --

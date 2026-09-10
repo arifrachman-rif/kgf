@@ -1,0 +1,2708 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Promo Codes for Example Program Store - Interactive Proposal</title>
+<!--
+=====================================================================
+  INTERACTIVE PROPOSAL ENGINE  -  single file, zero dependencies
+=====================================================================
+  One .html file. No CDN, no webfonts, no remote images, no build step.
+  Everything (styles, SVG, JS) is inline. Works from file:// and under
+  a strict CSP with no external hosts.
+
+  HOW TO AUTHOR A DOCUMENT WITH THIS ENGINE
+  -----------------------------------------
+  There are exactly four places you edit. Each is marked with a banner:
+
+    [A] AUTHOR: PAGE CONTENT   - the <section class="page"> blocks.
+                                 Add/remove a section = add/remove a tab.
+                                 The tab bar is generated from data-tab.
+    [B] AUTHOR: FLOW           - const FLOW = {...}  nodes, edges, steps.
+    [C] AUTHOR: FAILURES       - const FAILURES = [...] broken-path replays.
+    [D] AUTHOR: PALETTE        - the :root custom properties.
+
+  Everything else is engine. You should not need to touch it.
+=====================================================================
+-->
+<style>
+/* ===================================================================
+   [D] AUTHOR: PALETTE + TYPE TOKENS
+   Every colour in the document - including inside the SVG diagram -
+   resolves through these variables, so the diagram re-themes for free.
+   Semantic roles (keep them consistent):
+     --accent  primary / system / active path
+     --gold    focus, current step, highlights, "chosen" row
+     --blue    datastores
+     --red     failure and only failure
+   Dark theme is declared twice: once via prefers-color-scheme, once via
+   :root[data-theme="dark"] so a host toggle can win in both directions.
+   =================================================================== */
+:root{
+  --paper:#FBFBF9; --paper2:#F2F3F0; --paper3:#E9EBE7;
+  --ink:#182320; --ink2:#3A4641; --muted:#5F6C66; --faint:#8E9993;
+  --accent:#0B5D4D; --accent-soft:#E1EEE9; --accent-ink:#08453A;
+  --gold:#A07520; --gold-soft:#F3EAD3; --gold-ink:#71500F;
+  --blue:#38618F; --blue-soft:#E5EBF3; --blue-ink:#27476B;
+  --red:#B4432A; --red-soft:#F6E4DD;
+  --line:#E2E5E1; --line2:#CBD1CC;
+  /* "ink that sits ON TOP of a solid accent/gold/red fill" - light theme
+     fills are dark, so light ink; except gold, whose light-theme fill is
+     too bright for white text to clear 4.5:1, so it takes dark ink. */
+  --on-accent:#FFFFFF; --on-gold:#000000; --on-red:#FFFFFF;
+  --shadow:0 1px 2px rgba(24,35,32,.04),0 12px 34px rgba(24,35,32,.06);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#101614; --paper2:#171E1B; --paper3:#202824;
+    --ink:#E9EDEA; --ink2:#C6CDC9; --muted:#96A19B; --faint:#6A756F;
+    --accent:#4CC3A9; --accent-soft:#12302A; --accent-ink:#93E2CF;
+    --gold:#D2A64A; --gold-soft:#2C2413; --gold-ink:#E9C77E;
+    --blue:#7EA3CF; --blue-soft:#17273B; --blue-ink:#AFC8E4;
+    --red:#DD7C60; --red-soft:#2E1811;
+    --line:#242D29; --line2:#37423C;
+    /* dark theme's accent/gold/red are light-tinted, so they need DARK ink */
+    --on-accent:#101614; --on-gold:#101614; --on-red:#101614;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 14px 40px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101614; --paper2:#171E1B; --paper3:#202824;
+  --ink:#E9EDEA; --ink2:#C6CDC9; --muted:#96A19B; --faint:#6A756F;
+  --accent:#4CC3A9; --accent-soft:#12302A; --accent-ink:#93E2CF;
+  --gold:#D2A64A; --gold-soft:#2C2413; --gold-ink:#E9C77E;
+  --blue:#7EA3CF; --blue-soft:#17273B; --blue-ink:#AFC8E4;
+  --red:#DD7C60; --red-soft:#2E1811;
+  --line:#242D29; --line2:#37423C;
+  --on-accent:#101614; --on-gold:#101614; --on-red:#101614;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 14px 40px rgba(0,0,0,.45);
+}
+:root[data-theme="light"]{
+  --paper:#FBFBF9; --paper2:#F2F3F0; --paper3:#E9EBE7;
+  --ink:#182320; --ink2:#3A4641; --muted:#5F6C66; --faint:#8E9993;
+  --accent:#0B5D4D; --accent-soft:#E1EEE9; --accent-ink:#08453A;
+  --gold:#A07520; --gold-soft:#F3EAD3; --gold-ink:#71500F;
+  --blue:#38618F; --blue-soft:#E5EBF3; --blue-ink:#27476B;
+  --red:#B4432A; --red-soft:#F6E4DD;
+  --line:#E2E5E1; --line2:#CBD1CC;
+  --on-accent:#FFFFFF; --on-gold:#000000; --on-red:#FFFFFF;
+  --shadow:0 1px 2px rgba(24,35,32,.04),0 12px 34px rgba(24,35,32,.06);
+}
+
+/* ---- base -------------------------------------------------------- */
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+     line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::selection{background:var(--accent-soft);color:var(--accent-ink);}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px;}
+a{color:var(--accent-ink);}
+h1,h2,h3{margin:0;}
+p{margin:0 0 14px;}
+
+/* ---- wide breakout ------------------------------------------------
+   Use on a stage/table/diagram wrapper that should stretch past the
+   1080px text column, up to 1240px, still centered on the viewport.
+   The math: `left:50%` shifts the box by half of ITS CONTAINING
+   BLOCK's width (cancelling the .wrap centering offset), then
+   `translateX(-50%)` shifts back by half of the box's OWN resolved
+   width (post max-width clamp) - so centering holds whether the box
+   ends up full-viewport-wide or capped at 1240px. Do not put prose
+   paragraphs in here: it exists for stages, tables and diagrams only,
+   see .prose below for the text measure cap. -------------------------*/
+.wide{position:relative;left:50%;transform:translateX(-50%);
+     width:100vw;max-width:1240px;box-sizing:border-box;padding:0 22px;}
+
+/* ---- tab bar (generated by JS from each .page's data-tab) --------- */
+.bar{position:sticky;top:0;z-index:60;background:var(--paper);
+     border-bottom:1px solid var(--line);}
+.bar .in{max-width:1080px;margin:0 auto;padding:0 22px;display:flex;gap:4px;
+     overflow-x:auto;scrollbar-width:none;}
+.bar .in::-webkit-scrollbar{display:none;}
+.bar button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;
+     padding:14px 12px 12px;font-family:var(--sans);font-size:.86rem;color:var(--muted);
+     cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:7px;}
+.bar button .n{font-family:var(--mono);font-size:.68rem;color:var(--faint);}
+.bar button:hover{color:var(--ink2);}
+.bar button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--gold);}
+.bar button[aria-selected="true"] .n{color:var(--gold);}
+.bar button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
+
+/* ---- pages ------------------------------------------------------- */
+.page{display:none;padding:44px 0 110px;}
+.page.on{display:block;animation:pg .3s ease;}
+@keyframes pg{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+/* ---- headings + prose -------------------------------------------- */
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;
+     text-transform:uppercase;color:var(--muted);margin:0 0 12px;}
+h1.cover{font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,6vw,3.6rem);
+     line-height:1.03;letter-spacing:-.02em;max-width:16ch;}
+.dek{font-size:1.14rem;color:var(--muted);max-width:52ch;margin-top:18px;}
+.ph2{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,4vw,2.4rem);
+     line-height:1.1;letter-spacing:-.012em;}
+.h3{font-family:var(--serif);font-weight:600;font-size:1.34rem;margin:0 0 10px;}
+.pintro{font-size:1.1rem;color:var(--muted);max-width:58ch;margin-top:14px;}
+.prose{max-width:70ch;}
+.prose p{font-size:1.01rem;color:var(--ink2);}
+.keyline{font-family:var(--serif);font-size:1.28rem;line-height:1.45;
+     border-left:3px solid var(--gold);padding:2px 0 2px 20px;max-width:56ch;
+     color:var(--ink);margin:26px 0;}
+.fn{font-family:var(--mono);font-size:.8em;background:var(--paper2);border-radius:5px;
+     padding:1px 6px;color:var(--ink);white-space:nowrap;}
+.rule{height:1px;background:var(--line);border:0;margin:38px 0;}
+
+/* ---- callout boxes ----------------------------------------------- */
+.callout{border:1px solid var(--line);border-left:3px solid var(--accent);
+     background:var(--paper2);border-radius:10px;padding:16px 18px;margin:22px 0;}
+.callout .ct{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
+     text-transform:uppercase;color:var(--accent-ink);margin-bottom:6px;}
+.callout p:last-child{margin-bottom:0;}
+.callout.warn{border-left-color:var(--red);} .callout.warn .ct{color:var(--red);}
+.callout.note{border-left-color:var(--gold);} .callout.note .ct{color:var(--gold-ink);}
+
+/* ---- spec cards --------------------------------------------------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:22px 0;}
+.card{border:1px solid var(--line);border-radius:12px;background:var(--paper2);
+     padding:16px 16px 14px;box-shadow:var(--shadow);}
+.card .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.09em;
+     text-transform:uppercase;color:var(--accent);margin-bottom:7px;}
+.card h4{font-family:var(--serif);font-size:1.06rem;margin:0 0 6px;font-weight:600;}
+.card p{font-size:.9rem;color:var(--muted);margin:0 0 10px;}
+.card dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:.8rem;}
+.card dt{font-family:var(--mono);font-size:.7rem;color:var(--faint);}
+.card dd{margin:0;color:var(--ink2);}
+
+/* ---- comparison table --------------------------------------------- */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:22px 0;}
+.tablewrap:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
+table.cmp{border-collapse:collapse;width:100%;min-width:560px;font-size:.92rem;}
+table.cmp th,table.cmp td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;}
+table.cmp thead th{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;
+     text-transform:uppercase;color:var(--muted);background:var(--paper2);}
+table.cmp tbody tr:last-child td{border-bottom:0;}
+table.cmp tr.chosen td{background:var(--gold-soft);}
+table.cmp tr.chosen td:first-child{box-shadow:inset 3px 0 0 var(--gold);font-weight:600;}
+.pick{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+     background:var(--gold);color:var(--on-gold);border-radius:4px;padding:2px 6px;margin-left:8px;
+     white-space:nowrap;vertical-align:middle;}
+
+/* ---- timeline ------------------------------------------------------ */
+.tl{margin:24px 0;border-left:2px solid var(--line2);padding-left:0;list-style:none;}
+.tl li{position:relative;padding:0 0 26px 26px;}
+.tl li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;
+     border-radius:50%;background:var(--paper);border:2px solid var(--accent);}
+.tl li.milestone::before{background:var(--gold);border-color:var(--gold);}
+.tl li:last-child{padding-bottom:0;}
+.tl .ph{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;}
+.tl .ph h4{font-family:var(--serif);font-size:1.1rem;margin:0;font-weight:600;}
+.tl .eff{font-family:var(--mono);font-size:.68rem;color:var(--accent-ink);
+     background:var(--accent-soft);border-radius:5px;padding:2px 7px;}
+.tl .when{font-family:var(--mono);font-size:.68rem;color:var(--faint);}
+.tl p{font-size:.93rem;color:var(--muted);margin:6px 0 0;max-width:58ch;}
+.tl .flag{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+     color:var(--gold-ink);background:var(--gold-soft);border-radius:5px;padding:2px 7px;}
+
+/* ---- decision / ask block ------------------------------------------ */
+.decision{border:1px solid var(--line);border-radius:18px;background:var(--paper2);
+     padding:26px 24px;box-shadow:var(--shadow);margin:26px 0;}
+.decision .ct{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;
+     text-transform:uppercase;color:var(--gold-ink);margin-bottom:10px;}
+.decision p{font-family:var(--serif);font-size:1.3rem;line-height:1.45;color:var(--ink);}
+.asks{list-style:none;margin:18px 0 0;padding:0;}
+.asks li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:.96rem;color:var(--ink2);}
+.asks li::before{content:"\2192";color:var(--gold);font-weight:700;}
+
+/* ===================================================================
+   FLOW ENGINE styling. Node/edge state is expressed with exactly four
+   classes so authors can restyle without touching JS:
+     .is-idle  .is-active  .is-done  .is-broken
+   =================================================================== */
+.flow{border:1px solid var(--line);border-radius:18px;background:var(--paper2);
+     box-shadow:var(--shadow);margin:24px 0;overflow:hidden;}
+.flow .stagewrap{position:relative;}
+.flow .stage{background:var(--paper);border-bottom:1px solid var(--line);overflow-x:auto;
+     touch-action:pan-x pan-y;}
+.flow .stage.is-zoomed{cursor:grab;}
+.flow .stage.is-zoomed:active{cursor:grabbing;}
+.flow .stage:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
+.flow .stage svg{display:block;width:100%;min-width:820px;height:auto;}
+.flow:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+/* zoom cluster: +/-/reset, pinned to the stage's top-right corner */
+.flow .zoomctl{position:absolute;top:10px;right:10px;z-index:5;
+     display:flex;flex-direction:column;gap:6px;}
+.flow .zoomctl .btn{width:32px;height:32px;padding:0;display:flex;
+     align-items:center;justify-content:center;font-size:1rem;line-height:1;
+     background:var(--paper);box-shadow:var(--shadow);}
+/* narration panel */
+.flow .nar{padding:18px 20px;border-bottom:1px solid var(--line);}
+.flow .nar .st{font-family:var(--mono);font-size:.66rem;letter-spacing:.09em;
+     text-transform:uppercase;color:var(--gold);}
+.flow .nar h4{font-family:var(--serif);font-size:1.12rem;margin:5px 0 6px;font-weight:600;}
+.flow .nar p{font-size:.95rem;color:var(--ink2);margin:0;max-width:64ch;}
+.flow .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px;}
+.flow .chip{font-family:var(--mono);font-size:.66rem;color:var(--muted);
+     background:var(--paper3);border-radius:5px;padding:3px 8px;}
+.flow .chip b{color:var(--ink);font-weight:600;}
+/* controls */
+.flow .ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 20px;}
+.btn{appearance:none;font-family:var(--sans);font-size:.82rem;background:var(--paper);
+     color:var(--ink2);border:1px solid var(--line2);border-radius:9px;padding:6px 12px;
+     cursor:pointer;line-height:1.4;}
+.btn:hover{border-color:var(--accent);color:var(--ink);}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:1px;}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--on-accent);}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.45;cursor:default;}
+.flow input[type=range]{flex:1 1 160px;min-width:120px;accent-color:var(--gold);}
+.flow .count{font-family:var(--mono);font-size:.7rem;color:var(--muted);
+     font-variant-numeric:tabular-nums;}
+.dots{display:flex;flex-wrap:wrap;gap:5px;padding:0 20px 14px;}
+.dots button{appearance:none;font-family:var(--mono);font-size:.6rem;width:24px;height:24px;
+     border-radius:7px;border:1px solid var(--line2);background:var(--paper);
+     color:var(--muted);cursor:pointer;}
+.dots button.on{background:var(--gold);border-color:var(--gold);color:var(--on-gold);}
+.dots button.f{border-style:dashed;}
+.dots button.f.on{background:var(--red);border-color:var(--red);color:var(--on-red);}
+.dots button:focus-visible{outline:2px solid var(--accent);outline-offset:1px;}
+/* static text alternative: a collapsed <details> disclosure available to
+   everyone (not just reduced-motion users), so the SVG's aria-label
+   claim ("the step description below carries the same information as
+   text") is actually true for all visitors. */
+.flow .static{padding:4px 20px 18px;}
+.flow .static summary{cursor:pointer;font-family:var(--sans);font-size:.86rem;
+     color:var(--muted);padding:8px 0;}
+.flow .static summary:hover{color:var(--ink2);}
+.flow .static summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.flow .static ol{margin:0;padding-left:20px;}
+.flow .static li{font-size:.92rem;color:var(--ink2);margin-bottom:8px;}
+.flow .static li b{color:var(--ink);}
+
+/* ---- failure picker ------------------------------------------------ */
+.fails{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:16px 0 0;}
+.fails button{text-align:left;appearance:none;cursor:pointer;background:var(--paper2);
+     border:1px solid var(--line);border-radius:11px;padding:12px 13px;font-family:var(--sans);}
+.fails button:hover{border-color:var(--red);}
+.fails button[aria-pressed="true"]{border-color:var(--red);background:var(--red-soft);}
+.fails button:focus-visible{outline:2px solid var(--red);outline-offset:1px;}
+.fails .fk{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;
+     text-transform:uppercase;color:var(--red);}
+.fails .ft{display:block;font-size:.93rem;color:var(--ink);margin-top:4px;}
+.failinfo{margin-top:16px;border:1px solid var(--line);border-radius:12px;
+     background:var(--paper2);padding:0;overflow:hidden;}
+.failinfo dl{margin:0;display:grid;grid-template-columns:150px 1fr;}
+.failinfo dt{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+     color:var(--muted);padding:11px 14px;border-bottom:1px solid var(--line);background:var(--paper3);}
+.failinfo dd{margin:0;padding:11px 14px;border-bottom:1px solid var(--line);
+     font-size:.92rem;color:var(--ink2);}
+.failinfo dl>:nth-last-child(-n+2){border-bottom:0;}
+
+/* ---- SVG node + edge semantics (all colours via vars) -------------- */
+.fxn rect,.fxn .shape{fill:var(--paper);stroke:var(--line2);stroke-width:1.6;
+     transition:fill .35s,stroke .35s;}
+.fxn .lab{font-family:var(--mono);font-size:13px;font-weight:600;fill:var(--ink);}
+.fxn .sub{font-family:var(--sans);font-size:11px;fill:var(--muted);}
+.fxn.kind-store .shape{fill:var(--blue-soft);stroke:var(--blue);}
+.fxn.kind-queue .shape{fill:var(--gold-soft);stroke:var(--gold);}
+/* explicit idle rule (matches the "exactly four classes" header comment) */
+.fxn.is-idle .shape{fill:var(--paper);stroke:var(--line2);stroke-width:1.6;}
+/* done is signalled by more than colour: a visibly thicker stroke, so the
+   state still reads for anyone who can't distinguish stroke hue. */
+.fxn.is-done .shape{stroke:var(--accent);stroke-width:2.2;}
+.fxn.is-active .shape{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2.6;}
+.fxn.is-active .lab{fill:var(--accent-ink);}
+.fxn.is-broken .shape{fill:var(--red-soft)!important;stroke:var(--red)!important;stroke-width:2.6!important;}
+.fxn.is-broken .lab{fill:var(--red)!important;}
+.fxe path{fill:none;stroke:var(--line2);stroke-width:1.6;transition:stroke .3s;}
+.fxe .elab{font-family:var(--mono);font-size:10.5px;fill:var(--faint);}
+.fxe.is-done path{stroke:var(--accent);opacity:.55;}
+.fxe.is-active path{stroke:var(--accent);stroke-width:2.4;stroke-dasharray:7 5;
+     animation:dash 1s linear infinite;}
+.fxe.is-broken path{stroke:var(--red)!important;stroke-dasharray:6 5;animation:none;}
+@keyframes dash{to{stroke-dashoffset:-24;}}
+
+/* ---- responsive: only collapse, never overflow the body ------------ */
+@media (max-width:620px){
+  .cards{grid-template-columns:1fr;}
+  .failinfo dl{grid-template-columns:1fr;}
+  .failinfo dt{border-bottom:0;padding-bottom:0;background:none;}
+  .flow .ctl{gap:8px;}
+  h1.cover{font-size:2rem;}
+}
+/* ---- motion policy -------------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important;}
+}
+</style>
+</head>
+<body>
+
+<!-- Tab bar. The <button>s are generated by the engine from the
+     data-tab attribute on each <section class="page">. -->
+<nav class="bar" aria-label="Document sections">
+  <div class="in" role="tablist" id="bar"></div>
+</nav>
+
+<main class="wrap">
+
+<!-- ===================================================================
+     [A] AUTHOR: PAGE CONTENT
+     Each <section class="page"> is one tab.
+       id        must be unique, referenced by the generated tab button
+       data-tab  the tab label shown in the bar
+     The first section gets class "on" so it is visible before JS runs.
+     Add, remove or reorder sections freely - the bar follows.
+     =================================================================== */ -->
+
+<!-- ---------------------------------------------------------------- SUPPLEMENT -->
+<style>
+/* Author-supplied classes for tabs 01-04 diagrams and cards. Every colour
+   resolves through the existing palette custom properties above. This
+   block only adds selectors; it does not redeclare or override any
+   engine rule. */
+.diagram{border:1px solid var(--line);border-radius:14px;background:var(--paper2);
+   box-shadow:var(--shadow);padding:18px 18px 10px;margin:22px 0;overflow-x:auto;}
+.diagram svg{display:block;min-width:640px;width:100%;height:auto;margin:0 auto;}
+.dcap{font-size:.86rem;color:var(--muted);margin:10px 2px 4px;}
+.dg-box{fill:var(--paper);stroke:var(--line2);stroke-width:1.6;}
+.dg-boxA{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.7;}
+.dg-boxJ{fill:var(--blue-soft);stroke:var(--blue);stroke-width:1.7;}
+.dg-boxG{fill:var(--gold-soft);stroke:var(--gold);stroke-width:1.7;}
+.dg-boxR{fill:var(--red-soft);stroke:var(--red);stroke-width:1.7;}
+.dg-tt{font-family:var(--mono);font-size:13px;font-weight:600;fill:var(--ink);}
+.dg-ts{font-family:var(--sans);font-size:11px;fill:var(--muted);}
+.dg-edge{fill:none;stroke:var(--line2);stroke-width:1.6;}
+.dg-edger{fill:none;stroke:var(--red);stroke-width:1.6;}
+.dg-elab{font-family:var(--sans);font-size:11px;fill:var(--muted);}
+.dg-axis{stroke:var(--line2);stroke-width:1.6;}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin:10px 2px 0;font-size:.82rem;color:var(--muted);}
+.legend span{display:inline-flex;align-items:center;gap:6px;}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block;}
+.ladder{list-style:none;margin:20px 0;padding:0;counter-reset:rung;}
+.ladder li{counter-increment:rung;position:relative;padding:12px 14px 12px 54px;
+   border:1px solid var(--line);border-radius:10px;background:var(--paper2);margin-bottom:8px;}
+.ladder li::before{content:counter(rung);position:absolute;left:14px;top:50%;transform:translateY(-50%);
+   width:26px;height:26px;border-radius:50%;background:var(--paper);border:1.6px solid var(--accent);
+   color:var(--accent-ink);font-family:var(--mono);font-size:.78rem;font-weight:700;
+   display:flex;align-items:center;justify-content:center;}
+.ladder .rr{font-weight:600;color:var(--ink);display:block;}
+.ladder .rj{color:var(--muted);font-size:.88rem;display:block;margin-top:2px;}
+.ladder .rp{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;
+   background:var(--paper3);color:var(--muted);border-radius:5px;padding:2px 7px;margin-left:0;
+   display:inline-block;margin-top:6px;}
+.epics{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin:22px 0;}
+.epic{border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:18px 18px 16px;box-shadow:var(--shadow);}
+.epic .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:7px;}
+.epic h4{font-family:var(--serif);font-size:1.08rem;margin:0 0 8px;font-weight:600;}
+.epic .story{font-size:.92rem;color:var(--ink2);font-style:italic;margin:0 0 10px;}
+.epic .reqs{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 10px;}
+.epic .reqs .fn{margin:0;}
+.epic dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.82rem;}
+.epic dt{font-family:var(--mono);font-size:.68rem;color:var(--faint);}
+.epic dd{margin:0;color:var(--ink2);}
+.slim{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:16px 0;}
+.slimcard{border:1px solid var(--line);border-radius:9px;background:var(--paper2);padding:9px 11px;font-size:.78rem;color:var(--ink2);}
+.slimcard b{display:block;font-family:var(--serif);font-size:.9rem;color:var(--ink);margin-bottom:2px;}
+</style>
+
+<!-- ---------------------------------------------------------------- 01 -->
+<section class="page on" id="pg-task" data-tab="The task" role="tabpanel" tabindex="0">
+  <p class="eyebrow">Work &middot; Example Program Store &middot; internal proposal</p>
+  <h1 class="cover">Promo codes for Example Program, before Saudi National Day arrives</h1>
+  <p class="dek">Example Program Store wants promo codes live for Saudi National Day.
+     That date is fixed and external. It does not move for our roadmap.</p>
+
+  <hr class="rule">
+
+  <h3 class="h3">Revision history</h3>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="Revision history, scrollable">
+    <table class="cmp">
+      <thead><tr><th>Date</th><th>Change</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>21 July 2026</td>
+          <td>First issue, from the requirements workshop of 20 July 2026.</td>
+          <td>Requirements workshop</td>
+        </tr>
+        <tr>
+          <td><strong>3 August 2026</strong></td>
+          <td><strong>Data architecture settled.</strong> Member tier is resolved
+             live from Example Program's Accenture API at the moment a code is validated.
+             Work stores no member tier, no PII, and no Example Program member data of
+             any kind, at any point. There is no caching path and no data sync.
+             This replaces the earlier proposal to sync or cache member data, so
+             gating item 1, the Work security and compliance approval to persist
+             tier against an anonymous member ID, is <strong>moot and closed</strong>,
+             and <span class="fn">TR-05</span> is retired.<br>
+             <strong>Phase 2 gains a basic per-campaign promo code stacking
+             toggle</strong>, off by default, campaigns opt in. This is distinct
+             from, and far smaller than, the stacking-groups and A/B testing
+             framework, which stays deferred to a separate 2027 document,
+             PRD_Promo_Engine_V2_Stacking_AB.md.<br>
+             Phasing restated: Phase 1 generic store-wide codes, approved for the
+             next sprint against Saudi National Day; Phase 2 segmented codes,
+             category and product scoping, tier-differentiated discount, and the
+             stacking toggle; Phase 3 vouchers and influencer codes with
+             attribution.</td>
+          <td>Marketplace Sprint Backlog Review, 3 August 2026</td>
+        </tr>
+        <tr>
+          <td><strong>3 August 2026</strong></td>
+          <td>Three consequences of the same decision, recorded after a second
+             pass over the discussion. The <strong>Example Program member ID is named
+             as the anchor attribute</strong> the two systems refer to a member
+             by, constant from profile creation, with email and phone ruled out
+             for that role because both change over time. <strong>The case
+             against a nightly batch is stated on its own terms</strong>,
+             independently of privacy: Work knows only the members who have
+             signed in, so a batch either answers for a minority of the base or
+             requires the full member list. <strong>The cost at campaign creation
+             is stated openly</strong>: the creation screen cannot size an
+             audience, and restoring that would be a separate data-sharing
+             conversation rather than a Phase 2 dependency.</td>
+          <td>Marketplace Sprint Backlog Review, 3 August 2026</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="rule">
+
+  <h2 class="ph2">The ask</h2>
+  <div class="prose">
+    <p>Example Program asked Work, in the requirements workshop of 20 July 2026, for the
+       ability to issue discount codes members enter at checkout, so the store can run
+       seasonal, category, and influencer campaigns tied to Saudi National Day and the
+       calendar moments after it.</p>
+    <p>Work has no promo capability in production today. There is no mechanism to offer
+       a discount without a manual PIM price change, which is irreversible, untargeted,
+       and not trackable as promotion activity.</p>
+  </div>
+
+  <h3 class="h3">Where promo codes would sit</h3>
+  <p class="prose">Example Program Store is one tenant on the Work platform. Every box a
+     member touches between opening the app and paying already exists. None of them
+     can apply a promo code today.</p>
+  <div class="diagram">
+    <svg viewBox="0 0 900 300" role="img" aria-label="Example Program Store as a tenant on the Work platform. Three member entry points on the left connect to the Example Program Store storefront, which connects to Work checkout and OMS on the right. A bracket under all three groups marks that no step on this path can apply a promo code today.">
+      <defs>
+        <marker id="dgm1" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0L8 4L0 8Z" fill="var(--line2)"/>
+        </marker>
+      </defs>
+      <g>
+        <rect class="dg-box" x="20" y="30" width="160" height="54" rx="10"/>
+        <text class="dg-tt" x="100" y="53" text-anchor="middle">Example Program member</text>
+        <text class="dg-ts" x="100" y="69" text-anchor="middle">browsing the app</text>
+      </g>
+      <g>
+        <rect class="dg-box" x="20" y="103" width="160" height="54" rx="10"/>
+        <text class="dg-tt" x="100" y="126" text-anchor="middle">Example Program member</text>
+        <text class="dg-ts" x="100" y="142" text-anchor="middle">at checkout</text>
+      </g>
+      <g>
+        <rect class="dg-box" x="20" y="176" width="160" height="54" rx="10"/>
+        <text class="dg-tt" x="100" y="199" text-anchor="middle">Example Program member</text>
+        <text class="dg-ts" x="100" y="215" text-anchor="middle">paying miles or cash</text>
+      </g>
+      <path class="dg-edge" d="M180 57 H260 V137 H330" marker-end="url(#dgm1)"/>
+      <path class="dg-edge" d="M180 130 H330" marker-end="url(#dgm1)"/>
+      <path class="dg-edge" d="M180 203 H260 V137 H330" marker-end="url(#dgm1)"/>
+      <g>
+        <rect class="dg-boxA" x="330" y="100" width="220" height="80" rx="12"/>
+        <text class="dg-tt" x="440" y="134" text-anchor="middle">Example Program Store</text>
+        <text class="dg-ts" x="440" y="150" text-anchor="middle">storefront, this tenant</text>
+      </g>
+      <path class="dg-edge" d="M550 125 H620" marker-end="url(#dgm1)"/>
+      <path class="dg-edge" d="M550 155 H590 V197 H620" marker-end="url(#dgm1)"/>
+      <g>
+        <rect class="dg-box" x="620" y="90" width="200" height="54" rx="10"/>
+        <text class="dg-tt" x="720" y="113" text-anchor="middle">Checkout</text>
+        <text class="dg-ts" x="720" y="129" text-anchor="middle">Work platform</text>
+      </g>
+      <g>
+        <rect class="dg-box" x="620" y="170" width="200" height="54" rx="10"/>
+        <text class="dg-tt" x="720" y="193" text-anchor="middle">OMS</text>
+        <text class="dg-ts" x="720" y="209" text-anchor="middle">Work platform, order of record</text>
+      </g>
+      <path class="dg-axis" d="M20 258 H820" stroke="var(--red)" stroke-width="1.8"/>
+      <path class="dg-axis" d="M20 250 V266" stroke="var(--red)" stroke-width="1.8"/>
+      <path class="dg-axis" d="M820 250 V266" stroke="var(--red)" stroke-width="1.8"/>
+      <text x="420" y="288" text-anchor="middle" font-family="var(--mono)" font-size="12" font-weight="700" fill="var(--red)">no promo capability anywhere on this path today</text>
+    </svg>
+  </div>
+  <p class="dcap">Example Program Store sits between its members and Work checkout and OMS.
+     Every box exists. None of them can apply a code.</p>
+
+  <h3 class="h3">In scope for this document</h3>
+  <ul class="asks">
+    <li>How the Phase 1 machine validates a code and settles a redemption.</li>
+    <li>What breaks, and what happens when it does.</li>
+    <li>The five business decisions that block Phase 1 from being scoped.</li>
+  </ul>
+
+  <h3 class="h3">Out of scope for this document</h3>
+  <ul class="asks">
+    <li>The full requirement list. That lives in the PRD.</li>
+    <li>The client commitment and campaign phasing. That lives in the BRD.</li>
+    <li>Tier differentiation and member binding. Those are Phase 2 and Phase 3.</li>
+  </ul>
+
+  <div class="keyline">Done for Phase 1 means one thing:
+     a member can enter a code at checkout, get a discount that respects the
+     Example Program miles clock, and Example Program can see, honestly, whether the
+     campaign worked.</div>
+
+  <div class="callout warn">
+    <div class="ct">the single number</div>
+    <p>Saudi National Day is a fixed date. This PRD currently sits at P2 for Q3 to Q4
+       2026, which is after it. Either Phase 1 is pulled forward, or Example Program runs
+       Saudi National Day without codes. That is gating item 11, and it is the owner's
+       to resolve.</p>
+  </div>
+
+  <h3 class="h3">The sequencing conflict, as a picture</h3>
+  <div class="diagram">
+    <svg viewBox="0 0 900 200" role="img" aria-label="Timeline from today, 20 July 2026, to Saudi National Day, a fixed date around 23 September 2026, to the current PRD delivery window, which starts after Saudi National Day rather than before it.">
+      <defs>
+        <marker id="dgm2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0L8 4L0 8Z" fill="var(--line2)"/>
+        </marker>
+      </defs>
+      <path class="dg-axis" d="M40 100 H850" marker-end="url(#dgm2)"/>
+      <path class="dg-axis" d="M90 90 V110"/>
+      <text class="dg-tt" x="90" y="76" text-anchor="middle">Today</text>
+      <text class="dg-ts" x="90" y="126" text-anchor="middle">20 Jul 2026</text>
+      <path class="dg-axis" d="M430 90 V110" stroke="var(--gold)"/>
+      <text class="dg-tt" x="430" y="76" text-anchor="middle" fill="var(--gold-ink)">Saudi National Day</text>
+      <text class="dg-ts" x="430" y="126" text-anchor="middle">fixed, ~23 Sep 2026</text>
+      <path class="dg-edger" d="M430 118 H560" marker-end="url(#dgm2)" stroke-dasharray="5 4"/>
+      <text class="dg-elab" x="495" y="112" text-anchor="middle" fill="var(--red)">the plan starts after this date</text>
+      <rect class="dg-boxR" x="560" y="140" width="270" height="42" rx="8"/>
+      <text class="dg-tt" x="695" y="158" text-anchor="middle" fill="var(--red)">Current PRD window</text>
+      <text class="dg-ts" x="695" y="174" text-anchor="middle">P2, Q3 to Q4 2026</text>
+    </svg>
+  </div>
+  <p class="dcap">The current plan delivers after the date it exists for.
+     Gating item 11, drawn instead of written.</p>
+
+  <h3 class="h3">What this document is</h3>
+  <div class="callout">
+    <p>This is the how. The what and the why are in the PRD.
+       The client commitment is in the BRD.</p>
+  </div>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="What each document answers, scrollable">
+    <table class="cmp">
+      <thead><tr><th>Document</th><th>Answers</th><th>Owner</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="../Ecommerce/PRD_Promo_Engine_V1.md">Promotions Engine V1 PRD</a></td>
+          <td>The what and the why: every requirement, condition, and phase.</td>
+          <td>Your Name</td>
+          <td>Draft, v1.1</td>
+        </tr>
+        <tr>
+          <td><a href="BRD_ExampleProgram_Store_Promocodes.md">Example Program Store BRD</a></td>
+          <td>The client commitment: what Example Program is promised, and by when.</td>
+          <td>Your Name</td>
+          <td>Draft for review</td>
+        </tr>
+        <tr>
+          <td>This proposal</td>
+          <td>The how: the machine, what breaks, and the five decisions blocking
+             Phase 1.</td>
+          <td>Your Name</td>
+          <td>Internal, this document</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ---------------------------------------------------------------- 02 -->
+<section class="page" id="pg-problem" data-tab="The problem" role="tabpanel" tabindex="0">
+  <p class="eyebrow">02 &middot; the problem</p>
+  <h2 class="ph2">Two problems. The second is the one people miss.</h2>
+  <p class="pintro">The first is straightforward. The second changes how every
+     campaign has to be built, priced, and reported.</p>
+
+  <h3 class="h3">Problem one: no promo engine exists</h3>
+  <p class="prose">There is no code field, no condition engine, no redemption record.
+     It gets built. That part is not interesting.</p>
+
+  <h3 class="h3">Problem two: a redemption is not final at checkout</h3>
+  <p class="prose">On Example Program, loyalty miles are credited 30 days after an order is
+     accepted, and they are cancelled if the order is cancelled or returned inside
+     that window. A promo redemption inherits the same clock.</p>
+
+  <div class="keyline">A promo redemption is not final when the customer checks out.
+     It is provisional for 30 days.</div>
+
+  <h3 class="h3">Thirty days, then a fork</h3>
+  <div class="diagram">
+    <svg viewBox="0 0 900 320" role="img" aria-label="One order at day 0 enters a 30 day miles credit window as a Provisional redemption. At the end of the window it forks: no cancellation leads to Confirmed with miles credited, cancelled or returned inside the window leads to Reversed with caps restored and the member back to new customer status.">
+      <defs>
+        <marker id="dgm3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0L8 4L0 8Z" fill="var(--line2)"/>
+        </marker>
+      </defs>
+      <g>
+        <rect class="dg-box" x="20" y="140" width="150" height="60" rx="10"/>
+        <text class="dg-tt" x="95" y="164" text-anchor="middle">Day 0</text>
+        <text class="dg-ts" x="95" y="180" text-anchor="middle">redemption: PROVISIONAL</text>
+      </g>
+      <path class="dg-edge" d="M170 170 H210" marker-end="url(#dgm3)"/>
+      <g>
+        <rect class="dg-boxG" x="210" y="110" width="380" height="120" rx="14"/>
+        <circle cx="400" cy="205" r="20" fill="var(--paper)" stroke="var(--gold)" stroke-width="1.6"/>
+        <line x1="400" y1="205" x2="400" y2="192" stroke="var(--gold)" stroke-width="2"/>
+        <line x1="400" y1="205" x2="410" y2="210" stroke="var(--gold)" stroke-width="2"/>
+        <text class="dg-tt" x="400" y="150" text-anchor="middle">30-day miles credit window</text>
+        <text class="dg-ts" x="400" y="168" text-anchor="middle">every campaign number is provisional here</text>
+      </g>
+      <path class="dg-edge" d="M590 170 H650 V60 H680" marker-end="url(#dgm3)"/>
+      <path class="dg-edge" d="M590 170 H650 V270 H680" marker-end="url(#dgm3)"/>
+      <text class="dg-elab" x="655" y="115" text-anchor="start">day 30, no cancellation</text>
+      <text class="dg-elab" x="655" y="235" text-anchor="start">cancelled or returned in window</text>
+      <g>
+        <rect class="dg-boxA" x="680" y="30" width="200" height="60" rx="10"/>
+        <text class="dg-tt" x="780" y="55" text-anchor="middle" fill="var(--accent-ink)">CONFIRMED</text>
+        <text class="dg-ts" x="780" y="72" text-anchor="middle">miles credited</text>
+      </g>
+      <g>
+        <rect class="dg-boxR" x="680" y="240" width="200" height="60" rx="10"/>
+        <text class="dg-tt" x="780" y="265" text-anchor="middle" fill="var(--red)">REVERSED</text>
+        <text class="dg-ts" x="780" y="282" text-anchor="middle">caps restored, back to new</text>
+      </g>
+    </svg>
+  </div>
+  <p class="dcap">Every campaign number is provisional until this fork resolves.</p>
+
+  <p class="prose">Every hard open question in this document hangs off that one fact.
+     Four consequences follow, and none of them are optional to handle.</p>
+
+  <ul class="asks">
+    <li>A campaign cannot be reported as successful on the day it ends. It has not
+       settled.</li>
+    <li>"How many redemptions did we get" has two different correct answers at any
+       given moment, Provisional and Confirmed.</li>
+    <li>An influencer paid on provisional numbers can be paid for revenue that later
+       reverses.</li>
+    <li>Whether miles are earned on the pre-discount basket or on the amount actually
+       paid changes the true cost of every campaign, and it is still open. See
+       decision 3 in the next tab.</li>
+  </ul>
+
+  <h3 class="h3">Two correct answers, mid-window</h3>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="The same campaign at day 10 versus day 40, scrollable">
+    <table class="cmp">
+      <thead><tr><th>Moment</th><th>Provisional</th><th>Confirmed</th><th>Reversed</th><th>"How many redemptions"</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Day 10, mid-window</td>
+          <td>180</td>
+          <td>40</td>
+          <td>5</td>
+          <td>220 looks like the headline, but only 40 have settled. Both are
+             correct, for different questions.</td>
+        </tr>
+        <tr>
+          <td>Day 40, window closed for this cohort</td>
+          <td>0</td>
+          <td>210</td>
+          <td>15</td>
+          <td>210, the only number left, and lower than the day-10 headline.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="dcap">Figures are illustrative, not from a live campaign.</p>
+
+  <h3 class="h3">The latency budget</h3>
+  <div class="diagram">
+    <svg viewBox="0 0 900 140" role="img" aria-label="The sub-500ms validation budget as a horizontal bar. The condition ladder and writes take a known, fast share. The third party tier lookup takes an unknown remaining share, drawn hatched, inside the same budget.">
+      <rect class="dg-box" x="40" y="50" width="760" height="44" rx="8"/>
+      <rect class="dg-boxA" x="40" y="50" width="480" height="44" rx="0"/>
+      <rect x="40" y="50" width="8" height="44" fill="var(--accent-soft)"/>
+      <rect class="dg-boxR" x="520" y="50" width="280" height="44" stroke-dasharray="5 4"/>
+      <text class="dg-tt" x="280" y="68" text-anchor="middle">condition ladder + writes</text>
+      <text class="dg-ts" x="280" y="84" text-anchor="middle">known, fast</text>
+      <text class="dg-tt" x="660" y="68" text-anchor="middle" fill="var(--red)">live Accenture tier lookup</text>
+      <text class="dg-ts" x="660" y="84" text-anchor="middle">unknown share, Phase 2 latency risk</text>
+      <text class="dg-ts" x="40" y="112" text-anchor="start">0ms</text>
+      <text class="dg-ts" x="800" y="112" text-anchor="end">500ms ceiling</text>
+      <text class="dg-elab" x="420" y="126" text-anchor="middle">RF-02: validation under 500ms, p99</text>
+    </svg>
+  </div>
+  <p class="dcap">Third-party hop inside the budget. This hop is now the settled
+     design, not an option: tier is always resolved live. Phase 1 never makes
+     this call at all.</p>
+
+  <div class="callout note">
+    <div class="ct">a second constraint, unrelated to settlement</div>
+    <p>Work stores no customer information and treats every user as anonymous.
+       Tier-differentiated discounts resolve a member's tier <strong>live from
+       Example Program's Accenture API at the moment a code is validated</strong>,
+       inside a sub-500ms budget, per <span class="fn">RF-02</span>. Work stores
+       no member tier, no PII, and no Example Program member data of any kind, at any
+       point. There is no cache and no data sync. Phase 1 does not use tier.
+       Phase 2 does, and the only thing that bites there is latency, not data
+       residency.</p>
+  </div>
+
+  <h3 class="h3">Why a nightly batch was not the cheaper answer</h3>
+  <p class="prose">The obvious way to avoid a call inside the checkout path is to
+     pull the membership base overnight and read it locally. That option was
+     examined on 3 August 2026 and it fails for a reason that has nothing to do
+     with privacy, which is worth stating because the privacy argument tends to
+     crowd it out.</p>
+  <p class="prose">Work only learns that a member exists when that member signs
+     in to the store. If the programme holds a million members and only a
+     fraction have ever signed in, Work knows that fraction and nothing about
+     the rest. A batch built on what Work already holds would therefore answer
+     for a minority of the base while appearing to answer for all of it. A batch
+     built on the whole programme would require Example Program to hand over its full
+     member list, which is a larger data-sharing decision than the one this
+     initiative needs. The live lookup sidesteps the choice: the question is
+     asked about exactly one member, at the moment that member is at checkout.</p>
+
+  <h3 class="h3">What the decision costs at campaign creation</h3>
+  <p class="prose">Promo codes are a creation feature as much as a redemption
+     one, and the two halves are not affected equally. Redemption gets better,
+     because the tier read is always current and an upgrade applies to the very
+     next basket. Creation gives something up, and it should be visible here
+     rather than discovered during Phase 2.</p>
+  <p class="prose">Because Work holds no copy of the membership base, the
+     campaign creation screen cannot size an audience. Building a Gold tier
+     offer, marketing will not see how many Gold members exist, what share of
+     the base they represent, or how far a given set of restrictions would
+     reach. Only Example Program holds the data that answers those questions. The
+     accepted approach is the simpler one: define the code and its restrictions
+     without member data in view, and let eligibility resolve per member at
+     redemption. Audience sizing, if Example Program wants it, is a separate
+     conversation about what data Example Program is willing to share, and it is not a
+     dependency of Phase 2.</p>
+</section>
+
+<!-- ---------------------------------------------------------------- 03 -->
+<section class="page" id="pg-decisions" data-tab="The decisions" role="tabpanel" tabindex="0">
+  <p class="eyebrow">03 &middot; the open decisions</p>
+  <h2 class="ph2">Five business decisions, not an architecture choice</h2>
+  <p class="pintro">For this initiative the architecture is not contested. The
+     business definitions are. These five items block Phase 1 from being scoped.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 900 300" role="img" aria-label="Decision dependency diagram. D5 household definition feeds D1 new customer meaning. D3 miles basis feeds D4 commercial split. D5, D1, D2, and D3 all feed the Phase 1 scope freeze. D4 is not required for the scope freeze, only before contract.">
+      <defs>
+        <marker id="dgm4" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0L8 4L0 8Z" fill="var(--line2)"/>
+        </marker>
+      </defs>
+      <g>
+        <rect class="dg-boxA" x="20" y="30" width="170" height="64" rx="10"/>
+        <text class="dg-tt" x="105" y="56" text-anchor="middle">D5</text>
+        <text class="dg-ts" x="105" y="73" text-anchor="middle">household definition</text>
+      </g>
+      <g>
+        <rect class="dg-boxA" x="220" y="30" width="170" height="64" rx="10"/>
+        <text class="dg-tt" x="305" y="56" text-anchor="middle">D1</text>
+        <text class="dg-ts" x="305" y="73" text-anchor="middle">new customer meaning</text>
+      </g>
+      <g>
+        <rect class="dg-boxA" x="420" y="30" width="170" height="64" rx="10"/>
+        <text class="dg-tt" x="505" y="56" text-anchor="middle">D2</text>
+        <text class="dg-ts" x="505" y="73" text-anchor="middle">first purchase meaning</text>
+      </g>
+      <g>
+        <rect class="dg-boxJ" x="620" y="30" width="170" height="64" rx="10"/>
+        <text class="dg-tt" x="705" y="56" text-anchor="middle">D3</text>
+        <text class="dg-ts" x="705" y="73" text-anchor="middle">miles basis</text>
+      </g>
+      <g>
+        <rect class="dg-boxJ" x="620" y="170" width="170" height="54" rx="10"/>
+        <text class="dg-tt" x="705" y="193" text-anchor="middle">D4</text>
+        <text class="dg-ts" x="705" y="210" text-anchor="middle">commercial split</text>
+      </g>
+      <path class="dg-edge" d="M190 62 H220" marker-end="url(#dgm4)"/>
+      <text class="dg-elab" x="205" y="50" text-anchor="middle">changes who's new</text>
+      <path class="dg-edge" d="M705 94 V170" marker-end="url(#dgm4)"/>
+      <text class="dg-elab" x="715" y="135" text-anchor="start">true cost depends on basis</text>
+      <path class="dg-edge" d="M105 94 V240 H270 V250" marker-end="url(#dgm4)"/>
+      <path class="dg-edge" d="M305 94 V250" marker-end="url(#dgm4)"/>
+      <path class="dg-edge" d="M505 94 V250" marker-end="url(#dgm4)"/>
+      <path class="dg-edge" d="M620 62 H560 V250" marker-end="url(#dgm4)"/>
+      <g>
+        <rect class="dg-boxG" x="220" y="250" width="380" height="50" rx="10"/>
+        <text class="dg-tt" x="410" y="280" text-anchor="middle">Phase 1 scope freeze</text>
+      </g>
+      <text class="dg-elab" x="705" y="234" text-anchor="middle">needed before contract,</text>
+      <text class="dg-elab" x="705" y="246" text-anchor="middle">not before scoping</text>
+    </svg>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--accent)"></i>Example Program owns</span>
+    <span><i style="background:var(--blue)"></i>Joint decision, Example Program and Work</span>
+  </div>
+  <p class="dcap">D5, D1, D2, and D3 all feed the Phase 1 scope freeze. D4 depends on
+     D3 but is needed before contract, not before scoping.</p>
+
+  <h3 class="h3">Decision 1: what does "new customer" mean</h3>
+  <p class="prose">Gating item 6. Owner: Example Program. Blocks <span class="fn">CS-01</span>.</p>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="Decision 1 options, scrollable">
+    <table class="cmp">
+      <thead><tr><th>Option</th><th>What the member experiences</th><th>What it costs or requires</th><th>Can it make Phase 1?</th></tr></thead>
+      <tbody>
+        <tr class="chosen">
+          <td>Option A, new to the Example Program Store<span class="pick">recommended</span></td>
+          <td>A member with no prior order on this store qualifies, even if they are
+             a long-time Example Program loyalty member elsewhere.</td>
+          <td>None. Work can enforce this today from order history it already holds.
+             No new integration.</td>
+          <td>Yes, ready today.</td>
+        </tr>
+        <tr>
+          <td>Option B, new to the Example Program loyalty programme</td>
+          <td>Only members newly enrolled in the loyalty programme qualify,
+             regardless of store purchase history.</td>
+          <td>Requires Example Program to supply a membership join date. A new integration
+             and a new data sharing question.</td>
+          <td>No, needs a new integration.</td>
+        </tr>
+        <tr>
+          <td><strong>Verdict</strong></td>
+          <td colspan="3">Work recommends Option A.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="rule">
+
+  <h3 class="h3">Decision 2: acquisition offer, or one-per-member cap</h3>
+  <p class="prose">Gating item 7. Owner: Example Program. Blocks <span class="fn">CS-02</span>.</p>
+  <p class="prose">Does "first purchase discount" mean a genuinely new customer, or
+     the first time that member uses that code? These are different products.
+     An acquisition offer is not the same thing as a one-per-member cap. The
+     workshop transcript supports both readings, which is why it must be settled
+     explicitly.</p>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="Decision 2 options, scrollable">
+    <table class="cmp">
+      <thead><tr><th>Option</th><th>What the member experiences</th><th>What it costs or requires</th><th>Can it make Phase 1?</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Option A, acquisition offer</td>
+          <td>Only members with zero prior orders on the store see the offer.
+             A returning buyer never sees it, even on a code they have not used.</td>
+          <td>None new. This is exactly decision 1's customer-state check,
+             <span class="fn">CS-01</span>.</td>
+          <td>Yes, if decision 1 lands.</td>
+        </tr>
+        <tr>
+          <td>Option B, one-per-member cap</td>
+          <td>Every member, new or returning, can try the code once.</td>
+          <td>None. Already covered by the rolling per-member limit
+             <span class="fn">RW-01</span>.</td>
+          <td>Yes, ships regardless of decision 1.</td>
+        </tr>
+        <tr>
+          <td><strong>Verdict</strong></td>
+          <td colspan="3">Example Program's call. If the intent is Option B, no new work
+             is required beyond RW-01.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="rule">
+
+  <h3 class="h3">Decision 3: miles on the pre-discount basket, or the amount paid</h3>
+  <p class="prose">Gating item 8. Owner: Example Program and Work commercial. Blocks
+     <span class="fn">ML-01</span>.</p>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="Decision 3 options, scrollable">
+    <table class="cmp">
+      <thead><tr><th>Option</th><th>What the member experiences</th><th>What it costs or requires</th><th>Can it make Phase 1?</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Pre-discount basket value</td>
+          <td>The member is made whole; miles reflect what they would have earned
+             without the discount.</td>
+          <td>The campaign costs Work the discount plus miles on value nobody paid.</td>
+          <td>Yes, either answer can ship in Phase 1.</td>
+        </tr>
+        <tr>
+          <td>Amount actually paid</td>
+          <td>The member earns fewer miles on a promotional order, which may
+             undercut the offer's appeal.</td>
+          <td>Cheaper for Work, no miles issued on unpaid value.</td>
+          <td>Yes, either answer can ship in Phase 1.</td>
+        </tr>
+        <tr>
+          <td><strong>Verdict</strong></td>
+          <td colspan="3">No recommendation. Neither answer is obviously correct,
+             and this is a direct input to decision 4.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warn">
+    <div class="ct">what it is worth, illustrative</div>
+    <p>SAR 400 basket, SAR 100 discount, an illustrative rate of 1 mile per SAR.
+       This is not Example Program's real conversion rate, used only to size the gap.
+       Pre-discount basis earns 400 miles. Amount-paid basis earns 300 miles.
+       That is a delta of 100 miles per redemption between the two answers,
+       illustrative.</p>
+  </div>
+
+  <hr class="rule">
+
+  <h3 class="h3">Decision 4: who absorbs the discount</h3>
+  <p class="prose">Gating item 3. Owner: Thamer Bamieh and Example Program.</p>
+  <p class="prose">The PRD currently states Work absorbs the discount from its own
+     share. That was written for Work-owned marketplaces and has not been agreed
+     for a tenant.</p>
+  <p class="prose">This cannot be priced until decision 3 lands, because the true cost
+     of the discount depends on which basket value earns miles. Not a Phase 1
+     scoping blocker, but needed before contract.</p>
+
+  <hr class="rule">
+
+  <h3 class="h3">Decision 5: how a household counts</h3>
+  <p class="prose">Gating item 2. Owner: Example Program. Blocks <span class="fn">RW-01</span>.</p>
+  <p class="prose">Where a household holds one membership with family members underneath
+     it, the per member limit can apply once to the household, or once to each family
+     member. The rolling per member limit is Phase 1 scope, so this cannot be deferred.
+     It has a second effect: the same answer decides whether a family member still
+     counts as a new customer once the household has already purchased, which feeds
+     straight back into decision 1.</p>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="Decision 5 options, scrollable">
+    <table class="cmp">
+      <thead><tr><th>Option</th><th>What the member experiences</th><th>What it costs or requires</th><th>Can it make Phase 1?</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Per-household</td>
+          <td>Family members share a single Saudi National Day discount between
+             them.</td>
+          <td>None new beyond RW-01. Requires Example Program to identify household
+             membership at validation.</td>
+          <td>Yes, if household identifiers are available.</td>
+        </tr>
+        <tr>
+          <td>Per-member</td>
+          <td>Every family member redeems independently, up to the full campaign
+             discount each.</td>
+          <td>Multiplies the true campaign cost by household size.</td>
+          <td>Yes, simpler to enforce than the household option.</td>
+        </tr>
+        <tr>
+          <td><strong>Verdict</strong></td>
+          <td colspan="3">No recommendation. Owned by Example Program. The answer also
+             feeds decision 1, a family member's new or existing status.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="rule">
+
+  <h3 class="h3">Non-blocking, listed so nothing looks hidden</h3>
+  <p class="prose">Mirrors BRD section 8. These do not block Phase 1 scoping.</p>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="Non-blocking items, owner and needed-by phase, scrollable">
+    <table class="cmp">
+      <thead><tr><th>Item</th><th>Owner</th><th>Needed by</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Gating item 1 is closed, 3 August 2026.</strong> Work no
+             longer persists member tier, so the security and compliance approval
+             that this item asked for is moot and needs no owner. Tier is resolved
+             live from Example Program's Accenture API at validation time.
+             <span class="fn">TR-05</span> is retired.</td>
+          <td>Closed, no owner needed</td>
+          <td>Nothing. The remaining Phase 2 exposure is latency on the live call,
+             the risk in the diagram above, not data storage.</td>
+        </tr>
+        <tr>
+          <td>Which tiers exist and the default discount per tier.</td>
+          <td>Example Program marketing</td>
+          <td>Phase 2</td>
+        </tr>
+        <tr>
+          <td>Gating item 4, complete Example Program campaign list for the next two
+             quarters.</td>
+          <td>Teammate, Example Program</td>
+          <td>Phase 2 scope close</td>
+        </tr>
+        <tr>
+          <td>Gating item 5, miles-to-cash conversion basis for miles-priced
+             baskets. Blocks <span class="fn">MI-02</span>.</td>
+          <td>Work engineering and Example Program finance</td>
+          <td>Phase 1, miles-priced baskets only</td>
+        </tr>
+        <tr>
+          <td>Whether a code should be usable on a first purchase only, beyond
+             decision 2, as raised for the influencer scenario.</td>
+          <td>Example Program</td>
+          <td>Phase 3</td>
+        </tr>
+        <tr>
+          <td>Gating item 9, treatment of a partial return. Blocks
+             <span class="fn">ML-02</span>.</td>
+          <td>Example Program</td>
+          <td>Phase 2</td>
+        </tr>
+        <tr>
+          <td>Gating item 10, whether influencer rewards are paid on provisional
+             or confirmed redemptions. Blocks <span class="fn">ML-06</span>.</td>
+          <td>Example Program marketing</td>
+          <td>Phase 3</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ---------------------------------------------------------------- 04 -->
+<section class="page" id="pg-machinery" data-tab="The scope" role="tabpanel" tabindex="0">
+  <p class="eyebrow">04 &middot; the scope</p>
+  <h2 class="ph2">Six epics, following the PRD's own structure</h2>
+  <p class="pintro">What Example Program is actually buying, grouped the way the PRD
+     groups it: a user story, the requirement IDs it carries, which phase it
+     ships in, who owns it, and the trade-off where one exists.</p>
+
+  <div class="epics">
+    <div class="epic">
+      <div class="k">PRD 9.1 &middot; phase 1</div>
+      <h4>Code creation and management</h4>
+      <p class="story">As a LiveOps operator, I want to create a multi-use
+         campaign or bulk-generate unique single-use codes, so I can launch a
+         promotion without engineering involvement.</p>
+      <p class="delivers">Create a shared code or bulk-generate up to 100,000 unique codes, and pause or end a live campaign, with a full change log. No engineering needed.</p>
+      <div class="reqs">
+        <span class="fn">CM-01</span><span class="fn">CM-02</span>
+        <span class="fn">CM-03</span><span class="fn">CM-04</span>
+        <span class="fn">CM-05</span><span class="fn">CM-06</span>
+        <span class="fn">CM-07</span>
+      </div>
+      <dl>
+        <dt>owner</dt><dd>Work build</dd>
+        <dt>trade-off</dt><dd>Single-use batches cap at 100,000 codes per
+           generation, CM-02.</dd>
+      </dl>
+    </div>
+
+    <div class="epic">
+      <div class="k">PRD 9.2 &middot; phase 1</div>
+      <h4>Redemption at checkout</h4>
+      <p class="story">As a consumer, I want to enter a promo code at checkout
+         and see the discount applied within 500ms, so I know immediately
+         whether my code worked.</p>
+      <p class="delivers">A code box at checkout, the discount shown instantly as its own line, one code per order, answered in under half a second.</p>
+      <div class="reqs">
+        <span class="fn">RF-01</span><span class="fn">RF-02</span>
+        <span class="fn">RF-03</span><span class="fn">RF-04</span>
+        <span class="fn">RF-05</span><span class="fn">RF-06</span>
+        <span class="fn">RF-07</span><span class="fn">RF-08</span>
+      </div>
+      <dl>
+        <dt>owner</dt><dd>Work build, critical path</dd>
+        <dt>trade-off</dt><dd>A 15-minute soft hold on an abandoned checkout,
+           RF-04 and RF-05, trades a small window of held capacity for never
+           blocking a genuine customer mid-checkout.</dd>
+      </dl>
+    </div>
+
+    <div class="epic">
+      <div class="k">PRD 7.1, 9.3, 9.5 &middot; phase 1, tier and stacking toggle are phase 2</div>
+      <h4>Condition enforcement</h4>
+      <p class="story">As a consumer, I want a clear reason when my code is
+         rejected, so I know whether to try again or give up.</p>
+      <p class="delivers">The gate sequence that decides whether a code applies, scoped to this store, with a clear rejection reason and new-versus-existing targeting.</p>
+      <div class="reqs">
+        <span class="fn">CE-01</span><span class="fn">CE-03</span>
+        <span class="fn">TN-01</span><span class="fn">RW-01</span>
+        <span class="fn">CS-01</span><span class="fn">CS-04</span>
+        <span class="fn">TR-01</span>
+      </div>
+      <dl>
+        <dt>owner</dt><dd>Work build, blocked on decisions 1, 2, and 5</dd>
+        <dt>trade-off</dt><dd>Settled 3 August 2026: tier is resolved live from
+           Example Program's Accenture API, never cached. Work accepts the third-party
+           hop inside the 500ms budget in exchange for storing no member tier and
+           no PII at all. Caching is not a fallback and is not on the table.
+           The lookup is keyed on the Example Program member ID, which is the anchor
+           attribute both systems refer to a member by. It is constant from the
+           day the profile is created, whereas email and phone number change
+           across a membership lifetime and cannot carry that role.</dd>
+      </dl>
+    </div>
+
+    <div class="epic">
+      <div class="k">PRD 9.5 &middot; phase 1</div>
+      <h4>Settlement and the provisional window</h4>
+      <p class="story">As a finance analyst, I want a redemption to stay
+         Provisional until the 30-day miles window closes, so a campaign's
+         cost is never finalised on numbers that can still reverse.</p>
+      <p class="delivers">A redemption stays provisional for 30 days and reverses cleanly if the order cancels, so campaign cost is never counted before it settles.</p>
+      <div class="reqs">
+        <span class="fn">ML-01</span><span class="fn">ML-02</span>
+        <span class="fn">ML-03</span><span class="fn">ML-04</span>
+        <span class="fn">ML-05</span><span class="fn">ML-06</span>
+        <span class="fn">ML-07</span>
+      </div>
+      <dl>
+        <dt>owner</dt><dd>Work build, new, blocked on decision 3</dd>
+        <dt>trade-off</dt><dd>The rolling per-member window and the miles
+           credit window are both 30 days, but they are different clocks and
+           must not be conflated.</dd>
+      </dl>
+    </div>
+
+    <div class="epic">
+      <div class="k">PRD 9.4, 9.5 &middot; phase 1 baseline, attribution phase 2/3</div>
+      <h4>Reporting and attribution</h4>
+      <p class="story">As a Finance team member, I want discount cost and
+         redemption counts split Provisional from Confirmed, so I can account
+         for promo cost honestly in the P&amp;L.</p>
+      <p class="delivers">Provisional and confirmed counts kept separate, discount cost split new versus existing, and a visible reversal rate per campaign.</p>
+      <div class="reqs">
+        <span class="fn">FR-01</span><span class="fn">FR-02</span>
+        <span class="fn">CS-07</span><span class="fn">CS-08</span>
+        <span class="fn">ML-03</span><span class="fn">ML-04</span>
+        <span class="fn">AT-02</span>
+      </div>
+      <dl>
+        <dt>owner</dt><dd>Work build</dd>
+        <dt>trade-off</dt><dd>A single blended redemption number is never
+           shown; Provisional and Confirmed are always two figures, ML-03,
+           which costs dashboard simplicity for reporting honesty.</dd>
+      </dl>
+    </div>
+
+    <div class="epic">
+      <div class="k">PRD section 8 &middot; phase 1 baseline, tier and voucher fields later</div>
+      <h4>Admin console</h4>
+      <p class="story">As an operator, I want one screen to create a campaign,
+         watch it in a dashboard, and export single-use codes, so I never need
+         engineering to run a promotion.</p>
+      <p class="delivers">One screen to create a campaign, watch it live in a dashboard, and export single-use codes.</p>
+      <div class="reqs">
+        <span class="fn">8.1</span><span class="fn">8.2</span>
+        <span class="fn">8.3</span><span class="fn">8.4</span>
+      </div>
+      <dl>
+        <dt>owner</dt><dd>Work build</dd>
+        <dt>trade-off</dt><dd>None noted. Tier rule fields arrive in Phase 2,
+           member binding and attribution tag fields in Phase 3.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <h3 class="h3">The condition ladder</h3>
+  <p class="prose">Every code drops through these gates from the top. The first gate it
+     fails decides the message the shopper sees, and the gates below it never run. For
+     Saudi National Day only the Phase 1 gates are switched on. The greyed gates arrive
+     in a later phase.</p>
+
+  <div class="scn" role="group" aria-label="Try a rejection scenario">
+    <span class="scn-l">See which gate catches it:</span>
+    <button type="button" class="scn-b" data-t="validity" aria-pressed="false">Expired code</button>
+    <button type="button" class="scn-b" data-t="cap" aria-pressed="false">Code fully used</button>
+    <button type="button" class="scn-b" data-t="rolling" aria-pressed="false">Already used this cycle</button>
+    <button type="button" class="scn-b" data-t="state" aria-pressed="false">Existing shopper, new-only code</button>
+    <button type="button" class="scn-b" data-t="cart" aria-pressed="false">Cart below minimum</button>
+    <button type="button" class="scn-b" data-t="tier" aria-pressed="false">Wrong tier, a Phase 2 gate</button>
+    <button type="button" class="scn-b scn-clear" data-t="" aria-pressed="false">Clear</button>
+  </div>
+
+  <ol class="ladder" id="lad">
+    <li data-g="exists"><span class="rr">Code exists and is active</span>
+       <span class="rj">Fails when the code is unknown, or it has been paused or ended.</span>
+       <span class="rp">Phase 1</span></li>
+    <li data-g="validity"><span class="rr">Inside its validity window</span>
+       <span class="rj">Fails when the code has expired or has not started yet.</span>
+       <span class="rp">Phase 1</span></li>
+    <li data-g="tenant"><span class="rr">Belongs to this store</span>
+       <span class="rj">Fails when the code was made for a different storefront.</span>
+       <span class="chipline"><span class="fn">TN-01</span></span>
+       <span class="rp">Phase 1</span></li>
+    <li data-g="binding" class="later"><span class="rr">Reserved member matches, where the code is member-bound</span>
+       <span class="rj">Fails when a bound code is presented by anyone else.</span>
+       <span class="chipline"><span class="fn">VC-02</span></span>
+       <span class="rp">Phase 3</span></li>
+    <li data-g="cap"><span class="rr">Total usage cap not reached</span>
+       <span class="rj">Fails when the code has been fully used up across all shoppers.</span>
+       <span class="rp">Phase 1</span></li>
+    <li data-g="rolling"><span class="rr">Within the shopper's per-member limit</span>
+       <span class="rj">Fails when the shopper already used this code inside the rolling window.</span>
+       <span class="chipline"><span class="fn">RW-01</span><span class="fn">RW-02</span></span>
+       <span class="rp">Phase 1</span></li>
+    <li data-g="tier" class="later"><span class="rr">The shopper's tier has a discount on this code</span>
+       <span class="rj">Fails when the code sets no discount for the shopper's loyalty tier.</span>
+       <span class="chipline"><span class="fn">TR-03</span></span>
+       <span class="rp">Phase 2</span></li>
+    <li data-g="state"><span class="rr">Matches the new or existing customer setting</span>
+       <span class="rj">Fails when a new-only or existing-only code meets the wrong shopper. This gate is decisions 1 and 2.</span>
+       <span class="chipline"><span class="fn">CS-01</span><span class="fn">CS-02</span><span class="fn">CS-03</span></span>
+       <span class="rp">Phase 1</span></li>
+    <li data-g="marketplace"><span class="rr">Marketplace scope matches</span>
+       <span class="rj">Fails when the code is not valid in this marketplace. A baseline gate, not exercised by a single-store tenant.</span>
+       <span class="rp">Phase 1</span></li>
+    <li data-g="cart"><span class="rr">Cart meets the minimum value</span>
+       <span class="rj">Fails when the basket is below the code's minimum.</span>
+       <span class="rp">Phase 1</span></li>
+    <li data-g="category" class="later"><span class="rr">At least one item is in scope</span>
+       <span class="rj">Fails when nothing in the cart qualifies for the code's category or product scope.</span>
+       <span class="rp">Phase 2</span></li>
+  </ol>
+
+  <h3 class="h3">The phase map</h3>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="Epics by phase, with requirement IDs, scrollable">
+    <table class="cmp">
+      <thead><tr><th>Epic</th><th>Phase 1</th><th>Phase 2</th><th>Phase 3</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Code creation and management</td>
+          <td>CM-01 to CM-07</td>
+          <td>&mdash;</td>
+          <td>VC-01 to VC-04</td>
+        </tr>
+        <tr>
+          <td>Redemption at checkout</td>
+          <td>RF-01 to RF-08</td>
+          <td>&mdash;</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td>Condition enforcement</td>
+          <td>CE-01 to CE-05, TN-01, TN-02, RW-01, RW-02, CS-01 to CS-08</td>
+          <td>TR-01 to TR-04, CS-09, category and product scope, per-campaign
+             stacking toggle. TR-05 retired, nothing is cached.</td>
+          <td>VC-01, VC-02, member binding rung</td>
+        </tr>
+        <tr>
+          <td>Settlement and the provisional window</td>
+          <td>ML-01 to ML-07</td>
+          <td>&mdash;</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td>Reporting and attribution</td>
+          <td>FR-01 to FR-04, CS-07, CS-08, ML-03, ML-04, ML-06</td>
+          <td>AT-02, CS-09</td>
+          <td>AT-01, AT-02</td>
+        </tr>
+        <tr>
+          <td>Admin console</td>
+          <td>Section 8.1 to 8.4, baseline fields</td>
+          <td>Tier rule table, plus the per-campaign stacking toggle on the
+             campaign form, off by default</td>
+          <td>Member binding, attribution tag</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="h3">The eight systems, for engineering readers</h3>
+  <div class="slim">
+    <div class="slimcard"><b>Storefront checkout</b>Shows the code field and the discount as its own line.</div>
+    <div class="slimcard"><b>Promo Service</b>Runs the condition ladder, holds a soft reservation for 15 minutes.</div>
+    <div class="slimcard"><b>Condition ladder</b>PRD 7.1, order decides the rejection reason.</div>
+    <div class="slimcard"><b>Example Program Accenture API</b>Returns tier live inside the 500ms budget, Phase 2+. Nothing is stored on the Work side.</div>
+    <div class="slimcard"><b>OMS</b>Records code, discount, and campaign ID on the order.</div>
+    <div class="slimcard"><b>Redemption Ledger</b>Writes Provisional, then Confirmed at day 30.</div>
+    <div class="slimcard"><b>Miles Ledger</b>Owns the 30-day credit window, Example Program-owned.</div>
+    <div class="slimcard"><b>Campaign Reporting</b>Never shows one number without saying which state it is.</div>
+  </div>
+
+  <div class="callout note">
+    <div class="ct">what Phase 1 does not need</div>
+    <p>Phase 1 does not need tier resolution or member binding. The live call to
+       Example Program's Accenture API arrives in Phase 2, alongside category and product
+       scoping and the per-campaign stacking toggle; member binding and bulk voucher
+       generation arrive in Phase 3. No phase introduces a Work-side store of
+       member tier or PII. The Phase 1 machine is smaller than the full diagram
+       shown next.</p>
+  </div>
+</section>
+
+<!-- ---------------------------------------------------------------- 05 -->
+<section class="page" id="pg-build" data-tab="The build" role="tabpanel" tabindex="0">
+  <p class="eyebrow">05 &middot; the build</p>
+  <h2 class="ph2">One member, one code, thirty days to know</h2>
+  <p class="pintro">A single Example Program member applies SNDAY25 to a SAR 400 basket.
+     These are illustrative round figures, roughly a median store basket, and the
+     member ID shown is a placeholder in the real format. It is not a real member.</p>
+
+  <!-- FLOW WIDGET. Structure is fixed; the engine fills every id below.
+       Do not rename the ids unless you also change them in the JS. -->
+  <div class="flow wide" id="fx" tabindex="0" aria-label="Redemption walkthrough. Left and right arrow keys step through it.">
+    <div class="stagewrap">
+      <div class="stage" id="fx-stage" tabindex="0" role="region"
+           aria-label="Redemption diagram, scrollable and zoomable. Ctrl or Cmd plus scroll to zoom, drag to pan when zoomed, arrow keys pan when this area is focused and zoomed."></div>
+      <div class="zoomctl" id="fx-zoom" role="group" aria-label="Diagram zoom controls">
+        <button type="button" class="btn" id="fx-zoomin" aria-label="Zoom in">+</button>
+        <button type="button" class="btn" id="fx-zoomout" aria-label="Zoom out">&minus;</button>
+        <button type="button" class="btn" id="fx-zoomreset" aria-label="Reset zoom">&#8635;</button>
+      </div>
+    </div>
+
+    <div class="nar">
+      <div id="fx-live" aria-live="polite" aria-atomic="true">
+        <div class="st" id="fx-step">step 1 / 1</div>
+        <h4 id="fx-title">&nbsp;</h4>
+        <p id="fx-cap">&nbsp;</p>
+      </div>
+      <div class="chips" id="fx-chips"></div>
+    </div>
+
+    <div class="ctl">
+      <button class="btn pri" id="fx-play" aria-label="Play walkthrough">&#9654; Play</button>
+      <button class="btn" id="fx-prev" aria-label="Previous step">&#8592; Back</button>
+      <button class="btn" id="fx-next" aria-label="Next step">Next &#8594;</button>
+      <button class="btn" id="fx-reset" aria-label="Restart walkthrough">&#8634;</button>
+      <input type="range" id="fx-range" min="0" max="0" value="0" step="1"
+             aria-label="Step scrubber">
+      <span class="count" id="fx-count">1/1</span>
+    </div>
+    <div class="dots" id="fx-dots" role="group" aria-label="Jump to step"></div>
+    <details class="static" id="fx-static">
+      <summary>Full text description of every step</summary>
+      <div id="fx-static-body"></div>
+    </details>
+  </div>
+
+  <hr class="rule">
+
+  <h3 class="h3">When something breaks</h3>
+  <p class="prose">Pick a scenario. The walkthrough replays on the same diagram with
+     that component in the broken state, and the narration changes to the
+     degraded path.</p>
+
+  <div class="fails" id="fx-fails" role="group" aria-label="Failure scenarios"></div>
+  <div class="failinfo" id="fx-failinfo" hidden></div>
+
+  <hr class="rule">
+
+  <h3 class="h3">The three phases</h3>
+  <p class="prose">Capability accumulates. Each phase keeps everything the phase before it
+     shipped and adds the next layer. Phase 1 must land before Saudi National Day. Step
+     through to see what each phase unlocks and what it still cannot do.</p>
+
+  <div class="callout note">
+    <div class="ct">stacking, and what is not in Phase 2</div>
+    <p>Phase 2 now carries a <strong>basic per-campaign promo code stacking
+       toggle</strong>, added 3 August 2026. It is a single switch on a campaign,
+       off by default, and a campaign has to opt in. That is the whole of it.</p>
+    <p>It is deliberately not the full stacking capability. Stacking groups,
+       precedence and priority rules between competing codes, and the A/B testing
+       framework are a much larger piece of work and stay deferred to a separate
+       2027 document, <span class="fn">PRD_Promo_Engine_V2_Stacking_AB.md</span>.
+       The two should not be quoted, scoped, or estimated as if they were the
+       same thing.</p>
+  </div>
+
+  <div class="pr wide" id="pr" tabindex="0" aria-label="Phase roadmap. Left and right arrow keys move between phases.">
+    <div class="pr-rail">
+      <div class="pr-fill" id="pr-fill"></div>
+      <div class="pr-snd">Saudi National Day</div>
+      <button type="button" class="pr-stop" data-p="0" aria-label="Phase 1"><span>1</span></button>
+      <button type="button" class="pr-stop" data-p="1" aria-label="Phase 2"><span>2</span></button>
+      <button type="button" class="pr-stop" data-p="2" aria-label="Phase 3"><span>3</span></button>
+    </div>
+    <div class="pr-ctl">
+      <button type="button" class="btn" id="pr-prev" aria-label="Previous phase">&#8592; Previous</button>
+      <span class="pr-dot" id="pr-label">Phase 1 of 3</span>
+      <button type="button" class="btn pri" id="pr-next" aria-label="Next phase">Next &#8594;</button>
+    </div>
+    <div class="pr-panel" id="pr-panel" aria-live="polite"></div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="decision">
+    <div class="ct">the ask</div>
+    <p>Phase 1 cannot be scoped until the blocking decisions are closed, and Saudi
+       National Day does not move.</p>
+    <ul class="asks">
+      <li>Example Program closes decisions 1, 2, 3 and 5 this week.</li>
+      <li>Confirm decision 4, the commercial treatment, once decision 3 lands.</li>
+      <li>the owner resolves the P2 sequencing conflict in gating item 11, since
+         Saudi National Day precedes the current window.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<script>
+/* ===================================================================
+   ENGINE. Plain ES5, no build step, no dependencies.
+   Read once from the top: helpers -> tab shell -> flow engine ->
+   failure player -> boot.
+   =================================================================== */
+(function(){
+"use strict";
+
+/* ---- tiny helpers -------------------------------------------------- */
+function $(id){return document.getElementById(id);}
+function pad(n){return (n<10?"0":"")+n;}
+/* Escape any author-supplied text before it goes into markup. */
+function esc(s){return String(s==null?"":s)
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+/* Read once. Every widget branches on this instead of just switching off. */
+var REDUCE = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+/* Shared tween easing for the flow-stage camera (viewBox tweens). */
+function easeInOutCubic(p){return p<0.5 ? 4*p*p*p : 1-Math.pow(-2*p+2,3)/2;}
+
+/* ===================================================================
+   TAB SHELL
+   Builds the bar from every <section class="page"> that carries a
+   data-tab attribute. Keyboard: arrows move between tabs, Home/End
+   jump to the ends, roving tabindex so only the selected tab is in
+   the tab order.
+   =================================================================== */
+(function(){
+  var bar = $("bar"); if(!bar) return;
+  var pages = [].slice.call(document.querySelectorAll(".page[data-tab]"));
+  if(!pages.length) return;
+  var btns = [];
+
+  pages.forEach(function(pg,i){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("role","tab");
+    b.id = "tab-" + pg.id;
+    b.setAttribute("aria-controls", pg.id);
+    b.setAttribute("aria-selected", i===0 ? "true" : "false");
+    b.tabIndex = i===0 ? 0 : -1;
+    b.setAttribute("data-pg", pg.id);
+    b.innerHTML = '<span class="n">'+pad(i+1)+'</span>'+esc(pg.getAttribute("data-tab"));
+    bar.appendChild(b);
+    btns.push(b);
+    pg.setAttribute("aria-labelledby", b.id);
+    pg.classList.toggle("on", i===0);
+  });
+
+  function select(i,focus){
+    btns.forEach(function(b,j){
+      var on = i===j;
+      b.setAttribute("aria-selected", on?"true":"false");
+      b.tabIndex = on?0:-1;
+      pages[j].classList.toggle("on", on);
+    });
+    if(focus) btns[i].focus();
+    /* Lazy-boot hook: heavy widgets only start when their tab opens,
+       and can never double-start (see FlowPlayer.boot). */
+    if(window.__fxBoot && pages[i].querySelector("#fx")) window.__fxBoot();
+    window.scrollTo({top:0,behavior:REDUCE?"auto":"smooth"});
+  }
+
+  bar.addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest("button[role=tab]") : null;
+    if(!b) return;
+    select(btns.indexOf(b), false);
+  });
+
+  bar.addEventListener("keydown", function(e){
+    var i = btns.indexOf(document.activeElement);
+    if(i < 0) return;
+    var n = null;
+    if(e.key==="ArrowRight") n = (i+1) % btns.length;
+    else if(e.key==="ArrowLeft") n = (i-1+btns.length) % btns.length;
+    else if(e.key==="Home") n = 0;
+    else if(e.key==="End") n = btns.length-1;
+    if(n===null) return;
+    e.preventDefault();
+    select(n,true);
+  });
+})();
+
+/* ===================================================================
+   [B] AUTHOR: FLOW
+   -------------------------------------------------------------------
+   nodes[]  id     unique, referenced by edges and steps
+            label  the mono headline inside the box
+            sub    small grey line under it (optional)
+            x,y    top-left in an abstract canvas. The engine computes
+                   the viewBox from the extents, so use any scale you
+                   like. Keep boxes ~150 wide and ~64 tall for legibility.
+            w,h    optional size override
+            kind   "" | "store" | "queue"  -> colour family
+   edges[]  from,to  node ids
+            id       optional; defaults to "from>to"
+            label    optional small caption at the midpoint
+            route    optional "h" (elbow horizontally) | "v" | "line"
+                     default is chosen from the relative positions
+   steps[]  title    short headline for the narration panel
+            cap      one or two sentences of explanation
+            nodes[]  ids that are ACTIVE during this step
+            edges[]  edge ids that are ACTIVE during this step
+            broken[] ids that BREAK at this step and stay broken
+            healed[] ids that stop being broken at this step
+            chips[]  optional [{k:"where", v:"edge"}] metadata badges
+            dur      milliseconds this step holds during autoplay
+            cam      optional [x,y,w,h] viewBox to tween the stage SVG
+                     to when this step becomes active (step camera).
+                     Numbers are in the same abstract canvas units as
+                     node x/y/w/h above, so frame a step by eyeballing
+                     the node coordinates it should include, plus some
+                     padding. A step with no cam leaves the camera
+                     wherever it already is. On Restart (the fx-reset
+                     button) the camera always snaps back to the full
+                     computed viewBox regardless of any cam on step 0.
+   -------------------------------------------------------------------
+   State is DERIVED, never mutated: rendering step i replays the whole
+   step list from 0 to i to compute node/edge classes. That single
+   property is what makes seeking, looping, back-stepping and the
+   reduced-motion static render all fall out of one code path.
+   -------------------------------------------------------------------
+   ZOOM. The stage carries a +/-/reset button cluster in its top-right
+   corner (all keyboard-focusable, visible focus ring), plus ctrl/cmd
+   plus wheel to zoom, drag-to-pan once zoomed, arrow-key pan when the
+   stage has focus and is zoomed, and two-finger pinch on touch. Any
+   manual zoom/pan interaction sets a flag that suspends the step
+   camera above until the cluster's reset button is pressed. Every
+   zoom operation, manual or automatic, acts on the SVG viewBox and is
+   centered on the current view - never on the cursor or touch point.
+   prefers-reduced-motion skips the tween and jumps straight to the
+   target viewBox.
+   =================================================================== */
+var FLOW = {
+  nodes: [
+    {id:"member",     label:"Member",            sub:"Example Program app",   x:0,   y:120},
+    {id:"checkout",   label:"Checkout",          sub:"storefront",      x:200, y:120},
+    {id:"promo",      label:"Promo Service",     sub:"validates the code", x:400, y:120},
+    {id:"loyalty",    label:"Example Program e-shop",  sub:"tier lookup",     x:400, y:0,   kind:"store"},
+    {id:"oms",        label:"OMS",               sub:"order of record", x:600, y:120},
+    {id:"redemption", label:"Redemption Ledger", sub:"provisional first", x:600, y:270, kind:"store"},
+    {id:"miles",      label:"Miles Ledger",      sub:"30 day window",   x:830, y:270, kind:"store"},
+    {id:"report",     label:"Campaign Report",   sub:"split by state",  x:830, y:120}
+  ],
+  edges: [
+    {from:"member",     to:"checkout",   label:"enters code"},
+    {from:"checkout",   to:"promo",      label:"validate"},
+    {from:"promo",      to:"loyalty",    label:"tier?", route:"v"},
+    {from:"promo",      to:"checkout",   label:"discount", route:"under", id:"quote"},
+    {from:"checkout",   to:"oms",        label:"commit"},
+    {from:"oms",        to:"redemption", label:"provisional", route:"v"},
+    {from:"redemption", to:"miles",      label:"awaits"},
+    {from:"miles",       to:"redemption", label:"confirm at 30d", id:"confirm"},
+    {from:"redemption", to:"report",     label:"counts"}
+  ],
+  steps: [
+    { title:"The code is entered", cam:[-30,70,480,170],
+      cap:"Member AF-8823410 applies SNDAY25 to a SAR 400 basket at checkout. Nothing has been reserved yet, and no counter has moved.",
+      nodes:["member","checkout"], edges:["member>checkout"],
+      chips:[{k:"basket",v:"SAR 400"},{k:"code",v:"SNDAY25"}], dur:5500 },
+    { title:"The ladder runs in order", cam:[160,70,480,170],
+      cap:"Promo Service walks the condition ladder from the top. Code exists and is active, inside its validity window, tenant scope matches Example Program, total cap not reached, rolling per-member limit not reached. Order decides which rejection reason the member sees.",
+      nodes:["checkout","promo"], edges:["checkout>promo"],
+      chips:[{k:"order",v:"PRD 7.1"},{k:"budget",v:"< 500ms"}], dur:6500 },
+    { title:"Is this member new to the store", cam:[270,60,420,190],
+      cap:"Customer state is checked per tenant against confirmed orders on the Example Program storefront only. Cancelled orders do not count, so a member whose only order was cancelled is still new. This step is exactly decision 1 and decision 2, both unspecified today.",
+      nodes:["promo"], edges:[],
+      chips:[{k:"requirement",v:"CS-01"},{k:"status",v:"open"}], dur:6500 },
+    { title:"Tier is resolved live", cam:[320,-30,460,260],
+      cap:"Promo Service calls Example Program's Accenture API for the member's tier, a third party network hop inside the sub-500ms validation budget. The tier is used for the decision and then discarded: Work never stores it. Phase 1 does not use tier at all, so this hop is a Phase 2 concern.",
+      nodes:["promo","loyalty"], edges:["promo>loyalty"],
+      chips:[{k:"phase",v:"2+"},{k:"requirement",v:"TR-02"}], dur:6000 },
+    { title:"The discount comes back", cam:[160,60,480,200],
+      cap:"SAR 100 off returns as its own line on the checkout summary, never folded into the item price. The code is soft-reserved for 15 minutes. If the member walks away, the reservation releases and the cap stays untouched.",
+      nodes:["promo","checkout"], edges:["quote"],
+      chips:[{k:"discount",v:"SAR 100"},{k:"hold",v:"15 min"}], dur:5800 },
+    { title:"Payment and commit", cam:[360,70,480,170],
+      cap:"Member pays SAR 300. OMS records the code, the discount type, the discount amount, and the campaign ID on the order. Customer state is re-evaluated at commit, so a member cannot hold two baskets and use a New-only code twice.",
+      nodes:["checkout","oms"], edges:["checkout>oms"],
+      chips:[{k:"paid",v:"SAR 300"},{k:"requirement",v:"CS-04"}], dur:6000 },
+    { title:"The redemption is provisional, not done", cam:[520,90,460,280],
+      cap:"The Redemption Ledger writes the redemption as Provisional. It persists the discount band that the campaign rule applied, the customer state, and the miles conversion rate as they were at this moment, so reporting stays stable if the member later places more orders. The member's tier itself is never written down; only the band the campaign resolved to is.",
+      nodes:["oms","redemption"], edges:["oms>redemption"],
+      chips:[{k:"state",v:"Provisional"},{k:"requirement",v:"ML-01"}], dur:6000 },
+    { title:"Thirty days of waiting", cam:[560,80,470,290],
+      cap:"Miles are credited 30 days after acceptance. Until that clock runs out the campaign has not settled. Reporting shows Provisional and Confirmed as two separate figures, never a single blended number.",
+      nodes:["redemption","miles","report"], edges:["redemption>miles","redemption>report"],
+      chips:[{k:"window",v:"30 days"},{k:"requirement",v:"ML-03"}], dur:6500 },
+    { title:"It confirms, or it does not", cam:[-40,-40,1070,420],
+      cap:"At day 30 with no cancellation or return, the redemption becomes Confirmed and the campaign result is finally real. This is the first moment anyone can honestly say the campaign worked.",
+      nodes:["miles","redemption","report"], edges:["confirm"],
+      chips:[{k:"state",v:"Confirmed"},{k:"requirement",v:"ML-01"}], dur:6000 }
+  ]
+};
+
+/* ===================================================================
+   [C] AUTHOR: FAILURES
+   -------------------------------------------------------------------
+   Each scenario replays the SAME diagram with one component broken.
+     id        unique
+     title     button label
+     breaks    node id that goes red
+     system    what the system does about it
+     customer  what the customer actually sees
+     recovery  how it heals
+     steps[]   same shape as FLOW.steps. Usually you copy the happy
+               path up to the break, then diverge. Use broken:[] and
+               healed:[] to control when the node turns red and back.
+   =================================================================== */
+var FAILURES = [
+  {
+    id:"f1-cancel", title:"Order cancelled inside the window", breaks:"miles",
+    system:"The redemption reverses. Per-member limit and total cap are both restored, even if the campaign has already expired. An expired campaign never reopens for new redemptions, only its counters are corrected.",
+    customer:"Nothing. The member sees a normal cancellation.",
+    recovery:"Automatic. The member also returns to new-customer status, because customer state counts confirmed orders only.",
+    steps:[
+      { title:"Order sits provisional",
+        cap:"The order is inside the 30 day window. The Redemption Ledger shows the redemption as Provisional and the Miles Ledger has not credited anything yet.",
+        nodes:["redemption","miles"], edges:["redemption>miles"], dur:5200 },
+      { title:"The order is cancelled",
+        cap:"Example Program cancels the order inside the window. The Miles Ledger cannot credit a cancelled order.",
+        nodes:[], edges:[], broken:["miles"], chips:[{k:"requirement",v:"ML-02"}], dur:5000 },
+      { title:"The redemption reverses",
+        cap:"The Redemption Ledger reverses the entry. The per-member limit and the total cap are restored, and customer state reverts to new.",
+        nodes:["redemption"], edges:[], healed:["miles"], chips:[{k:"requirement",v:"ML-07"}], dur:5600 },
+      { title:"Nothing reaches the member",
+        cap:"The member sees a routine cancellation. No promo-specific message, no manual step, no lost data.",
+        nodes:["checkout"], edges:[], dur:5000 }
+    ]
+  },
+  {
+    id:"f2-partial", title:"Partial return", breaks:"redemption",
+    system:"There is no rule. A full cancellation reverses cleanly. An order where the member keeps some items and returns others has no defined behaviour for whether the discount is recalculated, partially clawed back, or left alone.",
+    customer:"Undefined, which is the problem.",
+    recovery:"None until Example Program decides. This is gating item 9, and it is shown as genuinely broken because it is.",
+    steps:[
+      { title:"Order is provisional",
+        cap:"The order sits inside the window with a Provisional redemption, exactly like the happy path.",
+        nodes:["redemption"], edges:[], dur:5000 },
+      { title:"Member returns part of the order",
+        cap:"Some items are returned, some are kept. The basket value the discount was calculated against no longer matches what was actually bought.",
+        nodes:["oms"], edges:["oms>redemption"], dur:5400 },
+      { title:"The Redemption Ledger has no rule",
+        cap:"There is no defined behaviour for recalculating, partially clawing back, or leaving the discount alone. Nothing happens because nothing is specified.",
+        nodes:[], edges:[], broken:["redemption"], chips:[{k:"gating item",v:"9"}], dur:5600 },
+      { title:"It stays broken",
+        cap:"This is not shown as a solved case. It remains unresolved until Example Program decides, gating item 9.",
+        nodes:[], edges:[], dur:5000 }
+    ]
+  },
+  {
+    id:"f3-tier", title:"Tier lookup is slow", breaks:"loyalty",
+    system:"The third party call eats the sub-500ms validation budget. Caching is not the answer: the architecture settled on 3 August 2026 is a live lookup on every validation, with no tier, no PII, and no Example Program member data stored on the Work side. The mitigation is therefore an engineering one, a hard timeout and a response-time SLA on the Accenture API, not a data-storage one.",
+    customer:"Checkout feels slow, or the code fails to validate.",
+    recovery:"Timeout, retry policy, and an agreed response-time SLA on the Accenture API, plus a defined behaviour when it does not answer. Phase 1 avoids this entirely by not using tier.",
+    steps:[
+      { title:"Tier lookup begins",
+        cap:"Promo Service calls Example Program's Accenture API for the member's tier, inside the sub-500ms validation budget.",
+        nodes:["promo","loyalty"], edges:["promo>loyalty"], dur:5200 },
+      { title:"The API is slow",
+        cap:"The third party call does not return in time and eats the validation budget.",
+        nodes:[], edges:[], broken:["loyalty"], chips:[{k:"requirement",v:"RF-02"}], dur:5400 },
+      { title:"Checkout stalls or fails",
+        cap:"The member either waits noticeably longer or the code fails to validate. Phase 1 never makes this call, so it never carries this risk.",
+        nodes:["checkout"], edges:[], dur:5600 },
+      { title:"The fix is an SLA, not a cache",
+        cap:"Caching the tier would remove the live call, but it is explicitly out of the architecture: Work stores no member tier and no PII. The fix is a timeout, a retry policy, and an agreed response-time SLA with Example Program and Accenture.",
+        nodes:[], edges:[], healed:["loyalty"], chips:[{k:"requirement",v:"TR-02"}], dur:5400 }
+    ]
+  },
+  {
+    id:"f4-miles-basket", title:"The basket was paid in miles", breaks:"promo",
+    system:"The discount has to apply to a miles-priced basket. The conversion basis used at redemption is persisted so cost can be reconciled later, but which basis to use is not agreed.",
+    customer:"Unclear what their discount is worth.",
+    recovery:"Blocked on gating item 5.",
+    steps:[
+      { title:"A miles basket enters",
+        cap:"The member checks out with a basket priced in Example Program miles instead of SAR.",
+        nodes:["checkout","promo"], edges:["checkout>promo"], dur:5200 },
+      { title:"The discount basis is unclear",
+        cap:"The conversion rate to apply the discount against is not agreed, so the discount value is ambiguous for this basket.",
+        nodes:[], edges:[], broken:["promo"], chips:[{k:"requirement",v:"MI-02"}], dur:5600 },
+      { title:"The rate gets persisted anyway",
+        cap:"Whatever conversion is used at redemption is persisted for later reconciliation, but which rate is correct is still an open question.",
+        nodes:[], edges:[], dur:5400 },
+      { title:"Resolution waits on Example Program",
+        cap:"This stays blocked on gating item 5, the miles-to-cash conversion basis, owned jointly by Work engineering and Example Program finance.",
+        nodes:[], edges:[], healed:["promo"], dur:5200 }
+    ]
+  },
+  {
+    id:"f5-influencer", title:"The influencer was already paid", breaks:"report",
+    system:"Performance figures default to Confirmed. If an influencer is paid on Provisional numbers and orders later reverse, Work has claw-back exposure. Reporting exposes a reversal rate per campaign and per attribution tag.",
+    customer:"None.",
+    recovery:"Policy decision, gating item 10. Phase 3 concern, not Phase 1.",
+    steps:[
+      { title:"Provisional numbers look strong",
+        cap:"Early in a campaign, redemption counts are all Provisional. An influencer report built on that number looks better than it may end up being.",
+        nodes:["redemption","report"], edges:["redemption>report"], dur:5400 },
+      { title:"Reporting mislabels the number",
+        cap:"If a Provisional count is treated as final and paid out, Work has claw-back exposure once orders reverse.",
+        nodes:[], edges:[], broken:["report"], chips:[{k:"requirement",v:"ML-06"}], dur:5400 },
+      { title:"Reversal rate is the fix",
+        cap:"Reporting exposes the reversal rate per campaign and per attribution tag, so a campaign generating cancelled orders is visible rather than hidden in a headline count.",
+        nodes:[], edges:[], healed:["report"], chips:[{k:"requirement",v:"ML-04"}], dur:5600 },
+      { title:"Payment timing stays a policy call",
+        cap:"Whether influencers are paid on provisional or confirmed numbers remains gating item 10, a Phase 3 concern rather than a Phase 1 blocker.",
+        nodes:[], edges:[], dur:5000 }
+    ]
+  }
+];
+
+/* ===================================================================
+   FLOW ENGINE  (generic - it knows nothing about the content above)
+   -------------------------------------------------------------------
+   Rendering: one inline SVG, geometry computed from node extents.
+   Playback : a single rAF loop with a pausable clock. Pause is an
+              offset on the clock, not a per-timer flag, so seeking
+              and resuming never leave orphaned timers.
+   =================================================================== */
+var Flow = (function(){
+  var NW = 150, NH = 64, PAD = 40;      /* default node box + canvas padding */
+  var stage=$("fx-stage");
+  if(!stage) return null;               /* widget is droppable: no element, no engine */
+
+  var nodeEls={}, edgeEls={}, svg=null;
+  var track = FLOW.steps;               /* the step list currently playing */
+  var idx = 0, playing = false, booted = false;
+  var t0 = 0, off = 0, pausedAt = null, stepStart = 0;
+
+  /* ---- camera / zoom state ------------------------------------------
+     baseView   the natural full-extent viewBox computed in build()
+     curView    the viewBox actually on screen right now
+     camAnim    the in-flight viewBox tween, or null
+     manualOverride  true once the visitor has zoomed/panned by hand;
+                suspends the automatic step camera until the zoom
+                cluster's reset button is pressed
+     Camera tweening runs on real wall-clock time (performance.now()),
+     not the pausable step clock() below, so it still animates while
+     the walkthrough itself is paused. */
+  var baseView = null, curView = null, camAnim = null, manualOverride = false;
+  var ZMIN = 0.12;                      /* smallest fraction of base width */
+
+  /* ---- geometry --------------------------------------------------- */
+  function box(n){
+    return {x:n.x, y:n.y, w:n.w||NW, h:n.h||NH,
+            cx:n.x+(n.w||NW)/2, cy:n.y+(n.h||NH)/2};
+  }
+  function nodeById(id){
+    for(var i=0;i<FLOW.nodes.length;i++) if(FLOW.nodes[i].id===id) return FLOW.nodes[i];
+    return null;
+  }
+  /* Edge routing. Orthogonal elbows only, so paths stay readable and
+     the same "d" string works at any zoom. */
+  function edgePath(e){
+    var a = box(nodeById(e.from)), b = box(nodeById(e.to));
+    var route = e.route;
+    if(!route) route = Math.abs(a.cy-b.cy) < 8 ? "line"
+                     : Math.abs(a.cx-b.cx) < 8 ? "v" : "h";
+    if(route==="under"){
+      /* a decorative return path that loops below both boxes */
+      var y = Math.max(a.y+a.h, b.y+b.h) + 34;
+      return "M"+a.cx+" "+(a.y+a.h)+" V"+y+" H"+b.cx+" V"+(b.y+b.h);
+    }
+    if(route==="line"){
+      var x1 = a.cx<b.cx ? a.x+a.w : a.x, x2 = a.cx<b.cx ? b.x : b.x+b.w;
+      return "M"+x1+" "+a.cy+" H"+x2;
+    }
+    if(route==="v"){
+      var y1 = a.cy<b.cy ? a.y+a.h : a.y, y2 = a.cy<b.cy ? b.y : b.y+b.h;
+      return "M"+a.cx+" "+y1+" V"+y2;
+    }
+    /* "h": leave the side, turn at the midpoint, enter the other side */
+    var sx = a.cx<b.cx ? a.x+a.w : a.x, ex = a.cx<b.cx ? b.x : b.x+b.w;
+    var mid = (sx+ex)/2;
+    return "M"+sx+" "+a.cy+" H"+mid+" V"+b.cy+" H"+ex;
+  }
+  function edgeId(e){ return e.id || (e.from+">"+e.to); }
+
+  /* Two edges can legitimately share the same pair of nodes, most often a
+     request and its return. Left alone they resolve to the same routed
+     midpoint and the labels stack into unreadable mush. fanIndex gives each
+     edge in such a group a stable slot so they can be pushed apart. Grouping
+     is on the UNORDERED pair, so A->B and B->A count as one group. */
+  function pairKey(e){
+    return [e.from, e.to].slice().sort().join("~");
+  }
+  function fanInfo(e){
+    var k = pairKey(e), group = [], i, all = FLOW.edges;
+    for(i=0;i<all.length;i++){
+      if(pairKey(all[i])===k) group.push(all[i]);
+    }
+    var idx = 0;
+    for(i=0;i<group.length;i++){ if(edgeId(group[i])===edgeId(e)) idx = i; }
+    /* centred slots: 1 edge -> 0, 2 edges -> -1,+1, 3 edges -> -1,0,+1 */
+    return {n:group.length, slot: group.length<2 ? 0 : (idx - (group.length-1)/2)};
+  }
+  var FAN_GAP = 17;
+
+  /* Label placement, computed from the SAME routed geometry as edgePath()
+     (never from a naive node-center average, which is what let the
+     "request"/"ack" labels land on top of each other). Each route gets a
+     small perpendicular nudge off the line it labels, then a fan offset so
+     parallel and opposing edges never coincide. */
+  function edgeLabelPos(e){
+    var a = box(nodeById(e.from)), b = box(nodeById(e.to));
+    var route = e.route;
+    if(!route) route = Math.abs(a.cy-b.cy) < 8 ? "line"
+                     : Math.abs(a.cx-b.cx) < 8 ? "v" : "h";
+    /* fan offset pushes co-located labels apart along the axis that is
+       perpendicular to the segment each label sits on */
+    var fan = fanInfo(e).slot * FAN_GAP;
+    if(route==="under"){
+      /* anchor to the elbow's horizontal return segment */
+      var uy = Math.max(a.y+a.h, b.y+b.h) + 34;
+      return {x:(a.cx+b.cx)/2, y:uy-6+fan};
+    }
+    if(route==="line"){
+      var x1 = a.cx<b.cx ? a.x+a.w : a.x, x2 = a.cx<b.cx ? b.x : b.x+b.w;
+      return {x:(x1+x2)/2, y:a.cy-7+fan};
+    }
+    if(route==="v"){
+      var y1 = a.cy<b.cy ? a.y+a.h : a.y, y2 = a.cy<b.cy ? b.y : b.y+b.h;
+      return {x:a.cx+9+fan, y:(y1+y2)/2};
+    }
+    /* "h": the true midpoint of the rendered elbow sits on its vertical
+       middle segment */
+    var sx = a.cx<b.cx ? a.x+a.w : a.x, ex = a.cx<b.cx ? b.x : b.x+b.w;
+    var mid = (sx+ex)/2;
+    return {x:mid+9+fan, y:(a.cy+b.cy)/2};
+  }
+
+  /* ---- one-time SVG build -----------------------------------------
+     The diagram is emitted as a markup string and parsed by the browser
+     as inline SVG. That keeps the whole geometry readable in one place
+     and avoids namespace ceremony.                                    */
+  function build(){
+    var minX=1e9,minY=1e9,maxX=-1e9,maxY=-1e9;
+    FLOW.nodes.forEach(function(n){var b=box(n);
+      minX=Math.min(minX,b.x); minY=Math.min(minY,b.y);
+      maxX=Math.max(maxX,b.x+b.w); maxY=Math.max(maxY,b.y+b.h);});
+    minX-=PAD; minY-=PAD; maxX+=PAD; maxY+=PAD+34; /* +34 for "under" routes */
+    baseView = [minX, minY, maxX-minX, maxY-minY];
+    curView = baseView.slice();
+
+    var h = '<svg viewBox="'+minX+' '+minY+' '+(maxX-minX)+' '+(maxY-minY)+'"'
+          + ' role="img" aria-label="Pipeline diagram. The step description below'
+          + ' carries the same information as text.">';
+
+    /* arrowheads, one per state, referenced by id */
+    h += '<defs>';
+    [["fxA","var(--line2)"],["fxB","var(--accent)"],["fxC","var(--red)"]].forEach(function(m){
+      h += '<marker id="'+m[0]+'" viewBox="0 0 8 8" refX="7" refY="4"'
+         + ' markerWidth="7" markerHeight="7" orient="auto">'
+         + '<path d="M0 0L8 4L0 8Z" fill="'+m[1]+'"/></marker>';
+    });
+    h += '</defs>';
+
+    /* edges first so nodes paint over them */
+    FLOW.edges.forEach(function(e){
+      var a=box(nodeById(e.from)), b=box(nodeById(e.to));
+      h += '<g class="fxe is-idle" data-e="'+esc(edgeId(e))+'">'
+         + '<path d="'+edgePath(e)+'" marker-end="url(#fxA)"/>';
+      if(e.label){
+        var lp = edgeLabelPos(e);
+        h += '<text class="elab" x="'+lp.x+'" y="'+lp.y+'"'
+           + ' text-anchor="middle">'+esc(e.label)+'</text>';
+      }
+      h += '</g>';
+    });
+
+    /* nodes */
+    FLOW.nodes.forEach(function(n){
+      var b = box(n);
+      h += '<g class="fxn is-idle'+(n.kind?' kind-'+esc(n.kind):'')+'" data-n="'+esc(n.id)+'">'
+         + '<rect class="shape" x="'+b.x+'" y="'+b.y+'" width="'+b.w+'" height="'+b.h+'" rx="11"/>'
+         + '<text class="lab" x="'+b.cx+'" y="'+(b.cy+(n.sub?-2:4))+'" text-anchor="middle">'
+         + esc(n.label)+'</text>';
+      if(n.sub){
+        h += '<text class="sub" x="'+b.cx+'" y="'+(b.cy+15)+'" text-anchor="middle">'
+           + esc(n.sub)+'</text>';
+      }
+      h += '</g>';
+    });
+
+    h += '</svg>';
+    stage.innerHTML = h;
+    svg = stage.querySelector("svg");
+
+    /* cache handles: every state change writes to these, nothing else */
+    [].slice.call(svg.querySelectorAll("[data-e]")).forEach(function(g){
+      edgeEls[g.getAttribute("data-e")] = {g:g, p:g.querySelector("path")};
+    });
+    [].slice.call(svg.querySelectorAll("[data-n]")).forEach(function(g){
+      nodeEls[g.getAttribute("data-n")] = g;
+    });
+  }
+
+  /* ---- camera / zoom --------------------------------------------------
+     Every zoom operation - buttons, wheel, drag, arrow-pan, pinch, and
+     the automatic step camera - funnels through setViewBox/tweenView so
+     there is exactly one place that writes the viewBox attribute. */
+  function setViewBox(v){
+    curView = v;
+    if(svg) svg.setAttribute("viewBox", v[0]+" "+v[1]+" "+v[2]+" "+v[3]);
+    stage.classList.toggle("is-zoomed", v[2] < baseView[2]-0.5);
+    var zin=$("fx-zoomin"), zout=$("fx-zoomout");
+    if(zin) zin.setAttribute("aria-disabled", v[2] <= baseView[2]*ZMIN+0.5 ? "true":"false");
+    if(zout) zout.setAttribute("aria-disabled", v[2] >= baseView[2]-0.5 ? "true":"false");
+  }
+  /* Keep the view inside a sane box: never zoom in tighter than ZMIN of
+     the base extent, never wider than the base extent, and never let a
+     pan drift further than half the base extent past the diagram. */
+  function clampView(v){
+    var w = Math.max(baseView[2]*ZMIN, Math.min(baseView[2], v[2]));
+    var h = Math.max(baseView[3]*ZMIN, Math.min(baseView[3], v[3]));
+    var cx = v[0]+v[2]/2, cy = v[1]+v[3]/2;
+    var x = cx-w/2, y = cy-h/2;
+    var padX = baseView[2]*0.5, padY = baseView[3]*0.5;
+    var minXb = baseView[0]-padX, maxXb = baseView[0]+baseView[2]+padX-w;
+    var minYb = baseView[1]-padY, maxYb = baseView[1]+baseView[3]+padY-h;
+    if(maxXb<minXb) maxXb=minXb;
+    if(maxYb<minYb) maxYb=minYb;
+    x = Math.max(minXb, Math.min(maxXb, x));
+    y = Math.max(minYb, Math.min(maxYb, y));
+    return [x,y,w,h];
+  }
+  /* Tween the viewBox to target over dur ms, easeInOutCubic, on the real
+     wall clock. REDUCE (or dur 0) jumps straight there instead. */
+  function tweenView(target, dur){
+    target = clampView(target);
+    if(REDUCE || !dur){ camAnim = null; setViewBox(target); return; }
+    camAnim = {start:performance.now(), dur:dur, from:curView.slice(), to:target};
+  }
+  /* Advances the in-flight tween, if any. Called from frame() every
+     rAF tick regardless of play/pause state. */
+  function tickCam(now){
+    if(!camAnim) return;
+    var p = (now-camAnim.start)/camAnim.dur;
+    if(p>=1){ setViewBox(camAnim.to); camAnim=null; return; }
+    var e = easeInOutCubic(p<0?0:p), v=[0,0,0,0], i;
+    for(i=0;i<4;i++) v[i] = camAnim.from[i] + (camAnim.to[i]-camAnim.from[i])*e;
+    setViewBox(v);
+  }
+  /* Automatic step camera: called from goTo(). A restart (the Reset
+     button) always returns to the full computed viewBox and clears the
+     manual-override suspension; an ordinary step entry tweens to that
+     step's cam if it declares one, and otherwise leaves the view alone. */
+  function applyStepCam(i, isRestart){
+    if(isRestart){
+      manualOverride = false;
+      tweenView(baseView.slice(), REDUCE?0:900);
+      return;
+    }
+    if(manualOverride) return;
+    var s = track[i];
+    if(s && s.cam) tweenView(s.cam, 900);
+  }
+  function zoomBy(factor){
+    manualOverride = true;
+    var v = curView, cx=v[0]+v[2]/2, cy=v[1]+v[3]/2;
+    var neww=v[2]/factor, newh=v[3]/factor;
+    tweenView([cx-neww/2, cy-newh/2, neww, newh], REDUCE?0:220);
+  }
+  /* Zoom cluster's own reset: un-suspends the auto-cam and returns to
+     whatever camera the current step calls for (its own cam, or the
+     full view if it declares none). */
+  function zoomReset(){
+    manualOverride = false;
+    var s = track[idx];
+    tweenView((s && s.cam) ? s.cam.slice() : baseView.slice(), REDUCE?0:700);
+  }
+
+  /* ---- derived state: render step i from scratch -------------------
+     No mutation history to keep in sync. This is the idempotent
+     "apply" of the whole track up to i.                              */
+  function paint(i){
+    var nstate={}, estate={}, broken={};
+    FLOW.nodes.forEach(function(n){nstate[n.id]="idle";});
+    FLOW.edges.forEach(function(e){estate[edgeId(e)]="idle";});
+
+    for(var j=0;j<=i && j<track.length;j++){
+      var s = track[j];
+      (s.broken||[]).forEach(function(id){broken[id]=1;});
+      (s.healed||[]).forEach(function(id){delete broken[id];});
+      (s.nodes||[]).forEach(function(id){nstate[id] = (j===i)?"active":"done";});
+      (s.edges||[]).forEach(function(id){estate[id] = (j===i)?"active":"done";});
+    }
+
+    Object.keys(nodeEls).forEach(function(id){
+      var st = broken[id] ? "broken" : nstate[id];
+      var n = nodeById(id);
+      nodeEls[id].setAttribute("class","fxn is-"+st+(n.kind?" kind-"+n.kind:""));
+    });
+    Object.keys(edgeEls).forEach(function(id){
+      var e = null;
+      FLOW.edges.forEach(function(x){if(edgeId(x)===id) e=x;});
+      var st = (broken[e.from]||broken[e.to]) ? "broken" : estate[id];
+      edgeEls[id].g.setAttribute("class","fxe is-"+st);
+      edgeEls[id].p.setAttribute("marker-end",
+        st==="broken" ? "url(#fxC)" : (st==="idle" ? "url(#fxA)" : "url(#fxB)"));
+    });
+
+    /* narration */
+    var s = track[i] || {};
+    $("fx-step").textContent = "step "+(i+1)+" / "+track.length;
+    $("fx-title").textContent = s.title || "";
+    $("fx-cap").textContent = s.cap || "";
+    $("fx-count").textContent = (i+1)+"/"+track.length;
+    var chips = $("fx-chips"); chips.innerHTML = "";
+    (s.chips||[]).forEach(function(c){
+      var sp = document.createElement("span");
+      sp.className = "chip";
+      sp.innerHTML = esc(c.k)+" <b></b>";
+      sp.querySelector("b").textContent = c.v;
+      chips.appendChild(sp);
+    });
+    /* dots + scrubber */
+    var dots = $("fx-dots").children;
+    for(var k=0;k<dots.length;k++){
+      dots[k].classList.toggle("on", k===i);
+      if(k===i) dots[k].setAttribute("aria-current","step");
+      else dots[k].removeAttribute("aria-current");
+    }
+    $("fx-range").value = i;
+    /* aria-disabled (not the disabled attribute) so a keyboard user
+       stepping back to the first/last step keeps focus on the button
+       instead of being silently blurred to <body>. */
+    $("fx-prev").setAttribute("aria-disabled", i===0 ? "true" : "false");
+    $("fx-next").setAttribute("aria-disabled", i===track.length-1 ? "true" : "false");
+  }
+
+  /* ---- controls / clock -------------------------------------------- */
+  function clock(){ return (pausedAt!==null?pausedAt:performance.now()) - t0 - off; }
+  function goTo(i, isRestart){
+    idx = Math.max(0, Math.min(track.length-1, i));
+    stepStart = clock();
+    paint(idx);
+    applyStepCam(idx, !!isRestart);
+  }
+  function setPlaying(on){
+    playing = on;
+    if(on){ if(pausedAt!==null){ off += performance.now()-pausedAt; pausedAt=null; } }
+    else if(pausedAt===null){ pausedAt = performance.now(); }
+    $("fx-play").innerHTML = on ? "&#10074;&#10074; Pause" : "&#9654; Play";
+    $("fx-play").setAttribute("aria-label", on ? "Pause walkthrough" : "Play walkthrough");
+  }
+  function frame(){
+    requestAnimationFrame(frame);
+    /* Camera tweens run on the real clock regardless of play/pause, so
+       stepping manually through a paused walkthrough still animates. */
+    tickCam(performance.now());
+    /* Never burn cycles when the tab is backgrounded or this page is
+       not the open one. offsetParent is null for a display:none ancestor. */
+    if(!playing) return;
+    if(document.hidden || !stage.offsetParent){ stepStart = clock(); return; }
+    var s = track[idx] || {};
+    if(clock() - stepStart >= (s.dur||3500)){
+      if(idx+1 >= track.length) goTo(0);          /* loop */
+      else goTo(idx+1);
+    }
+  }
+
+  /* ---- step dots (regenerated whenever the track changes) ---------- */
+  function buildDots(isFailure){
+    var d = $("fx-dots"); d.innerHTML = "";
+    track.forEach(function(s,i){
+      var b = document.createElement("button");
+      b.type="button";
+      b.textContent = String(i+1);
+      if(isFailure) b.className = "f";
+      b.setAttribute("aria-label","Go to step "+(i+1)+": "+(s.title||""));
+      b.addEventListener("click", function(){ setPlaying(false); goTo(i); });
+      d.appendChild(b);
+    });
+    $("fx-range").max = track.length-1;
+  }
+
+  /* ---- text alternative: available to everyone as a collapsed
+     <details> disclosure, not just reduced-motion users ------------- */
+  function renderStatic(){
+    var host = $("fx-static-body");
+    var ol = document.createElement("ol");
+    track.forEach(function(s){
+      var li = document.createElement("li");
+      var b = document.createElement("b"); b.textContent = (s.title||"")+". ";
+      li.appendChild(b);
+      li.appendChild(document.createTextNode(s.cap||""));
+      ol.appendChild(li);
+    });
+    host.innerHTML = ""; host.appendChild(ol);
+  }
+
+  /* ---- public: switch the track (happy path or a failure) --------- */
+  function load(steps, isFailure){
+    track = steps;
+    buildDots(!!isFailure);
+    renderStatic();
+    if(REDUCE){ goTo(track.length-1); setPlaying(false); }
+    else { goTo(0); setPlaying(true); }
+  }
+
+  /* ---- zoom interactions -------------------------------------------
+     Wired once at boot. Every path here sets manualOverride=true, since
+     each is a deliberate manual zoom/pan that should suspend the
+     automatic step camera until the cluster's reset button is used. */
+  function initZoomInteractions(){
+    var zin=$("fx-zoomin"), zout=$("fx-zoomout"), zreset=$("fx-zoomreset");
+    if(zin) zin.addEventListener("click", function(){
+      if(this.getAttribute("aria-disabled")==="true") return; zoomBy(1.35);
+    });
+    if(zout) zout.addEventListener("click", function(){
+      if(this.getAttribute("aria-disabled")==="true") return; zoomBy(1/1.35);
+    });
+    if(zreset) zreset.addEventListener("click", zoomReset);
+
+    /* ctrl/cmd + wheel only - a bare wheel must keep scrolling the page */
+    stage.addEventListener("wheel", function(e){
+      if(!(e.ctrlKey||e.metaKey)) return;
+      e.preventDefault();
+      manualOverride = true; camAnim = null;
+      var factor = e.deltaY<0 ? 1.12 : (1/1.12);
+      var v = curView, cx=v[0]+v[2]/2, cy=v[1]+v[3]/2;
+      var neww=v[2]/factor, newh=v[3]/factor;
+      setViewBox(clampView([cx-neww/2, cy-newh/2, neww, newh]));
+    }, {passive:false});
+
+    /* drag-to-pan, only meaningful once zoomed past the base extent */
+    var dragging=false, dragX=0, dragY=0;
+    stage.addEventListener("mousedown", function(e){
+      if(curView[2] >= baseView[2]-0.5) return;   /* not zoomed: leave native scroll alone */
+      dragging = true; dragX=e.clientX; dragY=e.clientY;
+      e.preventDefault();
+    });
+    window.addEventListener("mousemove", function(e){
+      if(!dragging) return;
+      var rect = svg.getBoundingClientRect();
+      if(!rect.width || !rect.height) return;
+      var sx = curView[2]/rect.width, sy = curView[3]/rect.height;
+      var dx = (e.clientX-dragX)*sx, dy = (e.clientY-dragY)*sy;
+      dragX=e.clientX; dragY=e.clientY;
+      manualOverride = true; camAnim = null;
+      setViewBox(clampView([curView[0]-dx, curView[1]-dy, curView[2], curView[3]]));
+    });
+    window.addEventListener("mouseup", function(){ dragging = false; });
+
+    /* arrow-key pan, only when the stage itself has focus and is zoomed;
+       otherwise let the key bubble up to the widget's step-nav handler */
+    stage.addEventListener("keydown", function(e){
+      if(e.key!=="ArrowLeft" && e.key!=="ArrowRight" && e.key!=="ArrowUp" && e.key!=="ArrowDown") return;
+      if(curView[2] >= baseView[2]-0.5) return;
+      e.preventDefault(); e.stopPropagation();
+      manualOverride = true; camAnim = null;
+      var dx=0, dy=0, sx=curView[2]*0.08, sy=curView[3]*0.08;
+      if(e.key==="ArrowLeft") dx=-sx; if(e.key==="ArrowRight") dx=sx;
+      if(e.key==="ArrowUp") dy=-sy; if(e.key==="ArrowDown") dy=sy;
+      setViewBox(clampView([curView[0]+dx, curView[1]+dy, curView[2], curView[3]]));
+    });
+
+    /* two-finger pinch, standard touch events */
+    var pinch=null;
+    function touchDist(t){ var dx=t[0].clientX-t[1].clientX, dy=t[0].clientY-t[1].clientY; return Math.sqrt(dx*dx+dy*dy); }
+    stage.addEventListener("touchstart", function(e){
+      if(e.touches.length===2) pinch = {d:touchDist(e.touches), view:curView.slice()};
+    }, {passive:true});
+    stage.addEventListener("touchmove", function(e){
+      if(e.touches.length!==2 || !pinch) return;
+      e.preventDefault();
+      var factor = touchDist(e.touches)/pinch.d;
+      manualOverride = true; camAnim = null;
+      var v = pinch.view, cx=v[0]+v[2]/2, cy=v[1]+v[3]/2;
+      var neww=v[2]/factor, newh=v[3]/factor;
+      setViewBox(clampView([cx-neww/2, cy-newh/2, neww, newh]));
+    }, {passive:false});
+    stage.addEventListener("touchend", function(e){ if(e.touches.length<2) pinch = null; });
+  }
+
+  function boot(){
+    if(booted) return; booted = true;             /* lazy, and only once */
+    build();
+    t0 = performance.now();
+    buildDots(false);
+    renderStatic();
+
+    $("fx-play").addEventListener("click", function(){ setPlaying(!playing); });
+    $("fx-next").addEventListener("click", function(){
+      if(this.getAttribute("aria-disabled")==="true") return;
+      setPlaying(false); goTo(idx+1);
+    });
+    $("fx-prev").addEventListener("click", function(){
+      if(this.getAttribute("aria-disabled")==="true") return;
+      setPlaying(false); goTo(idx-1);
+    });
+    $("fx-reset").addEventListener("click", function(){ goTo(0, true); setPlaying(!REDUCE); });
+    $("fx-range").addEventListener("input", function(){ setPlaying(false); goTo(+this.value); });
+
+    initZoomInteractions();
+
+    /* left/right arrows anywhere inside the widget step through it -
+       true both when a descendant control has focus (bubbling) and
+       when the widget shell itself is focused (#fx has tabindex="0"). */
+    $("fx").addEventListener("keydown", function(e){
+      if(e.target.tagName==="INPUT") return;
+      if(e.key==="ArrowRight"){ e.preventDefault(); setPlaying(false); goTo(idx+1); }
+      if(e.key==="ArrowLeft"){ e.preventDefault(); setPlaying(false); goTo(idx-1); }
+    });
+
+    if(REDUCE){
+      /* No autoplay. Open the text alternative and show the end state. */
+      $("fx-play").hidden = true;
+      $("fx-static").open = true;
+      goTo(track.length-1);
+    } else {
+      goTo(0); setPlaying(true);
+      requestAnimationFrame(frame);
+    }
+  }
+
+  return {boot:boot, load:load, pause:function(){setPlaying(false);}};
+})();
+
+/* Expose the lazy-boot hook the tab shell calls. */
+if(Flow) window.__fxBoot = Flow.boot;
+
+/* ===================================================================
+   FAILURE PLAYER
+   Renders one button per scenario, and on click swaps the flow track
+   for that scenario's steps and shows the system/customer/recovery
+   detail. Clicking the active scenario again returns to the happy path.
+   =================================================================== */
+(function(){
+  var host = $("fx-fails"), info = $("fx-failinfo");
+  if(!host || !Flow) return;
+  var current = null, btns = [];
+
+  function show(f){
+    if(!f){ info.hidden = true; info.innerHTML = ""; return; }
+    var dl = document.createElement("dl");
+    [["breaks", (function(){ for(var i=0;i<FLOW.nodes.length;i++)
+        if(FLOW.nodes[i].id===f.breaks) return FLOW.nodes[i].label; return f.breaks; })()],
+     ["what the system does", f.system],
+     ["what the customer sees", f.customer],
+     ["recovery", f.recovery]].forEach(function(r){
+      var dt = document.createElement("dt"); dt.textContent = r[0];
+      var dd = document.createElement("dd"); dd.textContent = r[1];
+      dl.appendChild(dt); dl.appendChild(dd);
+    });
+    info.innerHTML = ""; info.appendChild(dl); info.hidden = false;
+  }
+
+  FAILURES.forEach(function(f){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("aria-pressed","false");
+    b.innerHTML = '<span class="fk">failure</span><span class="ft"></span>';
+    b.querySelector(".ft").textContent = f.title;
+    b.addEventListener("click", function(){
+      Flow.boot();                                   /* safe: guarded */
+      var on = current !== f.id;
+      current = on ? f.id : null;
+      btns.forEach(function(x){ x.setAttribute("aria-pressed", x===b && on ? "true":"false"); });
+      show(on ? f : null);
+      Flow.load(on ? f.steps : FLOW.steps, on);
+    });
+    host.appendChild(b);
+    btns.push(b);
+  });
+})();
+
+/* Boot immediately if the flow tab happens to be the first one open. */
+if(Flow && document.querySelector("#pg-flow.on")) Flow.boot();
+
+})();
+</script>
+<style>
+/* ============ v3 enhancements: tooltips, ladder, phase roadmap ==========
+   All scoped to new class names. Colors come only from the [D] palette
+   custom properties, so light and dark both work. Namespaces: .fn--info /
+   .ip-tip (tooltips), .scn / .ladder (condition ladder), .pr- (phase
+   roadmap). Nothing here touches an engine id. */
+
+/* ---- requirement-id tooltips ---- */
+.epic .reqs{position:relative;padding-top:6px;}
+.epic .reqs::before{content:"PRD refs, hover any";display:block;
+  font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:5px;}
+.fn--info{cursor:help;border-bottom:1px dashed var(--faint);
+  transition:background .12s,color .12s;}
+.fn--info:hover,.fn--info:focus{background:var(--accent-soft);
+  color:var(--accent-ink);outline:none;}
+.fn--info:focus-visible{outline:2px solid var(--accent);outline-offset:1px;}
+.ip-tip{position:absolute;z-index:90;max-width:290px;background:var(--ink);
+  color:var(--paper);font-size:.82rem;line-height:1.45;padding:9px 12px;
+  border-radius:9px;box-shadow:0 8px 28px rgba(0,0,0,.30);pointer-events:none;}
+.ip-tip b{font-family:var(--mono);color:var(--gold);margin-right:4px;}
+
+/* ---- condition ladder, redesigned ---- */
+.scn{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0 8px;}
+.scn-l{font-size:.82rem;color:var(--muted);margin-right:2px;}
+.scn-b{font:inherit;font-size:.8rem;padding:5px 11px;border-radius:999px;
+  border:1px solid var(--line2);background:var(--paper);color:var(--ink2);
+  cursor:pointer;transition:background .12s,border-color .12s,color .12s;}
+.scn-b:hover{border-color:var(--accent);color:var(--accent-ink);}
+.scn-b:focus-visible{outline:2px solid var(--accent);outline-offset:1px;}
+.scn-b[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);
+  color:var(--on-accent);}
+.scn-clear{margin-left:auto;color:var(--muted);}
+
+.ladder{list-style:none;margin:14px 0 8px;padding:0;counter-reset:rung;
+  position:relative;}
+.ladder::before{content:"";position:absolute;left:19px;top:8px;bottom:8px;
+  width:2px;background:var(--line);z-index:0;}
+.ladder li{counter-increment:rung;position:relative;z-index:1;
+  padding:11px 14px 11px 52px;margin:7px 0;border:1px solid var(--line);
+  border-radius:11px;background:var(--paper);
+  transition:opacity .2s,border-color .2s,background .2s,box-shadow .2s;}
+.ladder li::before{content:counter(rung);position:absolute;left:8px;top:12px;
+  width:24px;height:24px;border-radius:50%;background:var(--paper2);
+  border:1px solid var(--line2);color:var(--ink2);font-family:var(--mono);
+  font-size:.78rem;display:flex;align-items:center;justify-content:center;
+  transition:background .2s,color .2s,border-color .2s;}
+.ladder li.later{opacity:.5;}
+.ladder li.later .rp{color:var(--muted);}
+.ladder .rr{font-weight:600;color:var(--ink);display:block;}
+.ladder .rj{color:var(--muted);font-size:.9rem;display:block;margin-top:3px;}
+.ladder .chipline{display:inline-flex;gap:5px;margin-top:6px;}
+.ladder .rp{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--accent-ink);background:var(--accent-soft);
+  padding:2px 7px;border-radius:5px;display:inline-block;margin-top:8px;}
+.ladder li.later .rp{background:var(--paper3);}
+.ladder .gmsg{display:none;margin-top:9px;padding:8px 11px;border-radius:8px;
+  background:var(--gold-soft);color:var(--gold-ink);font-size:.86rem;
+  border-left:3px solid var(--gold);}
+/* scenario states */
+.ladder.run li.passed{opacity:.4;}
+.ladder.run li.passed::before{background:var(--accent-soft);
+  border-color:var(--accent);color:var(--accent-ink);content:"\2713";}
+.ladder.run li.stopped{opacity:1;border-color:var(--red);
+  box-shadow:0 4px 18px var(--red-soft);}
+.ladder.run li.stopped::before{background:var(--red);border-color:var(--red);
+  color:var(--on-red);}
+.ladder.run li.stopped .gmsg{display:block;}
+.ladder.run li.below{opacity:.4;}
+
+/* ---- phase roadmap ---- */
+.pr{margin:18px 0 8px;}
+.pr-rail{position:relative;height:58px;margin:10px 34px 0;}
+.pr-rail::before{content:"";position:absolute;left:0;right:0;top:26px;height:4px;
+  border-radius:2px;background:var(--line2);}
+.pr-fill{position:absolute;left:0;top:26px;height:4px;border-radius:2px;
+  background:var(--accent);width:0;transition:width .5s cubic-bezier(.4,0,.2,1);}
+.pr-stop{position:absolute;top:14px;transform:translateX(-50%);width:28px;
+  height:28px;border-radius:50%;border:2px solid var(--line2);
+  background:var(--paper);color:var(--ink2);font-family:var(--mono);
+  font-size:.8rem;cursor:pointer;display:flex;align-items:center;
+  justify-content:center;padding:0;transition:background .3s,border-color .3s,color .3s,transform .3s;}
+.pr-stop[data-p="0"]{left:6%;} .pr-stop[data-p="1"]{left:50%;} .pr-stop[data-p="2"]{left:94%;}
+.pr-stop:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.pr-stop.done{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink);}
+.pr-stop.active{background:var(--accent);border-color:var(--accent);
+  color:var(--on-accent);transform:translateX(-50%) scale(1.18);}
+.pr-snd{position:absolute;left:28%;top:-6px;transform:translateX(-50%);
+  font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--gold-ink);background:var(--gold-soft);padding:2px 8px;
+  border-radius:5px;white-space:nowrap;border:1px solid var(--gold);}
+.pr-snd::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:20px;
+  background:var(--gold);transform:translateX(-50%);}
+.pr-ctl{display:flex;align-items:center;gap:14px;margin:14px 0;}
+.pr-dot{font-family:var(--mono);font-size:.82rem;color:var(--muted);}
+.pr-panel{border:1px solid var(--line);border-radius:14px;padding:20px 22px;
+  background:var(--paper2);}
+.pr-theme{font-size:1.02rem;color:var(--ink);margin:0 0 4px;font-weight:600;}
+.pr-sub{color:var(--muted);margin:0 0 16px;font-size:.92rem;}
+.pr-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;}
+@media(max-width:680px){.pr-grid{grid-template-columns:1fr;}.pr-rail{margin:10px 20px 0;}}
+.pr-h{font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--faint);margin:0 0 8px;}
+.pr-pills{list-style:none;margin:0 0 16px;padding:0;display:flex;
+  flex-direction:column;gap:6px;}
+.pr-pill{padding:7px 11px;border-radius:8px;font-size:.9rem;
+  background:var(--paper3);color:var(--muted);border-left:3px solid var(--line2);}
+.pr-pill.pr-new{background:var(--accent-soft);color:var(--accent-ink);
+  border-left-color:var(--accent);font-weight:500;}
+.pr-anim .pr-pill.pr-new{animation:prIn .42s cubic-bezier(.2,.7,.3,1) both;}
+@keyframes prIn{from{opacity:0;transform:translateX(-8px);}to{opacity:1;transform:none;}}
+.pr-unlock{background:var(--gold-soft);border:1px solid var(--gold);
+  border-radius:10px;padding:12px 14px;margin-bottom:14px;}
+.pr-unlock .pr-h{color:var(--gold-ink);}
+.pr-unlock p{margin:0;color:var(--gold-ink);font-size:.92rem;}
+.pr-miss{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px;}
+.pr-miss li{font-size:.88rem;color:var(--muted);padding-left:18px;position:relative;}
+.pr-miss li::before{content:"\00d7";position:absolute;left:2px;color:var(--red);font-weight:700;}
+.pr-miss.none li{color:var(--accent-ink);}
+.pr-miss.none li::before{content:"\2713";color:var(--accent);}
+.pr-needs{margin-top:14px;font-size:.9rem;color:var(--ink2);}
+.pr-needs b{color:var(--ink);}
+@media(prefers-reduced-motion:reduce){
+  .pr-fill,.pr-stop{transition:none;}
+  .pr-anim .pr-pill.pr-new{animation:none;}
+  .ladder li,.ladder li::before{transition:none;}
+}
+.delivers{margin:8px 0 12px;color:var(--ink2);font-size:.92rem;line-height:1.5;}
+.delivers::before{content:"delivers";display:block;font-size:.6rem;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:3px;}
+</style>
+
+<script>
+/* ===== v3 behaviour: id tooltips, ladder scenarios, phase roadmap =====
+   Self-contained, ES5-safe, namespaced. Runs after the DOM. No engine ids
+   are touched. Guards every lookup so a missing element is a no-op. */
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+  /* ---------- 1. requirement-id tooltips ---------- */
+  var GLOSS = {
+  "AT-01": "Every code can be tagged to the influencer, partner, or segment that issued it.",
+  "AT-02": "Reports break down redemptions and discount value by influencer tag, tier, and category.",
+  "CE-01": "The system checks every rule on a code in a fixed, consistent order.",
+  "CE-03": "A first-purchase code checks history only on that tenant's store, not other Work stores.",
+  "CE-05": "Usage limits are checked instantly so two shoppers can never grab the last slot.",
+  "CM-01": "Operators can create a shared promo code with a custom code word.",
+  "CM-02": "Operators can generate up to 100,000 unique one-time codes in a single batch.",
+  "CM-03": "The system blocks duplicate code words so no two campaigns share the same code.",
+  "CM-04": "Operators can pause a campaign so no new redemptions happen, past discounts stand.",
+  "CM-05": "Operators can end a campaign immediately, closing it to further use.",
+  "CM-06": "Once a code is used, it can only be paused or ended, not edited.",
+  "CM-07": "Every change to a campaign is recorded, showing who changed what and when.",
+  "CS-01": "A shopper counts as new to Example Program only if they have zero completed orders there.",
+  "CS-02": "Campaigns can target new shoppers only, existing shoppers only, or everyone.",
+  "CS-03": "A new-customer-only code is refused for repeat shoppers, with a clear explanation why.",
+  "CS-04": "Customer status is rechecked at final purchase, so it can't be gamed with two open carts.",
+  "CS-07": "Reports split redemptions and discount spend between new and existing customers, and by influencer.",
+  "CS-08": "Reports show first-time purchases driven by a campaign separately from total code uses.",
+  "CS-09": "A campaign can target a specific loyalty tier and a new-or-existing customer status together.",
+  "MI-02": "For miles-priced baskets, the exchange rate used is saved so costs can be checked later.",
+  "ML-01": "A redemption is provisional at first and becomes confirmed 30 days after the order if unreturned.",
+  "ML-02": "If an order is cancelled within 30 days, the redemption reverses and usage limits reset.",
+  "ML-03": "Reports always label redemption counts as either provisional or confirmed, never mixed together.",
+  "ML-04": "Reports show how often each campaign's or influencer's redemptions get cancelled and reversed.",
+  "ML-05": "A shopper whose only order was cancelled within 30 days counts as new again.",
+  "ML-06": "Influencer payouts count confirmed redemptions by default; provisional ones are shown but marked unconfirmed.",
+  "ML-07": "Cancelled-order corrections restore usage limits even after a campaign ends, but it stays closed.",
+  "RF-01": "Shoppers enter their promo code in a dedicated box on the checkout summary page.",
+  "RF-02": "The system checks a code's validity instantly, in under half a second.",
+  "RF-03": "A valid code's discount shows up in the cart total right away, before payment.",
+  "RF-04": "The code is reserved once payment starts and only fully used once the order is confirmed.",
+  "RF-05": "If checkout is abandoned, the reserved code is released again within 15 minutes.",
+  "RF-06": "Only one promo code can be applied to an order at a time.",
+  "RF-07": "The discount appears as its own line on both the checkout screen and receipt.",
+  "RF-08": "Every order records which code was used, the discount type, amount, and campaign.",
+  "RW-01": "A shopper's usage limit can reset periodically, like once every 30 days.",
+  "RW-02": "The system checks a shopper's recent redemption history against that rolling time window.",
+  "TN-01": "Every campaign belongs to one storefront only and won't work on any other.",
+  "TN-02": "Example Program staff see only their own campaigns; Work's team can see every tenant's.",
+  "TR-01": "One campaign can offer a different discount amount depending on the shopper's loyalty tier.",
+  "TR-02": "The shopper's loyalty tier is looked up live from Example Program's Accenture API at the moment the code is validated, used for the decision, and never stored by Work.",
+  "TR-03": "If a shopper's tier has no discount set, the code is refused for them.",
+  "TR-05": "Retired 3 August 2026. Work caches no tier data, so there is nothing to approve.",
+  "VC-01": "Operators can lock a code to one member, one by one or in bulk via CSV.",
+  "VC-02": "A member-locked code doesn't work for anyone else and won't count against the usage cap.",
+  "VC-04": "Operators can create and activate a one-off custom code in under two minutes, no IT needed.",
+  "8.1": "The campaign creation screen where operators set up a new code with its rules and discount.",
+  "8.2": "A dashboard listing all campaigns, letting operators filter them and pause, activate, or end any one.",
+  "8.3": "A report per campaign showing redemptions, total discount given, unique users, and usage trends.",
+  "8.4": "For one-time codes, operators can download a spreadsheet of every code and its redemption status."
+};
+  var tip = document.createElement("div");
+  tip.className = "ip-tip"; tip.id = "ip-tip"; tip.setAttribute("role","tooltip");
+  tip.hidden = true; document.body.appendChild(tip);
+  var openChip = null;
+  function place(el){
+    var g = GLOSS[el.getAttribute("data-ip")]; if(!g) return;
+    tip.innerHTML = "<b></b><span></span>";
+    tip.firstChild.textContent = el.getAttribute("data-ip");
+    tip.lastChild.textContent = g;
+    tip.hidden = false;
+    var r = el.getBoundingClientRect(), tr = tip.getBoundingClientRect();
+    var vw = document.documentElement.clientWidth;
+    var x = r.left + r.width/2 - tr.width/2 + window.pageXOffset;
+    var y = r.top - tr.height - 8 + window.pageYOffset;
+    if(r.top - tr.height - 8 < 4){ y = r.bottom + 8 + window.pageYOffset; }
+    x = Math.max(8+window.pageXOffset, Math.min(x, window.pageXOffset+vw-tr.width-8));
+    tip.style.left = x+"px"; tip.style.top = y+"px";
+  }
+  function openTip(el){ place(el); openChip = el; }
+  function closeTip(){ tip.hidden = true; openChip = null; }
+  var chips = document.querySelectorAll(".fn");
+  Array.prototype.forEach.call(chips, function(el){
+    var id = (el.textContent||"").trim();
+    if(!GLOSS[id]) return;
+    el.setAttribute("data-ip", id);
+    el.setAttribute("tabindex","0");
+    el.setAttribute("role","button");
+    el.setAttribute("aria-label", id+". "+GLOSS[id]);
+    el.classList.add("fn--info");
+    el.addEventListener("mouseenter", function(){ place(el); openChip=el; });
+    el.addEventListener("mouseleave", function(){ if(openChip===el) closeTip(); });
+    el.addEventListener("focus", function(){ openTip(el); });
+    el.addEventListener("blur", function(){ if(openChip===el) closeTip(); });
+    el.addEventListener("click", function(e){ e.preventDefault(); if(openChip===el) closeTip(); else openTip(el); });
+    el.addEventListener("keydown", function(e){
+      if(e.key==="Enter"||e.key===" "){ e.preventDefault(); if(openChip===el) closeTip(); else openTip(el); }
+      else if(e.key==="Escape"){ closeTip(); el.blur(); }
+    });
+  });
+  document.addEventListener("click", function(e){
+    if(openChip && e.target!==openChip && !openChip.contains(e.target)) closeTip();
+  }, true);
+  window.addEventListener("scroll", function(){ if(openChip) closeTip(); }, true);
+
+  /* ---------- 2. condition ladder scenarios ---------- */
+  var lad = document.getElementById("lad");
+  if(lad){
+    var rungs = lad.querySelectorAll("li");
+    var MSG = {
+      validity:"This code has expired.",
+      cap:"This code has reached its usage limit.",
+      rolling:"You have already used this code recently.",
+      state:"This code is for new customers only.",
+      cart:"Add more to reach the minimum for this code.",
+      tier:"This code is not available on your tier."
+    };
+    /* give every rung a message slot */
+    Array.prototype.forEach.call(rungs, function(li){
+      var m = document.createElement("span");
+      m.className = "gmsg"; m.setAttribute("aria-live","polite");
+      li.appendChild(m);
+    });
+    var scnBtns = document.querySelectorAll(".scn-b");
+    function clearScn(){
+      lad.classList.remove("run");
+      Array.prototype.forEach.call(rungs, function(li){
+        li.classList.remove("passed","stopped","below");
+        var m = li.querySelector(".gmsg"); if(m) m.textContent="";
+      });
+      Array.prototype.forEach.call(scnBtns, function(b){ b.setAttribute("aria-pressed","false"); });
+    }
+    function runScn(target, btn){
+      clearScn();
+      if(!target) return;
+      btn.setAttribute("aria-pressed","true");
+      lad.classList.add("run");
+      var hit = false, stopped = null;
+      Array.prototype.forEach.call(rungs, function(li){
+        if(hit){ li.classList.add("below"); return; }
+        if(li.getAttribute("data-g")===target){
+          li.classList.add("stopped"); hit = true; stopped = li;
+          var m = li.querySelector(".gmsg");
+          if(m) m.textContent = "Shopper sees: " + (MSG[target]||"Not eligible.");
+        } else {
+          li.classList.add("passed");
+        }
+      });
+      if(stopped && !reduce && stopped.scrollIntoView){
+        stopped.scrollIntoView({block:"nearest", behavior:"smooth"});
+      }
+    }
+    Array.prototype.forEach.call(scnBtns, function(b){
+      b.addEventListener("click", function(){
+        var t = b.getAttribute("data-t");
+        if(!t || b.getAttribute("aria-pressed")==="true"){ clearScn(); }
+        else { runScn(t, b); }
+      });
+    });
+  }
+
+  /* ---------- 3. phase roadmap ---------- */
+  var pr = document.getElementById("pr");
+  if(pr){
+    var PHASES = [
+      { name:"Phase 1", tag:"Generic store-wide code",
+        theme:"One public code to the whole member base, plus a separate offer for members who have never bought.",
+        adds:["Percentage or flat discount on the full basket",
+              "Baskets paid in cash or in Example Program miles",
+              "Validity window and a total usage cap",
+              "Rolling per-member limit, for example once every 30 days",
+              "New versus existing customer targeting and reporting",
+              "Provisional settlement that only confirms after the 30-day window"],
+        unlock:"Saudi National Day. A single public code to every member, plus an acquisition offer for members who have never used the store.",
+        miss:["A different discount per loyalty tier","Category or product restriction","Promo code stacking, even the basic toggle","Member-bound vouchers","Influencer attribution"],
+        needs:"Decisions 1, 2, 3 and 5 closed." },
+      { name:"Phase 2", tag:"Category, product, tier, and a basic stacking toggle",
+        theme:"Precision. Restrict a code to eligible products, reward loyalty tiers differently, and let a campaign opt in to stacking.",
+        adds:["Category and product scoping",
+              "A different discount per tier, for example Gold 30, Silver 20, Green 10, resolved live from Example Program's Accenture API and never stored",
+              "Reporting split by discount band and by category",
+              "Tier combined with new or existing customer status",
+              "A per-campaign promo code stacking toggle, off by default, campaigns opt in one at a time"],
+        unlock:"Back to School on eligible products, tiered seasonal offers such as Gold members on their first purchase, and a single campaign that is allowed to sit on top of another one.",
+        miss:["Stacking groups and precedence rules","A/B testing framework","Bulk voucher generation","Member-bound codes","Influencer attribution"],
+        needs:"No security sign-off. Gating item 1 is closed because nothing is stored. What Phase 2 needs is a response-time SLA on the live Accenture tier call, plus Example Program's tier and category lists." },
+      { name:"Phase 3", tag:"Vouchers and influencer attribution",
+        theme:"Scale and personalisation. This is the full engine.",
+        adds:["Bulk voucher generation from a member list",
+              "Codes bound to a named member",
+              "Expiry counted from the day the voucher was sent",
+              "Influencer attribution tags and per-issuer reporting"],
+        unlock:"The influencer programme at scale, Platinum personalised offers, and executive one-off codes.",
+        miss:[],
+        needs:"No new business decision. This is the full engine." }
+    ];
+    var idx = 0;
+    var fill = document.getElementById("pr-fill");
+    var label = document.getElementById("pr-label");
+    var panel = document.getElementById("pr-panel");
+    var stops = pr.querySelectorAll(".pr-stop");
+    var prev = document.getElementById("pr-prev");
+    var next = document.getElementById("pr-next");
+    function esc(s){ var d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
+    function render(animate){
+      var p = PHASES[idx];
+      if(fill) fill.style.width = (idx/(PHASES.length-1)*100) + "%";
+      Array.prototype.forEach.call(stops, function(s){
+        var si = +s.getAttribute("data-p");
+        s.classList.toggle("active", si===idx);
+        s.classList.toggle("done", si<idx);
+        s.setAttribute("aria-current", si===idx ? "step" : "false");
+      });
+      if(label) label.textContent = p.name + " of " + PHASES.length;
+      if(prev) prev.setAttribute("aria-disabled", idx===0 ? "true":"false");
+      if(next) next.setAttribute("aria-disabled", idx===PHASES.length-1 ? "true":"false");
+      /* cumulative capability stack */
+      var pills = "";
+      for(var q=0;q<=idx;q++){
+        var isNew = (q===idx);
+        for(var a=0;a<PHASES[q].adds.length;a++){
+          pills += '<li class="pr-pill'+(isNew?' pr-new':'')+'">'+esc(PHASES[q].adds[a])+'</li>';
+        }
+      }
+      var missItems = p.miss.length
+        ? p.miss.map(function(m){ return '<li>'+esc(m)+'</li>'; }).join("")
+        : '<li>Nothing left. This is the complete promo engine.</li>';
+      var html =
+        '<div class="pr-theme">'+esc(p.tag)+'</div>'+
+        '<p class="pr-sub">'+esc(p.theme)+'</p>'+
+        '<div class="pr-grid">'+
+          '<div>'+
+            '<div class="pr-h">What the store can do by the end of this phase</div>'+
+            '<ul class="pr-pills">'+pills+'</ul>'+
+          '</div>'+
+          '<div>'+
+            '<div class="pr-unlock"><div class="pr-h">Campaign this unlocks</div><p>'+esc(p.unlock)+'</p></div>'+
+            '<div class="pr-h">Still not possible yet</div>'+
+            '<ul class="pr-miss'+(p.miss.length?'':' none')+'">'+missItems+'</ul>'+
+            '<p class="pr-needs"><b>Needs:</b> '+esc(p.needs)+'</p>'+
+          '</div>'+
+        '</div>';
+      panel.innerHTML = html;
+      if(animate && !reduce){
+        panel.classList.remove("pr-anim"); void panel.offsetWidth; panel.classList.add("pr-anim");
+      }
+    }
+    function go(i, animate){ idx = Math.max(0, Math.min(PHASES.length-1, i)); render(animate); }
+    Array.prototype.forEach.call(stops, function(s){
+      s.addEventListener("click", function(){ go(+s.getAttribute("data-p"), true); });
+    });
+    if(prev) prev.addEventListener("click", function(){ if(idx>0) go(idx-1, true); });
+    if(next) next.addEventListener("click", function(){ if(idx<PHASES.length-1) go(idx+1, true); });
+    pr.addEventListener("keydown", function(e){
+      if(e.key==="ArrowLeft" && idx>0){ go(idx-1, true); }
+      else if(e.key==="ArrowRight" && idx<PHASES.length-1){ go(idx+1, true); }
+    });
+    render(false);
+  }
+})();
+</script>
+
+</body>
+</html>

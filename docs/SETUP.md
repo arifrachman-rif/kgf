@@ -70,6 +70,7 @@ You need the workspace files to start your Second Brain. Choose one of two easy 
 | Node.js | 18+ | For Claude Code CLI |
 | RAM | 4 GB | 8 GB recommended |
 | Storage | 2 GB free | For Chrome, dependencies, outputs |
+| ffmpeg | any recent | Needed by the local meeting recorder. `brew install ffmpeg` (macOS) or `sudo apt install -y ffmpeg pulseaudio-utils` (Linux/WSL) |
 
 ---
 
@@ -263,7 +264,7 @@ For each skill that needs its own token, create a `token.env` inside that skill'
 # Example: Slack
 echo "SLACK_BOT_TOKEN=<SLACK_TOKEN>" > .agent/skills/slack-connector/token.env
 
-# Example: Fathom
+# Example: Fathom (optional cloud recorder; the local recorder needs no key)
 echo "FATHOM_API_KEY=your-key-here" > .agent/skills/fathom-connector/token.env
 ```
 
@@ -438,7 +439,7 @@ echo "SLACK_BOT_TOKEN=<SLACK_TOKEN>" > .agent/skills/slack-connector/token.env
 
 | Service | Where to get it | Where to save it |
 |---|---|---|
-| **Fathom** | [fathom.video](https://fathom.video) → Settings → Integrations → API Token | `.agent/skills/fathom-connector/token.env` as `FATHOM_API_KEY=...` |
+| **Fathom** *(optional)* | [fathom.video](https://fathom.video) → Settings → Integrations → API Token | `.agent/skills/fathom-connector/token.env` as `FATHOM_API_KEY=...`. Only if you use Fathom on top of the local recorder (section 10.1) |
 | **Figma** | figma.com → Account Settings → Personal Access Tokens | `.agent/skills/figma-connector/token.env` as `FIGMA_ACCESS_TOKEN=...` |
 | **Mixpanel** | mixpanel.com → Settings → Project Settings → Access Keys | `.agent/skills/mixpanel-connector/token.env` (see template inside) |
 | **ClickUp** | app.clickup.com → Settings → Apps → API Token | `.agent/skills/clickup-connector/token.env` as `CLICKUP_ACCESS_TOKEN=...` |
@@ -454,9 +455,15 @@ Do you use Google Workspace (Drive, Docs, Calendar)?
   YES → Set up Google OAuth (section 7) — this is the foundation
   NO  → Skip to Slack or other services
 
-Do you record meetings with Fathom?
-  YES → Set up fathom-connector
+Do you want your meetings turned into notes automatically?
+  YES → Set up the local meeting recorder (the default, see section 10.1)
+        It runs on your own machine. No account, no API key, no per-seat cost.
   NO  → Skip (meeting notes will need manual input)
+
+  ...and do you ALSO use a cloud recorder (Fathom)?
+    YES → Optionally set up fathom-connector as well; both write to the same
+          registry, so one meeting still produces one set of notes
+    NO  → Skip it. The local recorder covers this on its own
 
 Do you use Slack at work?
   YES → Set up slack-connector
@@ -478,8 +485,84 @@ Do you manage tasks in ClickUp?
 **Minimum viable setup** (gets you 80% of the value):
 - Google Drive + Docs (work-drive-connector)
 - Google Calendar (google-calendar-connector)
-- Fathom (if you record meetings)
+- Local meeting recorder (`meeting-recorder/`, nothing to sign up for)
 - Slack (if your team uses it)
+
+Fathom and the other cloud connectors are add-ons. Set them up only if you already use those
+services.
+
+### 10.1 Meeting recorder (the default path)
+
+Meeting notes are one of the highest-value things the harness does, so the recorder is set up by
+default rather than treated as an extra. It records the meeting on your machine, transcribes it
+locally, and leaves a minutes draft for you to review. Nothing is uploaded and no third party sees
+the audio.
+
+It is plain Python from the standard library plus `ffmpeg`, so there is no `pip install` step. The
+whole setup is three commands:
+
+```bash
+# 1. Copy the config and fill in your platform's section
+cp meeting-recorder/config.example.json meeting-recorder/config.json
+
+# 2. Find your loopback/monitor audio device
+python3 meeting-recorder/recorder.py --list-devices
+
+# 3. Record a two-minute test meeting, then process it
+python3 meeting-recorder/recorder.py "Test Meeting"     # Ctrl-C to stop
+python3 meeting-recorder/watcher.py --once
+```
+
+You should end up with a transcript and a `MOM_*.md` draft in your meetings folder. If you do, the
+recorder is working.
+
+Two things worth knowing before you start:
+
+- **Audio capture differs per OS.** macOS needs a loopback device such as BlackHole, Windows uses
+  WASAPI loopback (`pip install PyAudioWPatch` in your *Windows* Python), Linux and WSL use a
+  PulseAudio `.monitor` source.
+- **Local GPU transcription is optional.** With a whisper.cpp build the transcription runs on your
+  own GPU. Without one, leave `whispercpp_bin` empty and it falls back to the Gemini API.
+
+Full guide including engines, daily use, the auto-join bot, and troubleshooting:
+**`docs/MEETING_RECORDER.md`**.
+
+### 10.2 Auto-join bot (optional, for meetings you cannot attend)
+
+The recorder above covers meetings you sit in. `meetbot/` covers the ones you miss: a small
+Rust service that reads your calendar, joins the call in a headless browser, captures the
+audio, and feeds it to the same transcription + minutes pipeline. It replaced a 1.25 GB
+Docker stack and idles at a few MB.
+
+It is optional and strictly more work than the local recorder, so set it up only once that
+one is working. Requires Rust and a Chromium build (Playwright's is fine).
+
+```bash
+cd meetbot
+cp config.example.toml config.toml     # then edit the paths + set admin_token
+cargo build --release
+./target/release/meetbot doctor <a-meet-code>   # dry-runs the join, names any broken step
+```
+
+Then install `meetbot.service` as a systemd user unit and point the recorder's cron line at
+it with `MEETBOT=1 VEXA_API_BASE=http://localhost:8060`.
+
+The thing that decides whether this works at all: **the bot must be signed in to a real
+Google account.** Anonymous guests are auto-declined by Meet's bot check about 1.5 seconds
+after knocking. Seed a Chrome profile once, by hand, with a visible browser:
+
+```bash
+<chromium> --user-data-dir=<meetbot>/data/bot-profile https://accounts.google.com/
+```
+
+Sign in, close the window, and point `profile_template` at that directory. Each session then
+gets a *copy* of it, because Chrome locks a profile directory and a session must never be
+able to invalidate your stored login.
+
+Read `.agent/skills/meetbot/SKILL.md` before debugging a join failure. It documents the
+landmines that are genuinely hard to rediscover — automation fingerprints Google rejects,
+one error string that means two different failures, and a control that ejects *you* from
+your own meeting if the selector priority is wrong.
 
 ---
 
@@ -587,5 +670,7 @@ Extra tools ship with the template and are set up separately when you want them:
   in `setup/integrations.json`. A complement to the manual steps above; `/setup` uses the same
   ideas conversationally.
 
-- **Meeting recorder** (`meeting-recorder/`): record and transcribe meetings locally on your own machine (macOS, Windows, Linux), with an automatic minutes draft. A private alternative or complement to a cloud recorder. See **`docs/MEETING_RECORDER.md`**.
+- **Meeting recorder** (`meeting-recorder/`): not listed here as optional any more. It is part of
+  the default setup, covered in section 10.1 above and in full in **`docs/MEETING_RECORDER.md`**.
+
 - **Visual dashboard** (`dashboard/`): a local web cockpit at `http://localhost:3737` over your notes, calendar, projects, tracker, and system health. Start it with `python3 dashboard/server.py`. See **`docs/DASHBOARD.md`**.

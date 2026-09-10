@@ -1,0 +1,69 @@
+{
+  "requestedUrl": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fanon%3Dtrue&type=meet&directDl=true&msLaunch=true&enableMobilePage=true",
+  "httpRedirects": [],
+  "documentTimeline": [
+    {
+      "kind": "doc-request",
+      "url": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fanon%3Dtrue&type=meet&directDl=true&msLaunch=true&enableMobilePage=true"
+    },
+    {
+      "kind": "doc-response",
+      "status": 200,
+      "url": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fanon%3Dtrue&type=meet&directDl=true&msLaunch=true&enableMobilePage=true"
+    },
+    {
+      "kind": "doc-request",
+      "url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=5e3ce6c0-2b1f-4285-8d4b-75ee78787346&response_type=token&scope=openid+profile&redirect_uri=https%3A%2F%2Fteams.microsoft.com%2Fv2%2Fauthv2&prompt=none"
+    },
+    {
+      "kind": "doc-request",
+      "url": "https://teams.microsoft.com/v2/?meetingjoin=true"
+    },
+    {
+      "kind": "doc-response",
+      "status": 200,
+      "url": "https://teams.microsoft.com/v2/?meetingjoin=true"
+    }
+  ],
+  "frameNavigations": [
+    {
+      "url": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fanon%3Dtrue&type=meet&directDl=true&msLaunch=true&enableMobilePage=true",
+      "parent": null
+    },
+    {
+      "url": "about:blank",
+      "parent": "64AE5D4A689D20F9981D5930CCC7D737"
+    },
+    {
+      "url": "https://teams.microsoft.com/v2/?meetingjoin=true",
+      "parent": null
+    }
+  ],
+  "beforeClick": {
+    "top": {
+      "frame": "top",
+      "url": "https://teams.microsoft.com/v2/?meetingjoin=true#/meet/1234567890123?anon=true&deeplinkId=6fc44ad3-1ba1-401b-9009-c8a604450716&launchAgent=join_launcher_web",
+      "title": "Microsoft Teams",
+      "allDataTids": [
+        "pre-core-title-bar",
+        "pre-core-title-bar-close-button",
+        "pre-core-title-bar-maximize-button",
+        "pre-core-title-bar-minimize-button"
+      ],
+      "buttons": [],
+      "inputs": [],
+      "headings": [],
+      "ariaLive": [],
+      "bodyText": "",
+      "bodyHtmlLen": 398849
+    },
+    "frames": [],
+    "location": "https://teams.microsoft.com/v2/?meetingjoin=true#/meet/1234567890123?anon=true&deeplinkId=6fc44ad3-1ba1-401b-9009-c8a604450716&launchAgent=join_launcher_web",
+    "iframeSrcs": []
+  },
+  "console": [
+    "[ExpLoader] Getting things ready...",
+    "[ExpLoader] ExperienceLoader: OCDI redirect: Not redirecting - not enabled"
+  ],
+  "finalUrl": "https://teams.microsoft.com/v2/?meetingjoin=true#/meet/1234567890123?anon=true&deeplinkId=6fc44ad3-1ba1-401b-9009-c8a604450716&launchAgent=join_launcher_web"
+}

@@ -970,8 +970,8 @@ details.row[open] > summary::after { transform: rotate(90deg); }
 .drawer-close:hover { color: var(--text-primary); background: var(--bg-card-hover); }
 
 .drawer-body { padding: var(--sp-5); overflow-y: auto; flex: 1; }
-/* drawer adalah SURFACE BACA (AI result, prep card, PRD) — naikkan tipografi
-   di atas ukuran list-row biar nyaman dibaca (the owner: "font kekecilan") */
+/* the drawer is a READING SURFACE (AI result, prep card, PRD), so lift the typography
+   above the list-row size so it reads comfortably (the owner: "the font is too small") */
 .drawer-body .md { font-size: 15.5px; line-height: 1.75; }
 .drawer-body .md h1 { font-size: 22px; }
 .drawer-body .md h2 { font-size: 18px; }
@@ -1694,7 +1694,7 @@ a.ticket-chip:hover { border-color: var(--border-active); color: var(--text-acce
 .hmap-g2 { stop-color: #6a8bff; }
 .hmap-g3 { stop-color: #c86bff; }
 
-/* ── 📈 trend card (Comp.trendCard) — the "bikin seneng" momentum card.
+/* ── 📈 trend card (Comp.trendCard) — the feel-good momentum card.
    --tc (categorical color) arrives inline from the builder. ── */
 .trend-card {
   --tc: var(--cat-1);
@@ -2000,7 +2000,7 @@ a.ticket-chip:hover { border-color: var(--border-active); color: var(--text-acce
   /* badge-heavy rows wrap instead of clipping at the viewport edge */
   .row, details.row > summary { flex-wrap: wrap; row-gap: 2px; }
   /* .row-right must wrap internally too: an escalation row's button chain
-     (SLA badge + owner + draft + beres + nudge) is wider than a phone
+     (SLA badge + owner + draft + done + nudge) is wider than a phone
      viewport, and as a single flex:none unit it was THE driver pushing
      document scrollWidth past the viewport (558px on a 390px phone) */
   .row-right { flex-wrap: wrap; max-width: 100%; row-gap: 2px; justify-content: flex-end; }
@@ -2023,6 +2023,9 @@ a.ticket-chip:hover { border-color: var(--border-active); color: var(--text-acce
 .hours-daynav .chip:disabled { opacity: .35; cursor: default; }
 .hours-daynav .chip { cursor: pointer; }
 .hours-updated { margin-left: auto; color: var(--text-muted); font-size: var(--fs-xs); }
+/* stale sweep: the frozen Hours tab read as normal for three weeks because the
+   age label stayed the same muted grey whether it said 2h or 25d. */
+.hours-updated.is-stale { color: var(--danger, #ef6d6d); font-weight: 600; }
 
 .hours-legend {
   display: flex; flex-wrap: wrap; gap: var(--sp-4);
@@ -2159,3 +2162,302 @@ a.ticket-chip:hover { border-color: var(--border-active); color: var(--text-acce
 /* hours week view: clickable day rows */
 .hours-day-link { cursor: pointer; }
 .hours-day-link:hover td, .hours-day-link:focus-visible td { background: var(--bg-hover); }
+
+/* ── header quick-find (ticket / ledger lookup) ── */
+.quickfind {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--bg-input); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 4px 8px; margin-right: 10px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.quickfind:focus-within {
+  border-color: var(--border-active);
+  box-shadow: 0 0 0 3px hsla(var(--h-violet), 60%, 60%, 0.12);
+}
+.quickfind-icon { font-size: 12px; opacity: .7; }
+.quickfind-input {
+  background: transparent; border: 0; outline: 0; color: var(--text-primary);
+  font-size: var(--fs-xs); width: 240px; max-width: 44vw;
+}
+.quickfind-input::placeholder { color: var(--text-muted); }
+.quickfind-kbd {
+  font: 600 10px/1 ui-monospace, monospace; color: var(--text-muted);
+  border: 1px solid var(--border); border-radius: 5px; padding: 2px 5px;
+}
+.qf-jira {
+  font-size: var(--fs-xs); color: var(--text-secondary);
+  padding: 8px 10px; margin-bottom: 10px;
+  background: var(--work-bg); border: 1px solid var(--work-border);
+  border-radius: var(--radius-xs);
+}
+@media (max-width: 720px) { .quickfind-input { width: 150px; } .quickfind-kbd { display: none; } }
+
+/* ── quick-find result detail (expandable card) ── */
+.qf-detail { display: flex; flex-direction: column; gap: 4px; font-size: var(--fs-xs); }
+.qf-d-context {
+  color: var(--text-primary); line-height: 1.45; margin-bottom: 6px;
+  white-space: pre-wrap;
+}
+.qf-d-line { display: flex; gap: 8px; align-items: baseline; }
+.qf-d-key {
+  flex: 0 0 108px; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: .03em; font-size: 10px;
+}
+.qf-d-val { color: var(--text-primary); }
+.qf-d-breach .qf-d-val { color: var(--danger, #ef6d6d); font-weight: 600; }
+.qf-d-notes { margin-top: 6px; }
+.qf-d-note {
+  color: var(--text-secondary); line-height: 1.4; margin-top: 2px;
+  padding-left: 4px;
+}
+.qf-d-src { margin-top: 8px; }
+
+/* ── deep-linked record card (#find/<ID>): open on arrival, no click needed ── */
+.qf-hero {
+  background: var(--bg-card); border: 1px solid var(--border-active);
+  border-radius: var(--radius-xs); padding: 12px 14px; margin-bottom: 14px;
+}
+.qf-hero-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.qf-hero-icon { font-size: 15px; }
+.qf-hero-id {
+  font: 600 13px/1 ui-monospace, monospace; color: var(--text-primary);
+  letter-spacing: .02em;
+}
+.qf-hero-kind {
+  font-size: 10px; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--text-muted); margin-top: 6px;
+}
+.qf-hero-title {
+  color: var(--text-primary); font-size: var(--fs-sm); line-height: 1.45;
+  font-weight: 600; margin: 4px 0 10px;
+}
+.qf-hero-perma { margin-top: 10px; font-size: var(--fs-xs); }
+
+/* ── token-usage period / date filter ── */
+.tu-controls {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.tu-seg { display: inline-flex; border: 1px solid var(--border); border-radius: var(--radius-xs); overflow: hidden; }
+.tu-range-btn {
+  background: transparent; border: 0; border-right: 1px solid var(--border);
+  color: var(--text-secondary); font-size: var(--fs-xs); padding: 5px 11px;
+  cursor: pointer; transition: background .12s ease, color .12s ease;
+}
+.tu-range-btn:last-child { border-right: 0; }
+.tu-range-btn:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+.tu-range-btn.active { background: hsla(var(--h-violet), 60%, 60%, 0.18); color: var(--text-accent); }
+.tu-daterange { display: inline-flex; align-items: center; gap: 6px; }
+.tu-daterange input[type="date"] {
+  background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-xs);
+  color: var(--text-primary); font-size: var(--fs-xs); padding: 4px 7px;
+  color-scheme: dark;
+}
+.tu-daterange .tu-sep { color: var(--text-muted); }
+.tu-apply {
+  background: var(--bg-card-hover); border: 1px solid var(--border-active);
+  color: var(--text-primary); font-size: var(--fs-xs); border-radius: var(--radius-xs);
+  padding: 5px 11px; cursor: pointer;
+}
+.tu-apply:hover { border-color: var(--text-accent); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   Work Tree — domain-first hierarchy in the Work tab (tab-work.js).
+   Left outline persists so the structure is always visible; right pane
+   shows the selected node. Depth is unbounded, so nothing here assumes
+   a fixed number of levels. Uses the shared tokens only.
+   ═══════════════════════════════════════════════════════════════════ */
+.wt-toolbar { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.wt-toolbar-sp { flex: 1; }
+
+.wt-split { display: grid; grid-template-columns: 292px minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 900px) { .wt-split { grid-template-columns: 1fr; } }
+
+.wt-tree {
+  max-height: 560px; overflow-y: auto; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); background: var(--bg-input); padding: 6px 0;
+}
+.wt-node { display: block; }
+.wt-row {
+  width: 100%; text-align: left; background: none; border: 0; cursor: pointer;
+  display: flex; align-items: center; gap: 6px; padding: 4px 10px 4px 0;
+  font-size: var(--fs-sm); color: var(--text-secondary);
+  border-left: 2px solid transparent; line-height: 1.45;
+}
+.wt-row:hover { background: var(--bg-glass); color: var(--text-primary); }
+.wt-row.is-sel {
+  background: var(--bg-card-hover); color: var(--text-accent);
+  font-weight: 600; border-left-color: var(--text-accent);
+}
+.wt-twist {
+  flex: none; width: 13px; text-align: center; font-size: 7px; color: var(--text-muted);
+  transition: transform .18s ease; display: inline-block;
+}
+.wt-twist.is-open { transform: rotate(90deg); }
+.wt-twist.is-leaf { visibility: hidden; }
+.wt-dot { flex: none; width: 7px; height: 7px; border-radius: 50%; }
+.wt-critical { background: var(--st-serious); }
+.wt-risk     { background: var(--st-warn); }
+.wt-ok       { background: var(--st-good); }
+.wt-plan     { background: var(--text-muted); }
+.wt-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wt-cnt, .wt-attn {
+  flex: none; font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px; border-radius: 8px; padding: 0 5px; font-variant-numeric: tabular-nums;
+}
+.wt-cnt  { color: var(--text-muted); background: var(--bg-glass); }
+.wt-attn { color: var(--st-serious); background: var(--st-serious-bg); font-weight: 700; }
+
+.wt-detail { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.wt-crumbs { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-size: var(--fs-xs); }
+.wt-crumb {
+  background: none; border: 0; padding: 2px 5px; border-radius: var(--radius-xs);
+  cursor: pointer; color: var(--text-secondary); font-size: var(--fs-xs);
+}
+.wt-crumb:hover { background: var(--bg-glass); color: var(--text-primary); }
+.wt-crumb-sep { color: var(--text-muted); }
+.wt-crumb-here { color: var(--text-primary); font-weight: 600; padding: 2px 5px; font-size: var(--fs-xs); }
+.wt-title { margin: 0; font-size: 18px; font-weight: 650; letter-spacing: -.02em; color: var(--text-primary); }
+.wt-tags { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.wt-kind {
+  font-size: 10px; letter-spacing: .09em; text-transform: uppercase; color: var(--text-muted);
+  border: 1px solid var(--border); border-radius: var(--radius-xs); padding: 2px 6px;
+}
+.wt-badge-b {
+  font-size: 10px; font-weight: 700; letter-spacing: .05em; padding: 2px 7px;
+  border-radius: var(--radius-xs); color: var(--text-accent);
+  background: var(--bg-glass); border: 1px solid var(--border-active);
+}
+.wt-moved { font-size: var(--fs-xs); color: var(--st-good); font-weight: 600; }
+.wt-sum { margin: 0; font-size: var(--fs-sm); color: var(--text-secondary); max-width: 74ch; line-height: 1.55; }
+
+.wt-ref {
+  display: inline-block; font-family: var(--font-mono, ui-monospace, monospace); font-size: 10.5px;
+  background: var(--bg-glass); border: 1px solid var(--border); border-radius: var(--radius-xs);
+  padding: 1px 6px; color: var(--text-secondary); cursor: pointer;
+}
+.wt-ref:hover { border-color: var(--text-accent); color: var(--text-accent); }
+.wt-ref-ledger { font: inherit; font-family: var(--font-mono, ui-monospace, monospace); font-size: 10.5px; }
+
+.wt-sources { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.wt-sources-label {
+  font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted);
+}
+.wt-src {
+  font-size: var(--fs-xs); color: var(--text-accent); background: var(--bg-glass);
+  border: 1px solid var(--border); border-radius: var(--radius-xs); padding: 2px 8px;
+}
+.wt-src:hover { border-color: var(--text-accent); background: var(--bg-card-hover); }
+
+.wt-sec-label {
+  font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 650; margin-top: 4px;
+}
+.wt-kids-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(238px, 1fr)); gap: 9px; }
+.wt-kid {
+  text-align: left; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 11px 12px; cursor: pointer;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.wt-kid:hover { border-color: var(--border-active); background: var(--bg-card-hover); }
+.wt-kid-top { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.wt-kid-name { font-size: var(--fs-sm); font-weight: 620; color: var(--text-primary); }
+.wt-kid-sum {
+  font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.45;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.wt-kid-foot { font-size: 10.5px; color: var(--text-muted); margin-top: auto; }
+.wt-kid-foot b { color: var(--st-serious); }
+
+.wt-tablewrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.wt-table { border-collapse: collapse; width: 100%; font-size: var(--fs-xs); }
+.wt-table th {
+  text-align: left; font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 600; padding: 9px 11px;
+  border-bottom: 1px solid var(--border); background: var(--bg-input); white-space: nowrap;
+}
+.wt-table td {
+  padding: 10px 11px; border-bottom: 1px solid var(--border);
+  vertical-align: top; color: var(--text-secondary); line-height: 1.5;
+}
+.wt-table tr:last-child td { border-bottom: 0; }
+.wt-th-name { display: flex; flex-direction: column; gap: 5px; min-width: 140px; }
+.wt-th-name b { color: var(--text-primary); }
+.wt-th-tags { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+.wt-blocked { color: var(--st-serious); }
+.wt-clear { color: var(--st-good); }
+.wt-branch { margin-top: 5px; font-size: 10.5px; color: var(--text-accent); }
+.wt-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px 20px; }
+@media (max-width: 700px) { .wt-fields { grid-template-columns: 1fr; } }
+.wt-field { display: flex; flex-direction: column; gap: 3px; font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.55; }
+.wt-flabel { font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
+.wt-f-problem  { color: var(--st-serious); }
+.wt-f-blocker  { color: var(--st-warn); }
+.wt-f-progress { color: var(--st-good); }
+.wt-f-next     { color: var(--text-accent); }
+.wt-empty { font-size: var(--fs-sm); color: var(--text-muted); font-style: italic; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   Ledger hover popover (ledger-hover.js)
+   A preview card for a COM-/WAIT-/DEC- link, shown on hover. It sits
+   above the drawer (z 41) so it still works on ids inside an open
+   panel. Not interactive beyond being readable: the click opens the
+   full record in the drawer instead.
+   ═══════════════════════════════════════════════════════════════════ */
+.lh-pop {
+  position: fixed;
+  z-index: 70;
+  width: min(420px, calc(100vw - 20px));
+  max-height: min(60vh, 560px);
+  overflow-y: auto;
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(8px);
+  color: var(--text-primary);
+  font-size: 12.5px;
+  line-height: 1.5;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity .13s ease, transform .13s ease;
+}
+.lh-pop.is-open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+.lh-head { display: flex; align-items: center; gap: 7px; margin-bottom: 3px; }
+.lh-icon { font-size: 13px; }
+.lh-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px; font-weight: 600; letter-spacing: .02em;
+  color: var(--text-accent);
+}
+.lh-kind { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
+.lh-title { margin: 6px 0 0; font-size: 13.5px; font-weight: 600; color: var(--text-primary); }
+.lh-body {
+  margin-top: 7px; padding-top: 7px;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.lh-rows { margin-top: 9px; display: flex; flex-direction: column; gap: 3px; }
+.lh-row { display: flex; gap: 10px; align-items: baseline; }
+.lh-k {
+  flex: 0 0 92px; font-size: 10.5px; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--text-muted);
+}
+.lh-v { flex: 1 1 auto; min-width: 0; color: var(--text-secondary); word-break: break-word; }
+.lh-row.lh-warn .lh-v { color: var(--p1); }
+
+.lh-foot {
+  margin-top: 10px; padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 10.5px; color: var(--text-muted);
+}
+.lh-loading, .lh-empty { color: var(--text-secondary); }
+.lh-empty strong { color: var(--text-primary); }
+
+/* the links themselves read as references, not as navigation away */
+a[href*="#find/"] { text-decoration-style: dotted; text-underline-offset: 2px; cursor: help; }
+a[href*="#find/"]:hover { color: var(--text-accent); }

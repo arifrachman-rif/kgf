@@ -27,6 +27,7 @@ import signal
 import subprocess
 import sys
 import threading
+import time
 import wave
 
 from common import detect_platform, load_config, slugify
@@ -36,7 +37,11 @@ CHUNK = 1024
 def now_stamp():
     return datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
 
-def write_sidecar(base, title, start, parts, plat):
+def write_sidecar(base, title, start, parts, plat, ad_hoc=False, attendees=None):
+    """ad_hoc=True marks a meeting you started yourself (a huddle, a phone call,
+    anything not on the calendar). The watcher then skips the calendar match
+    entirely, so the recording cannot inherit the title, attendees, or dedupe
+    key of whatever calendar event happened to overlap it."""
     end = datetime.datetime.now(datetime.timezone.utc)
     meta = {
         "title": title,
@@ -44,6 +49,8 @@ def write_sidecar(base, title, start, parts, plat):
         "end_utc": end.isoformat(timespec="seconds"),
         "duration_sec": int((end - start).total_seconds()),
         "platform": plat,
+        "ad_hoc": bool(ad_hoc),
+        "attendees": [a.strip() for a in (attendees or []) if a.strip()],
         "parts": [os.path.basename(p) for p in parts],
     }
     with open(base + ".json", "w", encoding="utf-8") as f:
@@ -69,13 +76,6 @@ class WindowsCapture:
         self.p = pyaudio.PyAudio()
         self.streams, self.wavs, self.parts = [], [], []
         self.devices = []
-        self.paused = False
-
-    def pause(self):
-        self.paused = True
-
-    def resume(self):
-        self.paused = False
 
     def _open_stream(self, dev, path, channels, rate):
         wf = wave.open(path, "wb")
@@ -84,8 +84,7 @@ class WindowsCapture:
         wf.setframerate(rate)
 
         def cb(in_data, frame_count, time_info, status):
-            if not self.paused:
-                wf.writeframes(in_data)
+            wf.writeframes(in_data)
             return (None, self.pyaudio.paContinue)
 
         st = self.p.open(format=self.pyaudio.paInt16, channels=channels,
@@ -127,59 +126,23 @@ def record_windows(base, title, start, mic_only, system_only):
     for d in cap.start():
         print(d)
     stop = threading.Event()
-    print("Recording... Press [Space] or [P] to Pause/Resume. "
-          "Press [Q] or Ctrl-C to stop.")
+    print("Recording... Ctrl-C to stop.")
     signal.signal(signal.SIGINT, lambda *a: stop.set())
-    
-    import msvcrt
-    paused = False
-    pause_time = None
-    accumulated_pause = datetime.timedelta(seconds=0)
-
-    # Third way to ask for a clean stop: a <base>.stop file appearing next to the marker.
+    # Second way to ask for a clean stop: a <base>.stop file appearing next to the marker.
     #
-    # The keyboard checks below need a console, and SIGINT cannot reach a detached child on
-    # Windows, so a GUI that spawned this with pythonw has no way to ask it to stop. Killing
-    # the process instead skips the `finally` in main(), leaving the .recording marker behind
-    # -- and watcher.py ignores any recording whose marker still exists, so the audio sits on
-    # disk forever looking like it never happened. The sentinel gives every caller a clean stop.
+    # SIGINT is fine from a terminal, but a GUI that spawned this cannot send one on Windows,
+    # where a detached child has no console to receive Ctrl-C. Killing the process instead would
+    # skip the `finally` below, leaving the .recording marker in place -- and watcher.py ignores
+    # any recording whose marker still exists, so the audio would sit on disk forever looking
+    # like it never happened. The sentinel gives every caller a clean stop on every platform.
     stop_file = base + ".stop"
-
     try:
         while not stop.is_set():
+            stop.wait(1)
             if os.path.exists(stop_file):
-                print("\n[STOPPING] Stop sentinel seen; finalising recording...")
                 stop.set()
-                break
-            if msvcrt.kbhit():
-                ch = msvcrt.getch()
-                # getch() swallows Ctrl-C and hands it back as \x03 instead of
-                # letting it raise SIGINT, so the handler above never fires
-                # while this loop is running. Treat it as a stop key here.
-                if ch in (b"\x03", b"q", b"Q"):
-                    print("\n[STOPPING] Finalising recording...")
-                    stop.set()
-                    break
-                if ch in (b' ', b'p', b'P'):
-                    paused = not paused
-                    if paused:
-                        cap.pause()
-                        pause_time = datetime.datetime.now(datetime.timezone.utc)
-                        print("\n[PAUSED] Recording suspended. Press [Space] or [P] to Resume.")
-                    else:
-                        cap.resume()
-                        if pause_time:
-                            paused_duration = datetime.datetime.now(datetime.timezone.utc) - pause_time
-                            accumulated_pause += paused_duration
-                        print("\n[RESUMED] Recording audio active...")
-            
-            stop.wait(0.2)
-            if not paused:
-                now_utc = datetime.datetime.now(datetime.timezone.utc)
-                elapsed = (now_utc - start - accumulated_pause).seconds
-                print(f"\r  {elapsed // 60:02d}:{elapsed % 60:02d}", end="", flush=True)
-            else:
-                print(f"\r  [PAUSED]   ", end="", flush=True)
+            elapsed = (datetime.datetime.now(datetime.timezone.utc) - start).seconds
+            print(f"\r  {elapsed // 60:02d}:{elapsed % 60:02d}", end="", flush=True)
     finally:
         if os.path.exists(stop_file):
             os.remove(stop_file)
@@ -244,11 +207,23 @@ def record_ffmpeg(base, plat, machine, mic_only, system_only):
 
     print("Recording... Ctrl-C or 'q' to stop.")
     proc = subprocess.Popen(cmd)
+    # Same two stop paths as the Windows capture: Ctrl-C, or a <base>.stop sentinel appearing.
+    # Poll rather than plain wait() so a GUI caller that cannot deliver SIGINT still gets ffmpeg
+    # shut down through its own SIGINT, which is what makes it flush a playable file.
+    stop_file = base + ".stop"
     try:
+        while proc.poll() is None:
+            if os.path.exists(stop_file):
+                proc.send_signal(signal.SIGINT)
+                break
+            time.sleep(1)
         proc.wait()
     except KeyboardInterrupt:
         proc.send_signal(signal.SIGINT)
         proc.wait()
+    finally:
+        if os.path.exists(stop_file):
+            os.remove(stop_file)
     if not os.path.exists(out):
         sys.exit("ERROR: ffmpeg produced no output")
     return [out]
@@ -276,6 +251,13 @@ def main():
     ap.add_argument("--system-only", action="store_true")
     ap.add_argument("--video", action="store_true",
                     help="also screen-record to <base>.mp4 (Windows, needs ffmpeg)")
+    ap.add_argument("--ad-hoc", action="store_true",
+                    help="meeting not on the calendar (Slack huddle, phone call). "
+                         "Skips calendar matching so the title you type is the title "
+                         "that sticks")
+    ap.add_argument("--attendees", default="",
+                    help="comma-separated names, used to resolve Speaker 1/2 labels "
+                         "in the MOM draft")
     args = ap.parse_args()
 
     cfg = load_config()
@@ -315,44 +297,12 @@ def main():
             video = screen.stop()
             if video:
                 parts = list(parts) + [video]
-        write_sidecar(base, args.title, start, parts, plat)
+        write_sidecar(base, args.title, start, parts, plat,
+                      ad_hoc=args.ad_hoc,
+                      attendees=args.attendees.split(","))
     finally:
         if os.path.exists(marker):
             os.remove(marker)
-        try:
-            import subprocess
-            if plat == "windows":
-                # Create the transcribing.lock file
-                lock_file = os.path.join(rec_dir, "transcribing.lock")
-                try:
-                    open(lock_file, "w").close()
-                except Exception:
-                    pass
-
-                 # Show Windows system tray icon that monitors transcribing.lock.
-                # tray_watcher.py runs under Windows Python in the user's desktop
-                # session so the icon actually appears in the system tray.
-                script_dir = os.path.dirname(os.path.abspath(__file__))
-                watcher_script = os.path.join(script_dir, "tray_watcher.py")
-                win_python = sys.executable  # recorder.py is already Windows Python
-                subprocess.Popen(
-                    [win_python, watcher_script],
-                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                    creationflags=0x00000208)  # DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
-
-                cmd = ["wsl", "python3", "meeting-recorder/watcher.py", "--once"]
-                # 0x00000208 is DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
-                subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=0x00000208)
-            elif plat in ("macos", "linux"):
-                if plat == "macos":
-                    cmd_notify = 'display notification "Recording stopped. MOM is underway in the background..." with title "Meeting Recorder"'
-                    subprocess.Popen(["osascript", "-e", cmd_notify],
-                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                cmd = [sys.executable, "meeting-recorder/watcher.py", "--once"]
-                subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            print("\nTriggered automatic transcription and MOM generation in the background...")
-        except Exception as e:
-            print(f"\nWARNING: Could not trigger watcher: {e}")
 
 if __name__ == "__main__":
     main()

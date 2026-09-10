@@ -1,114 +1,100 @@
 ---
 name: WhatsApp Connector
-description: Read and send on WhatsApp Web over a persistent CDP browser session inside WSL. Find contacts, dump chat history, list and download document attachments, and send messages with target verification so a private message can never land in a group.
+description: Read and draft WhatsApp messages through the local whatsapp-mcp bridge (MCP over stdio), never through browser automation. Sends are staged for out-of-band approval, never claimed as delivered.
 ---
 
-# WhatsApp Connector
+# WhatsApp Connector Skill
 
-Drives an already-logged-in WhatsApp Web session through Chrome DevTools
-Protocol. Nothing here logs in or scans a QR code by itself.
+This is the owner's personal infrastructure, not Work client work. It runs
+outside this repo's client connectors and outside the ASB app.
 
-## Where things actually live
+The old route through `web.whatsapp.com` selectors and an antigravity
+Chromium profile is dead. WhatsApp goes through the **whatsapp-mcp** server
+over MCP (stdio), talking to a local REST bridge. There is no browser
+automation left in this connector.
 
-| Bagian | Lokasi |
-| :--- | :--- |
-| Sesi login (profil Chrome, ~1 GB) | `~/.config/antigravity-chrome-data` **di dalam WSL Ubuntu** |
-| Browser service | WSL, port `9222`, dijalankan dengan `xvfb-run` |
-| Repo dilihat dari WSL | `/mnt/c/Users/<user>/.gemini/antigravity-ide/scratch/ai-second-brain` |
+## How it's wired on this machine
 
-Ini **hanya jalan dari dalam WSL**. Tidak ada profil WhatsApp di sisi Windows,
-dan `ensure_cdp.sh` memang skrip Linux (`xvfb-run`, path `chrome-linux`).
+- **Bridge**: a local Go process, `com.owner.wa-bridge`, managed by launchd,
+  serving REST on `localhost:8080`. the owner set this up by hand at
+  `~/wa-bridge`. (The ASB app manages its own separate copy of the same
+  bridge on port `8181`. Different install, different port; do not
+  conflate the two.)
+- **MCP server**: `~/wa-bridge/whatsapp-mcp-server`, run via `uv`, talking
+  to the bridge over stdio. Its config lives at `~/wa-bridge/.mcp.json` and
+  is only live in a Claude Code session opened from `~/wa-bridge`. A
+  session opened from this repo does not see these tools unless that
+  config is active.
+- **Credentials**: the WhatsApp account session lives under `~/wa-bridge/store/`
+  and never leaves this machine. That is the whole account link; treat it
+  like a password.
 
-## Menyalakan browser service
+## Send mode
 
-Harus proses **persisten**. Menjalankannya dengan `&` di dalam
-`wsl -- bash -lc "... &"` akan mati begitu perintah WSL selesai, dan gejalanya
-membingungkan: CDP sempat hidup lalu hilang beberapa detik kemudian.
+`WA_SEND_MODE` gates every send tool. Default on this machine is
+**disabled** (read-only): send tools refuse outright. In **approval** mode,
+a send tool does not deliver anything. It appends the draft to
+`~/.local/share/whatsapp-mcp/outbox.jsonl` and returns "staged", and the owner
+approves it out-of-band with `approve.py`, separate from this chat.
 
-```bash
-# di dalam WSL, tahan prosesnya (mis. sebagai background task yang tidak ditutup)
-exec xvfb-run -a python3 .agent/skills/browser-service/scripts/playwright_cdp_server.py
-```
+**Never say a message was sent, delivered, or received unless it actually
+was.** "Staged" and "sent" are different states. If a send tool returns
+"Draft staged", the true sentence is "Drafted and staged in the outbox,
+waiting on your approval", never "sent" or "I've messaged them."
 
-Cek siap atau belum:
+## Tool surface (17 tools)
 
-```bash
-curl -s http://127.0.0.1:9222/json/version
-python3 .agent/skills/whatsapp-connector/check_wa.py   # "WhatsApp is connected and ready."
-```
+**Contacts and chats** (read, ungated): `search_contacts`, `get_contact`,
+`list_chats`, `get_chat`, `get_direct_chat_by_contact`, `get_contact_chats`,
+`get_last_interaction`
 
-Kalau muncul QR code, sesi kedaluwarsa dan pemilik harus memindai ulang sekali
-lewat jendela Chrome yang terlihat.
+**Messages** (read, ungated): `list_messages`, `get_message_context`,
+`download_media`
 
-## Perkakas: `wa_tools.py`
+**Send** (gated by `WA_SEND_MODE`): `send_message`, `send_file`,
+`send_audio_message`, `send_reaction`
 
-Semua dijalankan dari root repo, di dalam WSL.
+**Channels and status** (read, ungated): `list_channels`,
+`get_channel_messages`, `list_status_updates`
 
-```bash
-S=.agent/skills/whatsapp-connector/wa_tools.py
+## Usage guidelines
 
-# cari kontak, dan lihat apakah namanya cocok PERSIS
-python3 $S find "Yuyun"
+### Reading
 
-# tampilkan seluruh pesan yang termuat, dengan nomor baris
-python3 $S dump "Hariyadi"
+Reads have no gate. Search contacts, list chats, pull history, check
+channels and status freely when a task calls for it.
 
-# daftar lampiran dokumen beserta nomor barisnya
-python3 $S list-docs "Hariyadi"
+### Drafting and sending
 
-# unduh lampiran berdasarkan nomor baris dari list-docs
-python3 $S download "Hariyadi" --rows 35,37,38 --out ./wadocs
+1. Gather context first: `list_messages` or `get_last_interaction` on the
+   relevant chat, so the draft answers what was actually said.
+2. Write the draft in the recipient's language and the owner's voice. Run it
+   through this repo's normal writing checks the same as any other message
+   to a named person (see `.agent/skills/no-ai-slop/SKILL.md`).
+3. Show the draft to the owner and wait for explicit approval.
+4. Only after approval, call `send_message` (or `send_file` /
+   `send_audio_message` / `send_reaction`). If `WA_SEND_MODE` is
+   `disabled`, the call will refuse; say so plainly rather than retrying.
+   If it is `approval`, report the result as staged in the outbox, not
+   sent, and name where the owner confirms it (`approve.py`, out-of-band).
 
-# kirim: TANPA --send hanya verifikasi target, tidak mengirim apa pun
-python3 $S send "Yuyun Kurniawan" --file pesan.txt
-python3 $S send "Yuyun Kurniawan" --file pesan.txt --send
-```
+## Safety rules
 
-`--file` dipakai untuk pesan multi-baris. Enter di WhatsApp berarti kirim, jadi
-baris baru diketik sebagai Shift+Enter.
+- **Use a second number for testing**, never the owner's primary line, when
+  trying anything new against this bridge.
+- **Never claim a message was sent** when the tool only staged it. This is
+  the same rule as `feedback-never-claim-unexecuted-action` in harness
+  memory, applied to WhatsApp specifically.
+- **`~/wa-bridge/store/` holds the full account session.** It is
+  equivalent to being logged into the owner's WhatsApp. Never copy it, upload
+  it, or expose it to any other tool or service.
+- **Panic button**: on the phone, WhatsApp → Linked Devices → log out the
+  linked session. That kills the bridge's access immediately, independent
+  of anything on this machine.
 
-## Aturan pengiriman
+## If the bridge or MCP server isn't running
 
-**Selalu jalankan dry-run lebih dulu, dan tetap minta persetujuan pemilik
-sebelum `--send`.** Approval gate di CLAUDE.md berlaku penuh untuk WhatsApp.
-
-`send` membatalkan diri sendiri kalau:
-
-- nama di header percakapan tidak **sama persis** dengan argumen `chat`, atau
-- header memuat penanda grup (`participants`, `is also in this group`, dan
-  sejenisnya).
-
-Ini bukan kehati-hatian berlebihan. Mencari "Yuyun" memunculkan kontak lain
-("Yuyun Keripik Asya") dan beberapa grup yang memuat teks
-"Yuyun Kurniawan is also in this group" (aGROWforests Reborn, Mitra Kadin RFBH).
-Tanpa verifikasi, pesan personal bisa tersiar ke grup, dan itu tidak bisa
-ditarik kembali.
-
-## `wa_manager.py` (lama)
-
-Masih ada karena punya jalur kirim lampiran berkas yang belum dipindahkan ke
-`wa_tools.py`. **Jangan pakai untuk mengirim teks**: ia memilih chat dengan
-`get_by_title(name).first` tanpa verifikasi apa pun, sehingga bisa nyasar ke
-grup seperti dijelaskan di atas.
-
-```bash
-# hanya untuk melampirkan berkas, dan pastikan nama kontaknya persis
-python3 .agent/skills/whatsapp-connector/wa_manager.py send \
-  --to "Nama Persis" --message "..." --file /path/berkas.pdf
-```
-
-## Catatan selector (hasil coba-coba, jangan diubah tanpa alasan)
-
-- Kotak pencarian dan kotak ketik ada di balik shadow root Lexical milik Meta.
-  Selector CSS meleset; `get_by_role("textbox")` menembusnya.
-- Scroll dengan mouse wheel **tidak** memicu pemuatan riwayat. Kontainer scroll
-  yang sebenarnya harus dicari lalu digerakkan lewat `scrollTop`.
-- Bubble dokumen hanya punya afordans `title="View ..."`. Tombol unduhnya ada di
-  **viewer layar penuh**, sebagai `button[aria-label="Download"]`.
-- Viewer yang tertinggal terbuka dari pemanggilan sebelumnya akan menelan semua
-  klik berikutnya. Setiap perintah menutupnya lebih dulu.
-- `[title]` pertama di header chat adalah tombol "Profile details", bukan nama
-  kontak. Nama chat adalah baris pertama `innerText` header.
-- Deteksi dokumen tidak boleh hanya mengandalkan ekstensi berkas. WhatsApp
-  kadang menampilkan nama tanpa ekstensi (mis. `DOC-20260225-WA0016.`), jadi
-  baris metadata ("40 pages - PDF - 2 MB") dan ikon dokumen ikut diperiksa.
+Reads and sends will fail outright. Tell the owner the bridge or MCP
+connection looks down rather than guessing at chat contents; this is
+personal infrastructure he maintains by hand, not something this repo can
+restart on its own.

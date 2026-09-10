@@ -21,7 +21,7 @@ handed to GLM as a fact it must not contradict.
 Usage:
   enrich_cards_agy.py --date 2026-07-17            # enrich all substantive cards
   enrich_cards_agy.py --date 2026-07-17 --dry-run  # print briefs, write nothing
-  enrich_cards_agy.py --date 2026-07-17 --force-glm  # pin glm-5.2, bypass time routing
+  enrich_cards_agy.py --date 2026-07-17 --force-glm  # DEPRECATED no-op (z.ai retired 2026-07-27)
 """
 import argparse
 import json
@@ -132,20 +132,89 @@ def _title_terms(title):
     words = re.findall(r'[A-Za-z0-9]{3,}', title or '')
     return {w.lower() for w in words if w.lower() not in _TITLE_STOP}
 
+GCAL = os.path.join(BASE_DIR, '.agent', 'skills', 'google-calendar-connector',
+                    'gcal_manager.py')
+OWNER_EMAIL = os.environ.get('WORK_OWNER_EMAIL', 'you@yourcompany.com').lower()
+_CAL_EVENTS_CACHE = {}
+
+def _calendar_events(date_str):
+    """Today's Work events, once per process. [] on any failure, never a guess."""
+    if date_str in _CAL_EVENTS_CACHE:
+        return _CAL_EVENTS_CACHE[date_str]
+    events = []
+    try:
+        out = subprocess.run(
+            [sys.executable, GCAL, 'list', '--profile', 'work',
+             '--days-back', '0', '--days-forward', '1', '--json'],
+            capture_output=True, text=True, timeout=90)
+        if out.returncode == 0:
+            m = re.search(r'\[.*\]', out.stdout, re.S)
+            if m:
+                events = json.loads(m.group(0))
+    except Exception:
+        events = []
+    _CAL_EVENTS_CACHE[date_str] = events
+    return events
+
+def calendar_status(card, date_str):
+    """Authoritative status from the calendar itself, not from Slack prose.
+
+    Two signals Slack search structurally cannot see:
+      - event status == 'cancelled', the organiser killed it.
+      - an attendee whose responseStatus is 'declined'. On 28 Jul Teammate
+        Chennupati declined the 18:15 ABC-123 scoping by email while the card
+        still read 'unknown', and he was the person the session depended on.
+
+    Returns (status, evidence) or (None, []) when the calendar says nothing,
+    in which case the caller falls back to the Slack heuristic.
+    """
+    title = (card.get('title') or '').strip().lower()
+    want_time = (card.get('time_wib') or '').strip()
+    if not title:
+        return None, []
+    for ev in _calendar_events(date_str):
+        summary = (ev.get('summary') or '').strip().lower()
+        if not summary or summary[:40] != title[:40]:
+            continue
+        start = ev.get('start') or ''
+        # The fetch spans two days, and recurring meetings repeat at the same time
+        # with the same title, so the date has to match or tomorrow's copy wins.
+        if date_str and not start.startswith(date_str):
+            continue
+        if want_time and 'T' in start and start.split('T')[1][:5] != want_time:
+            continue
+        if (ev.get('status') or '').lower() == 'cancelled':
+            return 'CANCELLED on the calendar', [
+                'calendar event status = cancelled for "{}"'.format(ev.get('summary'))]
+        # the owner declining is not a warning about the room, it is his own choice.
+        declined = [a for a in (ev.get('attendees') or [])
+                    if (a.get('responseStatus') or '').lower() == 'declined'
+                    and OWNER_EMAIL not in (a.get('email') or '').lower()]
+        if declined:
+            who = ', '.join((a.get('displayName') or a.get('email') or '?')
+                            for a in declined)
+            return 'on, but attendee declined', [
+                'calendar RSVP: {} declined "{}"'.format(who, ev.get('summary'))]
+        return None, []
+    return None, []
+
 def live_status(card, window_h=18):
     """Scripted cancelled / rescheduled / on check. Never delegated to the model.
 
     Returns (status, evidence). 'unknown' is an honest answer and is surfaced as
     such; the model is explicitly told it may not upgrade it.
 
-    KNOWN LIMITATION, do not mistake 'unknown' for 'on'. This catches a
-    cancellation only when the message names the meeting or lands in a channel
-    whose name does. It MISSES the most common real shape: a key attendee writing
-    "I won't be able to join today" in a DM, naming nothing. That is exactly how
-    YourManager cancelled the 16 Jul Weekly PMO, and this function returns 'unknown' for
-    it even with a 48h window (verified 17 Jul). The authoritative cancellation
-    signal is the CALENDAR event status, not Slack prose. Until that is wired in,
-    'unknown' means unchecked, and a human still has to eyeball the day.
+    This is now the FALLBACK. `calendar_status()` runs first and is authoritative:
+    since 28 Jul 2026 it reads the event's own status plus attendee responseStatus,
+    which covers organiser cancellations and declines (Teammate declining the 18:15
+    ABC-123 scoping was invisible to this function and obvious to that one).
+
+    REMAINING LIMITATION, do not mistake 'unknown' for 'on'. Reached only when the
+    calendar is silent. It catches a cancellation only when the message names the
+    meeting or lands in a channel whose name does. It still MISSES a key attendee
+    writing "I won't be able to join today" in a DM while leaving the invite
+    accepted, which is how YourManager cancelled the 16 Jul Weekly PMO. 'unknown' means
+    unchecked, and a human still has to eyeball the day.
     """
     title = (card.get('title') or '').strip()
     terms = _title_terms(title)
@@ -264,7 +333,10 @@ def call_agy(prompt, force_glm=False):
             f.write(prompt)
         cmd = [sys.executable, AGY_BRIDGE, '--task', 'draft', '--prompt-file', tmp]
         if force_glm:
-            cmd += ['--model', 'glm-5.2', '--backend', 'zai']
+            # z.ai/GLM retired 2026-07-27. Pinning it now guarantees a failed
+            # attempt, so the flag is accepted and ignored rather than honoured.
+            print('[enrich] --force-glm ignored: z.ai/GLM retired 2026-07-27, '
+                  'running the normal Gemini-first chain', file=sys.stderr)
         out = subprocess.run(cmd, capture_output=True, text=True, timeout=240)
         if out.returncode == 3:
             return None, 'fallback_to_claude sentinel'
@@ -294,7 +366,11 @@ def enrich_card(card, args):
     if '## 🎯 Goal' in card_text and not args.regenerate:
         return 'already', card['file'], None
 
-    status, evidence = live_status(card)
+    # Calendar first: it is authoritative and cheap. Slack search is the fallback
+    # guess, and it only ever produced 'unknown' for a declined or cancelled event.
+    status, evidence = calendar_status(card, args.date)
+    if not status:
+        status, evidence = live_status(card)
     docs = hunt_docs(card, card_text)
     body, note = call_agy(build_prompt(card, card_text, status, evidence, docs),
                           force_glm=args.force_glm)
@@ -324,7 +400,7 @@ def main():
     p.add_argument('--regenerate', action='store_true',
                    help='re-enrich cards that already have a brief')
     p.add_argument('--force-glm', action='store_true',
-                   help='pin glm-5.2/zai, bypassing agy-bridge time routing')
+                   help='DEPRECATED no-op: z.ai/GLM retired 2026-07-27, always runs the Gemini-first chain')
     args = p.parse_args()
 
     with open(STATE_PATH) as f:

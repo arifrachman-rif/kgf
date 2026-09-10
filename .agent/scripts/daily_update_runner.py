@@ -236,7 +236,7 @@ class HarvestAccumulator:
 # Timeouts (seconds)
 FILE_SCAN_TIMEOUT = 15
 CALENDAR_TIMEOUT = 20
-SLACK_LIST_TIMEOUT = 15
+SLACK_LIST_TIMEOUT = 120  # raised from 15: listing now paginates im/mpim and sweeps users.list for DM names
 SLACK_HISTORY_TIMEOUT = 20   # per channel; threads can be slow
 SLACK_HISTORY_TIMEOUT_MORNING = 12  # faster for morning mode
 BACKLOG_TIMEOUT = 10
@@ -304,11 +304,22 @@ def git_sync(sections):
             subprocess.run(["git", "commit", "-m", msg], cwd=BASE_DIR, capture_output=True)
             print("✓")
 
-        # 3. Pull with rebase to integrate remote changes
-        print("      Pulling remote changes...", end=" ", flush=True)
+        # 3. Pull with rebase to integrate remote changes.
+        #    Always operate on the CHECKED-OUT branch. This used to hardcode
+        #    'main', which rebased whatever feature branch was checked out onto
+        #    origin/main, rewriting every one of its SHAs and leaving the branch
+        #    permanently diverged from its own remote. Fixed 29 Jul 2026.
+        branch_res = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                                    cwd=BASE_DIR, capture_output=True, text=True)
+        branch = branch_res.stdout.strip() or "main"
+        if branch == "HEAD":
+            print("      ⚠ detached HEAD, skipping sync")
+            sections.append("## GitHub Sync Status\n> [!WARNING]\n> Detached HEAD, sync skipped.\n")
+            return
+        print(f"      Pulling remote changes ({branch})...", end=" ", flush=True)
         env = os.environ.copy()
         env["GIT_EDITOR"] = "true"
-        pull_res = subprocess.run(["git", "pull", "--rebase", "origin", "main"], 
+        pull_res = subprocess.run(["git", "pull", "--rebase", "origin", branch],
                                   cwd=BASE_DIR, env=env, capture_output=True, text=True)
         
         if pull_res.returncode != 0:
@@ -319,12 +330,12 @@ def git_sync(sections):
         print("✓")
 
         # 4. Push
-        print("      Pushing to origin...", end=" ", flush=True)
-        push_res = subprocess.run(["git", "push", "origin", "main"], 
+        print(f"      Pushing to origin ({branch})...", end=" ", flush=True)
+        push_res = subprocess.run(["git", "push", "origin", branch],
                                   cwd=BASE_DIR, capture_output=True, text=True)
         if push_res.returncode == 0:
             print("✓")
-            sections.append("## GitHub Sync Status\n✓ Successfully pushed latest local changes to origin/main.\n")
+            sections.append(f"## GitHub Sync Status\n✓ Successfully pushed latest local changes to origin/{branch}.\n")
         else:
             print("❌ FAILED")
             sections.append(f"## GitHub Sync Status\n> [!ERROR]\n> Push failed: {push_res.stderr}\n")
@@ -589,10 +600,19 @@ def _main_logic(mode, dry_run=False):
     else:
         out = run_step("Work Slack Channels", [
             sys.executable, work_slack_script,
-            '--action', 'list_joined_channels', '--token', work_token or ""
+            '--action', 'list_joined_channels', '--token', work_token or "",
+            '--include-dms'
         ], timeout=SLACK_LIST_TIMEOUT)
     sections.append(f"## Slack: Work (Married)\n```\n{out}\n```\n")
     write_output(sections, output_file)
+
+    # Keep the name -> handle index current, so a draft written today can mention a
+    # person who joined this week. Weekly, read-only, and never fatal to the sweep.
+    if not dry_run:
+        run_step("Slack person index", [
+            sys.executable, os.path.join(BASE_DIR, '.agent', 'scripts', 'slack_mentions.py'),
+            'refresh', '--if-stale', '7'
+        ], timeout=120)
 
     # Fetch Work history
     work_channels = []
@@ -601,13 +621,26 @@ def _main_logic(mode, dry_run=False):
             try:
                 name = line.split('- ')[1].split(' (ID:')[0].strip()
                 cid = line.split('(ID: ')[1].split(')')[0].strip()
-                work_channels.append((name, cid))
+                is_dm = '[DM' in line
+                dm_updated = 0
+                if is_dm and 'updated=' in line:
+                    dm_updated = int(line.split('updated=')[1].split(']')[0].strip() or 0)
+                work_channels.append((name, cid, is_dm, dm_updated))
             except: continue
 
     if work_channels:
-        # Filter for relevant channels
-        keywords = ['market', 'portal', 'b2c', 'ExampleProgram', 'oms', 'pim', 'standup', 'work', 'general', 'announcement', 'sync', 'priority', 'YourManager', 'product', 'platform', 'ecom', 'ExampleClient', 'seller', 'urgent', 'liveops']
-        filtered_work = [c for c in work_channels if any(k in c[0].lower() for k in keywords)]
+        # Filter for relevant channels. DMs bypass the keyword list entirely:
+        # the owner's most actionable traffic arrives there and a keyword list
+        # cannot match a person's name. No recency prefilter is possible here,
+        # because users.conversations returns `updated` as the conversation's
+        # creation time, not its last message.
+        # No keyword filter. It used to gate channels on a hardcoded word list,
+        # which silently dropped 29 live channels on 29 Jul 2026, among them
+        # ksa-2026-ExampleVendor, new-biz-ExampleVendor, exampleco-tech-ops and
+        # 2026-offers-redemption-journey-saib, all carrying open the owner items
+        # that day. the owner is only in ~92 conversations, so sweeping all of them
+        # costs ~45s and removes a whole class of silent blind spot.
+        filtered_work = work_channels
 
         # Morning mode: all channels but fewer messages (5 per channel)
         # Evening mode: filtered channels with more messages (10 per channel)
@@ -615,12 +648,21 @@ def _main_logic(mode, dry_run=False):
         history_timeout = SLACK_HISTORY_TIMEOUT_MORNING if is_morning else SLACK_HISTORY_TIMEOUT
 
         print(f"      Fetching history for {len(filtered_work)} channels ({msg_limit} msg/ch, mode={mode})...", flush=True)
-        for name, cid in filtered_work:
-            out = _step(f"Work #{name}", [
+        n_dms = sum(1 for c in filtered_work if c[2])
+        print(f"      [scope] {len(filtered_work) - n_dms} channels + {n_dms} DMs", flush=True)
+
+        for name, cid, is_dm, _updated in filtered_work:
+            # Channels expand thread replies; DMs do not, since DM threads are
+            # rare and the mention ledger already tracks them statefully. That
+            # keeps the added DM sweep to roughly 1.5s per conversation.
+            cmd = [
                 sys.executable, work_slack_script,
                 '--action', 'history', '--channel', cid,
-                '--token', work_token or "", '--limit', msg_limit, '--replies'
-            ], timeout=history_timeout)
+                '--token', work_token or "", '--limit', msg_limit, '--full'
+            ]
+            if not is_dm:
+                cmd.append('--replies')
+            out = _step(f"Work #{name}", cmd, timeout=history_timeout)
             harvest.add_slack_channel(name, out)
             sections.append(f"### Work: #{name}\n```\n{out}\n```\n")
             write_output(sections, output_file)
@@ -658,8 +700,11 @@ def _main_logic(mode, dry_run=False):
             write_output(sections)
     """
 
-    # ── Step 6: Todo.md scan (Morning mode - load current priorities) ──
-    if is_morning:
+    # ── Step 6: Todo.md scan (both modes - load current priorities) ──
+    # Runs in evening too. The evening rubric check compares the briefing's
+    # stated P0 count against sections.todo_p0, so gating this on morning made
+    # verify_briefing_numbers.py report MISMATCH unconditionally every night.
+    if True:
         print("[6] Loading current todo.md priorities...", flush=True)
         todo_path = os.path.join(BASE_DIR, 'journal', 'todo.md')
         try:
@@ -669,12 +714,14 @@ def _main_logic(mode, dry_run=False):
             else:
                 with open(todo_path, 'r', encoding='utf-8') as f:
                     todo_content = f.read()
-                # Extract open P0 items
+                # Match the structured marker, not a bare "P0" substring, so
+                # prose that merely mentions P0 cannot inflate the count.
+                # No cap: the length of this list IS the number the rubric
+                # verifies against, so truncating it makes the check lie.
                 open_p0 = []
                 for line in todo_content.split('\n'):
-                    if '[ ]' in line and ('P0' in line or 'P0' in line):
+                    if line.lstrip().startswith('- [ ]') and '<!-- P0 -->' in line:
                         open_p0.append(line.strip())
-                open_p0 = open_p0[:15]
             harvest.set_todo_p0(open_p0)
             sections.append(f"## Current Open P0 Items (from todo.md)\n")
             for item in open_p0:
@@ -749,8 +796,8 @@ def _main_logic(mode, dry_run=False):
 
         # LinkedIn Content Prompt
         sections.append(f"## LinkedIn Content Check\n")
-        sections.append(f"> **Reminder**: Target 1 post/day di LinkedIn.\n")
-        sections.append(f"> Sudah posting hari ini? Jika belum, pertimbangkan angle dari aktivitas hari ini.\n")
+        sections.append(f"> **Reminder**: target 1 post per day on LinkedIn.\n")
+        sections.append(f"> Posted today? If not, look for an angle in today's activity.\n")
         sections.append(f"> Content Pillars: AI (priority), Career, Startup, Family.\n")
         write_output(sections, output_file)
 
@@ -779,6 +826,38 @@ def _main_logic(mode, dry_run=False):
         write_output(sections, output_file)
     else:
         print("[10-11] Plan comparison/GitHub: SKIPPED (morning mode)", flush=True)
+
+    # ── Step 10.6: Followup Tracker Render (both modes) ───────────────
+    # journal/master_followup_tracker.md is a generated view over the PM
+    # ledgers (commitments/waiting_on/decisions), not hand-maintained. This
+    # keeps it mechanically fresh even if the Claude-driven SOP step is
+    # skipped. Cheap (three `report` subprocess calls), safe to run in both
+    # morning and evening mode.
+    print("[10.6] Rendering followup tracker...", flush=True)
+    tracker_script = os.path.join(BASE_DIR, '.agent', 'skills', 'project-tracking-update',
+                                   'scripts', 'render_followup_tracker.py')
+    out = _step("Followup Tracker Render", [sys.executable, tracker_script], timeout=60)
+    sections.append(f"## Followup Tracker Render\n```\n{out}\n```\n")
+    write_output(sections, output_file)
+
+    # ── Ledger self-checks ───────────────────────────────────────────
+    # Both of these answer a question the harvest above cannot: is what the
+    # ledger says still true. On 22 Aug the briefing led on three decisions that
+    # had already been made, because every source it read agreed with the stale
+    # record. Deterministic, offline, and both exit 1 when they find something.
+    print("[10.7] Checking decision consistency...", flush=True)
+    consistency_script = os.path.join(BASE_DIR, '.agent', 'scripts', 'decision_consistency.py')
+    out = _step("Decision Consistency", [sys.executable, consistency_script, 'check'],
+                timeout=120)
+    sections.append(f"## Decision Consistency\n```\n{out}\n```\n")
+
+    print("[10.8] Checking unresolved meeting speakers...", flush=True)
+    speaker_script = os.path.join(BASE_DIR, 'meeting-recorder', 'speaker_map.py')
+    if os.path.exists(speaker_script):
+        out = _step("Unresolved Speakers", [sys.executable, speaker_script, 'pending'],
+                    timeout=120)
+        sections.append(f"## Unresolved Speakers\n```\n{out}\n```\n")
+    write_output(sections, output_file)
 
     # ── Write morning plan file (Morning only) ───────────────────────
     if is_morning:

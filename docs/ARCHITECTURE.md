@@ -42,7 +42,8 @@ Clients/
 
 journal/
 ├── todo.md                Master task list (P0/P1 priorities)
-└── master_followup_tracker.md  External dependencies tracker
+└── master_followup_tracker.md  GENERATED view over the PM ledgers (commitments/waiting_on/decisions);
+                                 never hand-edited, rendered by project-tracking-update/scripts/render_followup_tracker.py
 ```
 
 ### Layer 2 — Automation Engine
@@ -197,7 +198,7 @@ Morning
 During the Day
   ├── "Write a PRD for X" → prd-pipeline
   ├── "Summarize the meeting I just had" → fathom-connector → meeting notes → Drive
-  ├── "What's blocking Y?" → reads master_followup_tracker.md
+  ├── "What's blocking Y?" → reads master_followup_tracker.md (generated view over the PM ledgers)
   └── "Draft a Slack update for the team" → slack-connector (draft + approval)
 
 End of Week

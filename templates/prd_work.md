@@ -88,9 +88,15 @@ diagrams, runs the formatting pass, enforces the readability gate, and re-restri
 - [Item explicitly excluded]
 - [Item explicitly excluded]
 
-### MCP Companion (mandatory for every API or SDK product)
+### MCP Companion (mandatory for every EXTERNAL-PARTNER API or SDK product)
 
-> Standing rule (17 Jul 2026): any product that exposes an API or ships an SDK **always** ships an accompanying **MCP (Model Context Protocol) server** that exposes the **same capabilities** as the API or SDK surface. Delete this subsection only if the product exposes no API and no SDK.
+> Standing rule (17 Jul 2026, scope clarified by the owner 30 Jul 2026): any API or SDK product built for **external partners** **always** ships an accompanying **MCP (Model Context Protocol) server** exposing the **same capabilities** as the API or SDK surface.
+>
+> **Internal APIs do not need this.** The test is who consumes it, not whether an HTTP endpoint exists. Service-to-service calls between Work components, contracts between Work's backend and Work's own frontend, and endpoints used only by Work CS or admin tooling are all internal. Delete this subsection for those.
+>
+> External means a partner, a tenant, or a bank integrates against it. The Storefront API for Bank al-Etihad, the Seller Portal external API for partner sellers, the Work Fulfillment Service, Storefront Analytics, and any SDK a tenant embeds all require the block.
+>
+> **Intent counts, not just current state.** A service meant to be opened to external partners later needs this block now. Retrofitting capability parity after the API surface is fixed is a rewrite. The Fulfillment Service is the worked example: it looks internal today and correctly carries the block because it is intended to open externally.
 
 | # | Requirement | Notes |
 |:---|:---|:---|

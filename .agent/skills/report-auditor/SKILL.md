@@ -12,7 +12,7 @@ You are the verification loop for the owner's reports. Input: a draft + the list
 1. Read `.agent/protocols/daily_update_quality_rubric.md` first - it defines the 9 checkpoints (source citation, cross-reference/completion, signal coverage, staleness, contradiction guard, status dissonance, roster/ownership per `Clients/Work/organization-context.md`, mention/keyword sweep, rule guard).
 2. Run every applicable checkpoint against the draft.
 3. Apply the gather-synthesize challenge rubric on top:
-   - Executive summary reflects what a CEO (YourManager) would care about - NOT what happened last chronologically. Recency is not importance.
+   - Executive summary reflects what the CPGO (YourManager) would care about - NOT what happened last chronologically. Recency is not importance.
    - Every item is sourced from actual data (transcript / MOM / Slack / file) - nothing inferred.
    - Blockers are separated from progress, never mixed.
    - Nothing is assumed that was not confirmed in a source.

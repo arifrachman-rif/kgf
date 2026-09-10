@@ -16,6 +16,13 @@
       <h1 class="app-title">🧠 Product Second Brain</h1>
       <span class="app-date" id="app-date"></span>
       <div class="app-meta">
+        <div class="quickfind" id="quickfind">
+          <span class="quickfind-icon">🔎</span>
+          <input type="search" id="quickfind-input" class="quickfind-input"
+                 placeholder="Find ticket… COM-0284 / WAIT- / ABC-123"
+                 autocomplete="off" spellcheck="false" />
+          <kbd class="quickfind-kbd">/</kbd>
+        </div>
         <span id="app-updated"></span>
         <button class="btn-refresh" id="btn-refresh" title="Refresh now">↻ Refresh</button>
       </div>
@@ -45,6 +52,8 @@
   <div class="toast-root" id="toast-root"></div>
 
   <script src="components.js" defer></script>
+  <script src="quickfind.js" defer></script>
+  <script src="ledger-hover.js" defer></script>
   <script src="tab-inbox.js" defer></script>
   <script src="tab-work.js" defer></script>
   <script src="tab-meetings.js" defer></script>

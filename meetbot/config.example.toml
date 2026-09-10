@@ -1,0 +1,99 @@
+# meetbot configuration — see SPEC.md §4 for the `Config` struct.
+# Fields typed `Option<T>` in Config carry `#[serde(default)]`, so omitting them
+# here means None. The two commented-out keys below are exactly those cases.
+
+# --- HTTP server -------------------------------------------------------------
+http_port = 8060
+http_bind = "127.0.0.1"
+
+# The X-API-Key clients must present. Read out of the existing vexa_token.env
+# (the `VEXA_API_KEY=` line) so `vexa_bots.py` keeps working unchanged.
+api_key_file = "/path/to/your/second-brain/meeting-recorder/vexa_token.env"
+# api_key = "..."          # overrides api_key_file; tests only
+
+# Guards POST /admin/users and POST /admin/users/{uid}/tokens.
+# MUST equal ADMIN_TOKEN in ~/tools/vexa/.env: `vexa_bots.py setup` reads the
+# admin key straight out of that file (it is not an env var), so a placeholder
+# here 401s the setup flow and fails acceptance test 10.
+admin_token = "CHANGE-ME-any-long-random-string"
+
+# --- Transcription -----------------------------------------------------------
+# whisper-server.exe runs on the Windows host. The gateway IP moves across
+# reboots, so leave whisper_host unset and let Config::gateway_ip() resolve it
+# from `ip route show default` on every call.
+# whisper_host = "172.25.32.1"
+whisper_port = 8083
+whisper_path = "/v1/audio/transcriptions"
+
+# Refuse POST /bots with 503 when transcribe_enabled and whisper is unreachable
+# (SPEC.md §1.3.2). true = fail loudly: the client records send_failed + a fail
+# heartbeat, but a whisper that flaps between the client's own probe and the
+# POST means the meeting is MISSED entirely. false = vexa's old behaviour: join
+# and record anyway, at the cost of a silently empty transcript that the client
+# files as skipped_not_admitted with an ok heartbeat. Default true.
+require_whisper_for_bots = true
+
+# --- Bot behaviour -----------------------------------------------------------
+max_concurrent_bots = 4
+# Waiting-room patience. On timeout the session finishes "completed" with zero
+# segments (SPEC.md §0.1) so the client records skipped_not_admitted, not a fail.
+admission_timeout_min = 10
+# How long the bot tolerates being the only participant before ending the call.
+lonely_grace_sec = 60
+# Empty-room tolerance before anyone else joins (bot joins early to be first).
+empty_room_grace_sec = 900
+bot_name = "Notetaker"
+
+# Hard wall-clock ceiling on the IN-CALL phase (SPEC.md §7.2). admission_timeout
+# only bounds the waiting room; without this nothing bounded the call itself.
+# The lonely-bot exit above is not a backstop: it needs the participant-count OR
+# the participant-tile selectors to resolve to a number, and both are keyed off
+# `data-participant-id`, so they drift together. When they do, the exit silently
+# turns itself off and the bot sits in the call forever holding a live Chrome, a
+# concurrency slot and a non-terminal row.
+#
+# Read from this file. session.rs applies it to the session right after
+# MeetSession::launch. Precedence, highest first:
+#   1. this key, when present
+#   2. the MEETBOT_MAX_CALL_MIN environment variable (minutes)
+#   3. meet::DEFAULT_MAX_CALL_DURATION, the 4-hour constant
+# The cap is ALWAYS active: with the key absent the session still runs on (2) or
+# (3), so commenting this out does not uncap anything. Note that setting it here
+# does shadow the env override -- comment it out again if you want to steer the
+# ceiling from the environment. Zero is clamped back to the 4-hour default
+# rather than read as "uncapped".
+max_call_duration_min = 240
+
+# --- Browser -----------------------------------------------------------------
+headless = true
+chromium_path = "$HOME/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome"
+# Attach to an already-running CDP endpoint instead of launching a new browser.
+# 9222 is systemd's tln-browser.service — attach only, never kill or restart it.
+# cdp_port = 9222
+
+# How the injected tap ships audio back to Rust (SPEC.md §7.1).
+#   "cdp"       — Runtime.addBinding, the specified path. DEFAULT.
+#   "websocket" — assets/capture_ws.js -> a loopback ingest socket. Fallback for
+#                 when audio backs up behind DOM traffic on the CDP session.
+# Leave on cdp unless a real call misbehaves; websocket is the less exercised.
+capture_transport = "cdp"
+
+# --- Storage -----------------------------------------------------------------
+data_dir = "/path/to/meetbot/data"
+db_path = "/path/to/meetbot/data/meetbot.db"
+# Vestigial (SPEC.md §2, corrected v1.1): the startup sweep is UNCONDITIONAL —
+# every non-terminal row is failed on boot, regardless of age, because otherwise
+# a session killed minutes into a call stays non-terminal and vexa_bots.py polls
+# it forever (acceptance test 9). Kept only so existing configs still parse.
+stale_after_hours = 6
+
+# Signed-in Chrome profile the bot joins as. Each session gets a COPY (Chrome
+# locks a user-data-dir, and a session must not mutate the stored login).
+# Seeded once with:
+#   chrome --user-data-dir=/path/to/meetbot/data/bot-profile
+# then signing in. Unset = anonymous guest, which Meet auto-declines.
+# Re-seeded 20 Jul 15:2x after Google revoked the previous session server-side.
+# Symptom of a revoked session: Chrome still sends the stored cookies, Google
+# rejects them and bounces to /landing?pli=1 — which blocks the guest path too,
+# so BOTH join routes die at once. Re-seed per .agent/skills/meetbot/SKILL.md.
+profile_template = "/path/to/meetbot/data/bot-profile"

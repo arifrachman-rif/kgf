@@ -1,0 +1,519 @@
+{
+  "requestedUrl": "https://teams.microsoft.com/meet/1234567890123?p=AbCd1234EfGh",
+  "httpRedirects": [
+    {
+      "kind": "http",
+      "status": 302,
+      "from": "https://teams.microsoft.com/meet/1234567890123?p=AbCd1234EfGh",
+      "to": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fp%3DAbCd1234EfGh%26anon%3Dtrue&type=meet&deeplinkId=7f424666-2fa3-4635-8dc7-2e1e696d9087&directDl=true&msLaunch=true&enableMobilePage=true",
+      "location": "/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fp%3DAbCd1234EfGh%26anon%3Dtrue&type=meet&deeplinkId=7f424666-2fa3-4635-8dc7-2e1e696d9087&directDl=true&msLaunch=true&enableMobilePage=true"
+    },
+    {
+      "kind": "http",
+      "status": 302,
+      "from": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=5e3ce6c0-2b1f-4285-8d4b-75ee78787346&scope=https%3A%2F%2Fapi.spaces.skype.com%2F.default%20openid%20profile%20offline_access&redirect_uri=https%3A%2F%2Fteams.microsoft.com%2Fv2%2Fauthv2&client-request-id=Core-65543ab5-9a54-4f0d-b54c-39ebcb2bf1ed&response_mode=fragment&client_info=1&clidata=1&prompt=none&nonce=019f784d-954b-7204-825e-c43d6c545c28&state=eyJpZCI6IjAxOWY3ODRkLTk1NGItN2M1ZS04N2JmLWZjYjU0YjA0ZTM3YyIsIm1ldGEiOnsiaW50ZXJhY3Rpb25UeXBlIjoic2lsZW50In19&x-client-SKU=msal.js.browser&x-client-VER=5.6.3&response_type=code&code_challenge=hgyLu2SkrEA9WGTUtMJsK0nypiEt19fri8DU91aIXpw&code_challenge_method=S256",
+      "to": "https://teams.microsoft.com/v2/authv2",
+      "location": "https://teams.microsoft.com/v2/authv2#error=login_required&error_description=AADSTS50058%3a+A+silent+sign-in+request+was+sent+but+no+user+is+signed+in.+The+cookies+used+to+represent+the+user%27s+session+were+not+sent+in+the+request+to+Azure+AD.+This+can+happen+if+the+user+is+using+Internet+Explorer+or+Edge%2c+and+the+web+app+sending+the+silent+sign-in+request+is+in+different+IE+security+zone+than+the+Azure+AD+endpoint+(login.microsoftonline.com).+Trace+ID%3a+f8e77124-a23e-4a4d-b5af-1babcc900d00+Correlation+ID%3a+e0de1437-d59e-4789-8663-9fbc00e3bbf8+Timestamp%3a+2026-07-19+02%3a56%3a18Z&error_uri=https%3a%2f%2flogin.microsoftonline.com%2ferror%3fcode%3d50058&state=eyJpZCI6IjAxOWY3ODRkLTk1NGItN2M1ZS04N2JmLWZjYjU0YjA0ZTM3YyIsIm1ldGEiOnsiaW50ZXJhY3Rpb25UeXBlIjoic2lsZW50In19&clientdata=e%7c50058%7c%7cmicrosoftonline.com%7cnone"
+    },
+    {
+      "kind": "http",
+      "status": 302,
+      "from": "https://teams.microsoft.com/meet/1234567890123?p=AbCd1234EfGh&anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=7353e231-36af-432f-9a31-8cd1bac3db6a",
+      "to": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fp%3DAbCd1234EfGh%26anon%3Dtrue%26launchAgent%3Djoin_launcher_web%26lightExperience%3Dtrue%26correlationId%3D7353e231-36af-432f-9a31-8cd1bac3db6a%26anon%3Dtrue&type=meet&deeplinkId=182667bb-76d9-4aec-87dc-b25a7cfb77ef&directDl=true&msLaunch=true&enableMobilePage=true",
+      "location": "/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fp%3DAbCd1234EfGh%26anon%3Dtrue%26launchAgent%3Djoin_launcher_web%26lightExperience%3Dtrue%26correlationId%3D7353e231-36af-432f-9a31-8cd1bac3db6a%26anon%3Dtrue&type=meet&deeplinkId=182667bb-76d9-4aec-87dc-b25a7cfb77ef&directDl=true&msLaunch=true&enableMobilePage=true"
+    },
+    {
+      "kind": "http",
+      "status": 302,
+      "from": "https://teams.microsoft.com/favicon.ico",
+      "to": "https://statics.teams.cdn.office.net/hashed/favicon/prod/favicon-f1722d9.ico",
+      "location": "https://statics.teams.cdn.office.net/hashed/favicon/prod/favicon-f1722d9.ico"
+    }
+  ],
+  "documentTimeline": [
+    {
+      "kind": "doc-request",
+      "url": "https://teams.microsoft.com/meet/1234567890123?p=AbCd1234EfGh"
+    },
+    {
+      "kind": "doc-request",
+      "url": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fp%3DAbCd1234EfGh%26anon%3Dtrue&type=meet&deeplinkId=7f424666-2fa3-4635-8dc7-2e1e696d9087&directDl=true&msLaunch=true&enableMobilePage=true"
+    },
+    {
+      "kind": "doc-response",
+      "status": 200,
+      "url": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fp%3DAbCd1234EfGh%26anon%3Dtrue&type=meet&deeplinkId=7f424666-2fa3-4635-8dc7-2e1e696d9087&directDl=true&msLaunch=true&enableMobilePage=true"
+    },
+    {
+      "kind": "doc-request",
+      "url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=5e3ce6c0-2b1f-4285-8d4b-75ee78787346&response_type=token&scope=openid+profile&redirect_uri=https%3A%2F%2Fteams.microsoft.com%2Fv2%2Fauthv2&prompt=none"
+    },
+    {
+      "kind": "doc-request",
+      "url": "https://teams.microsoft.com/v2/?meetingjoin=true"
+    },
+    {
+      "kind": "doc-response",
+      "status": 200,
+      "url": "https://teams.microsoft.com/v2/?meetingjoin=true"
+    },
+    {
+      "kind": "doc-request",
+      "url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=5e3ce6c0-2b1f-4285-8d4b-75ee78787346&scope=https%3A%2F%2Fapi.spaces.skype.com%2F.default%20openid%20profile%20offline_access&redirect_uri=https%3A%2F%2Fteams.microsoft.com%2Fv2%2Fauthv2&client-request-id=Core-65543ab5-9a54-4f0d-b54c-39ebcb2bf1ed&response_mode=fragment&client_info=1&clidata=1&prompt=none&nonce=019f784d-954b-7204-825e-c43d6c545c28&state=eyJpZCI6IjAxOWY3ODRkLTk1NGItN2M1ZS04N2JmLWZjYjU0YjA0ZTM3YyIsIm1ldGEiOnsiaW50ZXJhY3Rpb25UeXBlIjoic2lsZW50In19&x-client-SKU=msal.js.browser&x-client-VER=5.6.3&response_type=code&code_challenge=hgyLu2SkrEA9WGTUtMJsK0nypiEt19fri8DU91aIXpw&code_challenge_method=S256"
+    },
+    {
+      "kind": "doc-request",
+      "url": "https://teams.microsoft.com/v2/authv2"
+    },
+    {
+      "kind": "doc-response",
+      "status": 200,
+      "url": "https://teams.microsoft.com/v2/authv2"
+    },
+    {
+      "kind": "doc-request",
+      "url": "https://teams.microsoft.com/meet/1234567890123?p=AbCd1234EfGh&anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=7353e231-36af-432f-9a31-8cd1bac3db6a"
+    },
+    {
+      "kind": "doc-request",
+      "url": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fp%3DAbCd1234EfGh%26anon%3Dtrue%26launchAgent%3Djoin_launcher_web%26lightExperience%3Dtrue%26correlationId%3D7353e231-36af-432f-9a31-8cd1bac3db6a%26anon%3Dtrue&type=meet&deeplinkId=182667bb-76d9-4aec-87dc-b25a7cfb77ef&directDl=true&msLaunch=true&enableMobilePage=true"
+    },
+    {
+      "kind": "doc-response",
+      "status": 200,
+      "url": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fp%3DAbCd1234EfGh%26anon%3Dtrue%26launchAgent%3Djoin_launcher_web%26lightExperience%3Dtrue%26correlationId%3D7353e231-36af-432f-9a31-8cd1bac3db6a%26anon%3Dtrue&type=meet&deeplinkId=182667bb-76d9-4aec-87dc-b25a7cfb77ef&directDl=true&msLaunch=true&enableMobilePage=true"
+    },
+    {
+      "kind": "doc-request",
+      "url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=5e3ce6c0-2b1f-4285-8d4b-75ee78787346&response_type=token&scope=openid+profile&redirect_uri=https%3A%2F%2Fteams.microsoft.com%2Fv2%2Fauthv2&prompt=none"
+    },
+    {
+      "kind": "doc-request",
+      "url": "https://teams.microsoft.com/light-meetings/launch?p=AbCd1234EfGh&anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=7353e231-36af-432f-9a31-8cd1bac3db6a&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9wPUFiQ2QxMjM0RWZHaCZhbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD03MzUzZTIzMS0zNmFmLTQzMmYtOWEzMS04Y2QxYmFjM2RiNmEmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIiwicGFzc2NvZGUiOiJBYkNkMTIzNEVmR2gifQ%3D%3D&deeplinkId=8738e9b1-a4b0-42bb-b41b-5cbeb2c7efd7"
+    },
+    {
+      "kind": "doc-response",
+      "status": 200,
+      "url": "https://teams.microsoft.com/light-meetings/launch?p=AbCd1234EfGh&anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=7353e231-36af-432f-9a31-8cd1bac3db6a&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9wPUFiQ2QxMjM0RWZHaCZhbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD03MzUzZTIzMS0zNmFmLTQzMmYtOWEzMS04Y2QxYmFjM2RiNmEmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIiwicGFzc2NvZGUiOiJBYkNkMTIzNEVmR2gifQ%3D%3D&deeplinkId=8738e9b1-a4b0-42bb-b41b-5cbeb2c7efd7"
+    }
+  ],
+  "frameNavigations": [
+    {
+      "url": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fp%3DAbCd1234EfGh%26anon%3Dtrue&type=meet&deeplinkId=7f424666-2fa3-4635-8dc7-2e1e696d9087&directDl=true&msLaunch=true&enableMobilePage=true",
+      "parent": null
+    },
+    {
+      "url": "about:blank",
+      "parent": "0C4CBC75A06F30325AE6E41D5271D3A7"
+    },
+    {
+      "url": "https://teams.microsoft.com/v2/?meetingjoin=true",
+      "parent": null
+    },
+    {
+      "url": "about:blank",
+      "parent": "0C4CBC75A06F30325AE6E41D5271D3A7"
+    },
+    {
+      "url": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fmeet%2F1234567890123%3Fp%3DAbCd1234EfGh%26anon%3Dtrue%26launchAgent%3Djoin_launcher_web%26lightExperience%3Dtrue%26correlationId%3D7353e231-36af-432f-9a31-8cd1bac3db6a%26anon%3Dtrue&type=meet&deeplinkId=182667bb-76d9-4aec-87dc-b25a7cfb77ef&directDl=true&msLaunch=true&enableMobilePage=true",
+      "parent": null
+    },
+    {
+      "url": "about:blank",
+      "parent": "0C4CBC75A06F30325AE6E41D5271D3A7"
+    },
+    {
+      "url": "https://teams.microsoft.com/light-meetings/launch?p=AbCd1234EfGh&anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=7353e231-36af-432f-9a31-8cd1bac3db6a&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9wPUFiQ2QxMjM0RWZHaCZhbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD03MzUzZTIzMS0zNmFmLTQzMmYtOWEzMS04Y2QxYmFjM2RiNmEmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIiwicGFzc2NvZGUiOiJBYkNkMTIzNEVmR2gifQ%3D%3D&deeplinkId=8738e9b1-a4b0-42bb-b41b-5cbeb2c7efd7",
+      "parent": null
+    }
+  ],
+  "beforeClick": {
+    "top": {
+      "frame": "top",
+      "url": "https://teams.microsoft.com/light-meetings/launch?p=AbCd1234EfGh&anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=7353e231-36af-432f-9a31-8cd1bac3db6a&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9wPUFiQ2QxMjM0RWZHaCZhbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD03MzUzZTIzMS0zNmFmLTQzMmYtOWEzMS04Y2QxYmFjM2RiNmEmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIiwicGFzc2NvZGUiOiJBYkNkMTIzNEVmR2gifQ%3D%3D&deeplinkId=8738e9b1-a4b0-42bb-b41b-5cbeb2c7efd7",
+      "title": "Microsoft Teams meeting | Microsoft Teams",
+      "allDataTids": [
+        "auth-sign-in-link",
+        "button-custom-video-backgrounds",
+        "calling-prejoin-render-content-container",
+        "calling-prejoin-screen",
+        "calling-prejoin-v2-computer-audio-renderer-test",
+        "calling-prejoin-v2-no-audio-renderer-test",
+        "calling-prejoin-v2-phone-audio-renderer-test",
+        "calling-right-side-panel",
+        "calling-slot-background",
+        "get-user-media-wrapper",
+        "meeting-branding-v0-provider",
+        "meeting-branding-v9-provider",
+        "meeting-header-title",
+        "prejoin-audio-common-header-computer-audio",
+        "prejoin-audio-common-header-computer-no-audio",
+        "prejoin-audio-common-header-phone-audio",
+        "prejoin-cancel-button",
+        "prejoin-display-name-input",
+        "prejoin-header-content",
+        "prejoin-join-button",
+        "prejoin-meeting-details-content",
+        "prejoin-v2-video-actions",
+        "prejoin-v2-video-preview",
+        "prejoin-v2-video-preview-container",
+        "rail-header",
+        "rail-header-close-button",
+        "right-side-panel-header-title",
+        "second-step",
+        "selected-microphone-display",
+        "selected-speaker-display",
+        "speaker-toggle",
+        "toggle-mute",
+        "toggle-video",
+        "video-flyout-open-button"
+      ],
+      "buttons": [
+        {
+          "tag": "button",
+          "tid": null,
+          "id": null,
+          "type": "button",
+          "role": null,
+          "aria": null,
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": null,
+          "disabled": true,
+          "visible": true,
+          "cls": "fui-Button r1f29ykk ___1hojxwz f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1s2aq7o f9ql6rf f1s2uweq fr80ssc f1ukrpxl f"
+        },
+        {
+          "tag": "button",
+          "tid": "video-flyout-open-button",
+          "id": null,
+          "type": "button",
+          "role": "button",
+          "aria": "Open video options",
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": null,
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Button r1f29ykk ___112eaxd f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fe"
+        },
+        {
+          "tag": "button",
+          "tid": "button-custom-video-backgrounds",
+          "id": "button-custom-video-backgrounds",
+          "type": "button",
+          "role": null,
+          "aria": "Turn on video to use background effects",
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": "Background filters",
+          "disabled": true,
+          "visible": true,
+          "cls": "fui-Button r1f29ykk ___bf4mvh0 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1s2aq7o f9ql6rf f1s2uweq fr80ssc f1ukrpxl f"
+        },
+        {
+          "tag": "button",
+          "tid": null,
+          "id": null,
+          "type": "button",
+          "role": null,
+          "aria": null,
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": null,
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Button r1f29ykk ___x8v79x0 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fe"
+        },
+        {
+          "tag": "button",
+          "tid": "selected-microphone-display",
+          "id": null,
+          "type": "button",
+          "role": "button",
+          "aria": "Selected microphone: RDP Source, open microphone options",
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": "RDP Source",
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Button r1f29ykk fui-MenuButton ___885k3q0 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80"
+        },
+        {
+          "tag": "button",
+          "tid": "speaker-toggle",
+          "id": null,
+          "type": "button",
+          "role": null,
+          "aria": null,
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": null,
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Button r1f29ykk ___1hqpwtz f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80ssc f1ukrpxl fe"
+        },
+        {
+          "tag": "button",
+          "tid": "selected-speaker-display",
+          "id": null,
+          "type": "button",
+          "role": "button",
+          "aria": "Selected speaker: RDP Sink, open speaker options",
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": "RDP Sink",
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Button r1f29ykk fui-MenuButton ___885k3q0 f1c21dwh f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb fjxutwb f1s2uweq fr80"
+        },
+        {
+          "tag": "button",
+          "tid": "prejoin-cancel-button",
+          "id": null,
+          "type": "button",
+          "role": null,
+          "aria": null,
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": "Cancel",
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Button r1f29ykk ___14x389d frlmeda fd9q35j fnkn226 f10pi1ik f1yrrgfj f16xq7d1"
+        },
+        {
+          "tag": "button",
+          "tid": "prejoin-join-button",
+          "id": "prejoin-join-button",
+          "type": "button",
+          "role": null,
+          "aria": "Join now",
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": "Join now",
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Button r1f29ykk ___p07bni0 ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f"
+        },
+        {
+          "tag": "button",
+          "tid": "auth-sign-in-link",
+          "id": null,
+          "type": "button",
+          "role": null,
+          "aria": null,
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": "Sign in",
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Link ___64ms220 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc f1hn7b42 figsok6 f1s184ao f1mk8lai fnbmjn"
+        },
+        {
+          "tag": "a",
+          "tid": null,
+          "id": null,
+          "type": null,
+          "role": null,
+          "aria": null,
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": "Need help?",
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Link ___1r67aw0 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc f1hn7b42 figsok6 f1s184ao f1mk8lai fnbmjn"
+        },
+        {
+          "tag": "button",
+          "tid": null,
+          "id": null,
+          "type": "button",
+          "role": null,
+          "aria": null,
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": "Continue without audio or video",
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Button r1f29ykk"
+        }
+      ],
+      "inputs": [
+        {
+          "tag": "input",
+          "tid": "prejoin-display-name-input",
+          "id": null,
+          "type": "text",
+          "role": null,
+          "aria": null,
+          "ariaLabelledBy": null,
+          "placeholder": "Type your name",
+          "name": null,
+          "text": null,
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Input__input r12stul0 ___etraft0 f1w2t2ij f1oo480s f7nlbp4 fhovq9v f1sw78cg f17mccla f1fjxbv2 flh3ekv"
+        },
+        {
+          "tag": "input",
+          "tid": "toggle-video",
+          "id": "switch-rq",
+          "type": "checkbox",
+          "role": "switch",
+          "aria": null,
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": null,
+          "disabled": true,
+          "visible": true,
+          "cls": "fui-Switch__input rsji9ng"
+        },
+        {
+          "tag": "input",
+          "tid": null,
+          "id": "radio-rb",
+          "type": "radio",
+          "role": null,
+          "aria": "Computer audio",
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": "radiogroup-ra",
+          "text": null,
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Radio__input rg1upok ___1chu1p0 f9ma1gx fmuo3xs"
+        },
+        {
+          "tag": "input",
+          "tid": "toggle-mute",
+          "id": "switch-rn",
+          "type": "checkbox",
+          "role": "switch",
+          "aria": null,
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": null,
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Switch__input rsji9ng"
+        },
+        {
+          "tag": "input",
+          "tid": null,
+          "id": "radio-rc",
+          "type": "radio",
+          "role": null,
+          "aria": "Phone audio",
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": "radiogroup-ra",
+          "text": null,
+          "disabled": true,
+          "visible": true,
+          "cls": "fui-Radio__input rg1upok ___1chu1p0 f9ma1gx fmuo3xs"
+        },
+        {
+          "tag": "input",
+          "tid": null,
+          "id": "radio-rd",
+          "type": "radio",
+          "role": null,
+          "aria": "Don't use audio",
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": "radiogroup-ra",
+          "text": null,
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-Radio__input rg1upok ___1chu1p0 f9ma1gx fmuo3xs"
+        }
+      ],
+      "headings": [
+        {
+          "tag": "h1",
+          "tid": null,
+          "id": null,
+          "type": null,
+          "role": null,
+          "aria": "Microsoft Teams meeting",
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": "Microsoft Teams meeting",
+          "disabled": null,
+          "visible": true,
+          "cls": "fui-StyledText ___1smkuiu f22iagw f4d9j23 f1s184ao fp6vxd f17mccla fly5x3f"
+        }
+      ],
+      "ariaLive": [
+        {
+          "tag": "div",
+          "tid": null,
+          "id": null,
+          "type": null,
+          "role": null,
+          "aria": null,
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": null,
+          "disabled": null,
+          "visible": true,
+          "cls": null
+        },
+        {
+          "tag": "div",
+          "tid": null,
+          "id": null,
+          "type": null,
+          "role": null,
+          "aria": null,
+          "ariaLabelledBy": null,
+          "placeholder": null,
+          "name": null,
+          "text": null,
+          "disabled": null,
+          "visible": true,
+          "cls": null
+        }
+      ],
+      "bodyText": "Microsoft Teams meeting\nYour camera is turned off\nGo to your device settings to troubleshoot\nBackground filters\nComputer microphone and speaker controls\nComputer audio\nRDP Source\nMic on\nRDP Sink\nPhone audio\nPhone audio\nNo audio\nDon't use audio\nCancel\nJoin now\nSign in\nNeed help?\nAre you sure you don't want audio or video? If you change your mind, select the camera icon by your address bar and then Always allow.\nContinue without audio or video\nMake sure no other app is using your camera and mic.",
+      "bodyHtmlLen": 48094
+    },
+    "frames": [],
+    "location": "https://teams.microsoft.com/light-meetings/launch?p=AbCd1234EfGh&anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=7353e231-36af-432f-9a31-8cd1bac3db6a&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9wPUFiQ2QxMjM0RWZHaCZhbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD03MzUzZTIzMS0zNmFmLTQzMmYtOWEzMS04Y2QxYmFjM2RiNmEmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIiwicGFzc2NvZGUiOiJBYkNkMTIzNEVmR2gifQ%3D%3D&deeplinkId=8738e9b1-a4b0-42bb-b41b-5cbeb2c7efd7",
+    "iframeSrcs": []
+  },
+  "console": [
+    "[ExpLoader] Getting things ready...",
+    "[ExpLoader] ExperienceLoader: OCDI redirect: Not redirecting - not enabled",
+    "[Auth]: auth_cache initialized",
+    "[Auth]: authTelemetryProvider initialized",
+    "[Auth]: [Telemetry][4123cfa4-c235-4286-8923-76b6190fa39c][auth_web_initialization] [start] - telemetry provider created for createAuthenticationServiceInstance, source: core-auth-tasks::init with shouldCreateScenario: [true]",
+    "Unhandled error/rejection {\"isTrusted\":true}",
+    "[Auth]: auth_cache initialized",
+    "[Auth]: authTelemetryProvider initialized",
+    "i18n: The namespace \"framework\" has not been loaded. The only loaded namespaces: \"calling, peoplePicker, auth, channels, recurrence, breakoutRooms\"",
+    "CallingBotService: waitForCallRegion failed with error: Call disconnected",
+    "CallingBotService: waitForCallRegion failed with error: Call disconnected",
+    "ObservableCallService: Failed to get observable call. error=Conversation cannot be created due to invalid meeting data., error.message=terminatedReason: 5, ccCode: 400, ccSubCode: 5751, resultCategory: UnexpectedClientError,InvalidMeetingIdentifier",
+    "ObservableCallService: max num of failures exceeded",
+    "callingAgents: wasmvqe API: Error loading VQE worklet (AbortError: Unable to load a worklet's module.).",
+    "callingAgents: calling-stack [JS.TsCalling.MediaAgent] ffffffff: MA/DeviceManager/EffectsManager/AudioEffectManager Audio effect error: WasmVqeProcessorError, message: AbortError: Unable to load a worklet's module."
+  ],
+  "finalUrl": "https://teams.microsoft.com/light-meetings/launch?p=AbCd1234EfGh&anon=true&launchAgent=join_launcher_web&lightExperience=true&correlationId=7353e231-36af-432f-9a31-8cd1bac3db6a&agent=web&coords=eyJtZWV0aW5nVXJsIjoiaHR0cHM6Ly90ZWFtcy5taWNyb3NvZnQuY29tL21lZXQvMTIzNDU2Nzg5MDEyMz9wPUFiQ2QxMjM0RWZHaCZhbm9uPXRydWUmbGF1bmNoQWdlbnQ9am9pbl9sYXVuY2hlcl93ZWImbGlnaHRFeHBlcmllbmNlPXRydWUmY29ycmVsYXRpb25JZD03MzUzZTIzMS0zNmFmLTQzMmYtOWEzMS04Y2QxYmFjM2RiNmEmYW5vbj10cnVlIiwibWVldGluZ0NvZGUiOiIxMjM0NTY3ODkwMTIzIiwicGFzc2NvZGUiOiJBYkNkMTIzNEVmR2gifQ%3D%3D&deeplinkId=8738e9b1-a4b0-42bb-b41b-5cbeb2c7efd7"
+}
